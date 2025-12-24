@@ -91,15 +91,15 @@ exec \"\$HERE/usr/bin/nsbaci\" \"\$@\"
         execute_process(COMMAND chmod +x "${APPIMAGE_DIR}/AppRun")
 
         #create and write .desktop
-        file(WRITE ${APPIMAGE_DIR}/nsbaci.desktop "[Desktop Entry]
-Terminal=false
+file(WRITE ${APPIMAGE_DIR}/nsbaci.desktop "[Desktop Entry]
 Type=Application
 Name=nsbaci
 Exec=AppRun
-Icon=nsbaci-256x256
-Categories=Utility
-StartupWMClass=nsbaci;"
-        )
+Icon=nsbaci
+Categories=Utility;
+StartupWMClass=nsbaci
+Terminal=false
+")
 
           #create and write uninstall.sh
         file(WRITE ${APPIMAGE_DIR}/uninstall.sh "#!/bin/bash
@@ -135,6 +135,13 @@ update-desktop-database ~/.local/share/applications >/dev/null 2>&1 || true")
         file(COPY ${CMAKE_SOURCE_DIR}/assets/nsbaci-128x128.png DESTINATION ${APPIMAGE_DIR})
         file(COPY ${CMAKE_SOURCE_DIR}/assets/nsbaci-256x256.png DESTINATION ${APPIMAGE_DIR})
         file(COPY ${CMAKE_SOURCE_DIR}/assets/nsbaci-512x512.png DESTINATION ${APPIMAGE_DIR})
+
+        file(COPY ${CMAKE_SOURCE_DIR}/assets/nsbaci.png DESTINATION ${APPIMAGE_DIR})
+
+        execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+            nsbaci.png
+            ${APPIMAGE_DIR}/.DirIcon
+        )
 
         #create and write integrate.sh
 
@@ -203,6 +210,8 @@ cp \"\$APPDIR/\$APP_NAME-256x256.png\" \$LOCAL_SHARE/icons/hicolor/256x256/apps/
 cp \"\$APPDIR/\$APP_NAME-512x512.png\" \$LOCAL_SHARE/icons/hicolor/512x512/apps/\$APP_NAME.png
 
 update-desktop-database \$LOCAL_SHARE/applications >/dev/null 2>&1 || true
+
+gtk-update-icon-cache -f -t \"\$LOCAL_SHARE/icons/hicolor\" >/dev/null 2>&1 || true
 
 echo \"\$APP_NAME installed successfully!\"")
 
