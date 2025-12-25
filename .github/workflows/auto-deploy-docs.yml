@@ -2,8 +2,8 @@ name: Build and Deploy Doxygen Docs
 
 on:
   push:
-    # tags:
-    #   - 'v*'
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
@@ -69,5 +69,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/html
           publish_branch: gh-pages
-          cname: nsbaci-docs.nicolasserranogarcia.com
+          cname: nsbaci.nicolasserranogarcia.com
           force_orphan: true
