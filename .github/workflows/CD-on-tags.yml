@@ -46,6 +46,8 @@ jobs:
           cp /mingw64/bin/libwinpthread-1.dll build_inno/
 
           cp /mingw64/bin/libicuin*.dll build_inno/
+          cp /mingw64/bin/libicuuc77.dll build_inno/
+          cp /mingw64/bin/libicudt77.dll build_inno/
 
           cp /mingw64/bin/zlib1.dll build_inno/
           cp /mingw64/bin/libzstd.dll build_inno/
@@ -117,7 +119,7 @@ jobs:
       - name: Rename AppImage with version
         run: |
           cd build
-          mv nsbaci-*.AppImage nsbaci-${{ github.ref_name }}-x86_64.AppImage || mv *.AppImage nsbaci-${{ github.ref_name }}-x86_64.AppImage
+          mv nsbaci-x86_64.AppImage nsbaci-${{ github.ref_name }}-x86_64.AppImage
 
       - name: Upload AppImage artifact
         uses: actions/upload-artifact@v4
