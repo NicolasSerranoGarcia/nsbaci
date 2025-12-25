@@ -1,0 +1,43 @@
+Generate the nsbaci installer
+When developing, qt get's linked dynamically, so there is no dependency problem. When shipping the executable, you must ship the all the qt environment too. For this, nsbaci uses an installer created with Inno Setup.
+
+If you know how to work with Inno Setup, the .iss is inside installation/.
+
+If you don't, you first need to install Inno Setup, then go into build/ and run:
+
+windeployqt6 nsbaci.exe --release --dir ../build_inno
+cd ..
+cd installation
+echo 'export PATH="$PATH:/c/Program Files (x86)/Inno Setup 6"' >> ~/.bashrc
+source ~/.bashrc
+ISCC.exe "nsbaci-installer.iss"
+The final installable does not carry all the dependencies (some indirect dependencies do not get copied inside the installer). For this, you might need to run the following BEFORE compiling the .iss file (the command above). From the root of the project:
+
+cp /mingw64/bin/libgcc_s_seh-1.dll build_inno/
+cp /mingw64/bin/libstdc++-6.dll build_inno/
+cp /mingw64/bin/libwinpthread-1.dll build_inno/
+
+cp /mingw64/bin/libicuin*.dll build_inno/
+cp /mingw64/bin/libicuuc77.dll build_inno/
+cp /mingw64/bin/libicudt77.dll build_inno/
+
+cp /mingw64/bin/zlib1.dll build_inno/
+cp /mingw64/bin/libzstd.dll build_inno/
+cp /mingw64/bin/libbz2-1.dll build_inno/
+cp /mingw64/bin/libbrotlidec.dll build_inno/
+cp /mingw64/bin/libbrotlicommon.dll build_inno/
+
+cp /mingw64/bin/libfreetype-6.dll build_inno/
+cp /mingw64/bin/libharfbuzz-0.dll build_inno/
+cp /mingw64/bin/libpng16-16.dll build_inno/
+cp /mingw64/bin/libgraphite2.dll build_inno/
+
+cp /mingw64/bin/libpcre2-16-0.dll build_inno/
+cp /mingw64/bin/libpcre2-8-0.dll build_inno/
+cp /mingw64/bin/libb2-1.dll build_inno/
+cp /mingw64/bin/libdouble-conversion.dll build_inno/
+cp /mingw64/bin/libmd4c.dll build_inno/
+
+cp /mingw64/bin/libglib-2.0-0.dll build_inno/
+cp /mingw64/bin/libintl-8.dll build_inno/
+cp /mingw64/bin/libiconv-2.dll build_inno/
