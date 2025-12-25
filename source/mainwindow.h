@@ -3,6 +3,7 @@
  * @brief Main window class declaration for nsbaci.
  *
  * @author Nicolás Serrano García
+ * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT License.
  */
 
 #ifndef MAINWINDOW_H

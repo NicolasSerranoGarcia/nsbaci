@@ -1,5 +1,8 @@
 # ./cmake/test.cmake
 
+# Testing module for nsbaci.
+# Configures Google Test framework and enables CTest integration.
+
 if(BUILD_TESTS)
     message(STATUS "(nsbaci) Building tests is ENABLED")
 

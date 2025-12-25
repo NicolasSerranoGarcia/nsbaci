@@ -1,4 +1,7 @@
-# appImage.cmake
+# ./cmake/appImage.cmake
+
+# AppImage generation module for nsbaci.
+# This module handles the creation of Linux AppImage packages.
 
 if(NOT PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   return()
@@ -8,7 +11,7 @@ if(GENERATE_APPIMAGE)
     if(UNIX AND NOT APPLE)
         message(STATUS "(nsbaci) GENERATE_APPIMAGE is ON")
 
-        #downlaod linuxdeploy
+        # --- Download linuxdeploy ---
 
          add_custom_target(download-linuxdeploy ALL
             COMMAND wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage 
@@ -21,7 +24,8 @@ if(GENERATE_APPIMAGE)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         )
 
-        #set paths
+        # --- Set paths ---
+
         set(APPIMAGE_DIR "${CMAKE_BINARY_DIR}/AppDir")
         set(APP_BIN_DIR "${APPIMAGE_DIR}/usr/bin")
 

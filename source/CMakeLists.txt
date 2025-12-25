@@ -1,5 +1,8 @@
 # ./source/CMakeLists.txt
 
+# Source library configuration for nsbaci.
+# Defines the nsbaci_library static library containing the main application logic.
+
 # nsbaci_library
 
     add_library(nsbaci_library STATIC

@@ -3,6 +3,7 @@
  * @brief Implementation of the MainWindow class.
  *
  * @author Nicolás Serrano García
+ * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT License.
  */
 
 #include "mainwindow.h"

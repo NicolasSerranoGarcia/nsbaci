@@ -1,6 +1,9 @@
-# Unlike other cmake modules, this one just defines the qt interface library
+# ./cmake/qt.cmake
 
-    # --- fetch qt ---
+# Qt configuration module for nsbaci.
+# Defines the Qt interface library that other components link against.
+
+    # --- Fetch Qt ---
 
     set(CMAKE_AUTOMOC ON)
     set(CMAKE_AUTOUIC ON)

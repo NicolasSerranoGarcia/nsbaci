@@ -6,6 +6,7 @@
  * and displays the main window.
  *
  * @author Nicolás Serrano García
+ * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT License.
  * @see MainWindow
  */
 

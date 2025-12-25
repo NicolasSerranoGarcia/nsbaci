@@ -1,3 +1,8 @@
+# ./cmake/doxygen.cmake
+
+# Doxygen documentation generation module for nsbaci.
+# Fetches doxygen-awesome-css theme and configures the Doxyfile.
+
 if(GENERATE_DOCS)
     message(STATUS "(nsbaci) Generating docs is ENABLED")
     message(STATUS "(nsbaci) Doxygen version short: ${PROJECT_VERSION_SHORT}")

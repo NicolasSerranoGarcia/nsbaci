@@ -1,5 +1,8 @@
 # ./CMakeLists.txt
 
+# Main CMake configuration file for nsbaci.
+# Defines project settings, compiler flags, and includes auxiliary modules.
+
 # CMake config
 
     # --- CMake ---
