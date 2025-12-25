@@ -13,6 +13,17 @@
         set(CMAKE_CXX_STANDARD_REQUIRED ON)
         set(CMAKE_CXX_EXTENSIONS OFF)
 
+    # --- Default build type ---
+
+        # --- If the type of build is not specified, release is used ---
+
+        if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+            set(CMAKE_BUILD_TYPE Release CACHE STRING
+                "Choose the type of build: Debug Release RelWithDebInfo MinSizeRel." FORCE)
+            set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
+                "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
+        endif()
+
     # --- Project ---
 
         file(READ "${CMAKE_SOURCE_DIR}/VERSION" PROJECT_VERSION_STRING)
@@ -95,13 +106,13 @@
 
 # Sub-libraries
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/source)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/source/ui)
 
 # Link project libraries
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    nsbaci_library
-)
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+        nsbaci_ui_library
+    )
 
 # Auxiliary modules
 
@@ -109,41 +120,23 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     include(${CMAKE_SOURCE_DIR}/cmake/doxygen.cmake)
     include(${CMAKE_SOURCE_DIR}/cmake/appImage.cmake)
 
-# Set build type
+# Build configuration
 
-    if(NOT CMAKE_BUILD_TYPE)
-        set(CMAKE_BUILD_TYPE Release CACHE STRING
-            "Choose the type of build: Debug Release RelWithDebInfo MinSizeRel." FORCE)
-    endif()
     message(STATUS "(nsbaci) Build type: ${CMAKE_BUILD_TYPE}")
 
-    if(WIN32)
-        if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-            target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_MODE)
-            target_link_options(${PROJECT_NAME} PRIVATE -mconsole)
-        elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-            target_compile_definitions(${PROJECT_NAME} PRIVATE NDEBUG)
-            target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
-        endif()
+    # --- Debug mode definition ---
+
+    target_compile_definitions(${PROJECT_NAME} PRIVATE
+        $<$<CONFIG:Debug>:DEBUG_MODE>
+    )
+
+    # --- Windows subsystem (console for Debug, GUI for Release) ---
+
+    if(WIN32 AND MINGW)
+        target_link_options(${PROJECT_NAME} PRIVATE
+            $<$<CONFIG:Debug>:-mconsole>
+            $<$<CONFIG:Release>:-mwindows>
+            $<$<CONFIG:RelWithDebInfo>:-mwindows>
+            $<$<CONFIG:MinSizeRel>:-mwindows>
+        )
     endif()
-
-# Installation
-
-    set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/install")
-    install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-
-# CPack
-
-    set(CPACK_GENERATOR "ZIP")
-
-    include(InstallRequiredSystemLibraries)
-    set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
-    set(CPACK_PACKAGE_VENDOR "Nicolás Serrano García")
-    set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} helps you learn concurrency.")
-    set(CPACK_PACKAGE_CONTACT "serranogarcianicolas@gmail.com")
-    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
-    set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-    set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
-    include(CPack)
-
-    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

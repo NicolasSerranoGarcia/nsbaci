@@ -10,7 +10,7 @@
  * @see MainWindow
  */
 
-#include "mainwindow.h"
+#include "ui/mainwindow/mainwindow.h"
 
 #include <QApplication>
 
