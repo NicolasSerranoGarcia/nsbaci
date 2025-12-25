@@ -2,8 +2,8 @@ name: Build and Deploy Doxygen Docs
 
 on:
   push:
-    tags:
-      - 'v*'
+    # tags:
+    #   - 'v*'
 
 permissions:
   contents: write

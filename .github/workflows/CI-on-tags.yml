@@ -1,9 +1,9 @@
-name: CI on tag (Tests + Benchmarks)
+name: CI on tag (Tests)
 
 on:
   push:
-    tags:
-      - 'v*'
+    # tags:
+    #   - 'v*'
 
 jobs:
   build-and-test:

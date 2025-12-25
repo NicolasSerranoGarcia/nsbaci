@@ -2,8 +2,8 @@ name: CD on tag
 
 on:
   push:
-    tags:
-      - 'v*'
+    # tags:
+    #   - 'v*'
 
 permissions:
   contents: write
@@ -86,20 +86,65 @@ jobs:
           # Upload the entire directory so path structure is preserved.
           path: build_inno/Output
 
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            qt6-base-dev \
+            qt6-tools-dev \
+            qt6-tools-dev-tools \
+            libgl1-mesa-dev \
+            libxkbcommon-dev \
+            libxcb-cursor0 \
+            libfuse2 \
+            wget
+
+      - name: Configure and build nsbaci
+        run: |
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -DGENERATE_APPIMAGE=ON ..
+          cmake --build . --config Release
+
+      - name: Rename AppImage with version
+        run: |
+          cd build
+          mv nsbaci-*.AppImage nsbaci-${{ github.ref_name }}-x86_64.AppImage || mv *.AppImage nsbaci-${{ github.ref_name }}-x86_64.AppImage
+
+      - name: Upload AppImage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nsbaci-Linux-AppImage
+          path: build/*.AppImage
+
   release:
     runs-on: ubuntu-latest
-    needs: build-windows
+    needs: [build-windows, build-linux]
     permissions:
       contents: write
     steps:
       - name: Checkout repository (for images in release body)
         uses: actions/checkout@v4
 
-      - name: Download built artifacts
+      - name: Download Windows artifact
         uses: actions/download-artifact@v4
         with:
           name: nsbaci-Windows-Installer
-          path: dist
+          path: dist/windows
+
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nsbaci-Linux-AppImage
+          path: dist/linux
 
       - name: List downloaded artifacts (debug)
         run: ls -R dist
@@ -123,7 +168,49 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
-            ### Windows Security Notice
+            ## Installation
+
+            ---
+
+            ### 🐧 Linux (AppImage)
+
+            The AppImage is a portable executable that works on most Linux distributions without installation.
+
+            #### How to run nsbaci on Linux
+
+            1. Download the `.AppImage` file from the **Assets** section below.
+            2. Make the file executable:
+               ```bash
+               chmod +x nsbaci-*.AppImage
+               ```
+            3. Run the application:
+               ```bash
+               ./nsbaci-*.AppImage
+               ```
+
+            > **First run:** On the first launch, nsbaci will automatically integrate itself into your system by:
+            > - Copying itself to `~/Applications/`
+            > - Creating a desktop entry in your application menu
+            > - Installing icons for your desktop environment
+
+            #### Uninstalling on Linux
+
+            To uninstall nsbaci, run:
+            ```bash
+            ~/Applications/nsbaci.AppImage --uninstall
+            ```
+
+            > **Note:** If you encounter a *"FUSE not found"* error, install FUSE with:
+            > ```bash
+            > sudo apt install libfuse2   # Debian/Ubuntu
+            > sudo dnf install fuse-libs  # Fedora
+            > ```
+
+            ---
+
+            ### 🪟 Windows
+
+            #### Windows Security Notice
 
             When running the nsbaci **installer** (`nsbaci-installer-*.exe`), Windows may display a **"Windows protected your PC"** warning.  
             This is expected and happens because the executable is not digitally signed (I don't have the resources to purchase a digital certificate :) ).
@@ -148,8 +235,11 @@ jobs:
             > **Note:** You do **not** need to install any additional dependencies.  
             > The installer already includes all required Qt libraries.
 
+            ---
+
             **Release notes**
             ${{ steps.notes.outputs.notes }}
           files: |
-            dist/**/*.exe
+            dist/windows/**/*.exe
+            dist/linux/*.AppImage
           draft: false
