@@ -16,7 +16,7 @@
         project(
             nsbaci
             VERSION ${PROJECT_VERSION_STRING}
-            DESCRIPTION "nsbaci — Workspace automation for Windows"
+            DESCRIPTION "nsbaci — Learn concurrency in C++"
             HOMEPAGE_URL "https://github.com/NicolasSerranoGarcia/nsbaci"
             LANGUAGES CXX
         )

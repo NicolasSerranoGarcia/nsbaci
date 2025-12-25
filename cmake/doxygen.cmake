@@ -1,6 +1,6 @@
 if(GENERATE_DOCS)
-    message(STATUS "(nbaci) Generating docs is ENABLED")
-    message(STATUS "(nbaci) Doxygen version short: ${PROJECT_VERSION_SHORT}")
+    message(STATUS "(nsbaci) Generating docs is ENABLED")
+    message(STATUS "(nsbaci) Doxygen version short: ${PROJECT_VERSION_SHORT}")
 
     include(FetchContent)
     FetchContent_Declare(
@@ -13,14 +13,14 @@ if(GENERATE_DOCS)
     # This allows us to get the path to doxygen-awesome.css
     FetchContent_GetProperties(doxygen-awesome-css SOURCE_DIR AWESOME_CSS_DIR)
 
-    message(STATUS "(nbaci) AWESOME_CSS_DIR = ${AWESOME_CSS_DIR}")
+    message(STATUS "(nsbaci) AWESOME_CSS_DIR = ${AWESOME_CSS_DIR}")
 
     # Generate the Doxyfile
     set(DOXYFILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
     set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
     configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
 
-    message(STATUS "(nbaci) Doc files have been written to ${CMAKE_SOURCE_DIR}/docs")
+    message(STATUS "(nsbaci) Doc files have been written to ${CMAKE_SOURCE_DIR}/docs")
 else()
-    message(STATUS "(nbaci) Generating docs is DISABLED")
+    message(STATUS "(nsbaci) Generating docs is DISABLED")
 endif()
