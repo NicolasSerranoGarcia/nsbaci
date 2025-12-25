@@ -45,9 +45,9 @@ jobs:
           cp /mingw64/bin/libstdc++-6.dll build_inno/
           cp /mingw64/bin/libwinpthread-1.dll build_inno/
 
-          cp /mingw64/bin/libicuin*.dll build_inno/
-          cp /mingw64/bin/libicuuc77.dll build_inno/ || true
-          cp /mingw64/bin/libicudt77.dll build_inno/ || true
+          cp /mingw64/bin/libicuin*.dll build_inno/ || true
+          cp /mingw64/bin/libicuuc*.dll build_inno/ || true
+          cp /mingw64/bin/libicudt*.dll build_inno/ || true
 
           cp /mingw64/bin/zlib1.dll build_inno/
           cp /mingw64/bin/libzstd.dll build_inno/
@@ -125,7 +125,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nsbaci-Linux-AppImage
-          path: build/*.AppImage
+          path: build/nsbaci-${{ github.ref_name }}-x86_64.AppImage
 
   release:
     runs-on: ubuntu-latest
