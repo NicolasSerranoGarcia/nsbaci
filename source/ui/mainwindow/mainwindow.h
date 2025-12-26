@@ -3,7 +3,8 @@
  * @brief Main window class declaration for nsbaci.
  *
  * @author Nicolás Serrano García
- * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT License.
+ * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT
+ * License.
  */
 
 #ifndef MAINWINDOW_H
@@ -26,31 +27,30 @@ QT_END_NAMESPACE
  *
  * @note This class inherits from QMainWindow and uses Qt's UI form system.
  */
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    /**
-     * @brief Constructs the main window.
-     * @param parent Optional parent widget (default is nullptr).
-     */
-    MainWindow(QWidget *parent = nullptr);
+  /**
+   * @brief Constructs the main window.
+   * @param parent Optional parent widget (default is nullptr).
+   */
+  MainWindow(QWidget *parent = nullptr);
 
-    /**
-     * @brief Destroys the main window and frees resources.
-     */
-    ~MainWindow();
+  /**
+   * @brief Destroys the main window and frees resources.
+   */
+  ~MainWindow();
 
 private slots:
-    /**
-     * @brief Slot triggered when the "New" action is activated.
-     *
-     * Opens a modal dialog for creating new content or configurations.
-     */
-    void on_actionNew_triggered();
+  /**
+   * @brief Slot triggered when the "New" action is activated.
+   *
+   * Opens a modal dialog for creating new content or configurations.
+   */
+  void on_actionNew_triggered();
 
 private:
-    Ui::MainWindow *ui; ///< Pointer to the UI form class.
+  Ui::MainWindow *ui; ///< Pointer to the UI form class.
 };
 #endif // MAINWINDOW_H
