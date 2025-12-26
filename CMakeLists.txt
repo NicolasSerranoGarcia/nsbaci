@@ -106,6 +106,7 @@
 
 # Sub-libraries
 
+    add_subdirectory(${CMAKE_SOURCE_DIR}/source/types)
     add_subdirectory(${CMAKE_SOURCE_DIR}/source/error)
     add_subdirectory(${CMAKE_SOURCE_DIR}/source/ui)
     add_subdirectory(${CMAKE_SOURCE_DIR}/source/controler)

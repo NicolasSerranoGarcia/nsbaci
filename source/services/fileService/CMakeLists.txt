@@ -19,5 +19,6 @@
 
     target_link_libraries(nsbaci_fileService_library PUBLIC
         config_compiler_flags_library
+        nsbaci_types_library
         nsbaci_error_library
     )

@@ -13,7 +13,9 @@
 #ifndef NSBACI_ERROR_H
 #define NSBACI_ERROR_H
 
-#include <string>
+#include "errorTypes.h"
+
+using namespace nsbaci::types;
 
 /**
  * @namespace nsbaci
@@ -26,8 +28,14 @@ namespace nsbaci {
  * @brief Represents an error with a message and optional code.
  */
 class Error {
+    
+    public:
+    Error() = default;
+    ~Error() = default;
+    ErrorBase basic;
+    ErrorPayload payload;
+};
 
-};  
-}// namespace nsbaci
+}  // namespace nsbaci
 
 #endif  // NSBACI_ERROR_H
