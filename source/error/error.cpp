@@ -1,12 +1,14 @@
 /**
- * @file controler.cpp
- * @brief Implementation unit for the Controler.
+ * @file error.cpp
+ * @brief Implementation unit for the Error class.
  *
  * @author Nicolás Serrano García
  * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT
  * License.
  */
 
-#include "controler.h"
+#include "error.h"
 
-namespace nsbaci {}  // namespace nsbaci
+namespace nsbaci {
+
+}  // namespace nsbaci

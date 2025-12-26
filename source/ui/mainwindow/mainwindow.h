@@ -30,7 +30,7 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
-public:
+ public:
   /**
    * @brief Constructs the main window.
    * @param parent Optional parent widget (default is nullptr).
@@ -42,7 +42,7 @@ public:
    */
   ~MainWindow();
 
-private slots:
+ private slots:
   /**
    * @brief Slot triggered when the "New" action is activated.
    *
@@ -50,7 +50,7 @@ private slots:
    */
   void on_actionNew_triggered();
 
-private:
-  Ui::MainWindow *ui; ///< Pointer to the UI form class.
+ private:
+  Ui::MainWindow *ui;  ///< Pointer to the UI form class.
 };
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

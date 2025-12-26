@@ -12,6 +12,25 @@
 #ifndef NSBACI_FILESERVICE_H
 #define NSBACI_FILESERVICE_H
 
+#include <filesystem>
+#include <string>
+#include <vector>
+
+namespace fs = std::filesystem;
+
+using Text = std::string;
+using File = fs::path;
+
+//guarantee: if ok == false, errors.size() > 0
+struct FileResult{
+  bool ok;
+  std::vector<Error> errors;
+};
+
+struct saveResult : FileResult{
+
+};
+
 /**
  * @namespace nsbaci::services
  * @brief Services namespace for nsbaci.
@@ -22,12 +41,15 @@ namespace nsbaci::services {
  * @class FileService
  */
 class FileService {
-public:
+ public:
+
+  saveResult save(Text contents, File file);
+
   FileService() = default;
 
   ~FileService() = default;
 };
 
-} // namespace nsbaci::services
+}  // namespace nsbaci::services
 
-#endif // NSBACI_FILESERVICE_H
+#endif  // NSBACI_FILESERVICE_H

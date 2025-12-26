@@ -22,11 +22,11 @@ namespace nsbaci::services {
  * @class RuntimeService
  */
 class RuntimeService {
-public:
+ public:
   RuntimeService() = default;
   ~RuntimeService() = default;
 };
 
-} // namespace nsbaci::services
+}  // namespace nsbaci::services
 
-#endif // NSBACI_RUNTIMESERVICE_H
+#endif  // NSBACI_RUNTIMESERVICE_H

@@ -22,11 +22,11 @@ namespace nsbaci::services {
  * @class CompilerService
  */
 class CompilerService {
-public:
+ public:
   CompilerService() = default;
   ~CompilerService() = default;
 };
 
-} // namespace nsbaci::services
+}  // namespace nsbaci::services
 
-#endif // NSBACI_COMPILERSERVICE_H
+#endif  // NSBACI_COMPILERSERVICE_H

@@ -3,10 +3,12 @@
  * @brief Implementation of the Dialog class.
  *
  * @author Nicolás Serrano García
- * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT License.
+ * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT
+ * License.
  */
 
 #include "dialog.h"
+
 #include "ui_dialog.h"
 
 /**
@@ -16,11 +18,8 @@
  *
  * @param parent Optional parent widget.
  */
-Dialog::Dialog(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::Dialog)
-{
-    ui->setupUi(this);
+Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
+  ui->setupUi(this);
 }
 
 /**
@@ -28,7 +27,4 @@ Dialog::Dialog(QWidget *parent)
  *
  * Cleans up the dynamically allocated UI object.
  */
-Dialog::~Dialog()
-{
-    delete ui;
-}
+Dialog::~Dialog() { delete ui; }

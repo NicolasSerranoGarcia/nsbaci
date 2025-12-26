@@ -29,7 +29,7 @@ class Dialog;
 class Dialog : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   /**
    * @brief Constructs the dialog.
    * @param parent Optional parent widget (default is nullptr).
@@ -41,8 +41,8 @@ public:
    */
   ~Dialog();
 
-private:
-  Ui::Dialog *ui; ///< Pointer to the UI form class.
+ private:
+  Ui::Dialog *ui;  ///< Pointer to the UI form class.
 };
 
-#endif // DIALOG_H
+#endif  // DIALOG_H

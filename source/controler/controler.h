@@ -23,11 +23,11 @@ namespace nsbaci {
  * @class Controler
  */
 class Controler {
-public:
+ public:
   Controler() = default;
   ~Controler() = default;
 };
 
-} // namespace nsbaci
+}  // namespace nsbaci
 
-#endif // NSBACI_CONTROLER_H
+#endif  // NSBACI_CONTROLER_H

@@ -6,13 +6,14 @@
  * and displays the main window.
  *
  * @author Nicolás Serrano García
- * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT License.
+ * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT
+ * License.
  * @see MainWindow
  */
 
-#include "ui/mainwindow/mainwindow.h"
-
 #include <QApplication>
+
+#include "ui/mainwindow/mainwindow.h"
 
 /**
  * @brief Application entry point.
@@ -25,11 +26,10 @@
  * @param argv Array of command-line argument strings.
  * @return Exit code from the Qt event loop.
  */
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    QApplication::setDesktopFileName("nsbaci");
-    MainWindow w;
-    w.show();
-    return a.exec();
+int main(int argc, char *argv[]) {
+  QApplication a(argc, argv);
+  QApplication::setDesktopFileName("nsbaci");
+  MainWindow w;
+  w.show();
+  return a.exec();
 }

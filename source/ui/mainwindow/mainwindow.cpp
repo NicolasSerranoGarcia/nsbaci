@@ -3,13 +3,14 @@
  * @brief Implementation of the MainWindow class.
  *
  * @author Nicolás Serrano García
- * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT License.
+ * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT
+ * License.
  */
 
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 
 #include "dialog.h"
+#include "ui_mainwindow.h"
 
 /**
  * @brief Constructs and initializes the main window.
@@ -21,17 +22,15 @@
  * @param parent Optional parent widget.
  */
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-    setCentralWidget(ui->plainTextEdit);
-    setWindowTitle("nsbaci");
-    statusBar()->showMessage("Welcome to nsbaci!");
+    : QMainWindow(parent), ui(new Ui::MainWindow) {
+  ui->setupUi(this);
+  setCentralWidget(ui->plainTextEdit);
+  setWindowTitle("nsbaci");
+  statusBar()->showMessage("Welcome to nsbaci!");
 
-    #ifdef _WIN32
-        setWindowIcon(QIcon(":/assets/nsbaci.ico"));
-    #endif
+#ifdef _WIN32
+  setWindowIcon(QIcon(":/assets/nsbaci.ico"));
+#endif
 }
 
 /**
@@ -39,10 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
  *
  * Cleans up the dynamically allocated UI object.
  */
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }
 
 /**
  * @brief Handles the "New" menu action.
@@ -50,9 +46,8 @@ MainWindow::~MainWindow()
  * Creates and displays a modal Dialog window when the user
  * triggers the "New" action from the menu.
  */
-void MainWindow::on_actionNew_triggered()
-{
-    Dialog d;
-    d.setModal(true);
-    d.exec();
+void MainWindow::on_actionNew_triggered() {
+  Dialog d;
+  d.setModal(true);
+  d.exec();
 }
