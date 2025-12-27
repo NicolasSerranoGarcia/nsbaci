@@ -13,8 +13,17 @@
 #ifndef NSBACI_CONTROLLER_H
 #define NSBACI_CONTROLLER_H
 
+#include <QObject>
+
 #include "fileService.h"
 #include "fileTypes.h"
+#include "uiError.h"
+
+#include "compilerService.h"
+#include "compilerTypes.h"
+
+#include "runtimeService.h"
+#include "runtimeTypes.h"
 
 using namespace nsbaci::services;
 using namespace nsbaci::types;
@@ -28,19 +37,33 @@ namespace nsbaci {
 /**
  * @class Controller
  */
-class Controller {
- public:
-  // gets called with the full path, including the name
-  void save(File file, Text contents);
+class Controller : public QObject {
+    Q_OBJECT
 
-  // Usually gets called inside save, if the file is not already saved
-  void saveAs(File file, Text contents);
-
-  Controller() = default;
+public:
+  explicit Controller(QObject* parent = nullptr);
   ~Controller() = default;
 
- private:
+signals:
+  // File operation results
+  void saveFailed(std::vector<UIError> errors);
+  void saveSucceeded();
+  void loadFailed(std::vector<UIError> errors);
+  void loadSucceeded(const QString& contents);
+
+public slots:
+  // File operations
+  void onSaveRequested(File file, Text contents);
+  void onOpenRequested(File file);
+
+  // Build operations
+  void onCompileRequested(Text contents);
+  void onRunRequested();
+  
+  private:
   FileService fileService;
+  CompilerService compilerService;
+  RuntimeService runtimeService;
 };
 
 }  // namespace nsbaci

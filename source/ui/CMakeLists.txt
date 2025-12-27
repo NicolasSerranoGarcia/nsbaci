@@ -5,9 +5,11 @@
 
 # Sub-components
 
+    add_subdirectory(errorDialogFactory)
     add_subdirectory(mainwindow)
 
 # nsbaci_ui_library
+# Note: This library includes nsbaci_errordialogfactory_library internally
 
     add_library(nsbaci_ui_library INTERFACE)
 
@@ -15,4 +17,5 @@
 
     target_link_libraries(nsbaci_ui_library INTERFACE
         nsbaci_mainwindow_library
+        # nsbaci_errordialogfactory_library is already linked via mainwindow
     )

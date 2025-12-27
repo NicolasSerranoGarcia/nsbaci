@@ -15,8 +15,11 @@
 #include <QMainWindow>
 #include <QShortcut>
 #include <QToolButton>
+#include <QFileDialog>
 
 #include "codeeditor.h"
+#include "errorDialogFactory.h"
+#include "uiError.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -32,9 +35,8 @@ class MainWindow : public QMainWindow {
   ~MainWindow() override = default;
 
  signals:
-  void saveRequested(const QString& contents);
-  void saveAsRequested(const QString& contents);
-  void openRequested();
+  void saveRequested(const QString& filePath, const QString& contents);
+  void openRequested(const QString& filePath);
   void compileRequested(const QString& contents);
   void runRequested();
 
@@ -43,12 +45,19 @@ class MainWindow : public QMainWindow {
   void setStatusMessage(const QString& message);
   void setCurrentFile(const QString& fileName, bool modified = false);
 
+  // Controller response slots
+  void onSaveSucceeded();
+  void onSaveFailed(std::vector<nsbaci::UIError> errors);
+  void onLoadSucceeded(const QString& contents);
+  void onLoadFailed(std::vector<nsbaci::UIError> errors);
+
  private slots:
   // File menu
   void onNew();
   void onSave();
   void onSaveAs();
   void onOpen();
+  void onExit();
   void onCompile();
   void onRun();
 
@@ -111,7 +120,8 @@ class MainWindow : public QMainWindow {
   QAction* actionAbout = nullptr;
 
   // State
-  QString currentFileName;
+  QString currentFileName;   // Just the filename for display
+  QString currentFilePath;   // Full path for saving
   bool isModified = false;
   bool hasName = false;
 

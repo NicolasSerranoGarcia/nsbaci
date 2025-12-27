@@ -1,7 +1,7 @@
-# ./source/error/CMakeLists.txt
+# ./source/errors/error/CMakeLists.txt
 
-# Error component library for nsbaci.
-# Defines the error handling structures and classes.
+# Backend Error component library for nsbaci.
+# Defines the core error handling structures and classes.
 
 # nsbaci_error_library
 

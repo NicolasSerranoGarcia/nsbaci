@@ -11,6 +11,8 @@
 
 #include <QAction>
 #include <QApplication>
+#include <QDir>
+#include <QFileInfo>
 #include <QFont>
 #include <QFontDatabase>
 #include <QFrame>
@@ -367,7 +369,7 @@ void MainWindow::createMenuBar() {
   connect(actionOpen, &QAction::triggered, this, &MainWindow::onOpen);
   connect(actionSave, &QAction::triggered, this, &MainWindow::onSave);
   connect(actionSaveAs, &QAction::triggered, this, &MainWindow::onSaveAs);
-  connect(actionExit, &QAction::triggered, this, &QWidget::close);
+  connect(actionExit, &QAction::triggered, this, &MainWindow::onExit);
 
   // Edit
   connect(actionUndo, &QAction::triggered, this, &MainWindow::onUndo);
@@ -477,6 +479,7 @@ void MainWindow::createCentralWidget() {
 
   connect(runButton, &QToolButton::clicked, this, &MainWindow::onRun);
 
+  //signal inherited from QPlainTextEdit, as the class CodeEditor inherits from it
   connect(codeEditor, &CodeEditor::textChanged, this,
           &MainWindow::onTextChanged);
 }
@@ -508,6 +511,29 @@ void MainWindow::setCurrentFile(const QString& fileName, bool modified) {
       QString("%1%2 - nsbaci").arg(modified ? "*" : "").arg(fileName));
 }
 
+// Controller response slots
+
+void MainWindow::onSaveSucceeded() {
+  setCurrentFile(currentFileName, false);
+  statusBar()->showMessage(tr("File saved successfully"));
+}
+
+void MainWindow::onSaveFailed(std::vector<nsbaci::UIError> errors) {
+  nsbaci::ui::ErrorDialogFactory::showErrors(errors, this);
+  statusBar()->showMessage(tr("Save failed"));
+}
+
+void MainWindow::onLoadSucceeded(const QString& contents) {
+  setEditorContents(contents);
+  setCurrentFile(currentFileName, false);
+  statusBar()->showMessage(tr("File loaded successfully"));
+}
+
+void MainWindow::onLoadFailed(std::vector<nsbaci::UIError> errors) {
+  nsbaci::ui::ErrorDialogFactory::showErrors(errors, this);
+  statusBar()->showMessage(tr("Failed to open file"));
+}
+
 // File slots
 
 void MainWindow::onNew() {
@@ -533,15 +559,79 @@ void MainWindow::onNew() {
 }
 
 void MainWindow::onSave() {
-  if (isModified) {
-    emit saveRequested(codeEditor->toPlainText());
-    setCurrentFile(currentFileName, false);
-  }
+    if (!hasName) {
+        // First time saving - show file dialog (same as Save As)
+        onSaveAs();
+    } else if (isModified) {
+        // File already has a name - delegate saving to controller
+        emit saveRequested(currentFilePath, codeEditor->toPlainText());
+        setCurrentFile(currentFileName, false);
+        statusBar()->showMessage(tr("File saved"));
+    }
 }
 
-void MainWindow::onSaveAs() { emit saveAsRequested(codeEditor->toPlainText()); }
+void MainWindow::onSaveAs() {
+    QString filePath = QFileDialog::getSaveFileName(
+        this,
+        tr("Save File As"),
+        QDir::homePath() + "/" + currentFileName,
+        tr("NSBaci Files (*.nsb);;All Files (*)")
+    );
 
-void MainWindow::onOpen() { emit openRequested(); }
+    if (!filePath.isEmpty()) {
+        // Extract filename from path for display
+        QFileInfo fileInfo(filePath);
+        QString fileName = fileInfo.fileName();
+
+        // Update state
+        currentFilePath = filePath;
+        hasName = true;
+        setCurrentFile(fileName, false);
+
+        // Delegate actual saving to controller
+        emit saveRequested(filePath, codeEditor->toPlainText());
+        statusBar()->showMessage(tr("File saved as: %1").arg(fileName));
+    }
+}
+
+void MainWindow::onOpen() {
+    // Check for unsaved changes first
+    if (isModified) {
+        QMessageBox::StandardButton reply = QMessageBox::question(
+            this, tr("Unsaved Changes"),
+            tr("The document has been modified.\nDo you want to save your "
+               "changes?"),
+            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+            QMessageBox::Save);
+
+        if (reply == QMessageBox::Save) {
+            onSave();
+        } else if (reply == QMessageBox::Cancel) {
+            return;
+        }
+    }
+
+    QString filePath = QFileDialog::getOpenFileName(
+        this,
+        tr("Open File"),
+        QDir::homePath(),
+        tr("NSBaci Files (*.nsb);;All Files (*)")
+    );
+
+    if (!filePath.isEmpty()) {
+        // Update state
+        QFileInfo fileInfo(filePath);
+        QString fileName = fileInfo.fileName();
+
+        currentFilePath = filePath;
+        currentFileName = fileName;
+        hasName = true;
+
+        // Delegate actual file loading to controller
+        emit openRequested(filePath);
+        statusBar()->showMessage(tr("Opened: %1").arg(fileName));
+    }
+}
 
 // Edit slots
 
@@ -592,6 +682,24 @@ void MainWindow::onAbout() {
                         "<p>Version: " NSBACI_VERSION "</p>"
                         "<p>Copyright © 2025 Nicolás Serrano García</p>"
                         "<p>Licensed under the MIT License.</p>"));
+}
+
+void MainWindow::onExit() { 
+     if (isModified) {
+        QMessageBox::StandardButton reply = QMessageBox::question(
+            this, tr("Unsaved Changes"),
+            tr("The document has been modified.\nDo you want to save your "
+               "changes?"),
+            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+            QMessageBox::Save);
+
+        if (reply == QMessageBox::Save) {
+            onSave();
+        } else if (reply == QMessageBox::Cancel) {
+            return;
+        }
+    }
+    close(); 
 }
 
 // Editor slots

@@ -15,18 +15,39 @@
 #include <QStyleFactory>
 
 #include "ui/mainwindow/mainwindow.h"
+#include "controller.h"
 
-/**
- * @brief Application entry point.
- *
- * Initializes the Qt application framework, sets the desktop file name
- * for proper desktop integration on Linux, creates and displays the
- * main window, and starts the event loop.
- *
- * @param argc Number of command-line arguments.
- * @param argv Array of command-line argument strings.
- * @return Exit code from the Qt event loop.
- */
+// MVC
+void setupViewController(nsbaci::Controller* c, MainWindow* w) {
+  // View -> Controller connections
+  // Convert QString to std::string/fs::path in lambda since types differ. As the backend uses std, this conversion was needed in some place, so 
+  // do it before entering the controller
+  QObject::connect(w, &MainWindow::saveRequested,
+      [c](const QString& filePath, const QString& contents) {
+          c->onSaveRequested(filePath.toStdString(), contents.toStdString());
+      });
+
+  // same for open
+  QObject::connect(w, &MainWindow::openRequested,
+      [c](const QString& filePath) {
+          c->onOpenRequested(filePath.toStdString());
+      });
+
+  //again, same for compile
+  QObject::connect(w, &MainWindow::compileRequested,
+      [c](const QString& contents) {
+          c->onCompileRequested(contents.toStdString());
+      });
+
+  QObject::connect(w, &MainWindow::runRequested, c, &nsbaci::Controller::onRunRequested);
+
+  // Controller -> View connections
+  QObject::connect(c, &nsbaci::Controller::saveSucceeded, w, &MainWindow::onSaveSucceeded);
+  QObject::connect(c, &nsbaci::Controller::saveFailed, w, &MainWindow::onSaveFailed);
+  QObject::connect(c, &nsbaci::Controller::loadSucceeded, w, &MainWindow::onLoadSucceeded);
+  QObject::connect(c, &nsbaci::Controller::loadFailed, w, &MainWindow::onLoadFailed);
+}
+
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   QApplication::setDesktopFileName("nsbaci");
@@ -34,6 +55,9 @@ int main(int argc, char *argv[]) {
   a.setStyle(QStyleFactory::create("Fusion"));
 
   MainWindow w;
+  nsbaci::Controller c;
+  setupViewController(&c, &w);
+
   w.show();
   return a.exec();
 }

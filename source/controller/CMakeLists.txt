@@ -10,6 +10,12 @@
         controller.h
     )
 
+# private dependencies
+
+    add_subdirectory(${CMAKE_SOURCE_DIR}/source/services 
+        ${CMAKE_BINARY_DIR}/source/services
+    )
+
 # Include path
 
     target_include_directories(nsbaci_controller_library PUBLIC
@@ -20,6 +26,11 @@
 
     target_link_libraries(nsbaci_controller_library PUBLIC
         config_compiler_flags_library
+        nsbaci_qt_library
         nsbaci_error_library
+        nsbaci_uierror_library
+        
         nsbaci_fileService_library
+        nsbaci_compilerService_library
+        nsbaci_runtimeService_library
     )
