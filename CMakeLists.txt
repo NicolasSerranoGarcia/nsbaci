@@ -106,16 +106,18 @@
 
 # Sub-libraries
 
+    add_subdirectory(${CMAKE_SOURCE_DIR}/source/types) # header-only
+    add_subdirectory(${CMAKE_SOURCE_DIR}/source/errors)
     add_subdirectory(${CMAKE_SOURCE_DIR}/source/ui)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/source/controler)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/source/services)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/source/controller)
 
 # Link project libraries
 
     target_link_libraries(${PROJECT_NAME} PRIVATE
+        nsbaci_error_library
+        nsbaci_uierror_library
         nsbaci_ui_library
-        nsbaci_controler_library
-        nsbaci_services_library
+        nsbaci_controller_library # Already includes services
     )
 
 # Auxiliary modules

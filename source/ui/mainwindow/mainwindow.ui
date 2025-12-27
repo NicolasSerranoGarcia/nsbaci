@@ -39,6 +39,11 @@
      <string>File</string>
     </property>
     <addaction name="actionNew"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpen"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
@@ -58,6 +63,21 @@
   <action name="actionNew">
    <property name="text">
     <string>New...</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>SaveAs</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
    </property>
   </action>
  </widget>

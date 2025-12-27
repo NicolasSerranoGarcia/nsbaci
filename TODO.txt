@@ -1,0 +1,3 @@
+- Implement FileService calls, and create tests for them
+
+- Implement Error payloads, so that each one carries valuable info about the specific error (line and column for compilerError, for example)
