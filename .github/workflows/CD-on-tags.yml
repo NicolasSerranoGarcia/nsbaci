@@ -222,7 +222,7 @@ jobs:
 
             ---
 
-            ### 🐧 Linux (AppImage)
+            ### Linux (AppImage)
 
             The AppImage is a portable executable that works on most Linux distributions without installation.
 
@@ -249,6 +249,8 @@ jobs:
             ```bash
             ~/Applications/nsbaci.AppImage --uninstall
             ```
+            
+            You can also uninstall it by right clicking the icon when running the app, and selecting "uninstall" in the menu
 
             > **Note:** If you encounter a *"FUSE not found"* error, install FUSE with:
             > ```bash
@@ -258,7 +260,7 @@ jobs:
 
             ---
 
-            ### 🪟 Windows
+            ### Windows
 
             #### Windows Security Notice
 
