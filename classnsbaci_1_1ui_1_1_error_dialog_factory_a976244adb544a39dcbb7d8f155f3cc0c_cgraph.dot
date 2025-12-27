@@ -1,0 +1,11 @@
+digraph "nsbaci::ui::ErrorDialogFactory::showError"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="nsbaci::ui::ErrorDialogFactory\l::showError",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Shows a single error dialog immediately."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="nsbaci::ui::ErrorDialogFactory\l::getDialogFromUIError",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1ui_1_1_error_dialog_factory.html#a0406719bd4f61c4331000235028c8c6c",tooltip="Creates a dialog invoker from a UIError."];
+}

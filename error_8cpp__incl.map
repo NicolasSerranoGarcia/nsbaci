@@ -1,0 +1,7 @@
+<map id="error.cpp" name="error.cpp">
+<area shape="rect" id="Node000001" title="Implementation unit for the Error class." alt="" coords="16,5,88,32"/>
+<area shape="rect" id="Node000002" href="$error_8h.html" title="Error class declaration for nsbaci." alt="" coords="23,80,81,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,33,55,64,49,64,49,33"/>
+<area shape="rect" id="Node000003" href="$error_types_8h.html" title="Type definitions for error&#45;related structures." alt="" coords="5,155,99,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="55,107,55,139,49,139,49,107"/>
+</map>

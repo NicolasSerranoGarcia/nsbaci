@@ -1,0 +1,12 @@
+<map id="errorTypes.h" name="errorTypes.h">
+<area shape="rect" id="Node000001" title="Type definitions for error&#45;related structures." alt="" coords="17,5,111,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,59,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="54,34,37,55,24,81,21,110,25,139,20,140,15,110,19,79,33,52,49,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="34,80,94,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="67,33,67,64,61,64,61,33"/>
+<area shape="rect" id="Node000004" href="$file_types_8h.html" title="Type definitions for file&#45;related operations." alt="" coords="118,80,202,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="82,30,133,68,130,73,79,35"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="139,110,69,149,66,144,136,105"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="119,155,201,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="163,107,163,139,157,139,157,107"/>
+</map>

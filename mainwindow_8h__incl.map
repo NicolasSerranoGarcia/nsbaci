@@ -1,0 +1,36 @@
+<map id="mainwindow.h" name="mainwindow.h">
+<area shape="rect" id="Node000001" title="Main window class declaration for nsbaci." alt="" coords="416,5,519,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,95,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="416,31,111,82,110,77,415,25"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="118,80,187,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="416,34,203,82,201,77,415,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="211,80,273,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="429,35,289,80,287,75,427,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="297,80,403,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="448,35,385,74,382,69,446,30"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="427,80,508,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="470,33,470,64,465,64,465,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="531,80,625,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="488,30,548,69,545,74,485,35"/>
+<area shape="rect" id="Node000008" href="$codeeditor_8h.html" title="CodeEditor class with line numbers for nsbaci." alt="" coords="649,80,742,107"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="508,30,642,72,640,77,506,35"/>
+<area shape="rect" id="Node000011" href="$error_dialog_factory_8h.html" title="Factory for creating error dialogs from UIError objects." alt="" coords="810,80,948,107"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="520,26,795,75,794,80,519,32"/>
+<area shape="rect" id="Node000016" href="$ui_error_8h.html" title="UI Error type definitions for nsbaci." alt="" coords="1086,155,1156,181"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="520,17,605,20,716,29,840,47,902,61,962,77,1033,109,1092,144,1089,148,1031,113,960,83,900,66,839,53,716,35,605,26,519,23"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="481,155,590,181"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="669,110,578,150,576,145,666,105"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="614,155,686,181"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="690,109,668,143,664,140,685,106"/>
+<area shape="poly" id="edge12_Node000011_Node000010" title=" " alt="" coords="840,110,702,153,700,148,839,105"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="710,155,817,181"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="861,109,798,148,795,144,858,105"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="841,155,918,181"/>
+<area shape="poly" id="edge13_Node000011_Node000013" title=" " alt="" coords="882,107,882,139,877,139,877,107"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="942,155,1011,181"/>
+<area shape="poly" id="edge14_Node000011_Node000014" title=" " alt="" coords="898,105,950,143,946,148,895,109"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="1056,229,1113,256"/>
+<area shape="poly" id="edge15_Node000011_Node000015" title=" " alt="" coords="929,105,977,124,1025,153,1053,183,1074,215,1070,217,1049,186,1022,157,975,129,927,110"/>
+<area shape="poly" id="edge16_Node000011_Node000016" title=" " alt="" coords="922,105,1072,149,1070,154,921,110"/>
+<area shape="poly" id="edge17_Node000016_Node000015" title=" " alt="" coords="1117,183,1100,216,1095,214,1112,181"/>
+</map>

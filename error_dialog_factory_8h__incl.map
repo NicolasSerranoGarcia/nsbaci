@@ -1,0 +1,23 @@
+<map id="errorDialogFactory.h" name="errorDialogFactory.h">
+<area shape="rect" id="Node000001" title="Factory for creating error dialogs from UIError objects." alt="" coords="250,5,388,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,113,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="274,35,120,78,119,73,273,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="136,80,208,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="295,35,213,75,210,70,292,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="232,80,310,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="313,34,290,69,285,66,308,31"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="334,80,402,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="330,31,353,66,349,69,325,34"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="405,155,462,181"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="353,30,387,50,417,78,431,109,436,139,431,140,426,110,413,82,384,54,351,35"/>
+<area shape="rect" id="Node000007" href="$ui_error_8h.html" title="UI Error type definitions for nsbaci." alt="" coords="484,80,554,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="355,30,471,72,469,77,353,35"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="506,109,461,147,458,143,502,105"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="486,155,552,181"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="522,107,522,139,516,139,516,107"/>
+<area shape="rect" id="Node000009" href="$error_8h.html" title="Error class declaration for nsbaci." alt="" coords="575,155,634,181"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="536,105,580,143,577,147,532,109"/>
+<area shape="rect" id="Node000010" href="$error_types_8h.html" title="Type definitions for error&#45;related structures." alt="" coords="591,229,684,256"/>
+<area shape="poly" id="edge11_Node000007_Node000010" title=" " alt="" coords="555,98,605,116,629,132,648,153,654,168,656,185,651,215,646,214,650,184,649,170,643,156,625,136,603,121,553,103"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="613,181,628,214,623,216,608,183"/>
+</map>

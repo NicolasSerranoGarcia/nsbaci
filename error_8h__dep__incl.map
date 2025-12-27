@@ -1,0 +1,21 @@
+<map id="error.h" name="error.h">
+<area shape="rect" id="Node000001" title="Error class declaration for nsbaci." alt="" coords="150,5,208,32"/>
+<area shape="rect" id="Node000002" href="$error_8cpp.html" title="Implementation unit for the Error class." alt="" coords="36,80,108,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,43,93,82,90,77,146,39"/>
+<area shape="rect" id="Node000003" href="$file_service_8h.html" title="FileService class declaration for nsbaci." alt="" coords="132,80,226,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="182,48,182,80,176,80,176,48"/>
+<area shape="rect" id="Node000008" href="$ui_error_8h.html" title="UI Error type definitions for nsbaci." alt="" coords="280,80,350,107"/>
+<area shape="poly" id="edge5_Node000001_Node000008" title=" " alt="" coords="217,37,292,77,290,82,215,42"/>
+<area shape="rect" id="Node000004" href="$controller_8h.html" title="Controller class declaration for nsbaci." alt="" coords="136,155,222,181"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="182,122,182,154,176,154,176,122"/>
+<area shape="rect" id="Node000007" href="$file_service_8cpp.html" title="Implementation unit for the FileService." alt="" coords="5,155,113,181"/>
+<area shape="poly" id="edge4_Node000003_Node000007" title=" " alt="" coords="147,117,81,156,79,152,144,113"/>
+<area shape="poly" id="edge6_Node000008_Node000004" title=" " alt="" coords="279,117,204,156,202,152,277,112"/>
+<area shape="rect" id="Node000009" href="$error_dialog_factory_8h.html" title="Factory for creating error dialogs from UIError objects." alt="" coords="246,155,384,181"/>
+<area shape="poly" id="edge7_Node000008_Node000009" title=" " alt="" coords="318,122,318,154,312,154,312,122"/>
+<area shape="rect" id="Node000011" href="$mainwindow_8h.html" title="Main window class declaration for nsbaci." alt="" coords="317,229,420,256"/>
+<area shape="poly" id="edge9_Node000008_Node000011" title=" " alt="" coords="358,113,381,130,399,154,403,174,399,196,380,230,376,228,394,194,398,175,394,156,377,134,355,117"/>
+<area shape="rect" id="Node000013" href="$ui_error_8cpp.html" title="Implementation of UIError utilities." alt="" coords="460,155,544,181"/>
+<area shape="poly" id="edge10_Node000008_Node000013" title=" " alt="" coords="363,110,470,152,468,157,361,115"/>
+<area shape="poly" id="edge8_Node000009_Node000011" title=" " alt="" coords="335,192,361,227,357,231,331,196"/>
+</map>

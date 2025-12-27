@@ -1,0 +1,11 @@
+<map id="codeeditor.h" name="codeeditor.h">
+<area shape="rect" id="Node000001" title="CodeEditor class with line numbers for nsbaci." alt="" coords="76,5,169,32"/>
+<area shape="rect" id="Node000002" href="$codeeditor_8cpp.html" title="Implementation of the CodeEditor class with line numbers." alt="" coords="5,80,112,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,46,72,81,68,78,99,42"/>
+<area shape="rect" id="Node000003" href="$mainwindow_8h.html" title="Main window class declaration for nsbaci." alt="" coords="136,80,240,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,42,179,78,175,81,142,45"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html" title="Application entry point for nsbaci." alt="" coords="91,155,165,181"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="170,120,140,156,136,153,166,117"/>
+<area shape="rect" id="Node000005" href="$mainwindow_8cpp.html" title="Implementation of the MainWindow class." alt="" coords="189,155,306,181"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="210,117,240,153,235,156,206,120"/>
+</map>
