@@ -479,7 +479,8 @@ void MainWindow::createCentralWidget() {
 
   connect(runButton, &QToolButton::clicked, this, &MainWindow::onRun);
 
-  //signal inherited from QPlainTextEdit, as the class CodeEditor inherits from it
+  // signal inherited from QPlainTextEdit, as the class CodeEditor inherits from
+  // it
   connect(codeEditor, &CodeEditor::textChanged, this,
           &MainWindow::onTextChanged);
 }
@@ -559,78 +560,72 @@ void MainWindow::onNew() {
 }
 
 void MainWindow::onSave() {
-    if (!hasName) {
-        // First time saving - show file dialog (same as Save As)
-        onSaveAs();
-    } else if (isModified) {
-        // File already has a name - delegate saving to controller
-        emit saveRequested(currentFilePath, codeEditor->toPlainText());
-        setCurrentFile(currentFileName, false);
-        statusBar()->showMessage(tr("File saved"));
-    }
+  if (!hasName) {
+    // First time saving - show file dialog (same as Save As)
+    onSaveAs();
+  } else if (isModified) {
+    // File already has a name - delegate saving to controller
+    emit saveRequested(currentFilePath, codeEditor->toPlainText());
+    setCurrentFile(currentFileName, false);
+    statusBar()->showMessage(tr("File saved"));
+  }
 }
 
 void MainWindow::onSaveAs() {
-    QString filePath = QFileDialog::getSaveFileName(
-        this,
-        tr("Save File As"),
-        QDir::homePath() + "/" + currentFileName,
-        tr("NSBaci Files (*.nsb);;All Files (*)")
-    );
+  QString filePath = QFileDialog::getSaveFileName(
+      this, tr("Save File As"), QDir::homePath() + "/" + currentFileName,
+      tr("NSBaci Files (*.nsb);;All Files (*)"));
 
-    if (!filePath.isEmpty()) {
-        // Extract filename from path for display
-        QFileInfo fileInfo(filePath);
-        QString fileName = fileInfo.fileName();
+  if (!filePath.isEmpty()) {
+    // Extract filename from path for display
+    QFileInfo fileInfo(filePath);
+    QString fileName = fileInfo.fileName();
 
-        // Update state
-        currentFilePath = filePath;
-        hasName = true;
-        setCurrentFile(fileName, false);
+    // Update state
+    currentFilePath = filePath;
+    hasName = true;
+    setCurrentFile(fileName, false);
 
-        // Delegate actual saving to controller
-        emit saveRequested(filePath, codeEditor->toPlainText());
-        statusBar()->showMessage(tr("File saved as: %1").arg(fileName));
-    }
+    // Delegate actual saving to controller
+    emit saveRequested(filePath, codeEditor->toPlainText());
+    statusBar()->showMessage(tr("File saved as: %1").arg(fileName));
+  }
 }
 
 void MainWindow::onOpen() {
-    // Check for unsaved changes first
-    if (isModified) {
-        QMessageBox::StandardButton reply = QMessageBox::question(
-            this, tr("Unsaved Changes"),
-            tr("The document has been modified.\nDo you want to save your "
-               "changes?"),
-            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
-            QMessageBox::Save);
+  // Check for unsaved changes first
+  if (isModified) {
+    QMessageBox::StandardButton reply = QMessageBox::question(
+        this, tr("Unsaved Changes"),
+        tr("The document has been modified.\nDo you want to save your "
+           "changes?"),
+        QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+        QMessageBox::Save);
 
-        if (reply == QMessageBox::Save) {
-            onSave();
-        } else if (reply == QMessageBox::Cancel) {
-            return;
-        }
+    if (reply == QMessageBox::Save) {
+      onSave();
+    } else if (reply == QMessageBox::Cancel) {
+      return;
     }
+  }
 
-    QString filePath = QFileDialog::getOpenFileName(
-        this,
-        tr("Open File"),
-        QDir::homePath(),
-        tr("NSBaci Files (*.nsb);;All Files (*)")
-    );
+  QString filePath =
+      QFileDialog::getOpenFileName(this, tr("Open File"), QDir::homePath(),
+                                   tr("NSBaci Files (*.nsb);;All Files (*)"));
 
-    if (!filePath.isEmpty()) {
-        // Update state
-        QFileInfo fileInfo(filePath);
-        QString fileName = fileInfo.fileName();
+  if (!filePath.isEmpty()) {
+    // Update state
+    QFileInfo fileInfo(filePath);
+    QString fileName = fileInfo.fileName();
 
-        currentFilePath = filePath;
-        currentFileName = fileName;
-        hasName = true;
+    currentFilePath = filePath;
+    currentFileName = fileName;
+    hasName = true;
 
-        // Delegate actual file loading to controller
-        emit openRequested(filePath);
-        statusBar()->showMessage(tr("Opened: %1").arg(fileName));
-    }
+    // Delegate actual file loading to controller
+    emit openRequested(filePath);
+    statusBar()->showMessage(tr("Opened: %1").arg(fileName));
+  }
 }
 
 // Edit slots
@@ -684,22 +679,22 @@ void MainWindow::onAbout() {
                         "<p>Licensed under the MIT License.</p>"));
 }
 
-void MainWindow::onExit() { 
-     if (isModified) {
-        QMessageBox::StandardButton reply = QMessageBox::question(
-            this, tr("Unsaved Changes"),
-            tr("The document has been modified.\nDo you want to save your "
-               "changes?"),
-            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
-            QMessageBox::Save);
+void MainWindow::onExit() {
+  if (isModified) {
+    QMessageBox::StandardButton reply = QMessageBox::question(
+        this, tr("Unsaved Changes"),
+        tr("The document has been modified.\nDo you want to save your "
+           "changes?"),
+        QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+        QMessageBox::Save);
 
-        if (reply == QMessageBox::Save) {
-            onSave();
-        } else if (reply == QMessageBox::Cancel) {
-            return;
-        }
+    if (reply == QMessageBox::Save) {
+      onSave();
+    } else if (reply == QMessageBox::Cancel) {
+      return;
     }
-    close(); 
+  }
+  close();
 }
 
 // Editor slots

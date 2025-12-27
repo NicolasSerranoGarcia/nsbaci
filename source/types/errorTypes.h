@@ -13,8 +13,8 @@
 #ifndef NSBACI_TYPES_ERRORTYPES_H
 #define NSBACI_TYPES_ERRORTYPES_H
 
-#include <variant>
 #include <string>
+#include <variant>
 
 #include "fileTypes.h"
 
@@ -36,23 +36,23 @@ enum class ErrSeverity { Warning, Error, Fatal };
  */
 enum class ErrType {
   // File path errors
-  emptyPath,           // Path string is empty
-  invalidPath,         // Path is malformed or invalid
-  invalidExtension,    // File does not have .nsb extension
-  directoryNotFound,   // Parent directory doesn't exist
-  fileNotFound,        // File doesn't exist
-  notARegularFile,     // Path points to directory, symlink, etc.
+  emptyPath,          // Path string is empty
+  invalidPath,        // Path is malformed or invalid
+  invalidExtension,   // File does not have .nsb extension
+  directoryNotFound,  // Parent directory doesn't exist
+  fileNotFound,       // File doesn't exist
+  notARegularFile,    // Path points to directory, symlink, etc.
 
   // Permission errors
-  permissionDenied,    // No read/write access
+  permissionDenied,  // No read/write access
 
   // I/O errors
-  openFailed,          // Could not open file
-  readFailed,          // Error while reading
-  writeFailed,         // Error while writing
+  openFailed,   // Could not open file
+  readFailed,   // Error while reading
+  writeFailed,  // Error while writing
 
   // Generic
-  unknown              // Unspecified error
+  unknown  // Unspecified error
 };
 
 using ErrMessage = std::string;
@@ -62,12 +62,15 @@ using ErrMessage = std::string;
  * @brief Base structure containing common error properties.
  */
 struct ErrorBase {
-  //this severity serves as an indicator to what icon to use in the error, the string that appears in the top of the dialog, additional buttons for things like restart
-  //when the error is fatal...
+  // this severity serves as an indicator to what icon to use in the error, the
+  // string that appears in the top of the dialog, additional buttons for things
+  // like restart when the error is fatal...
   ErrSeverity severity;
   ErrMessage message;
-  //useful to show the reason for things. For example, if when trying to save a file to a sensible location, if the app doesn't have privileges, 
-  //the ui can show a message of type: "/Error/ X could not be saved in Y. Reason: Permission Denied. Try starting the app in admin mode. [Ok]"
+  // useful to show the reason for things. For example, if when trying to save a
+  // file to a sensible location, if the app doesn't have privileges, the ui can
+  // show a message of type: "/Error/ X could not be saved in Y. Reason:
+  // Permission Denied. Try starting the app in admin mode. [Ok]"
   ErrType type;
 };
 
@@ -101,7 +104,9 @@ struct RuntimeError {};
 
 /**
  * @brief Variant type for all possible error payloads.
- * Can be used to create a more specific error message in the controller, for example when an error is of type compileError, the controller can specify the line, col, what might have happened...
+ * Can be used to create a more specific error message in the controller, for
+ * example when an error is of type compileError, the controller can specify the
+ * line, col, what might have happened...
  */
 using ErrorPayload =
     std::variant<SaveError, LoadError, CompileError, RuntimeError>;

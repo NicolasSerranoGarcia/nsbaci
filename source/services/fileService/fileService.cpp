@@ -28,7 +28,8 @@ saveResult FileService::save(Text contents, File file) {
   if (file.extension() != ".nsb") {
     Error err;
     err.basic.severity = ErrSeverity::Error;
-    err.basic.message = "Invalid file extension. Only .nsb files are supported.";
+    err.basic.message =
+        "Invalid file extension. Only .nsb files are supported.";
     err.basic.type = ErrType::invalidExtension;
     err.payload = SaveError{file};
     return saveResult(err);
@@ -93,7 +94,8 @@ LoadResult FileService::load(File file) {
   if (file.extension() != ".nsb") {
     Error err;
     err.basic.severity = ErrSeverity::Error;
-    err.basic.message = "Invalid file extension. Only .nsb files are supported.";
+    err.basic.message =
+        "Invalid file extension. Only .nsb files are supported.";
     err.basic.type = ErrType::invalidExtension;
     err.payload = LoadError{file};
     return LoadResult(err);

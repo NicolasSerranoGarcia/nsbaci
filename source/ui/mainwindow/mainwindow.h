@@ -10,12 +10,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QFileDialog>
 #include <QFrame>
 #include <QLabel>
 #include <QMainWindow>
 #include <QShortcut>
 #include <QToolButton>
-#include <QFileDialog>
 
 #include "codeeditor.h"
 #include "errorDialogFactory.h"
@@ -120,8 +120,8 @@ class MainWindow : public QMainWindow {
   QAction* actionAbout = nullptr;
 
   // State
-  QString currentFileName;   // Just the filename for display
-  QString currentFilePath;   // Full path for saving
+  QString currentFileName;  // Just the filename for display
+  QString currentFilePath;  // Full path for saving
   bool isModified = false;
   bool hasName = false;
 

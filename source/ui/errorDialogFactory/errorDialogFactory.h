@@ -47,9 +47,12 @@
  * ## Why Return Callables?
  *
  * The DialogInvoker pattern provides:
- * - **Separation of concerns**: Factory knows HOW to build, caller knows WHEN to show
- * - **Deferred execution**: Prepare dialogs ahead of time, show when appropriate
- * - **User response handling**: The return value indicates which button was clicked
+ * - **Separation of concerns**: Factory knows HOW to build, caller knows WHEN
+ * to show
+ * - **Deferred execution**: Prepare dialogs ahead of time, show when
+ * appropriate
+ * - **User response handling**: The return value indicates which button was
+ * clicked
  * - **Flexibility**: Batch prepare multiple dialogs, show conditionally, etc.
  *
  * The callable captures all necessary data by value, so the original UIError
@@ -98,7 +101,6 @@ class ErrorDialogFactory {
    */
   using DialogInvoker = std::function<QMessageBox::StandardButton()>;
 
-
   /**
    * @brief Creates a dialog invoker from a UIError.
    *
@@ -133,9 +135,6 @@ class ErrorDialogFactory {
   static DialogInvoker getSuccessDialog(const QString& title,
                                         const QString& message,
                                         QWidget* parent = nullptr);
-
-
-                                        
 
   /**
    * @brief Shows all error dialogs sequentially.
