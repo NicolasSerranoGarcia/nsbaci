@@ -28,12 +28,11 @@ namespace nsbaci {
  * @brief Represents an error with a message and optional code.
  */
 class Error {
-    
-    public:
-    Error() = default;
-    ~Error() = default;
-    ErrorBase basic;
-    ErrorPayload payload;
+ public:
+  Error() = default;
+  ~Error() = default;
+  ErrorBase basic;
+  ErrorPayload payload;
 };
 
 }  // namespace nsbaci

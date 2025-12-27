@@ -9,6 +9,4 @@
 
 #include "error.h"
 
-namespace nsbaci {
-
-}  // namespace nsbaci
+namespace nsbaci {}  // namespace nsbaci

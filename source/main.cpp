@@ -12,6 +12,7 @@
  */
 
 #include <QApplication>
+#include <QStyleFactory>
 
 #include "ui/mainwindow/mainwindow.h"
 
@@ -29,6 +30,9 @@
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   QApplication::setDesktopFileName("nsbaci");
+
+  a.setStyle(QStyleFactory::create("Fusion"));
+
   MainWindow w;
   w.show();
   return a.exec();

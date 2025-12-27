@@ -6,7 +6,7 @@
     # --- Fetch Qt ---
 
     set(CMAKE_AUTOMOC ON)
-    set(CMAKE_AUTOUIC ON)
+    set(CMAKE_AUTOUIC OFF)
     set(CMAKE_AUTORCC ON)
 
     find_package(Qt6 REQUIRED COMPONENTS Core Widgets)

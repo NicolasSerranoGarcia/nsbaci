@@ -62,7 +62,8 @@ struct RuntimeError {};
 /**
  * @brief Variant type for all possible error payloads.
  */
-using ErrorPayload = std::variant<SaveError, LoadError, CompileError, RuntimeError>;
+using ErrorPayload =
+    std::variant<SaveError, LoadError, CompileError, RuntimeError>;
 
 }  // namespace nsbaci::types
 

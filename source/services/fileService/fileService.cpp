@@ -10,11 +10,7 @@
 #include "fileService.h"
 
 namespace nsbaci::services {
-    saveResult save(Text contents, File file){
-        return saveResult();
-    }
+saveResult save(Text contents, File file) { return saveResult(); }
 
-  LoadResult load(File file){
-        return LoadResult();
-  }
+LoadResult load(File file) { return LoadResult(); }
 }  // namespace nsbaci::services

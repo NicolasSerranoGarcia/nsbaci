@@ -5,7 +5,6 @@
 
 # Sub-components
 
-    add_subdirectory(dialog)
     add_subdirectory(mainwindow)
 
 # nsbaci_ui_library
@@ -15,6 +14,5 @@
 # Dependencies
 
     target_link_libraries(nsbaci_ui_library INTERFACE
-        nsbaci_dialog_library
         nsbaci_mainwindow_library
     )

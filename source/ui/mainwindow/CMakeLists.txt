@@ -9,6 +9,8 @@
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        codeeditor.cpp
+        codeeditor.h
     )
 
 # Include path
@@ -22,5 +24,4 @@
     target_link_libraries(nsbaci_mainwindow_library PUBLIC
         config_compiler_flags_library
         nsbaci_qt_library
-        nsbaci_dialog_library
     )

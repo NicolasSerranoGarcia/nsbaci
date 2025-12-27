@@ -44,3 +44,4 @@ build/
 .vscode/
 build_inno/
 format
+.qtcreator

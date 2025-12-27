@@ -20,7 +20,7 @@
 using namespace nsbaci;
 using namespace nsbaci::types;
 
-//guarantee: if ok == false, errors.size() > 0
+// guarantee: if ok == false, errors.size() > 0
 struct FileResult {
   FileResult() : ok(true) {}
   explicit FileResult(std::vector<Error> errs)
@@ -75,7 +75,6 @@ namespace nsbaci::services {
  */
 class FileService {
  public:
-
   saveResult save(Text contents, File file);
 
   LoadResult load(File file);
