@@ -125,6 +125,7 @@
     include(${CMAKE_SOURCE_DIR}/cmake/test.cmake)
     include(${CMAKE_SOURCE_DIR}/cmake/doxygen.cmake)
     include(${CMAKE_SOURCE_DIR}/cmake/appImage.cmake)
+    include(${CMAKE_SOURCE_DIR}/cmake/macOS.cmake)
 
 # Build configuration
 
