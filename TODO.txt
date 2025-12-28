@@ -1,3 +1,6 @@
-- Implement FileService calls, and create tests for them
+- Implement FileService tests
 
-- Implement Error payloads, so that each one carries valuable info about the specific error (line and column for compilerError, for example)
+- Implement the memory model of my compiler (the instructions, syntax...)
+
+- Although you can implement a scheduler assuming the output of the compiler (a vector of instructions), it is better to first implement the 
+compiler
