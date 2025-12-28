@@ -1,6 +1,6 @@
-# ./source/services/runtimeService/instruction/CMakeLists.txt
+# ./source/services/compilerService/instruction/CMakeLists.txt
 
-# Instruction component library for nsbaci runtime service.
+# Instruction component library for nsbaci compiler service.
 
 # Subdirectories
 
@@ -9,8 +9,8 @@
 # nsbaci_instruction_library
 
     add_library(nsbaci_instruction_library STATIC
-        instructionBase.h
-        instructionBase.cpp
+        instruction.h
+        instruction.cpp
     )
 
 # Include path

@@ -3,6 +3,10 @@
 # CompilerService component library for nsbaci.
 # Defines the compilation-related service.
 
+# Subdirectories
+
+    add_subdirectory(instruction)
+
 # nsbaci_compilerService_library
 
     add_library(nsbaci_compilerService_library STATIC
@@ -22,4 +26,5 @@
         config_compiler_flags_library
         nsbaci_types_library
         nsbaci_error_library
+        nsbaci_instruction_library
     )

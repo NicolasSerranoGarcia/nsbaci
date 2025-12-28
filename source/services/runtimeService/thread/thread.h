@@ -63,8 +63,8 @@ class Thread {
   ThreadID id;
   ThreadState state;
   Priority priority;
-  // the pc but for this specific thread
-  Address threadCounter;
+  // the pc but for this specific thread (thread counter)
+  Address tc;
 
   static ThreadID nextThreadId;
 

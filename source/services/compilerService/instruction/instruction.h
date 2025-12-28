@@ -1,5 +1,5 @@
 /**
- * @file InstructionBase.h
+ * @file Instruction.h
  * @brief Base instruction class declaration for nsbaci runtime service.
  *
  * @author Nicolás Serrano García
@@ -21,13 +21,13 @@ using namespace nsbaci::types;
 namespace nsbaci::services::runtime {
 
 /**
- * @class InstructionBase
+ * @class Instruction
  * @brief Base class for all instructions in the runtime service.
  */
-class InstructionBase {
+class Instruction {
  public:
-  InstructionBase() = default;
-  virtual ~InstructionBase() = default;
+  Instruction() = default;
+  virtual ~Instruction() = default;
 
   /**
    * @brief Executes the instruction.
