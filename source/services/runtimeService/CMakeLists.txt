@@ -2,6 +2,11 @@
 
 # RuntimeService component library for nsbaci.
 
+# Subdirectories
+
+    add_subdirectory(thread)
+    add_subdirectory(instruction)
+
 # nsbaci_runtimeService_library
 
     add_library(nsbaci_runtimeService_library STATIC
@@ -21,4 +26,6 @@
         config_compiler_flags_library
         nsbaci_types_library
         nsbaci_error_library
+        nsbaci_thread_library
+        nsbaci_instruction_library
     )

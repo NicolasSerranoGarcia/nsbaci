@@ -13,13 +13,24 @@
 #ifndef NSBACI_TYPES_RUNTIMETYPES_H
 #define NSBACI_TYPES_RUNTIMETYPES_H
 
+#include <stack>
+
 /**
  * @namespace nsbaci::types
  * @brief Type definitions namespace for nsbaci.
  */
 namespace nsbaci::types {
+// just in case I want to implement my own stack or smth in the future
+template <typename Type>
+using Stack = std::stack<Type>;
 
-// Runtime-specific types will be added here as needed
+using ThreadID = unsigned long long int;
+
+using Priority = unsigned long int;
+
+enum class ThreadState { Waiting, Ready, Running, Blocked, IO };
+
+using Address = unsigned long long int;
 
 }  // namespace nsbaci::types
 
