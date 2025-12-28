@@ -127,9 +127,50 @@ jobs:
           name: nsbaci-Linux-AppImage
           path: build/nsbaci-${{ github.ref_name }}-x86_64.AppImage
 
+  build-macos:
+    runs-on: macos-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Qt6
+        run: brew install qt@6
+
+      - name: Configure and build nsbaci
+        run: |
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_PREFIX_PATH="$(brew --prefix qt@6)" \
+                ..
+          cmake --build . --config Release
+
+      - name: Bundle Qt dependencies
+        run: |
+          cd build
+          # macdeployqt creates a self-contained .app bundle
+          $(brew --prefix qt@6)/bin/macdeployqt nsbaci.app -verbose=1
+
+      - name: Create DMG installer
+        run: |
+          cd build
+          # Create a DMG with the app bundle
+          hdiutil create -volname "nsbaci" \
+            -srcfolder nsbaci.app \
+            -ov -format UDZO \
+            nsbaci-${{ github.ref_name }}-macos.dmg
+
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nsbaci-macOS-DMG
+          path: build/nsbaci-${{ github.ref_name }}-macos.dmg
+
   release:
     runs-on: ubuntu-latest
     needs: [build-windows, build-linux]
+    if: always() && needs.build-windows.result == 'success' && needs.build-linux.result == 'success'
     permissions:
       contents: write
     steps:
@@ -147,6 +188,13 @@ jobs:
         with:
           name: nsbaci-Linux-AppImage
           path: dist/linux
+
+      - name: Download macOS artifact
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: nsbaci-macOS-DMG
+          path: dist/macos
 
       - name: List downloaded artifacts (debug)
         run: ls -R dist
@@ -174,7 +222,7 @@ jobs:
 
             ---
 
-            ### 🐧 Linux (AppImage)
+            ### Linux (AppImage)
 
             The AppImage is a portable executable that works on most Linux distributions without installation.
 
@@ -201,6 +249,8 @@ jobs:
             ```bash
             ~/Applications/nsbaci.AppImage --uninstall
             ```
+            
+            You can also uninstall it by right clicking the icon when running the app, and selecting "uninstall" in the menu
 
             > **Note:** If you encounter a *"FUSE not found"* error, install FUSE with:
             > ```bash
@@ -210,7 +260,7 @@ jobs:
 
             ---
 
-            ### 🪟 Windows
+            ### Windows
 
             #### Windows Security Notice
 
@@ -239,9 +289,29 @@ jobs:
 
             ---
 
+            ### 🍎 macOS
+
+            #### How to install nsbaci on macOS
+
+            1. Download the `.dmg` file from the **Assets** section below.
+            2. Double-click the DMG file to mount it.
+            3. Drag `nsbaci.app` to your **Applications** folder.
+            4. On first launch, you may need to right-click the app and select **"Open"** to bypass Gatekeeper (since the app is not notarized).
+
+            #### macOS Security Notice
+
+            Since this app is not signed with an Apple Developer certificate, macOS may show a warning. To run it:
+            1. Go to **System Settings** → **Privacy & Security**
+            2. Scroll down and click **"Open Anyway"** next to the nsbaci message
+
+            > **Note:** The DMG includes all required Qt dependencies — no additional installation needed.
+
+            ---
+
             **Release notes**
             ${{ steps.notes.outputs.notes }}
           files: |
             dist/windows/**/*.exe
             dist/linux/*.AppImage
+            dist/macos/*.dmg
           draft: false

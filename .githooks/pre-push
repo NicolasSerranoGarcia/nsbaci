@@ -1,0 +1,35 @@
+#!/bin/bash
+# Pre-push hook: Update VERSION file when pushing a version tag
+#
+# To enable this hook, run:
+#   git config core.hooksPath .githooks
+
+while read local_ref local_sha remote_ref remote_sha; do
+    # Check if we're pushing a tag that starts with 'v'
+    if [[ "$local_ref" =~ ^refs/tags/v ]]; then
+        tag_name="${local_ref#refs/tags/}"
+        version="${tag_name#v}"  # Strip 'v' prefix
+        
+        current_version=$(cat VERSION 2>/dev/null | tr -d '\n')
+        
+        if [[ "$current_version" != "$version" ]]; then
+            echo "VERSION file ($current_version) doesn't match tag ($version)"
+            echo ""
+            echo "Would you like to update VERSION to $version? [y/N]"
+            read -r response < /dev/tty
+            
+            if [[ "$response" =~ ^[Yy]$ ]]; then
+                echo -n "$version" > VERSION
+                git add VERSION
+                git commit --amend --no-edit
+                echo "VERSION updated to $version"
+                echo "Note: The commit was amended. You may need to force push."
+            else
+                echo "Push aborted. Please update VERSION manually and retry."
+                exit 1
+            fi
+        fi
+    fi
+done
+
+exit 0
