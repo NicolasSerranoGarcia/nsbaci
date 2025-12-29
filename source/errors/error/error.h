@@ -15,8 +15,6 @@
 
 #include "errorTypes.h"
 
-using namespace nsbaci::types;
-
 /**
  * @namespace nsbaci
  * @brief Root namespace for the nsbaci application.
@@ -31,8 +29,8 @@ class Error {
  public:
   Error() = default;
   ~Error() = default;
-  ErrorBase basic;
-  ErrorPayload payload;
+  nsbaci::types::ErrorBase basic;
+  nsbaci::types::ErrorPayload payload;
 };
 
 }  // namespace nsbaci

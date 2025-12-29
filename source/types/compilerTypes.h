@@ -13,6 +13,8 @@
 #ifndef NSBACI_TYPES_COMPILERTYPES_H
 #define NSBACI_TYPES_COMPILERTYPES_H
 
+#include <vector>
+
 /**
  * @namespace nsbaci::types
  * @brief Type definitions namespace for nsbaci.

@@ -13,11 +13,6 @@
 #ifndef NSBACI_TYPES_RUNTIMETYPES_H
 #define NSBACI_TYPES_RUNTIMETYPES_H
 
-#include <queue>
-#include <stack>
-
-class Thread;
-
 /**
  * @namespace nsbaci::types
  * @brief Type definitions namespace for nsbaci.
@@ -110,8 +105,6 @@ struct Address {
   // Conversion operator (explicit to avoid implicit conversions)
   explicit operator unsigned long long int() const { return value; }
 };
-
-using ThreadQueue = std::queue<Thread>;
 
 }  // namespace nsbaci::types
 

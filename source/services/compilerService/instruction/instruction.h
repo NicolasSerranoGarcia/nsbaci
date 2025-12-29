@@ -10,9 +10,9 @@
 #ifndef NSBACI_SERVICES_RUNTIME_INSTRUCTIONBASE_H
 #define NSBACI_SERVICES_RUNTIME_INSTRUCTIONBASE_H
 
-#include "runtimeTypes.h"
+#include <vector>
 
-using namespace nsbaci::types;
+#include "runtimeTypes.h"
 
 /**
  * @namespace nsbaci::services::runtime
@@ -38,5 +38,16 @@ class Instruction {
 };
 
 }  // namespace nsbaci::services::runtime
+
+/**
+ * @namespace nsbaci::types
+ * @brief Type definitions namespace for nsbaci.
+ */
+namespace nsbaci::types {
+
+/// @brief Vector of instructions representing a compiled program
+using InstructionStream = std::vector<nsbaci::services::runtime::Instruction>;
+
+}  // namespace nsbaci::types
 
 #endif  // NSBACI_SERVICES_RUNTIME_INSTRUCTIONBASE_H

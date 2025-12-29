@@ -23,9 +23,6 @@
 #include "runtimeTypes.h"
 #include "uiError.h"
 
-using namespace nsbaci::services;
-using namespace nsbaci::types;
-
 /**
  * @namespace nsbaci
  * @brief Root namespace for the nsbaci application.
@@ -51,17 +48,17 @@ class Controller : public QObject {
 
  public slots:
   // File operations
-  void onSaveRequested(File file, Text contents);
-  void onOpenRequested(File file);
+  void onSaveRequested(nsbaci::types::File file, nsbaci::types::Text contents);
+  void onOpenRequested(nsbaci::types::File file);
 
   // Build operations
-  void onCompileRequested(Text contents);
+  void onCompileRequested(nsbaci::types::Text contents);
   void onRunRequested();
 
  private:
-  FileService fileService;
-  CompilerService compilerService;
-  RuntimeService runtimeService;
+  nsbaci::services::FileService fileService;
+  nsbaci::services::CompilerService compilerService;
+  nsbaci::services::RuntimeService runtimeService;
 };
 
 }  // namespace nsbaci

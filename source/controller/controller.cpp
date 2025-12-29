@@ -9,6 +9,9 @@
 
 #include "controller.h"
 
+using namespace nsbaci::types;
+using namespace nsbaci::services;
+
 namespace nsbaci {
 
 Controller::Controller(QObject* parent) : QObject(parent) {}

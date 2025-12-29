@@ -18,8 +18,6 @@
 #include "runtimeTypes.h"
 #include "thread.h"
 
-using namespace nsbaci::types;
-
 /**
  * @namespace nsbaci::services::runtime
  * @brief Runtime services namespace for nsbaci.
@@ -40,9 +38,9 @@ class Scheduler {
   ~Scheduler() = default;
 
  private:
-  ThreadQueue blocked;  ///< Queue of blocked threads
-  ThreadQueue ready;    ///< Queue of threads ready to run
-  ThreadQueue io;       ///< Queue of threads waiting for I/O
+  nsbaci::types::ThreadQueue blocked;  ///< Queue of blocked threads
+  nsbaci::types::ThreadQueue ready;    ///< Queue of threads ready to run
+  nsbaci::types::ThreadQueue io;       ///< Queue of threads waiting for I/O
   Thread running;       ///< Currently running thread
 };
 

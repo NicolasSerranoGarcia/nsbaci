@@ -9,6 +9,8 @@
 
 #include "thread.h"
 
+using namespace nsbaci::types;
+
 namespace nsbaci::services::runtime {
 
 ThreadID Thread::nextThreadId = 0;

@@ -12,6 +12,30 @@
 #ifndef NSBACI_COMPILERSERVICE_H
 #define NSBACI_COMPILERSERVICE_H
 
+#include "fileTypes.h"
+#include "instruction.h"
+#include "runtimeTypes.h"
+#include <vector>
+
+#include "error.h"
+
+struct CompileResult {
+  CompileResult() : ok(true) {}
+  explicit CompileResult(std::vector<nsbaci::Error> errs)
+      : ok(errs.empty()), errors(std::move(errs)) {}
+  explicit CompileResult(nsbaci::Error error) : ok(false), errors({std::move(error)}) {}
+
+  CompileResult(CompileResult&&) noexcept = default;
+  CompileResult& operator=(CompileResult&&) noexcept = default;
+
+  CompileResult(const CompileResult&) = default;
+  CompileResult& operator=(const CompileResult&) = default;
+
+  bool ok;
+  std::vector<nsbaci::Error> errors;
+  nsbaci::types::InstructionStream instructions;
+};
+
 /**
  * @namespace nsbaci::services
  * @brief Services namespace for nsbaci.
@@ -23,6 +47,9 @@ namespace nsbaci::services {
  */
 class CompilerService {
  public:
+
+  CompileResult compile(nsbaci::types::Text raw);
+
   CompilerService() = default;
   ~CompilerService() = default;
 };
