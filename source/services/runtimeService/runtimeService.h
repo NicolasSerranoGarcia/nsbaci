@@ -38,12 +38,14 @@ class RuntimeService {
   // knows what to tell the gui)
   RuntimeService() = default;
   RuntimeService(std::unique_ptr<runtime::Interpreter> i,
-                 std::unique_ptr<runtime::Scheduler>
-                     s);  // move them into the class attributes
+                 std::unique_ptr<runtime::Scheduler> s,
+                 std::unique_ptr<runtime::Program> p);
   ~RuntimeService() = default;
 
+  void changeProgram(std::unique_ptr<runtime::Program> p);
+
  private:
-  runtime::Program program;
+  std::unique_ptr<runtime::Program> program;
   std::unique_ptr<runtime::Interpreter> interpreter;
   std::unique_ptr<runtime::Scheduler> scheduler;
 };

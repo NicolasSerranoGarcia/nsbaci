@@ -46,6 +46,8 @@ class Controller : public QObject {
   void saveSucceeded();
   void loadFailed(std::vector<UIError> errors);
   void loadSucceeded(const QString& contents);
+  void compileFailed(std::vector<UIError> errors);
+  void compileSucceeded();
 
  public slots:
   // File operations

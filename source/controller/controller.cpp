@@ -39,7 +39,14 @@ void Controller::onOpenRequested(File file) {
 }
 
 void Controller::onCompileRequested(Text contents) {
-  // TODO: Delegate to compilerService
+  auto compileRes = compilerService.compile(contents);
+
+  if (!compileRes.ok) {
+    auto uiErrors = UIError::fromBackendErrors(compileRes.errors);
+    emit compileFailed(std::move(uiErrors));
+  } else {
+    emit compileSucceeded();
+  }
 }
 
 void Controller::onRunRequested() {

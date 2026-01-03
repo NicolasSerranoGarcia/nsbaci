@@ -52,6 +52,10 @@ void setupViewController(nsbaci::Controller* c, MainWindow* w) {
                    &MainWindow::onLoadSucceeded);
   QObject::connect(c, &nsbaci::Controller::loadFailed, w,
                    &MainWindow::onLoadFailed);
+  QObject::connect(c, &nsbaci::Controller::compileSucceeded, w,
+                   &MainWindow::onCompileSucceeded);
+  QObject::connect(c, &nsbaci::Controller::compileFailed, w,
+                   &MainWindow::onCompileFailed);
 }
 
 int main(int argc, char* argv[]) {

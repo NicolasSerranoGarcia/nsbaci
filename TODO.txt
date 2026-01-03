@@ -4,3 +4,5 @@
 
 - Although you can implement a scheduler assuming the output of the compiler (a vector of instructions), it is better to first implement the 
 compiler
+
+-Inyect the services in the controller with a configuration factory, depending on the config of the program. Return a service package

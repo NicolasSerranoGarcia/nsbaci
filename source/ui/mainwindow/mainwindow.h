@@ -50,6 +50,8 @@ class MainWindow : public QMainWindow {
   void onSaveFailed(std::vector<nsbaci::UIError> errors);
   void onLoadSucceeded(const QString& contents);
   void onLoadFailed(std::vector<nsbaci::UIError> errors);
+  void onCompileSucceeded();
+  void onCompileFailed(std::vector<nsbaci::UIError> errors);
 
  private slots:
   // File menu

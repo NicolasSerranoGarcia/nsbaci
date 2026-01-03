@@ -535,6 +535,15 @@ void MainWindow::onLoadFailed(std::vector<nsbaci::UIError> errors) {
   statusBar()->showMessage(tr("Failed to open file"));
 }
 
+void MainWindow::onCompileSucceeded() {
+  statusBar()->showMessage(tr("File compiled successfully"));
+}
+
+void MainWindow::onCompileFailed(std::vector<nsbaci::UIError> errors) {
+  nsbaci::ui::ErrorDialogFactory::showErrors(errors, this);
+  statusBar()->showMessage(tr("Failed to compile file"));
+}
+
 // File slots
 
 void MainWindow::onNew() {
