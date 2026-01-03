@@ -33,4 +33,5 @@
         nsbaci_fileService_library
         nsbaci_compilerService_library
         nsbaci_runtimeService_library
+        nsbaci_drawingService_library
     )

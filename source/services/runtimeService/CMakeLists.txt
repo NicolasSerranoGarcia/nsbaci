@@ -4,9 +4,8 @@
 
 # Subdirectories
 
-    add_subdirectory(thread)
-    add_subdirectory(scheduler)
     add_subdirectory(program)
+    add_subdirectory(scheduler) # defines thread library
     add_subdirectory(interpreter)
 
 # nsbaci_runtimeService_library
@@ -26,10 +25,6 @@
 
     target_link_libraries(nsbaci_runtimeService_library PUBLIC
         config_compiler_flags_library
-        nsbaci_types_library
-        nsbaci_error_library
-        nsbaci_thread_library
-        nsbaci_instruction_library
         nsbaci_scheduler_library
         nsbaci_program_library
         nsbaci_interpreter_library

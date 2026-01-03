@@ -17,7 +17,6 @@
 #include <unordered_map>
 
 #include "instruction.h"
-#include "runtimeTypes.h"
 
 /**
  * @namespace nsbaci::types
@@ -55,7 +54,7 @@ class Program {
  private:
     //global lookup
     const nsbaci::types::InstructionStream instructions;
-    nsbaci::types::VariableTable globalTable;
+    nsbaci::types::VariableTable symbolTable;
 };
 
 }  // namespace nsbaci::services::runtime

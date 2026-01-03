@@ -15,7 +15,6 @@
 
 #include <queue>
 
-#include "runtimeTypes.h"
 #include "thread.h"
 
 /**
@@ -35,7 +34,7 @@ namespace nsbaci::services::runtime {
 class Scheduler {
  public:
   Scheduler() = default;
-  ~Scheduler() = default;
+  virtual ~Scheduler() = default;
 
  private:
   nsbaci::types::ThreadQueue blocked;  ///< Queue of blocked threads

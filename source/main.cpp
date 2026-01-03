@@ -14,7 +14,7 @@
 #include <QApplication>
 #include <QStyleFactory>
 
-#include "controller.h"
+#include "controller/controller.h"
 #include "ui/mainwindow/mainwindow.h"
 
 // MVC

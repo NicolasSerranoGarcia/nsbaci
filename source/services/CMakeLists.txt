@@ -8,6 +8,7 @@
     add_subdirectory(compilerService)
     add_subdirectory(fileService)
     add_subdirectory(runtimeService)
+    add_subdirectory(drawingService)
 
 # nsbaci_services_library
 
@@ -19,4 +20,5 @@
         nsbaci_compilerService_library
         nsbaci_fileService_library
         nsbaci_runtimeService_library
+        nsbaci_drawingService_library
     )

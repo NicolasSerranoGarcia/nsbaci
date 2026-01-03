@@ -2,6 +2,10 @@
 
 # Interpreter component library for nsbaci runtime service.
 
+# Subdirectories
+
+    add_subdirectory(nsbaci)
+
 # nsbaci_interpreter_library
 
     add_library(nsbaci_interpreter_library STATIC
@@ -19,7 +23,8 @@
 
     target_link_libraries(nsbaci_interpreter_library PUBLIC
         config_compiler_flags_library
-        nsbaci_types_library
+        nsbaci_error_library
         nsbaci_program_library
         nsbaci_thread_library
+        nsbaci_nsbaciInterpreter_library
     )
