@@ -9,6 +9,4 @@
 
 #include "interpreter.h"
 
-namespace nsbaci::services::runtime {
-
-}  // namespace nsbaci::services::runtime
+namespace nsbaci::services::runtime {}  // namespace nsbaci::services::runtime

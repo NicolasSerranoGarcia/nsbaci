@@ -31,16 +31,16 @@ namespace nsbaci::services::runtime {
  */
 class NsbaciScheduler final : public Scheduler {
  public:
-    NsbaciScheduler() = default;
-    ~NsbaciScheduler() override = default;
+  NsbaciScheduler() = default;
+  ~NsbaciScheduler() override = default;
 
-    // TODO: Override virtual methods from Scheduler when defined
+  // TODO: Override virtual methods from Scheduler when defined
 
  private:
-    nsbaci::types::ThreadQueue blocked;  ///< Queue of blocked threads
-    nsbaci::types::ThreadQueue ready;    ///< Queue of threads ready to run
-    nsbaci::types::ThreadQueue io;       ///< Queue of threads waiting for I/O
-    Thread running;                      ///< Currently running thread
+  nsbaci::types::ThreadQueue blocked;  ///< Queue of blocked threads
+  nsbaci::types::ThreadQueue ready;    ///< Queue of threads ready to run
+  nsbaci::types::ThreadQueue io;       ///< Queue of threads waiting for I/O
+  Thread running;                      ///< Currently running thread
 };
 
 }  // namespace nsbaci::services::runtime

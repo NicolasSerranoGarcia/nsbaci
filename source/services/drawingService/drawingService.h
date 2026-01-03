@@ -27,15 +27,14 @@ namespace nsbaci::services {
  * @brief Adapter service for graphical output backends.
  */
 class DrawingService {
-
  public:
-    DrawingService() = default;
-    ~DrawingService() = default;
-    // TODO: Add signals for notifying backends of drawing operations
-    // Example: void drawFigure(std::shared_ptr<Figure> figure);
+  DrawingService() = default;
+  ~DrawingService() = default;
+  // TODO: Add signals for notifying backends of drawing operations
+  // Example: void drawFigure(std::shared_ptr<Figure> figure);
 
  private:
-    // TODO: Add backend reference/pointer when backends are implemented
+  // TODO: Add backend reference/pointer when backends are implemented
 };
 
 }  // namespace nsbaci::services

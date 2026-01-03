@@ -30,16 +30,17 @@ namespace nsbaci::services::runtime {
  */
 class NsbaciInterpreter final : public Interpreter {
  public:
-    NsbaciInterpreter() = default;
-    ~NsbaciInterpreter() override = default;
+  NsbaciInterpreter() = default;
+  ~NsbaciInterpreter() override = default;
 
-    /**
-     * @brief Executes the current instruction for the given thread with the program context.
-     * @param t The thread whose instruction should be executed.
-     * @param program The program context in which to execute the instruction.
-     * @return InterpreterResult indicating success or any errors encountered.
-     */
-    InterpreterResult executeInstruction(Thread& t, Program& program) override;
+  /**
+   * @brief Executes the current instruction for the given thread with the
+   * program context.
+   * @param t The thread whose instruction should be executed.
+   * @param program The program context in which to execute the instruction.
+   * @return InterpreterResult indicating success or any errors encountered.
+   */
+  InterpreterResult executeInstruction(Thread& t, Program& program) override;
 
  private:
 };

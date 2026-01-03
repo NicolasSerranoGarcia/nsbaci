@@ -47,14 +47,14 @@ namespace nsbaci::services::runtime {
  */
 class Program {
  public:
-    Program() = default;
-    Program(nsbaci::types::InstructionStream i);
-    ~Program() = default;
+  Program() = default;
+  Program(nsbaci::types::InstructionStream i);
+  ~Program() = default;
 
  private:
-    //global lookup
-    const nsbaci::types::InstructionStream instructions;
-    nsbaci::types::VariableTable symbolTable;
+  // global lookup
+  const nsbaci::types::InstructionStream instructions;
+  nsbaci::types::VariableTable symbolTable;
 };
 
 }  // namespace nsbaci::services::runtime

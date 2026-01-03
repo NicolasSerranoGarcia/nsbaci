@@ -13,15 +13,16 @@
 #ifndef NSBACI_SERVICES_RUNTIME_INTERPRETER_H
 #define NSBACI_SERVICES_RUNTIME_INTERPRETER_H
 
+#include "error.h"
 #include "program.h"
 #include "thread.h"
-#include "error.h"
 
 struct InterpreterResult {
   InterpreterResult() : ok(true) {}
   explicit InterpreterResult(std::vector<nsbaci::Error> errs)
       : ok(errs.empty()), errors(std::move(errs)) {}
-  explicit InterpreterResult(nsbaci::Error error) : ok(false), errors({std::move(error)}) {}
+  explicit InterpreterResult(nsbaci::Error error)
+      : ok(false), errors({std::move(error)}) {}
 
   InterpreterResult(InterpreterResult&&) noexcept = default;
   InterpreterResult& operator=(InterpreterResult&&) noexcept = default;
@@ -31,7 +32,7 @@ struct InterpreterResult {
 
   bool ok;
   std::vector<nsbaci::Error> errors;
-    //additional info of executing an instruction from a thread
+  // additional info of executing an instruction from a thread
 };
 
 /**
@@ -49,15 +50,16 @@ namespace nsbaci::services::runtime {
  */
 class Interpreter {
  public:
-    Interpreter() = default;
-    virtual ~Interpreter() = default;
+  Interpreter() = default;
+  virtual ~Interpreter() = default;
 
-    /**
-     * @brief Executes the current instruction for the given thread with the program context.
-     * @param t The thread whose instruction should be executed.
-     * @param program The program context in which to execute the instruction
-     */
-    virtual InterpreterResult executeInstruction(Thread& t, Program& program) = 0;
+  /**
+   * @brief Executes the current instruction for the given thread with the
+   * program context.
+   * @param t The thread whose instruction should be executed.
+   * @param program The program context in which to execute the instruction
+   */
+  virtual InterpreterResult executeInstruction(Thread& t, Program& program) = 0;
 };
 
 }  // namespace nsbaci::services::runtime

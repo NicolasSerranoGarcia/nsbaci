@@ -15,13 +15,13 @@
 
 #include <QObject>
 
-#include "compilerTypes.h"
-#include "runtimeTypes.h"
-#include "fileTypes.h"
 #include "compilerService.h"
-#include "fileService.h"
+#include "compilerTypes.h"
 #include "drawingService.h"
+#include "fileService.h"
+#include "fileTypes.h"
 #include "runtimeService.h"
+#include "runtimeTypes.h"
 #include "uiError.h"
 
 /**

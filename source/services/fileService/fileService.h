@@ -22,7 +22,8 @@ struct FileResult {
   FileResult() : ok(true) {}
   explicit FileResult(std::vector<nsbaci::Error> errs)
       : ok(errs.empty()), errors(std::move(errs)) {}
-  explicit FileResult(nsbaci::Error error) : ok(false), errors({std::move(error)}) {}
+  explicit FileResult(nsbaci::Error error)
+      : ok(false), errors({std::move(error)}) {}
 
   FileResult(FileResult&&) noexcept = default;
   FileResult& operator=(FileResult&&) noexcept = default;
@@ -36,7 +37,8 @@ struct FileResult {
 
 struct saveResult : FileResult {
   saveResult() : FileResult() {}
-  explicit saveResult(std::vector<nsbaci::Error> errs) : FileResult(std::move(errs)) {}
+  explicit saveResult(std::vector<nsbaci::Error> errs)
+      : FileResult(std::move(errs)) {}
   explicit saveResult(nsbaci::Error error) : FileResult(std::move(error)) {}
 
   saveResult(saveResult&&) noexcept = default;
@@ -49,7 +51,8 @@ struct LoadResult : FileResult {
   LoadResult() : FileResult() {}
   LoadResult(nsbaci::types::Text conts, nsbaci::types::File name)
       : FileResult(), contents(std::move(conts)), fileName(std::move(name)) {}
-  explicit LoadResult(std::vector<nsbaci::Error> errs) : FileResult(std::move(errs)) {}
+  explicit LoadResult(std::vector<nsbaci::Error> errs)
+      : FileResult(std::move(errs)) {}
   explicit LoadResult(nsbaci::Error error) : FileResult(std::move(error)) {}
 
   LoadResult(LoadResult&&) noexcept = default;

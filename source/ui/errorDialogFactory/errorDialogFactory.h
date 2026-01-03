@@ -172,7 +172,8 @@ class ErrorDialogFactory {
   /**
    * @brief Maps ErrSeverity to QMessageBox::Icon.
    */
-  static QMessageBox::Icon iconFromSeverity(nsbaci::types::ErrSeverity severity);
+  static QMessageBox::Icon iconFromSeverity(
+      nsbaci::types::ErrSeverity severity);
 };
 
 }  // namespace nsbaci::ui

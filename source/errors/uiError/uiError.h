@@ -29,8 +29,8 @@ namespace nsbaci {
  * title, body text, and severity (which maps to an icon).
  */
 struct UIError {
-  QString title;         // Dialog title (e.g., "Save Error", "Load Error")
-  QString body;          // Main message body with details
+  QString title;  // Dialog title (e.g., "Save Error", "Load Error")
+  QString body;   // Main message body with details
   nsbaci::types::ErrSeverity severity;  // Maps to icon (Warning, Error, Fatal)
 
   /**

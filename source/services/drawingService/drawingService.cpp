@@ -9,6 +9,4 @@
 
 #include "drawingService.h"
 
-namespace nsbaci::services {
-
-}  // namespace nsbaci::services
+namespace nsbaci::services {}  // namespace nsbaci::services

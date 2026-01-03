@@ -11,9 +11,10 @@
 
 namespace nsbaci::services::runtime {
 
-InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t, Program& program) {
-    // TODO: Implement BACI instruction execution
-    return InterpreterResult();
+InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
+                                                        Program& program) {
+  // TODO: Implement BACI instruction execution
+  return InterpreterResult();
 }
 
 }  // namespace nsbaci::services::runtime

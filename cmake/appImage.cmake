@@ -13,7 +13,7 @@ if(GENERATE_APPIMAGE)
 
         # --- Download linuxdeploy ---
 
-         add_custom_target(download-linuxdeploy ALL
+        add_custom_target(download-linuxdeploy ALL
             COMMAND wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage 
             COMMAND chmod +x linuxdeploy-x86_64.AppImage
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
