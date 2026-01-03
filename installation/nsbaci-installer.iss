@@ -9,7 +9,7 @@
 #define BuildInno "..\build_inno"
 #define ReadmeFile "..\README.md"
 #define LicenseFile "..\LICENSE"
-#define AppURL "https://nsbaci-docs.nicolasserranogarcia.com"
+#define AppURL "https://nsbaci.nicolasserranogarcia.com"
 #define WorkspacesDir "{userappdata}\nsbaci"
 #define FileDesc = FileOpen("..\VERSION")
 #define VersionNumber = FileRead(FileDesc)

@@ -1,6 +1,6 @@
 /**
  * @file instruction.cpp
- * @brief Instruction class implementation for nsbaci runtime service.
+ * @brief Instruction class implementation for nsbaci compiler.
  *
  * @author Nicolás Serrano García
  * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT
@@ -9,8 +9,8 @@
 
 #include "instruction.h"
 
-namespace nsbaci::services::runtime {
+namespace nsbaci::compiler {
 
-// Instruction implementation
+// Instruction implementation - base class is abstract
 
-}  // namespace nsbaci::services::runtime
+}  // namespace nsbaci::compiler

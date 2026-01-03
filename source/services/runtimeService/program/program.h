@@ -48,12 +48,12 @@ namespace nsbaci::services::runtime {
 class Program {
  public:
   Program() = default;
-  Program(nsbaci::types::InstructionStream i);
+  Program(nsbaci::compiler::InstructionStream i);
   ~Program() = default;
 
  private:
   // global lookup
-  const nsbaci::types::InstructionStream instructions;
+  const nsbaci::compiler::InstructionStream instructions;
   nsbaci::types::VariableTable symbolTable;
 };
 

@@ -27,6 +27,8 @@ jobs:
             mingw-w64-x86_64-qt6
             mingw-w64-x86_64-qt6-base
             mingw-w64-x86_64-qt6-tools
+            mingw-w64-x86_64-bison
+            mingw-w64-x86_64-flex
 
       - name: Configure and build nsbaci
         run: |
@@ -107,7 +109,9 @@ jobs:
             libxkbcommon-dev \
             libxcb-cursor0 \
             libfuse2 \
-            wget
+            wget \
+            bison \
+            flex
 
       - name: Configure and build nsbaci
         run: |
