@@ -6,3 +6,5 @@
 compiler
 
 -Inyect the services in the controller with a configuration factory, depending on the config of the program. Return a service package
+
+- Need to aquire the results of the compilation, then convert them into nsbaci errors to return them in the nsbaciCompiler::compile function
