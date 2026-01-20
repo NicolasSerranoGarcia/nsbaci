@@ -38,7 +38,7 @@ class CompilerService {
   nsbaci::compiler::CompilerResult compile(nsbaci::types::Text raw);
 
  private:
-  std::unique_ptr<nsbaci::compiler::Compiler> compiler_;
+  std::unique_ptr<nsbaci::compiler::Compiler> compiler;
 };
 
 }  // namespace nsbaci::services

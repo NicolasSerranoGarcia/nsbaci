@@ -24,7 +24,7 @@
 
     target_link_libraries(nsbaci_compiler_library PUBLIC
         config_compiler_flags_library
+        nsbaci_baseResult_library
         nsbaci_compilerInstruction_library
-        nsbaci_error_library
         nsbaci_nsbaciCompiler_library
     )

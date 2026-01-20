@@ -45,8 +45,8 @@ find_package(BISON REQUIRED)
 
     target_link_libraries(nsbaci_nsbaciCompiler_library PUBLIC
         config_compiler_flags_library
+        nsbaci_baseResult_library
         nsbaci_compilerInstruction_library
-        nsbaci_error_library
     )
 
 # Subdirectories

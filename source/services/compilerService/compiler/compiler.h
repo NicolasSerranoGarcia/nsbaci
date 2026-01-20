@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 
-#include "error.h"
+#include "baseResult.h"
 #include "instruction.h"
 
 /**
@@ -30,12 +30,12 @@ namespace nsbaci::compiler {
  * @struct CompilerResult
  * @brief Result of a compilation operation.
  */
-struct CompilerResult {
-  CompilerResult() : ok(true) {}
+struct CompilerResult : nsbaci::BaseResult {
+  CompilerResult() : BaseResult() {}
   explicit CompilerResult(std::vector<nsbaci::Error> errs)
-      : ok(errs.empty()), errors(std::move(errs)) {}
+      : BaseResult(std::move(errs)) {}
   explicit CompilerResult(nsbaci::Error error)
-      : ok(false), errors({std::move(error)}) {}
+      : BaseResult(std::move(error)) {}
 
   CompilerResult(CompilerResult&&) noexcept = default;
   CompilerResult& operator=(CompilerResult&&) noexcept = default;
@@ -43,8 +43,6 @@ struct CompilerResult {
   CompilerResult(const CompilerResult&) = default;
   CompilerResult& operator=(const CompilerResult&) = default;
 
-  bool ok;
-  std::vector<nsbaci::Error> errors;
   InstructionStream instructions;
 };
 

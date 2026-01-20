@@ -14,25 +14,22 @@
 
 #include <vector>
 
-#include "error.h"
+#include "baseResult.h"
 #include "fileTypes.h"
 
 // guarantee: if ok == false, errors.size() > 0
-struct FileResult {
-  FileResult() : ok(true) {}
+struct FileResult : nsbaci::BaseResult {
+  FileResult() : BaseResult() {}
   explicit FileResult(std::vector<nsbaci::Error> errs)
-      : ok(errs.empty()), errors(std::move(errs)) {}
+      : BaseResult(std::move(errs)) {}
   explicit FileResult(nsbaci::Error error)
-      : ok(false), errors({std::move(error)}) {}
+      : BaseResult(std::move(error)) {}
 
   FileResult(FileResult&&) noexcept = default;
   FileResult& operator=(FileResult&&) noexcept = default;
 
   FileResult(const FileResult&) = default;
   FileResult& operator=(const FileResult&) = default;
-
-  bool ok;
-  std::vector<nsbaci::Error> errors;
 };
 
 struct saveResult : FileResult {

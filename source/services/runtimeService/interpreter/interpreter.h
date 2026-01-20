@@ -13,16 +13,16 @@
 #ifndef NSBACI_SERVICES_RUNTIME_INTERPRETER_H
 #define NSBACI_SERVICES_RUNTIME_INTERPRETER_H
 
-#include "error.h"
+#include "baseResult.h"
 #include "program.h"
 #include "thread.h"
 
-struct InterpreterResult {
-  InterpreterResult() : ok(true) {}
+struct InterpreterResult : nsbaci::BaseResult {
+  InterpreterResult() : BaseResult() {}
   explicit InterpreterResult(std::vector<nsbaci::Error> errs)
-      : ok(errs.empty()), errors(std::move(errs)) {}
+      : BaseResult(std::move(errs)) {}
   explicit InterpreterResult(nsbaci::Error error)
-      : ok(false), errors({std::move(error)}) {}
+      : BaseResult(std::move(error)) {}
 
   InterpreterResult(InterpreterResult&&) noexcept = default;
   InterpreterResult& operator=(InterpreterResult&&) noexcept = default;
@@ -30,8 +30,6 @@ struct InterpreterResult {
   InterpreterResult(const InterpreterResult&) = default;
   InterpreterResult& operator=(const InterpreterResult&) = default;
 
-  bool ok;
-  std::vector<nsbaci::Error> errors;
   // additional info of executing an instruction from a thread
 };
 

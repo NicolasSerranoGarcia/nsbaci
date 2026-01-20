@@ -14,14 +14,14 @@
 namespace nsbaci::services {
 
 CompilerService::CompilerService()
-    : compiler_(std::make_unique<nsbaci::compiler::NsbaciCompiler>()) {}
+    : compiler(std::make_unique<nsbaci::compiler::NsbaciCompiler>()) {}
 
 CompilerService::CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c)
-    : compiler_(std::move(c)) {}
+    : compiler(std::move(c)) {}
 
 nsbaci::compiler::CompilerResult CompilerService::compile(
     nsbaci::types::Text raw) {
-  return compiler_->compile(raw);
+  return compiler->compile(raw);
 }
 
 }  // namespace nsbaci::services
