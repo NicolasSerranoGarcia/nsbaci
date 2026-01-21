@@ -14,7 +14,9 @@ using namespace nsbaci::services;
 
 namespace nsbaci {
 
-Controller::Controller(QObject* parent) : QObject(parent) {}
+//Needs the other services to be passed
+Controller::Controller(FileService&& f, CompilerService&& c, RuntimeService&& r, QObject* parent) :
+           QObject(parent), fileService(std::move(f)), compilerService(std::move(c)), runtimeService(std::move(r)) {}
 
 void Controller::onSaveRequested(File file, Text contents) {
   auto saveRes = fileService.save(contents, file);

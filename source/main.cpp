@@ -16,8 +16,15 @@
 
 #include "controller/controller.h"
 #include "ui/mainwindow/mainwindow.h"
+//this should not be here but rather a factory for each service that generates a service
+//depending on things like the arguments of the program or the config of the user. For now, inject the services directly
+#include "services/compilerService/compilerService.h"
+#include "services/runtimeService/runtimeService.h"
+#include "services/fileService/fileService.h"
+#include "services/drawingService/drawingService.h"
 
-// MVC
+
+// MVC. Connects slots with signals from the mainWINdow and the controller
 void setupViewController(nsbaci::Controller* c, MainWindow* w) {
   // View -> Controller connections
   // Convert QString to std::string/fs::path in lambda since types differ. As
@@ -65,7 +72,11 @@ int main(int argc, char* argv[]) {
   a.setStyle(QStyleFactory::create("Fusion"));
 
   MainWindow w;
-  nsbaci::Controller c;
+  nsbaci::Controller c(
+      nsbaci::services::FileService{},
+      nsbaci::services::CompilerService{},
+      nsbaci::services::RuntimeService{}//this has a default constructor rn bc it is not being used, but it should be deleted and the real constructor be the parametrized one
+  );
   setupViewController(&c, &w);
 
   w.show();

@@ -78,6 +78,12 @@ class FileService {
 
   FileService() = default;
 
+  FileService(const FileService&) = delete; 
+  FileService& operator=(const FileService&) = delete;
+
+  FileService(FileService&&) = default;
+  FileService& operator=(FileService&&) = default;
+
   ~FileService() = default;
 };
 

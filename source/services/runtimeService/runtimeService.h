@@ -39,13 +39,19 @@ class RuntimeService {
   RuntimeService() = default;
   RuntimeService(std::unique_ptr<runtime::Interpreter> i,
                  std::unique_ptr<runtime::Scheduler> s,
-                 std::unique_ptr<runtime::Program> p);
+                runtime::Program&& p);
   ~RuntimeService() = default;
 
-  void changeProgram(std::unique_ptr<runtime::Program> p);
+  RuntimeService(const RuntimeService&) = delete;
+  RuntimeService& operator=(const RuntimeService&) = delete;
+
+  RuntimeService(RuntimeService&&) = default;
+  RuntimeService& operator=(RuntimeService&&) = default;
+
+  void changeProgram(runtime::Program&& p);
 
  private:
-  std::unique_ptr<runtime::Program> program;
+  runtime::Program program;
   std::unique_ptr<runtime::Interpreter> interpreter;
   std::unique_ptr<runtime::Scheduler> scheduler;
 };

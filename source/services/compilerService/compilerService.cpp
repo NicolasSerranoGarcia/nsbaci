@@ -9,12 +9,7 @@
 
 #include "compilerService.h"
 
-#include "nsbaciCompiler.h"
-
 namespace nsbaci::services {
-
-CompilerService::CompilerService()
-    : compiler(std::make_unique<nsbaci::compiler::NsbaciCompiler>()) {}
 
 CompilerService::CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c)
     : compiler(std::move(c)) {}

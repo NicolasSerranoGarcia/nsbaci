@@ -37,7 +37,7 @@ class Controller : public QObject {
   Q_OBJECT
 
  public:
-  explicit Controller(QObject* parent = nullptr);
+  explicit Controller(nsbaci::services::FileService&& f, nsbaci::services::CompilerService&& c, nsbaci::services::RuntimeService&& r, QObject* parent = nullptr);
   ~Controller() = default;
 
  signals:

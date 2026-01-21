@@ -590,13 +590,13 @@ void MainWindow::onSaveAs() {
     QFileInfo fileInfo(filePath);
     QString fileName = fileInfo.fileName();
 
+    // Delegate actual saving to controller
+    emit saveRequested(filePath, codeEditor->toPlainText());
+    
     // Update state
     currentFilePath = filePath;
     hasName = true;
     setCurrentFile(fileName, false);
-
-    // Delegate actual saving to controller
-    emit saveRequested(filePath, codeEditor->toPlainText());
     statusBar()->showMessage(tr("File saved as: %1").arg(fileName));
   }
 }

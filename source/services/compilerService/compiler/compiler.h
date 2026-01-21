@@ -56,6 +56,7 @@ struct CompilerResult : nsbaci::BaseResult {
 class Compiler {
  public:
   Compiler() = default;
+
   virtual ~Compiler() = default;
 
   /**

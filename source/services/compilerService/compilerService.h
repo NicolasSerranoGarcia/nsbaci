@@ -19,6 +19,8 @@
 #include "error.h"
 #include "fileTypes.h"
 
+#include "nsbaciCompiler.h"
+
 /**
  * @namespace nsbaci::services
  * @brief Services namespace for nsbaci.
@@ -31,9 +33,14 @@ namespace nsbaci::services {
  */
 class CompilerService {
  public:
-  CompilerService();
-  CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c);
+  CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c = std::make_unique<nsbaci::compiler::NsbaciCompiler>());
   ~CompilerService() = default;
+
+  CompilerService(const CompilerService&) = delete; 
+  CompilerService& operator=(const CompilerService&) = delete;
+
+  CompilerService(CompilerService&&) = default;
+  CompilerService& operator=(CompilerService&&) = default;
 
   nsbaci::compiler::CompilerResult compile(nsbaci::types::Text raw);
 

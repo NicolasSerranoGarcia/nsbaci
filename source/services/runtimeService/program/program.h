@@ -51,9 +51,15 @@ class Program {
   Program(nsbaci::compiler::InstructionStream i);
   ~Program() = default;
 
+  Program(const Program&) = delete;
+  Program& operator=(const Program&) = delete;
+
+  Program(Program&&) = default;
+  Program& operator=(Program&&) = default;
+
  private:
   // global lookup
-  const nsbaci::compiler::InstructionStream instructions;
+  nsbaci::compiler::InstructionStream instructions;
   nsbaci::types::VariableTable symbolTable;
 };
 
