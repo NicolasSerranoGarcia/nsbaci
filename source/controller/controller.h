@@ -17,14 +17,12 @@
 
 #include "compilerService.h"
 #include "compilerTypes.h"
+#include "drawingService.h"
 #include "fileService.h"
 #include "fileTypes.h"
 #include "runtimeService.h"
 #include "runtimeTypes.h"
 #include "uiError.h"
-
-using namespace nsbaci::services;
-using namespace nsbaci::types;
 
 /**
  * @namespace nsbaci
@@ -39,7 +37,7 @@ class Controller : public QObject {
   Q_OBJECT
 
  public:
-  explicit Controller(QObject* parent = nullptr);
+  explicit Controller(nsbaci::services::FileService&& f, nsbaci::services::CompilerService&& c, nsbaci::services::RuntimeService&& r, QObject* parent = nullptr);
   ~Controller() = default;
 
  signals:
@@ -48,20 +46,22 @@ class Controller : public QObject {
   void saveSucceeded();
   void loadFailed(std::vector<UIError> errors);
   void loadSucceeded(const QString& contents);
+  void compileFailed(std::vector<UIError> errors);
+  void compileSucceeded();
 
  public slots:
   // File operations
-  void onSaveRequested(File file, Text contents);
-  void onOpenRequested(File file);
+  void onSaveRequested(nsbaci::types::File file, nsbaci::types::Text contents);
+  void onOpenRequested(nsbaci::types::File file);
 
   // Build operations
-  void onCompileRequested(Text contents);
+  void onCompileRequested(nsbaci::types::Text contents);
   void onRunRequested();
 
  private:
-  FileService fileService;
-  CompilerService compilerService;
-  RuntimeService runtimeService;
+  nsbaci::services::FileService fileService;
+  nsbaci::services::CompilerService compilerService;
+  nsbaci::services::RuntimeService runtimeService;
 };
 
 }  // namespace nsbaci

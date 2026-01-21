@@ -12,6 +12,12 @@
 #ifndef NSBACI_RUNTIMESERVICE_H
 #define NSBACI_RUNTIMESERVICE_H
 
+#include <memory>
+
+#include "interpreter.h"
+#include "program.h"
+#include "scheduler.h"
+
 /**
  * @namespace nsbaci::services
  * @brief Services namespace for nsbaci.
@@ -23,8 +29,31 @@ namespace nsbaci::services {
  */
 class RuntimeService {
  public:
+  // in order to communicate things to the gui (for example, we can have a list
+  // of variables currently created), the backend con send signals to the
+  // service, telling him that a variable values has changed, for example. The
+  // runtime service resend the info to the controller, maybe tweaking it in
+  // some way. Finally, the controller knows exactly what and how to update in
+  // the gui (maybe a device or object "Variable Table" in the controller that
+  // knows what to tell the gui)
   RuntimeService() = default;
+  RuntimeService(std::unique_ptr<runtime::Interpreter> i,
+                 std::unique_ptr<runtime::Scheduler> s,
+                runtime::Program&& p);
   ~RuntimeService() = default;
+
+  RuntimeService(const RuntimeService&) = delete;
+  RuntimeService& operator=(const RuntimeService&) = delete;
+
+  RuntimeService(RuntimeService&&) = default;
+  RuntimeService& operator=(RuntimeService&&) = default;
+
+  void changeProgram(runtime::Program&& p);
+
+ private:
+  runtime::Program program;
+  std::unique_ptr<runtime::Interpreter> interpreter;
+  std::unique_ptr<runtime::Scheduler> scheduler;
 };
 
 }  // namespace nsbaci::services

@@ -1,0 +1,4 @@
+This service is an adapter. It can have CLI, canvas with opengl...
+It comunicates with runtimeService via signals. For example, if runtimService executes an instruction that
+creates a figure, emit FigureCreated(std::shared_ptr<Figure>). this ervice will have a slot that reacts, 
+calling the specific drawing backend. As we are using qt for the gui, maybe have the own qtOPenGL widget in the backend for the canvas?

@@ -9,6 +9,8 @@
 
 #include "uiError.h"
 
+using namespace nsbaci::types;
+
 namespace nsbaci {
 
 std::vector<UIError> UIError::fromBackendErrors(

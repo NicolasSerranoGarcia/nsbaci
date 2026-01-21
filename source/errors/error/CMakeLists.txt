@@ -6,7 +6,6 @@
 # nsbaci_error_library
 
     add_library(nsbaci_error_library STATIC
-        error.cpp
         error.h
     )
 

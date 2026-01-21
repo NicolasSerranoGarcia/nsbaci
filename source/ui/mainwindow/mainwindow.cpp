@@ -535,6 +535,15 @@ void MainWindow::onLoadFailed(std::vector<nsbaci::UIError> errors) {
   statusBar()->showMessage(tr("Failed to open file"));
 }
 
+void MainWindow::onCompileSucceeded() {
+  statusBar()->showMessage(tr("File compiled successfully"));
+}
+
+void MainWindow::onCompileFailed(std::vector<nsbaci::UIError> errors) {
+  nsbaci::ui::ErrorDialogFactory::showErrors(errors, this);
+  statusBar()->showMessage(tr("Failed to compile file"));
+}
+
 // File slots
 
 void MainWindow::onNew() {
@@ -581,13 +590,13 @@ void MainWindow::onSaveAs() {
     QFileInfo fileInfo(filePath);
     QString fileName = fileInfo.fileName();
 
+    // Delegate actual saving to controller
+    emit saveRequested(filePath, codeEditor->toPlainText());
+    
     // Update state
     currentFilePath = filePath;
     hasName = true;
     setCurrentFile(fileName, false);
-
-    // Delegate actual saving to controller
-    emit saveRequested(filePath, codeEditor->toPlainText());
     statusBar()->showMessage(tr("File saved as: %1").arg(fileName));
   }
 }

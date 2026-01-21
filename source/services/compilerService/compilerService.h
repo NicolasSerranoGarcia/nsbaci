@@ -12,6 +12,15 @@
 #ifndef NSBACI_COMPILERSERVICE_H
 #define NSBACI_COMPILERSERVICE_H
 
+#include <memory>
+#include <vector>
+
+#include "compiler.h"
+#include "error.h"
+#include "fileTypes.h"
+
+#include "nsbaciCompiler.h"
+
 /**
  * @namespace nsbaci::services
  * @brief Services namespace for nsbaci.
@@ -20,11 +29,23 @@ namespace nsbaci::services {
 
 /**
  * @class CompilerService
+ * @brief Service that wraps the compiler for use in the application.
  */
 class CompilerService {
  public:
-  CompilerService() = default;
+  CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c = std::make_unique<nsbaci::compiler::NsbaciCompiler>());
   ~CompilerService() = default;
+
+  CompilerService(const CompilerService&) = delete; 
+  CompilerService& operator=(const CompilerService&) = delete;
+
+  CompilerService(CompilerService&&) = default;
+  CompilerService& operator=(CompilerService&&) = default;
+
+  nsbaci::compiler::CompilerResult compile(nsbaci::types::Text raw);
+
+ private:
+  std::unique_ptr<nsbaci::compiler::Compiler> compiler;
 };
 
 }  // namespace nsbaci::services

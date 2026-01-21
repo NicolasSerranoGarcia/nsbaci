@@ -14,33 +14,29 @@
 
 #include <vector>
 
-#include "error.h"
+#include "baseResult.h"
 #include "fileTypes.h"
 
-using namespace nsbaci;
-using namespace nsbaci::types;
-
 // guarantee: if ok == false, errors.size() > 0
-struct FileResult {
-  FileResult() : ok(true) {}
-  explicit FileResult(std::vector<Error> errs)
-      : ok(errs.empty()), errors(std::move(errs)) {}
-  explicit FileResult(Error error) : ok(false), errors({std::move(error)}) {}
+struct FileResult : nsbaci::BaseResult {
+  FileResult() : BaseResult() {}
+  explicit FileResult(std::vector<nsbaci::Error> errs)
+      : BaseResult(std::move(errs)) {}
+  explicit FileResult(nsbaci::Error error)
+      : BaseResult(std::move(error)) {}
 
   FileResult(FileResult&&) noexcept = default;
   FileResult& operator=(FileResult&&) noexcept = default;
 
   FileResult(const FileResult&) = default;
   FileResult& operator=(const FileResult&) = default;
-
-  bool ok;
-  std::vector<Error> errors;
 };
 
 struct saveResult : FileResult {
   saveResult() : FileResult() {}
-  explicit saveResult(std::vector<Error> errs) : FileResult(std::move(errs)) {}
-  explicit saveResult(Error error) : FileResult(std::move(error)) {}
+  explicit saveResult(std::vector<nsbaci::Error> errs)
+      : FileResult(std::move(errs)) {}
+  explicit saveResult(nsbaci::Error error) : FileResult(std::move(error)) {}
 
   saveResult(saveResult&&) noexcept = default;
   saveResult& operator=(saveResult&&) noexcept = default;
@@ -50,18 +46,19 @@ struct saveResult : FileResult {
 
 struct LoadResult : FileResult {
   LoadResult() : FileResult() {}
-  LoadResult(Text conts, File name)
+  LoadResult(nsbaci::types::Text conts, nsbaci::types::File name)
       : FileResult(), contents(std::move(conts)), fileName(std::move(name)) {}
-  explicit LoadResult(std::vector<Error> errs) : FileResult(std::move(errs)) {}
-  explicit LoadResult(Error error) : FileResult(std::move(error)) {}
+  explicit LoadResult(std::vector<nsbaci::Error> errs)
+      : FileResult(std::move(errs)) {}
+  explicit LoadResult(nsbaci::Error error) : FileResult(std::move(error)) {}
 
   LoadResult(LoadResult&&) noexcept = default;
   LoadResult& operator=(LoadResult&&) noexcept = default;
   LoadResult(const LoadResult&) = default;
   LoadResult& operator=(const LoadResult&) = default;
 
-  Text contents;
-  File fileName;
+  nsbaci::types::Text contents;
+  nsbaci::types::File fileName;
 };
 
 /**
@@ -75,11 +72,17 @@ namespace nsbaci::services {
  */
 class FileService {
  public:
-  saveResult save(Text contents, File file);
+  saveResult save(nsbaci::types::Text contents, nsbaci::types::File file);
 
-  LoadResult load(File file);
+  LoadResult load(nsbaci::types::File file);
 
   FileService() = default;
+
+  FileService(const FileService&) = delete; 
+  FileService& operator=(const FileService&) = delete;
+
+  FileService(FileService&&) = default;
+  FileService& operator=(FileService&&) = default;
 
   ~FileService() = default;
 };

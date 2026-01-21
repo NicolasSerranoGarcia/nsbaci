@@ -19,9 +19,6 @@
 #include "error.h"
 #include "errorTypes.h"
 
-using namespace nsbaci;
-using namespace nsbaci::types;
-
 namespace nsbaci {
 
 /**
@@ -32,9 +29,9 @@ namespace nsbaci {
  * title, body text, and severity (which maps to an icon).
  */
 struct UIError {
-  QString title;         // Dialog title (e.g., "Save Error", "Load Error")
-  QString body;          // Main message body with details
-  ErrSeverity severity;  // Maps to icon (Warning, Error, Fatal)
+  QString title;  // Dialog title (e.g., "Save Error", "Load Error")
+  QString body;   // Main message body with details
+  nsbaci::types::ErrSeverity severity;  // Maps to icon (Warning, Error, Fatal)
 
   /**
    * @brief Converts backend errors to UI-ready errors.
@@ -48,17 +45,17 @@ struct UIError {
   /**
    * @brief Maps an ErrType to a human-readable reason string.
    */
-  static QString reasonFromType(ErrType type);
+  static QString reasonFromType(nsbaci::types::ErrType type);
 
   /**
    * @brief Gets a title based on the error payload type.
    */
-  static QString titleFromPayload(const ErrorPayload& payload);
+  static QString titleFromPayload(const nsbaci::types::ErrorPayload& payload);
 
   /**
    * @brief Gets additional context from the error payload.
    */
-  static QString contextFromPayload(const ErrorPayload& payload);
+  static QString contextFromPayload(const nsbaci::types::ErrorPayload& payload);
 };
 
 }  // namespace nsbaci

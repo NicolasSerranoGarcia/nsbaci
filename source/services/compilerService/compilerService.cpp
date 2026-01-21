@@ -9,4 +9,14 @@
 
 #include "compilerService.h"
 
-namespace nsbaci::services {}  // namespace nsbaci::services
+namespace nsbaci::services {
+
+CompilerService::CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c)
+    : compiler(std::move(c)) {}
+
+nsbaci::compiler::CompilerResult CompilerService::compile(
+    nsbaci::types::Text raw) {
+  return compiler->compile(raw);
+}
+
+}  // namespace nsbaci::services

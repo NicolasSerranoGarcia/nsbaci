@@ -9,9 +9,14 @@
 
 #include "controller.h"
 
+using namespace nsbaci::types;
+using namespace nsbaci::services;
+
 namespace nsbaci {
 
-Controller::Controller(QObject* parent) : QObject(parent) {}
+//Needs the other services to be passed
+Controller::Controller(FileService&& f, CompilerService&& c, RuntimeService&& r, QObject* parent) :
+           QObject(parent), fileService(std::move(f)), compilerService(std::move(c)), runtimeService(std::move(r)) {}
 
 void Controller::onSaveRequested(File file, Text contents) {
   auto saveRes = fileService.save(contents, file);
@@ -36,7 +41,14 @@ void Controller::onOpenRequested(File file) {
 }
 
 void Controller::onCompileRequested(Text contents) {
-  // TODO: Delegate to compilerService
+  auto compileRes = compilerService.compile(contents);
+
+  if (!compileRes.ok) {
+    auto uiErrors = UIError::fromBackendErrors(compileRes.errors);
+    emit compileFailed(std::move(uiErrors));
+  } else {
+    emit compileSucceeded();
+  }
 }
 
 void Controller::onRunRequested() {

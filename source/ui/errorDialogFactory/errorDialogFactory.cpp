@@ -9,6 +9,8 @@
 
 #include "errorDialogFactory.h"
 
+using namespace nsbaci::types;
+
 namespace nsbaci::ui {
 
 ErrorDialogFactory::DialogInvoker ErrorDialogFactory::getDialogFromUIError(

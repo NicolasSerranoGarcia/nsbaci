@@ -11,6 +11,8 @@
 
 #include <fstream>
 
+using namespace nsbaci::types;
+
 namespace nsbaci::services {
 
 saveResult FileService::save(Text contents, File file) {
