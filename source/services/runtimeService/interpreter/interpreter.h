@@ -13,6 +13,10 @@
 #ifndef NSBACI_SERVICES_RUNTIME_INTERPRETER_H
 #define NSBACI_SERVICES_RUNTIME_INTERPRETER_H
 
+#include <functional>
+#include <optional>
+#include <string>
+
 #include "baseResult.h"
 #include "program.h"
 #include "thread.h"
@@ -30,7 +34,9 @@ struct InterpreterResult : nsbaci::BaseResult {
   InterpreterResult(const InterpreterResult&) = default;
   InterpreterResult& operator=(const InterpreterResult&) = default;
 
-  // additional info of executing an instruction from a thread
+  bool needsInput = false;  ///< Thread is waiting for input
+  std::string inputPrompt;  ///< Prompt to show for input
+  std::string output;       ///< Output produced by this instruction
 };
 
 /**
@@ -38,6 +44,12 @@ struct InterpreterResult : nsbaci::BaseResult {
  * @brief Runtime services namespace for nsbaci.
  */
 namespace nsbaci::services::runtime {
+
+/// @brief Callback type for output operations
+using OutputCallback = std::function<void(const std::string&)>;
+
+/// @brief Callback type for input requests
+using InputRequestCallback = std::function<void(const std::string&)>;
 
 /**
  * @class Interpreter
@@ -58,6 +70,24 @@ class Interpreter {
    * @param program The program context in which to execute the instruction
    */
   virtual InterpreterResult executeInstruction(Thread& t, Program& program) = 0;
+
+  /**
+   * @brief Provide input to a thread waiting for input.
+   * @param input The input string.
+   */
+  virtual void provideInput(const std::string& input) = 0;
+
+  /**
+   * @brief Check if interpreter is waiting for input.
+   * @return True if waiting for input.
+   */
+  virtual bool isWaitingForInput() const = 0;
+
+  /**
+   * @brief Set the output callback for print operations.
+   * @param callback Function to call when output is produced.
+   */
+  virtual void setOutputCallback(OutputCallback callback) = 0;
 };
 
 }  // namespace nsbaci::services::runtime

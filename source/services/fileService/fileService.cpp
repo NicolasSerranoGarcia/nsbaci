@@ -1,6 +1,10 @@
 /**
  * @file fileService.cpp
- * @brief Implementation unit for the FileService.
+ * @brief Implementation of the FileService class for nsbaci.
+ *
+ * This file contains the implementation of file save and load operations
+ * for NsBaci source files (.nsb). It provides comprehensive validation and
+ * error handling for all file system operations.
  *
  * @author Nicolás Serrano García
  * @copyright Copyright (c) 2025 Nicolás Serrano García. Licensed under the MIT

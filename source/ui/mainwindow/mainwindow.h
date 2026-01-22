@@ -15,10 +15,12 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QShortcut>
+#include <QStackedWidget>
 #include <QToolButton>
 
 #include "codeeditor.h"
 #include "errorDialogFactory.h"
+#include "runtimeView.h"
 #include "uiError.h"
 
 QT_BEGIN_NAMESPACE
@@ -40,6 +42,15 @@ class MainWindow : public QMainWindow {
   void compileRequested(const QString& contents);
   void runRequested();
 
+  // Runtime control signals
+  void stepRequested();
+  void stepThreadRequested(nsbaci::types::ThreadID threadId);
+  void runContinueRequested();
+  void pauseRequested();
+  void resetRequested();
+  void stopRequested();
+  void inputProvided(const QString& input);
+
  public slots:
   void setEditorContents(const QString& contents);
   void setStatusMessage(const QString& message);
@@ -52,6 +63,15 @@ class MainWindow : public QMainWindow {
   void onLoadFailed(std::vector<nsbaci::UIError> errors);
   void onCompileSucceeded();
   void onCompileFailed(std::vector<nsbaci::UIError> errors);
+
+  // Runtime slots
+  void onRunStarted(const QString& programName);
+  void onRuntimeStateChanged(bool running, bool halted);
+  void onThreadsUpdated(const std::vector<nsbaci::ui::ThreadInfo>& threads);
+  void onVariablesUpdated(
+      const std::vector<nsbaci::ui::VariableInfo>& variables);
+  void onOutputReceived(const QString& output);
+  void onInputRequested(const QString& prompt);
 
  private slots:
   // File menu
@@ -81,11 +101,21 @@ class MainWindow : public QMainWindow {
   // Editor
   void onTextChanged();
 
+  // Runtime view
+  void onStopRuntime();
+
  private:
+  // Stacked widget for switching views
+  QStackedWidget* centralStack = nullptr;
+
+  // Editor view container
+  QWidget* editorView = nullptr;
+
   // File info bar
   QFrame* fileInfoBar = nullptr;
   QLabel* fileNameLabel = nullptr;
   QLabel* fileModifiedIndicator = nullptr;
+  QLabel* compileStatusIndicator = nullptr;
 
   // Central widget
   CodeEditor* codeEditor = nullptr;
@@ -94,6 +124,9 @@ class MainWindow : public QMainWindow {
   QFrame* sideBar = nullptr;
   QToolButton* compileButton = nullptr;
   QToolButton* runButton = nullptr;
+
+  // Runtime view
+  nsbaci::ui::RuntimeView* runtimeView = nullptr;
 
   // File actions
   QAction* actionNew = nullptr;
@@ -126,12 +159,19 @@ class MainWindow : public QMainWindow {
   QString currentFilePath;  // Full path for saving
   bool isModified = false;
   bool hasName = false;
+  bool isCompiled =
+      false;  // True when program is compiled and code hasn't changed
 
  private:
   void createCentralWidget();
+  void createEditorView();
+  void createRuntimeView();
   void createMenuBar();
   void createStatusBar();
   void setupShortcuts();
   void applyStyleSheet();
+
+  void switchToEditor();
+  void switchToRuntime();
 };
 #endif  // MAINWINDOW_H

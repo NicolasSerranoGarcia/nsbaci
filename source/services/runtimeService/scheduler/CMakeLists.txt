@@ -13,7 +13,6 @@
 # nsbaci_scheduler_library
 
     add_library(nsbaci_scheduler_library STATIC
-        scheduler.cpp
         scheduler.h
     )
 

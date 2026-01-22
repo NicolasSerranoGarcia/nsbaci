@@ -132,23 +132,41 @@ void MainWindow::applyStyleSheet() {
             border-color: #454545;
         }
         QToolButton:pressed {
-            background-color: #404040;
+            background-color: #1a1a1a;
+            border-color: #555555;
+            border-style: inset;
+            padding-top: 12px;
+            padding-bottom: 8px;
         }
         QToolButton#compileButton {
-            background-color: #2a2a2a;
-            border-color: #404040;
+            background-color: #1e3a1e;
+            border-color: #2d5a2d;
         }
         QToolButton#compileButton:hover {
-            background-color: #353535;
-            border-color: #505050;
+            background-color: #2a4a2a;
+            border-color: #3d6a3d;
+        }
+        QToolButton#compileButton:pressed {
+            background-color: #153015;
+            border-color: #4d7a4d;
+            border-style: inset;
+            padding-top: 12px;
+            padding-bottom: 8px;
         }
         QToolButton#runButton {
-            background-color: #2a2a2a;
-            border-color: #404040;
+            background-color: #1e2a3a;
+            border-color: #2d4a5a;
         }
         QToolButton#runButton:hover {
-            background-color: #353535;
-            border-color: #505050;
+            background-color: #2a3a4a;
+            border-color: #3d5a6a;
+        }
+        QToolButton#runButton:pressed {
+            background-color: #152030;
+            border-color: #4d6a7a;
+            border-style: inset;
+            padding-top: 12px;
+            padding-bottom: 8px;
         }
 
         /* Editor */
@@ -395,13 +413,31 @@ void MainWindow::createMenuBar() {
 }
 
 void MainWindow::createCentralWidget() {
-  QWidget* central = new QWidget(this);
-  auto* mainLayout = new QVBoxLayout(central);
+  // Create stacked widget to switch between editor and runtime views
+  centralStack = new QStackedWidget(this);
+
+  // Create both views
+  createEditorView();
+  createRuntimeView();
+
+  // Add views to stack
+  centralStack->addWidget(editorView);   // Index 0
+  centralStack->addWidget(runtimeView);  // Index 1
+
+  setCentralWidget(centralStack);
+
+  // Start with editor view
+  centralStack->setCurrentIndex(0);
+}
+
+void MainWindow::createEditorView() {
+  editorView = new QWidget();
+  auto* mainLayout = new QVBoxLayout(editorView);
   mainLayout->setContentsMargins(0, 0, 0, 0);
   mainLayout->setSpacing(0);
 
   // File info bar
-  fileInfoBar = new QFrame(central);
+  fileInfoBar = new QFrame(editorView);
   fileInfoBar->setObjectName("fileInfoBar");
   auto* fileInfoLayout = new QHBoxLayout(fileInfoBar);
   fileInfoLayout->setContentsMargins(8, 0, 12, 0);
@@ -414,9 +450,14 @@ void MainWindow::createCentralWidget() {
   fileModifiedIndicator->setObjectName("fileModifiedIndicator");
   fileModifiedIndicator->setText("");
 
+  compileStatusIndicator = new QLabel(fileInfoBar);
+  compileStatusIndicator->setObjectName("compileStatusIndicator");
+  compileStatusIndicator->setText("Not Compiled");
+
   fileInfoLayout->addWidget(fileNameLabel);
   fileInfoLayout->addWidget(fileModifiedIndicator);
   fileInfoLayout->addStretch();
+  fileInfoLayout->addWidget(compileStatusIndicator);
 
   // Content area with fixed sidebar and editor
   auto* contentLayout = new QHBoxLayout();
@@ -426,7 +467,7 @@ void MainWindow::createCentralWidget() {
   QStyle* style = QApplication::style();
 
   // Sidebar (fixed width)
-  sideBar = new QFrame(central);
+  sideBar = new QFrame(editorView);
   sideBar->setObjectName("sideBar");
   sideBar->setFixedWidth(140);
 
@@ -454,7 +495,7 @@ void MainWindow::createCentralWidget() {
   sideLayout->addStretch();
 
   // Editor with line numbers
-  codeEditor = new CodeEditor(central);
+  codeEditor = new CodeEditor(editorView);
   codeEditor->setFrameStyle(QFrame::NoFrame);
 
   // Set monospace font for editor
@@ -472,17 +513,31 @@ void MainWindow::createCentralWidget() {
   mainLayout->addWidget(fileInfoBar);
   mainLayout->addLayout(contentLayout, 1);
 
-  setCentralWidget(central);
-
   // Connections
   connect(compileButton, &QToolButton::clicked, this, &MainWindow::onCompile);
-
   connect(runButton, &QToolButton::clicked, this, &MainWindow::onRun);
-
-  // signal inherited from QPlainTextEdit, as the class CodeEditor inherits from
-  // it
   connect(codeEditor, &CodeEditor::textChanged, this,
           &MainWindow::onTextChanged);
+}
+
+void MainWindow::createRuntimeView() {
+  runtimeView = new nsbaci::ui::RuntimeView();
+
+  // Connect runtime view signals to main window signals (for controller)
+  connect(runtimeView, &nsbaci::ui::RuntimeView::stepRequested, this,
+          &MainWindow::stepRequested);
+  connect(runtimeView, &nsbaci::ui::RuntimeView::stepThreadRequested, this,
+          &MainWindow::stepThreadRequested);
+  connect(runtimeView, &nsbaci::ui::RuntimeView::runRequested, this,
+          &MainWindow::runContinueRequested);
+  connect(runtimeView, &nsbaci::ui::RuntimeView::pauseRequested, this,
+          &MainWindow::pauseRequested);
+  connect(runtimeView, &nsbaci::ui::RuntimeView::resetRequested, this,
+          &MainWindow::resetRequested);
+  connect(runtimeView, &nsbaci::ui::RuntimeView::stopRequested, this,
+          &MainWindow::onStopRuntime);
+  connect(runtimeView, &nsbaci::ui::RuntimeView::inputProvided, this,
+          &MainWindow::inputProvided);
 }
 
 void MainWindow::createStatusBar() { statusBar()->showMessage(tr("Ready")); }
@@ -527,6 +582,9 @@ void MainWindow::onSaveFailed(std::vector<nsbaci::UIError> errors) {
 void MainWindow::onLoadSucceeded(const QString& contents) {
   setEditorContents(contents);
   setCurrentFile(currentFileName, false);
+  isCompiled = false;
+  compileStatusIndicator->setText("Not Compiled");
+  compileStatusIndicator->setStyleSheet("color: #909090;");
   statusBar()->showMessage(tr("File loaded successfully"));
 }
 
@@ -536,10 +594,16 @@ void MainWindow::onLoadFailed(std::vector<nsbaci::UIError> errors) {
 }
 
 void MainWindow::onCompileSucceeded() {
+  isCompiled = true;
+  compileStatusIndicator->setText("Compiled");
+  compileStatusIndicator->setStyleSheet("color: #4ec94e; font-weight: bold;");
   statusBar()->showMessage(tr("File compiled successfully"));
 }
 
 void MainWindow::onCompileFailed(std::vector<nsbaci::UIError> errors) {
+  isCompiled = false;
+  compileStatusIndicator->setText("Compile Failed");
+  compileStatusIndicator->setStyleSheet("color: #e05050; font-weight: bold;");
   nsbaci::ui::ErrorDialogFactory::showErrors(errors, this);
   statusBar()->showMessage(tr("Failed to compile file"));
 }
@@ -565,6 +629,9 @@ void MainWindow::onNew() {
   codeEditor->clear();
   setCurrentFile("Untitled.nsb", false);
   hasName = false;
+  isCompiled = false;
+  compileStatusIndicator->setText("Not Compiled");
+  compileStatusIndicator->setStyleSheet("color: #909090;");
   statusBar()->showMessage(tr("New file created"));
 }
 
@@ -592,7 +659,7 @@ void MainWindow::onSaveAs() {
 
     // Delegate actual saving to controller
     emit saveRequested(filePath, codeEditor->toPlainText());
-    
+
     // Update state
     currentFilePath = filePath;
     hasName = true;
@@ -673,6 +740,12 @@ void MainWindow::onCompile() {
 }
 
 void MainWindow::onRun() {
+  if (!isCompiled) {
+    QMessageBox::warning(
+        this, tr("Cannot Run"),
+        tr("Please compile the program first before running."));
+    return;
+  }
   emit runRequested();
   statusBar()->showMessage(tr("Running..."));
 }
@@ -713,4 +786,59 @@ void MainWindow::onTextChanged() {
     isModified = true;
     setCurrentFile(currentFileName, true);
   }
+  // Reset compile status when code changes
+  if (isCompiled) {
+    isCompiled = false;
+    compileStatusIndicator->setText("Not Compiled");
+    compileStatusIndicator->setStyleSheet("color: #909090;");
+  }
+}
+
+// Runtime slots
+
+void MainWindow::onStopRuntime() {
+  emit stopRequested();
+  switchToEditor();
+}
+
+void MainWindow::onRunStarted(const QString& programName) {
+  switchToRuntime();
+  runtimeView->onProgramLoaded(programName);
+}
+
+void MainWindow::onRuntimeStateChanged(bool running, bool halted) {
+  runtimeView->updateExecutionState(running, halted);
+  if (halted) {
+    runtimeView->onProgramHalted();
+  }
+}
+
+void MainWindow::onThreadsUpdated(
+    const std::vector<nsbaci::ui::ThreadInfo>& threads) {
+  runtimeView->updateThreads(threads);
+}
+
+void MainWindow::onVariablesUpdated(
+    const std::vector<nsbaci::ui::VariableInfo>& variables) {
+  runtimeView->updateVariables(variables);
+}
+
+void MainWindow::onOutputReceived(const QString& output) {
+  runtimeView->appendOutput(output);
+}
+
+void MainWindow::onInputRequested(const QString& prompt) {
+  runtimeView->requestInput(prompt);
+}
+
+// View switching
+
+void MainWindow::switchToEditor() {
+  centralStack->setCurrentIndex(0);
+  statusBar()->showMessage(tr("Ready"));
+}
+
+void MainWindow::switchToRuntime() {
+  centralStack->setCurrentIndex(1);
+  statusBar()->showMessage(tr("Runtime"));
 }

@@ -13,6 +13,9 @@
 #ifndef NSBACI_TYPES_COMPILERTYPES_H
 #define NSBACI_TYPES_COMPILERTYPES_H
 
+#include <cstdint>
+#include <string>
+#include <unordered_map>
 #include <vector>
 
 /**
@@ -21,7 +24,22 @@
  */
 namespace nsbaci::types {
 
-// Compiler-specific types will be added here as needed
+/// @brief Type alias for variable names
+using VarName = std::string;
+
+/// @brief Type alias for memory addresses
+using MemoryAddr = uint32_t;
+
+/// @brief Information about a variable/symbol
+struct SymbolInfo {
+  VarName name;
+  MemoryAddr address;
+  std::string type;  ///< "int", "bool", "char", "void", etc.
+  bool isGlobal;
+};
+
+/// @brief Lookup table mapping variable names to their symbol info
+using SymbolTable = std::unordered_map<VarName, SymbolInfo>;
 
 }  // namespace nsbaci::types
 

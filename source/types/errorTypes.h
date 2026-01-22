@@ -51,6 +51,9 @@ enum class ErrType {
   readFailed,   // Error while reading
   writeFailed,  // Error while writing
 
+  // Compilation errors
+  compilationError,  // Syntax or semantic error during compilation
+
   // Generic
   unknown  // Unspecified error
 };
@@ -78,7 +81,10 @@ struct ErrorBase {
  * @struct CompileError
  * @brief Error payload for compilation errors.
  */
-struct CompileError {};
+struct CompileError {
+  int line = 0;
+  int column = 0;
+};
 
 /**
  * @struct SaveError
