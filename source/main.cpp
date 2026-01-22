@@ -18,7 +18,7 @@
 #include "serviceFactories/serviceFactories.h"
 #include "ui/mainwindow/mainwindow.h"
 
-// MVC. Connects slots with signals from the mainWINdow and the controller
+// MVC. Connects slots with signals from the mainWindow and the controller
 void setupViewController(nsbaci::Controller* c, MainWindow* w) {
   // View -> Controller connections
   // Convert QString to std::string/fs::path in lambda since types differ. As
@@ -97,17 +97,10 @@ int main(int argc, char* argv[]) {
 
   MainWindow w;
   nsbaci::Controller c(
-      nsbaci::factories::FileServiceFactory::createService(
-          nsbaci::factories::defaultFileSystem),
-      nsbaci::factories::CompilerServiceFactory::createService(
-          nsbaci::factories::nsbaciCompiler),
-      nsbaci::factories::RuntimeServiceFactory::createService(
-          nsbaci::factories::
-              nsbaciRuntime),  // this has a default constructor rn bc it is not
-                               // being used, but it should be deleted and the
-                               // real constructor be the parametrized one
-      nsbaci::factories::DrawingServiceFactory::createService(
-          nsbaci::factories::defaultDrawingBackend));
+      nsbaci::factories::FileServiceFactory::createService(nsbaci::factories::defaultFileSystem),
+      nsbaci::factories::CompilerServiceFactory::createService(nsbaci::factories::nsbaciCompiler),
+      nsbaci::factories::RuntimeServiceFactory::createService(nsbaci::factories::nsbaciRuntime),
+      nsbaci::factories::DrawingServiceFactory::createService(nsbaci::factories::defaultDrawingBackend));
   setupViewController(&c, &w);
 
   w.show();
