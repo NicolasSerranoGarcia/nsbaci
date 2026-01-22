@@ -15,20 +15,25 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 
+#include "compilerTypes.h"
 #include "instruction.h"
 
 /**
  * @namespace nsbaci::types
- * @brief Type definitions namespace for nsbaci.
+ * @brief Type definitions namespace for nsbaci (runtime-specific).
  */
 namespace nsbaci::types {
 
-/// @brief Type alias for variable names
-using VarName = std::string;
+/// @brief Stack value type (can hold int or address)
+using StackValue = int32_t;
 
-/// @brief Lookup table mapping variable names to their values
-using VariableTable = std::unordered_map<VarName, int>;
+/// @brief Runtime stack
+using Stack = std::vector<StackValue>;
+
+/// @brief Memory block for runtime data
+using Memory = std::vector<int32_t>;
 
 }  // namespace nsbaci::types
 
@@ -48,7 +53,8 @@ namespace nsbaci::services::runtime {
 class Program {
  public:
   Program() = default;
-  Program(nsbaci::compiler::InstructionStream i);
+  explicit Program(nsbaci::compiler::InstructionStream i);
+  Program(nsbaci::compiler::InstructionStream i, nsbaci::types::SymbolTable s);
   ~Program() = default;
 
   Program(const Program&) = delete;
@@ -57,10 +63,59 @@ class Program {
   Program(Program&&) = default;
   Program& operator=(Program&&) = default;
 
+  /**
+   * @brief Gets instruction at the given address.
+   * @param addr The instruction address.
+   * @return Reference to the instruction.
+   */
+  const nsbaci::compiler::Instruction& getInstruction(uint32_t addr) const;
+
+  /**
+   * @brief Gets the total number of instructions.
+   * @return Number of instructions in the program.
+   */
+  size_t instructionCount() const;
+
+  /**
+   * @brief Access to global memory.
+   * @return Reference to memory.
+   */
+  nsbaci::types::Memory& memory();
+  const nsbaci::types::Memory& memory() const;
+
+  /**
+   * @brief Access to symbol table.
+   * @return Const reference to symbol table.
+   */
+  const nsbaci::types::SymbolTable& symbols() const;
+
+  /**
+   * @brief Add a symbol to the symbol table.
+   * @param info The symbol information to add.
+   */
+  void addSymbol(nsbaci::types::SymbolInfo info);
+
+  /**
+   * @brief Read a value from memory.
+   * @param addr Memory address to read from.
+   * @return Value at the address.
+   */
+  int32_t readMemory(nsbaci::types::MemoryAddr addr) const;
+
+  /**
+   * @brief Write a value to memory.
+   * @param addr Memory address to write to.
+   * @param value Value to write.
+   */
+  void writeMemory(nsbaci::types::MemoryAddr addr, int32_t value);
+
  private:
-  // global lookup. A single instance of a program will have one an only one instruction stream. This acts as a read-only table. make the constructor take a rvalue, but as this is a typedef, I think it is overkill to make a strong tyoe and delete the copy constructor and operator. an rvalue should guarantee ownership of the object. Also, the public interface will not enable modifying this, so there should be no problem with immutability
+  // Instruction stream - read-only after construction
   nsbaci::compiler::InstructionStream instructions;
-  nsbaci::types::VariableTable symbolTable;
+  // Global symbol table
+  nsbaci::types::SymbolTable symbolTable;
+  // Global memory
+  nsbaci::types::Memory globalMemory;
 };
 
 }  // namespace nsbaci::services::runtime

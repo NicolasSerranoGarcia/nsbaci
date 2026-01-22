@@ -23,7 +23,14 @@ using ThreadID = unsigned long long int;
 
 using Priority = unsigned long int;
 
-enum class ThreadState { Waiting, Ready, Running, Blocked, IO };
+enum class ThreadState {
+  Ready,      ///< Thread is ready to run
+  Running,    ///< Thread is currently executing
+  Blocked,    ///< Thread is blocked (e.g., waiting on semaphore)
+  Waiting,    ///< Thread is waiting for I/O
+  IO,         ///< Thread is performing I/O
+  Terminated  ///< Thread has finished execution
+};
 
 /**
  * @struct Address

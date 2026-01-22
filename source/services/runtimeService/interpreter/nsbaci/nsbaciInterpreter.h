@@ -42,7 +42,15 @@ class NsbaciInterpreter final : public Interpreter {
    */
   InterpreterResult executeInstruction(Thread& t, Program& program) override;
 
+  void provideInput(const std::string& input) override;
+  bool isWaitingForInput() const override;
+  void setOutputCallback(OutputCallback callback) override;
+
  private:
+  OutputCallback outputCallback;
+  bool waitingForInput = false;
+  std::string pendingInput;
+  bool hasInput = false;
 };
 
 }  // namespace nsbaci::services::runtime

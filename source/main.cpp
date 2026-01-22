@@ -15,14 +15,8 @@
 #include <QStyleFactory>
 
 #include "controller/controller.h"
+#include "serviceFactories/serviceFactories.h"
 #include "ui/mainwindow/mainwindow.h"
-//this should not be here but rather a factory for each service that generates a service
-//depending on things like the arguments of the program or the config of the user. For now, inject the services directly
-#include "services/compilerService/compilerService.h"
-#include "services/runtimeService/runtimeService.h"
-#include "services/fileService/fileService.h"
-#include "services/drawingService/drawingService.h"
-
 
 // MVC. Connects slots with signals from the mainWINdow and the controller
 void setupViewController(nsbaci::Controller* c, MainWindow* w) {
@@ -50,6 +44,22 @@ void setupViewController(nsbaci::Controller* c, MainWindow* w) {
   QObject::connect(w, &MainWindow::runRequested, c,
                    &nsbaci::Controller::onRunRequested);
 
+  // Runtime control: View -> Controller
+  QObject::connect(w, &MainWindow::stepRequested, c,
+                   &nsbaci::Controller::onStepRequested);
+  QObject::connect(w, &MainWindow::stepThreadRequested, c,
+                   &nsbaci::Controller::onStepThreadRequested);
+  QObject::connect(w, &MainWindow::runContinueRequested, c,
+                   &nsbaci::Controller::onRunContinueRequested);
+  QObject::connect(w, &MainWindow::pauseRequested, c,
+                   &nsbaci::Controller::onPauseRequested);
+  QObject::connect(w, &MainWindow::resetRequested, c,
+                   &nsbaci::Controller::onResetRequested);
+  QObject::connect(w, &MainWindow::stopRequested, c,
+                   &nsbaci::Controller::onStopRequested);
+  QObject::connect(w, &MainWindow::inputProvided, c,
+                   &nsbaci::Controller::onInputProvided);
+
   // Controller -> View connections
   QObject::connect(c, &nsbaci::Controller::saveSucceeded, w,
                    &MainWindow::onSaveSucceeded);
@@ -63,6 +73,20 @@ void setupViewController(nsbaci::Controller* c, MainWindow* w) {
                    &MainWindow::onCompileSucceeded);
   QObject::connect(c, &nsbaci::Controller::compileFailed, w,
                    &MainWindow::onCompileFailed);
+
+  // Runtime state: Controller -> View
+  QObject::connect(c, &nsbaci::Controller::runStarted, w,
+                   &MainWindow::onRunStarted);
+  QObject::connect(c, &nsbaci::Controller::runtimeStateChanged, w,
+                   &MainWindow::onRuntimeStateChanged);
+  QObject::connect(c, &nsbaci::Controller::threadsUpdated, w,
+                   &MainWindow::onThreadsUpdated);
+  QObject::connect(c, &nsbaci::Controller::variablesUpdated, w,
+                   &MainWindow::onVariablesUpdated);
+  QObject::connect(c, &nsbaci::Controller::outputReceived, w,
+                   &MainWindow::onOutputReceived);
+  QObject::connect(c, &nsbaci::Controller::inputRequested, w,
+                   &MainWindow::onInputRequested);
 }
 
 int main(int argc, char* argv[]) {
@@ -73,10 +97,17 @@ int main(int argc, char* argv[]) {
 
   MainWindow w;
   nsbaci::Controller c(
-      nsbaci::services::FileService{},
-      nsbaci::services::CompilerService{},
-      nsbaci::services::RuntimeService{}//this has a default constructor rn bc it is not being used, but it should be deleted and the real constructor be the parametrized one
-  );
+      nsbaci::factories::FileServiceFactory::createService(
+          nsbaci::factories::defaultFileSystem),
+      nsbaci::factories::CompilerServiceFactory::createService(
+          nsbaci::factories::nsbaciCompiler),
+      nsbaci::factories::RuntimeServiceFactory::createService(
+          nsbaci::factories::
+              nsbaciRuntime),  // this has a default constructor rn bc it is not
+                               // being used, but it should be deleted and the
+                               // real constructor be the parametrized one
+      nsbaci::factories::DrawingServiceFactory::createService(
+          nsbaci::factories::defaultDrawingBackend));
   setupViewController(&c, &w);
 
   w.show();

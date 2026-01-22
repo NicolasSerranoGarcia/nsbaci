@@ -33,6 +33,12 @@ class DrawingService {
   // TODO: Add signals for notifying backends of drawing operations
   // Example: void drawFigure(std::shared_ptr<Figure> figure);
 
+  DrawingService(const DrawingService&) = delete;
+  DrawingService& operator=(const DrawingService&) = delete;
+
+  DrawingService(DrawingService&&) = default;
+  DrawingService& operator=(DrawingService&&) = default;
+
  private:
   // TODO: Add backend reference/pointer when backends are implemented
 };

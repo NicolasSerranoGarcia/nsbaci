@@ -25,22 +25,35 @@ namespace nsbaci::services::runtime {
  * @class NsbaciScheduler
  * @brief BACI-specific implementation of the Scheduler.
  *
- * NsbaciScheduler implements the scheduling algorithm used by the
- * BACI concurrent programming environment, providing thread management
+ * NsbaciScheduler implements a round-robin scheduling algorithm
  * with support for blocked, ready, running, and I/O waiting states.
+ * Threads are selected randomly from the ready queue to simulate
+ * non-deterministic concurrent execution.
  */
 class NsbaciScheduler final : public Scheduler {
  public:
   NsbaciScheduler() = default;
   ~NsbaciScheduler() override = default;
 
-  // TODO: Override virtual methods from Scheduler when defined
+  Thread* pickNext() override;
+  void addThread(Thread thread) override;
+  void blockCurrent() override;
+  void unblock(nsbaci::types::ThreadID threadId) override;
+  void yield() override;
+  void terminateCurrent() override;
+  bool hasThreads() const override;
+  Thread* current() override;
+  void clear() override;
+  void unblockIO() override;
+  const std::vector<Thread>& getThreads() const override;
 
  private:
-  nsbaci::types::ThreadQueue blocked;  ///< Queue of blocked threads
-  nsbaci::types::ThreadQueue ready;    ///< Queue of threads ready to run
-  nsbaci::types::ThreadQueue io;       ///< Queue of threads waiting for I/O
-  Thread running;                      ///< Currently running thread
+  /**
+   * @brief Find thread index by ID.
+   * @param threadId The thread ID to search for.
+   * @return Index of the thread, or nullopt if not found.
+   */
+  std::optional<size_t> findThreadIndex(nsbaci::types::ThreadID threadId) const;
 };
 
 }  // namespace nsbaci::services::runtime
