@@ -4,4 +4,6 @@
 
 - Drawing service
 
--User guide
+-User guide + example folder with code examples
+
+-known issue: the app compiles with an empty file.
