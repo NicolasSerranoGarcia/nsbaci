@@ -58,7 +58,7 @@ class Program {
   Program& operator=(Program&&) = default;
 
  private:
-  // global lookup
+  // global lookup. A single instance of a program will have one an only one instruction stream. This acts as a read-only table. make the constructor take a rvalue, but as this is a typedef, I think it is overkill to make a strong tyoe and delete the copy constructor and operator. an rvalue should guarantee ownership of the object. Also, the public interface will not enable modifying this, so there should be no problem with immutability
   nsbaci::compiler::InstructionStream instructions;
   nsbaci::types::VariableTable symbolTable;
 };
