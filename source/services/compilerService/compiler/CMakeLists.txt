@@ -10,7 +10,6 @@
 # nsbaci_compiler_library
 
     add_library(nsbaci_compiler_library STATIC
-        compiler.cpp
         compiler.h
     )
 
