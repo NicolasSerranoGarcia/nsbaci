@@ -1,0 +1,5 @@
+<map id="nsbaci::Controller::onRunContinueRequested" name="nsbaci::Controller::onRunContinueRequested">
+<area shape="rect" id="Node000001" title="Starts or resumes continuous execution mode." alt="" coords="177,5,359,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#a3e9a64f392ee28382ad1d28c638bfd87" title="Provides user input to the runtime." alt="" coords="5,5,129,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,27,129,29,129,24,163,26"/>
+</map>

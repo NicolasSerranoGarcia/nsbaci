@@ -1,0 +1,7 @@
+<map id="controller.h" name="controller.h">
+<area shape="rect" id="Node000001" title="Controller class declaration for nsbaci." alt="" coords="67,5,152,32"/>
+<area shape="rect" id="Node000002" href="$controller_8cpp.html" title="Implementation of the Controller class for nsbaci." alt="" coords="5,80,105,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,44,66,81,62,78,88,46"/>
+<area shape="rect" id="Node000003" href="$main_8cpp.html" title="Application entry point for nsbaci." alt="" coords="128,80,203,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="130,42,159,80,153,79,127,47"/>
+</map>

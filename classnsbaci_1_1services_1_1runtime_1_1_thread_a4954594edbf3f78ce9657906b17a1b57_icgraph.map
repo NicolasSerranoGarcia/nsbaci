@@ -1,0 +1,7 @@
+<map id="nsbaci::services::runtime::Thread::setState" name="nsbaci::services::runtime::Thread::setState">
+<area shape="rect" id="Node000001" title="Sets the state of the thread." alt="" coords="298,39,465,81"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#ad84bc5daf268099873394bb201560acd" title="Add a new thread to the scheduler." alt="" coords="29,5,226,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="279,47,227,42,226,37,285,47"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_interpreter.html#a42e636e66f698e15b70b188e4205eb6e" title="Executes the current instruction for the given thread with the program context." alt="" coords="5,72,250,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="279,73,251,80,250,75,285,73"/>
+</map>

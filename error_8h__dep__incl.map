@@ -1,0 +1,31 @@
+<map id="error.h" name="error.h">
+<area shape="rect" id="Node000001" title="Error class declaration for nsbaci." alt="" coords="330,5,388,32"/>
+<area shape="rect" id="Node000002" href="$base_result_8h.html" title="Base result class declaration for nsbaci services." alt="" coords="152,80,250,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="316,41,230,82,228,77,320,37"/>
+<area shape="rect" id="Node000004" href="$compiler_service_8h.html" title="CompilerService class declaration for nsbaci." alt="" coords="273,229,399,256"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="358,46,340,230,335,228,354,49"/>
+<area shape="rect" id="Node000027" href="$ui_error_8h.html" title="UI Error type definitions for nsbaci." alt="" coords="537,80,607,107"/>
+<area shape="poly" id="edge12_Node000001_Node000027" title=" " alt="" coords="403,32,539,79,534,81,402,37"/>
+<area shape="rect" id="Node000003" href="$compiler_8h.html" title="Abstract Compiler class declaration for nsbaci." alt="" coords="239,155,321,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="227,115,269,154,264,155,226,120"/>
+<area shape="rect" id="Node000015" href="$file_service_8h.html" title="FileService class declaration for nsbaci." alt="" coords="5,229,99,256"/>
+<area shape="poly" id="edge5_Node000002_Node000015" title=" " alt="" coords="135,109,97,127,79,140,64,156,55,174,51,193,52,229,47,228,46,193,50,172,59,153,75,136,94,123,139,105"/>
+<area shape="rect" id="Node000019" href="$interpreter_8h.html" title="Interpreter class declaration for nsbaci runtime service." alt="" coords="74,155,164,181"/>
+<area shape="poly" id="edge7_Node000002_Node000019" title=" " alt="" coords="174,119,135,156,131,152,177,115"/>
+<area shape="rect" id="Node000024" href="$runtime_service_8h.html" title="RuntimeService class declaration for nsbaci." alt="" coords="130,229,249,256"/>
+<area shape="poly" id="edge10_Node000002_Node000024" title=" " alt="" coords="201,120,193,230,188,228,197,124"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="300,191,329,229,324,228,298,196"/>
+<area shape="rect" id="Node000010" href="$controller_8h.html" title="Controller class declaration for nsbaci." alt="" coords="220,304,305,331"/>
+<area shape="poly" id="edge4_Node000004_Node000010" title=" " alt="" coords="315,266,277,306,274,301,310,268"/>
+<area shape="poly" id="edge6_Node000015_Node000010" title=" " alt="" coords="104,259,228,302,224,305,103,264"/>
+<area shape="poly" id="edge8_Node000019_Node000024" title=" " alt="" coords="142,190,180,229,175,229,141,195"/>
+<area shape="poly" id="edge9_Node000024_Node000010" title=" " alt="" coords="214,265,253,304,247,303,212,270"/>
+<area shape="poly" id="edge13_Node000027_Node000010" title=" " alt="" coords="622,103,660,115,693,132,705,142,713,154,715,168,709,183,682,208,641,231,588,251,529,268,406,296,306,313,305,307,405,290,527,263,587,246,639,226,679,204,704,180,709,167,708,156,701,146,690,136,658,120,622,108"/>
+<area shape="rect" id="Node000028" href="$error_dialog_factory_8h.html" title="Factory for creating error dialogs from UIError objects." alt="" coords="396,155,534,181"/>
+<area shape="poly" id="edge14_Node000027_Node000028" title=" " alt="" coords="543,114,485,156,483,152,539,117"/>
+<area shape="rect" id="Node000030" href="$mainwindow_8h.html" title="Main window class declaration for nsbaci." alt="" coords="426,229,529,256"/>
+<area shape="poly" id="edge16_Node000027_Node000030" title=" " alt="" coords="570,120,563,152,549,183,525,210,498,231,496,227,521,207,544,180,558,150,566,123"/>
+<area shape="rect" id="Node000032" href="$ui_error_8cpp.html" title="Implementation of UIError utilities." alt="" coords="610,155,694,181"/>
+<area shape="poly" id="edge17_Node000027_Node000032" title=" " alt="" coords="598,115,641,155,636,154,596,120"/>
+<area shape="poly" id="edge15_Node000028_Node000030" title=" " alt="" coords="471,195,478,230,473,228,468,199"/>
+</map>

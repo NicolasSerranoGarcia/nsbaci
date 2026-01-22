@@ -1,0 +1,5 @@
+<map id="nsbaci::ui::ErrorDialogFactory::showSuccess" name="nsbaci::ui::ErrorDialogFactory::showSuccess">
+<area shape="rect" id="Node000001" title="Shows a success message dialog immediately." alt="" coords="5,5,200,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1ui_1_1_error_dialog_factory.html#ac421cd1edfedaefb2e3b0fe256388d40" title="Creates a success message dialog invoker." alt="" coords="248,5,442,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,24,235,26,230,27,200,29"/>
+</map>

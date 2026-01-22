@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['callables_0',['Why Return Callables?',['../error_dialog_factory_8h.html#autotoc_md3',1,'']]],
+  ['clear_1',['clear',['../classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a1bcdb861c6ed6a9478a1e5079568e514',1,'nsbaci::services::runtime::NsbaciScheduler::clear()'],['../classnsbaci_1_1services_1_1runtime_1_1_scheduler.html#ac136c917030d3b0660ac8200e9cc404e',1,'nsbaci::services::runtime::Scheduler::clear()']]],
+  ['codeeditor_2',['CodeEditor',['../class_code_editor.html',1,'']]],
+  ['codeeditor_2ecpp_3',['codeeditor.cpp',['../codeeditor_8cpp.html',1,'']]],
+  ['codeeditor_2eh_4',['codeeditor.h',['../codeeditor_8h.html',1,'']]],
+  ['compile_5',['compile',['../classnsbaci_1_1compiler_1_1_compiler.html#a851f387f0a28370462b81e2a8d28df4c',1,'nsbaci::compiler::Compiler::compile(const std::string &amp;source)=0'],['../classnsbaci_1_1compiler_1_1_compiler.html#a84f133939dc9ba7b63b88cb9f2dfe3dc',1,'nsbaci::compiler::Compiler::compile(std::istream &amp;input)=0'],['../classnsbaci_1_1compiler_1_1_nsbaci_compiler.html#a366b3dcacc4a78b09e7e351c934b3eb9',1,'nsbaci::compiler::NsbaciCompiler::compile(const std::string &amp;source) override'],['../classnsbaci_1_1compiler_1_1_nsbaci_compiler.html#a652db0c71be7bce4a4bffb2a9eb2cbc7',1,'nsbaci::compiler::NsbaciCompiler::compile(std::istream &amp;input) override'],['../classnsbaci_1_1services_1_1_compiler_service.html#afc49a7658071aef7364a8bfb4de0b8c9',1,'nsbaci::services::CompilerService::compile()']]],
+  ['compileerror_6',['CompileError',['../structnsbaci_1_1types_1_1_compile_error.html',1,'nsbaci::types']]],
+  ['compilefailed_7',['compileFailed',['../classnsbaci_1_1_controller.html#a45631ada6ab1b0c33a4c833a0874d85f',1,'nsbaci::Controller']]],
+  ['compiler_8',['Compiler',['../classnsbaci_1_1compiler_1_1_compiler.html',1,'nsbaci::compiler::Compiler'],['../classnsbaci_1_1compiler_1_1_compiler.html#a6f13b531cccf74aa6fbfaf90897c8516',1,'nsbaci::compiler::Compiler::Compiler()']]],
+  ['compiler_2eh_9',['compiler.h',['../compiler_8h.html',1,'']]],
+  ['compilerresult_10',['CompilerResult',['../structnsbaci_1_1compiler_1_1_compiler_result.html',1,'nsbaci::compiler::CompilerResult'],['../structnsbaci_1_1compiler_1_1_compiler_result.html#abe4e9f8cc56ccb35451b07c014312f91',1,'nsbaci::compiler::CompilerResult::CompilerResult()'],['../structnsbaci_1_1compiler_1_1_compiler_result.html#adfd6ead5615f7d4fc1c182695cb1b03c',1,'nsbaci::compiler::CompilerResult::CompilerResult(std::vector&lt; nsbaci::Error &gt; errs)'],['../structnsbaci_1_1compiler_1_1_compiler_result.html#ad2ca52ca84f18a1ed25887e487171824',1,'nsbaci::compiler::CompilerResult::CompilerResult(nsbaci::Error error)']]],
+  ['compilerservice_11',['CompilerService',['../classnsbaci_1_1services_1_1_compiler_service.html',1,'nsbaci::services::CompilerService'],['../classnsbaci_1_1services_1_1_compiler_service.html#a1649b034fba779ef37a712f587609f3b',1,'nsbaci::services::CompilerService::CompilerService()']]],
+  ['compilerservice_2ecpp_12',['compilerService.cpp',['../compiler_service_8cpp.html',1,'']]],
+  ['compilerservice_2eh_13',['compilerService.h',['../compiler_service_8h.html',1,'']]],
+  ['compilerservicefactory_14',['CompilerServiceFactory',['../classnsbaci_1_1factories_1_1_compiler_service_factory.html',1,'nsbaci::factories']]],
+  ['compilerservicefactory_2ecpp_15',['compilerServiceFactory.cpp',['../compiler_service_factory_8cpp.html',1,'']]],
+  ['compilerservicefactory_2eh_16',['compilerServiceFactory.h',['../compiler_service_factory_8h.html',1,'']]],
+  ['compilertypes_2eh_17',['compilerTypes.h',['../compiler_types_8h.html',1,'']]],
+  ['compilesucceeded_18',['compileSucceeded',['../classnsbaci_1_1_controller.html#a55b86564d0342729b3b36597ff3ab49e',1,'nsbaci::Controller']]],
+  ['contents_19',['contents',['../struct_load_result.html#a8783583fb8194c2c87dd0bf5651c15be',1,'LoadResult']]],
+  ['controller_20',['Controller',['../classnsbaci_1_1_controller.html',1,'nsbaci::Controller'],['../classnsbaci_1_1_controller.html#a955d9b8f76c35cbb6fbbcf79dba79039',1,'nsbaci::Controller::Controller()']]],
+  ['controller_2ecpp_21',['controller.cpp',['../controller_8cpp.html',1,'']]],
+  ['controller_2eh_22',['controller.h',['../controller_8h.html',1,'']]],
+  ['convenience_23',['2. Immediate Mode (Convenience)',['../error_dialog_factory_8h.html#autotoc_md2',1,'']]],
+  ['current_24',['current',['../classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a7bbfc15a74b2da209a9572edcef4eda0',1,'nsbaci::services::runtime::NsbaciScheduler::current()'],['../classnsbaci_1_1services_1_1runtime_1_1_scheduler.html#aef2a578f4ccdba30470c84459724ac1c',1,'nsbaci::services::runtime::Scheduler::current()']]]
+];

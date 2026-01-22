@@ -1,0 +1,5 @@
+<map id="nsbaci::Controller::onResetRequested" name="nsbaci::Controller::onResetRequested">
+<area shape="rect" id="Node000001" title="Resets the runtime to initial state." alt="" coords="5,5,147,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#a81153ea61842a545ba81799e396d0eb5" title="Emitted when the runtime execution state changes." alt="" coords="195,5,350,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,24,182,26,177,27,147,29"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="errorTypes.h" name="errorTypes.h">
+<area shape="rect" id="Node000001" title="Type definitions for error&#45;related structures." alt="" coords="204,5,297,32"/>
+<area shape="rect" id="Node000002" href="$error_8h.html" title="Error class declaration for nsbaci." alt="" coords="188,80,246,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,44,225,81,221,78,236,48"/>
+<area shape="rect" id="Node000028" href="$ui_error_8h.html" title="UI Error type definitions for nsbaci." alt="" coords="277,155,347,181"/>
+<area shape="poly" id="edge5_Node000001_Node000028" title=" " alt="" coords="263,44,309,155,304,154,260,48"/>
+<area shape="rect" id="Node000003" href="$base_result_8h.html" title="Base result class declaration for nsbaci services." alt="" coords="5,155,104,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="176,116,84,156,82,152,174,111"/>
+<area shape="rect" id="Node000005" href="$compiler_service_8h.html" title="CompilerService class declaration for nsbaci." alt="" coords="128,155,253,181"/>
+<area shape="poly" id="edge3_Node000002_Node000005" title=" " alt="" coords="210,120,197,156,193,152,205,123"/>
+<area shape="poly" id="edge4_Node000002_Node000028" title=" " alt="" coords="247,114,298,154,293,154,245,119"/>
+</map>

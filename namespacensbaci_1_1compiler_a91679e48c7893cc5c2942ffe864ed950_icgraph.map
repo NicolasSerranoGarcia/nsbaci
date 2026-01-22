@@ -1,0 +1,5 @@
+<map id="nsbaci::compiler::opcodeName" name="nsbaci::compiler::opcodeName">
+<area shape="rect" id="Node000001" title="Get the string name of an opcode (for debugging/display)." alt="" coords="298,13,499,40"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_interpreter.html#a42e636e66f698e15b70b188e4205eb6e" title="Executes the current instruction for the given thread with the program context." alt="" coords="5,5,250,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="279,27,250,29,250,24,285,27"/>
+</map>

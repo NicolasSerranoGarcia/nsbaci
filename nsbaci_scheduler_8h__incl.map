@@ -1,0 +1,12 @@
+<map id="nsbaciScheduler.h" name="nsbaciScheduler.h">
+<area shape="rect" id="Node000001" title="NsbaciScheduler class declaration for nsbaci runtime service." alt="" coords="45,5,173,32"/>
+<area shape="rect" id="Node000002" href="$scheduler_8h.html" title="Scheduler class declaration for nsbaci runtime service." alt="" coords="65,80,153,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,30,112,65,107,64,108,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,155,72,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,110,63,145,59,142,98,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="116,229,174,256"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="114,105,141,214,136,214,110,109"/>
+<area shape="rect" id="Node000005" href="$thread_8h.html" title="Thread class declaration for nsbaci runtime service." alt="" coords="147,155,215,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="122,105,161,143,155,144,121,110"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="177,180,160,217,156,213,173,183"/>
+</map>

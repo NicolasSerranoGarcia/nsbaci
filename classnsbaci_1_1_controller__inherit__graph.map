@@ -1,0 +1,5 @@
+<map id="nsbaci::Controller" name="nsbaci::Controller">
+<area shape="rect" id="Node000001" title="Central coordinator between UI and backend services." alt="" coords="5,80,129,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="32,5,102,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,46,70,80,64,79,65,50"/>
+</map>

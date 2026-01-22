@@ -1,0 +1,73 @@
+<map id="main.cpp" name="main.cpp">
+<area shape="rect" id="Node000001" title="Application entry point for nsbaci." alt="" coords="497,5,571,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="204,88,299,115"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="495,31,311,83,303,85,300,80,309,77,499,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="323,88,428,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="507,34,415,83,412,78,512,31"/>
+<area shape="rect" id="Node000004" href="$controller_8h.html" title="Controller class declaration for nsbaci." alt="" coords="750,179,892,205"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="556,30,789,170,784,171,555,35"/>
+<area shape="rect" id="Node000051" href="$service_factories_8h.html" title="Aggregate header for all service factories." alt="" coords="452,80,616,123"/>
+<area shape="poly" id="edge20_Node000001_Node000051" title=" " alt="" coords="536,30,537,66,532,64,533,35"/>
+<area shape="rect" id="Node000056" href="$mainwindow_8h.html" title="Main window class declaration for nsbaci." alt="" coords="1482,179,1675,205"/>
+<area shape="poly" id="edge29_Node000001_Node000056" title=" " alt="" coords="572,24,1488,173,1485,178,572,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="722,261,792,288"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="813,205,778,251,775,247,808,207"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="866,261,930,288"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="834,203,879,251,874,250,832,208"/>
+<area shape="rect" id="Node000007" href="$compiler_service_8h.html" title="CompilerService class declaration for nsbaci." alt="" coords="116,261,241,288"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="776,205,739,216,605,235,499,243,393,250,257,264,256,258,392,245,499,238,605,229,738,211,771,207"/>
+<area shape="rect" id="Node000018" href="$file_types_8h.html" title="Type definitions for file&#45;related operations." alt="" coords="559,336,643,363"/>
+<area shape="poly" id="edge12_Node000004_Node000018" title=" " alt="" coords="801,205,712,264,628,328,626,323,709,259,796,207"/>
+<area shape="rect" id="Node000020" href="$compiler_types_8h.html" title="Type definitions for compiler&#45;related operations." alt="" coords="955,261,1071,288"/>
+<area shape="poly" id="edge8_Node000004_Node000020" title=" " alt="" coords="851,203,972,255,966,255,850,208"/>
+<area shape="rect" id="Node000024" href="$drawing_service_8h.html" title="DrawingService class declaration for nsbaci." alt="" coords="266,261,387,288"/>
+<area shape="poly" id="edge9_Node000004_Node000024" title=" " alt="" coords="775,205,739,216,572,242,403,263,402,258,571,236,738,211,769,207"/>
+<area shape="rect" id="Node000025" href="$file_service_8h.html" title="FileService class declaration for nsbaci." alt="" coords="554,261,648,288"/>
+<area shape="poly" id="edge10_Node000004_Node000025" title=" " alt="" coords="789,205,650,258,648,253,784,206"/>
+<area shape="rect" id="Node000026" href="$runtime_service_8h.html" title="RuntimeService class declaration for nsbaci." alt="" coords="410,261,530,288"/>
+<area shape="poly" id="edge13_Node000004_Node000026" title=" " alt="" coords="772,205,739,216,543,260,542,255,738,211,767,207"/>
+<area shape="rect" id="Node000033" href="$runtime_types_8h.html" title="Type definitions for runtime&#45;related operations." alt="" coords="870,336,980,363"/>
+<area shape="poly" id="edge14_Node000004_Node000033" title=" " alt="" coords="825,204,836,243,856,287,874,307,895,327,890,326,870,311,852,289,831,245,822,208"/>
+<area shape="rect" id="Node000035" href="$runtime_view_8h.html" title="RuntimeView widget declaration for nsbaci." alt="" coords="1094,261,1198,288"/>
+<area shape="poly" id="edge15_Node000004_Node000035" title=" " alt="" coords="872,203,1083,257,1077,257,872,209"/>
+<area shape="rect" id="Node000049" href="$ui_error_8h.html" title="UI Error type definitions for nsbaci." alt="" coords="2055,336,2125,363"/>
+<area shape="poly" id="edge19_Node000004_Node000049" title=" " alt="" coords="893,203,1364,285,1559,307,1752,324,2042,345,2037,345,1751,329,1559,312,1363,291,892,209"/>
+<area shape="poly" id="edge7_Node000007_Node000018" title=" " alt="" coords="242,284,545,336,542,340,241,289"/>
+<area shape="poly" id="edge11_Node000025_Node000018" title=" " alt="" coords="603,287,603,322,599,319,599,290"/>
+<area shape="poly" id="edge18_Node000035_Node000033" title=" " alt="" coords="1110,288,979,333,978,328,1105,289"/>
+<area shape="rect" id="Node000038" title=" " alt="" coords="1262,336,1324,363"/>
+<area shape="poly" id="edge16_Node000035_Node000038" title=" " alt="" coords="1172,286,1256,329,1251,328,1171,291"/>
+<area shape="rect" id="Node000045" title=" " alt="" coords="1122,336,1216,363"/>
+<area shape="poly" id="edge17_Node000035_Node000045" title=" " alt="" coords="1152,286,1163,323,1158,320,1149,291"/>
+<area shape="rect" id="Node000052" href="$compiler_service_factory_8h.html" title="CompilerServiceFactory class declaration for nsbaci." alt="" coords="5,171,178,213"/>
+<area shape="poly" id="edge21_Node000051_Node000052" title=" " alt="" coords="450,121,440,125,194,173,192,168,439,120,455,119"/>
+<area shape="rect" id="Node000053" href="$drawing_service_factory_8h.html" title="DrawingServiceFactory class declaration for nsbaci." alt="" coords="202,171,370,213"/>
+<area shape="poly" id="edge23_Node000051_Node000053" title=" " alt="" coords="474,124,360,167,358,162,478,122"/>
+<area shape="rect" id="Node000054" href="$file_service_factory_8h.html" title="FileServiceFactory class declaration for nsbaci." alt="" coords="585,171,726,213"/>
+<area shape="poly" id="edge25_Node000051_Node000054" title=" " alt="" coords="563,120,618,161,612,161,562,126"/>
+<area shape="rect" id="Node000055" href="$runtime_service_factory_8h.html" title="RuntimeServiceFactory class declaration for nsbaci." alt="" coords="395,171,561,213"/>
+<area shape="poly" id="edge27_Node000051_Node000055" title=" " alt="" coords="523,121,501,159,497,156,519,125"/>
+<area shape="poly" id="edge22_Node000052_Node000007" title=" " alt="" coords="114,211,156,250,151,251,113,217"/>
+<area shape="poly" id="edge24_Node000053_Node000024" title=" " alt="" coords="298,212,316,248,311,247,295,216"/>
+<area shape="poly" id="edge26_Node000054_Node000025" title=" " alt="" coords="644,213,619,251,616,246,639,215"/>
+<area shape="poly" id="edge28_Node000055_Node000026" title=" " alt="" coords="478,212,475,247,471,244,474,216"/>
+<area shape="poly" id="edge40_Node000056_Node000035" title=" " alt="" coords="1513,206,1213,264,1213,258,1508,206"/>
+<area shape="poly" id="edge32_Node000056_Node000038" title=" " alt="" coords="1506,205,1434,229,1398,244,1365,263,1333,293,1309,325,1306,320,1329,289,1362,259,1396,240,1432,224,1501,206"/>
+<area shape="poly" id="edge36_Node000056_Node000045" title=" " alt="" coords="1520,205,1428,231,1330,264,1261,297,1202,330,1200,325,1258,292,1328,259,1426,226,1514,206"/>
+<area shape="poly" id="edge41_Node000056_Node000049" title=" " alt="" coords="1675,192,1781,197,1896,208,1998,228,2038,242,2067,259,2078,273,2085,288,2092,322,2087,319,2080,290,2073,275,2063,263,2036,247,1997,233,1895,214,1781,203,1676,197"/>
+<area shape="rect" id="Node000057" title=" " alt="" coords="1375,261,1464,288"/>
+<area shape="poly" id="edge30_Node000056_Node000057" title=" " alt="" coords="1556,205,1459,257,1457,252,1551,207"/>
+<area shape="rect" id="Node000058" title=" " alt="" coords="1488,261,1556,288"/>
+<area shape="poly" id="edge31_Node000056_Node000058" title=" " alt="" coords="1572,205,1541,251,1538,247,1567,207"/>
+<area shape="rect" id="Node000059" title=" " alt="" coords="1581,261,1687,288"/>
+<area shape="poly" id="edge33_Node000056_Node000059" title=" " alt="" coords="1588,203,1619,250,1615,248,1586,208"/>
+<area shape="rect" id="Node000060" title=" " alt="" coords="1711,261,1792,288"/>
+<area shape="poly" id="edge34_Node000056_Node000060" title=" " alt="" coords="1606,203,1714,255,1708,254,1605,208"/>
+<area shape="rect" id="Node000061" title=" " alt="" coords="1815,261,1936,288"/>
+<area shape="poly" id="edge35_Node000056_Node000061" title=" " alt="" coords="1625,203,1817,257,1811,257,1624,208"/>
+<area shape="rect" id="Node000062" href="$codeeditor_8h.html" title="CodeEditor class with line numbers for nsbaci." alt="" coords="1960,261,2052,288"/>
+<area shape="poly" id="edge37_Node000056_Node000062" title=" " alt="" coords="1649,203,1947,261,1942,261,1649,209"/>
+<area shape="rect" id="Node000063" href="$error_dialog_factory_8h.html" title="Factory for creating error dialogs from UIError objects." alt="" coords="2128,261,2266,288"/>
+<area shape="poly" id="edge38_Node000056_Node000063" title=" " alt="" coords="1675,203,2109,259,2115,262,2110,262,2108,264,1675,208"/>
+<area shape="poly" id="edge39_Node000063_Node000049" title=" " alt="" coords="2181,288,2122,329,2121,324,2176,289"/>
+</map>

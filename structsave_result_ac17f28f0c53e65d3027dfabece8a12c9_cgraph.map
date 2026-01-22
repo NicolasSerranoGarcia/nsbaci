@@ -1,0 +1,7 @@
+<map id="saveResult::saveResult" name="saveResult::saveResult">
+<area shape="rect" id="Node000001" title="Constructs a failed result from a single error." alt="" coords="5,13,167,40"/>
+<area shape="rect" id="Node000002" href="$struct_file_result.html#a3ce9e4af77025ff3328770f5f738d060" title="Default constructor creates a successful result." alt="" coords="215,13,362,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,24,202,26,197,27,167,29"/>
+<area shape="rect" id="Node000003" href="$structnsbaci_1_1_base_result.html#a8597b3cc00d27223b24e3b0f83280537" title="Default constructor creates a successful result." alt="" coords="410,5,545,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="362,24,397,27,392,27,362,29"/>
+</map>

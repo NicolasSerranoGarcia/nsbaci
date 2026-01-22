@@ -1,0 +1,19 @@
+<map id="uiError.h" name="uiError.h">
+<area shape="rect" id="Node000001" title="UI Error type definitions for nsbaci." alt="" coords="306,5,377,32"/>
+<area shape="rect" id="Node000002" href="$controller_8h.html" title="Controller class declaration for nsbaci." alt="" coords="99,80,184,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="291,39,178,82,176,77,295,36"/>
+<area shape="rect" id="Node000005" href="$error_dialog_factory_8h.html" title="Factory for creating error dialogs from UIError objects." alt="" coords="219,80,358,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="325,43,299,82,296,78,321,46"/>
+<area shape="rect" id="Node000007" href="$mainwindow_8h.html" title="Main window class declaration for nsbaci." alt="" coords="355,155,459,181"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="355,44,372,79,404,155,399,154,367,81,353,49"/>
+<area shape="rect" id="Node000009" href="$ui_error_8cpp.html" title="Implementation of UIError utilities." alt="" coords="433,80,517,107"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="378,37,454,79,449,80,378,42"/>
+<area shape="rect" id="Node000003" href="$controller_8cpp.html" title="Implementation of the Controller class for nsbaci." alt="" coords="5,155,105,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="114,119,72,156,68,152,117,115"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html" title="Application entry point for nsbaci." alt="" coords="236,229,311,256"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="145,120,154,151,169,180,201,208,239,229,234,229,198,212,165,183,149,153,143,125"/>
+<area shape="rect" id="Node000006" href="$error_dialog_factory_8cpp.html" title="Implementation of ErrorDialogFactory." alt="" coords="179,155,331,181"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="278,119,263,156,259,152,274,123"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="322,112,389,154,384,154,321,118"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="373,188,298,231,296,226,368,189"/>
+</map>

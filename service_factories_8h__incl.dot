@@ -1,0 +1,24 @@
+digraph "serviceFactories.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [id="Node000001",label="serviceFactories.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Aggregate header for all service factories."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="compilerServiceFactory\l/compilerServiceFactory.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$compiler_service_factory_8h.html",tooltip="CompilerServiceFactory class declaration for nsbaci."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="compilerService.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$compiler_service_8h.html",tooltip="CompilerService class declaration for nsbaci."];
+  Node1 -> Node20 [id="edge3_Node000001_Node000020",color="steelblue1",style="solid",tooltip=" "];
+  Node20 [id="Node000020",label="drawingServiceFactory\l/drawingServiceFactory.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$drawing_service_factory_8h.html",tooltip="DrawingServiceFactory class declaration for nsbaci."];
+  Node20 -> Node21 [id="edge4_Node000020_Node000021",color="steelblue1",style="solid",tooltip=" "];
+  Node21 [id="Node000021",label="drawingService.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$drawing_service_8h.html",tooltip="DrawingService class declaration for nsbaci."];
+  Node1 -> Node22 [id="edge5_Node000001_Node000022",color="steelblue1",style="solid",tooltip=" "];
+  Node22 [id="Node000022",label="fileServiceFactory\l/fileServiceFactory.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$file_service_factory_8h.html",tooltip="FileServiceFactory class declaration for nsbaci."];
+  Node22 -> Node23 [id="edge6_Node000022_Node000023",color="steelblue1",style="solid",tooltip=" "];
+  Node23 [id="Node000023",label="fileService.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$file_service_8h.html",tooltip="FileService class declaration for nsbaci."];
+  Node1 -> Node24 [id="edge7_Node000001_Node000024",color="steelblue1",style="solid",tooltip=" "];
+  Node24 [id="Node000024",label="runtimeServiceFactory\l/runtimeServiceFactory.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$runtime_service_factory_8h.html",tooltip="RuntimeServiceFactory class declaration for nsbaci."];
+  Node24 -> Node25 [id="edge8_Node000024_Node000025",color="steelblue1",style="solid",tooltip=" "];
+  Node25 [id="Node000025",label="runtimeService.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$runtime_service_8h.html",tooltip="RuntimeService class declaration for nsbaci."];
+}

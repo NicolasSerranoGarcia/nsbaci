@@ -1,0 +1,15 @@
+digraph "nsbaci::ui::ErrorDialogFactory::getDialogFromUIError"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="nsbaci::ui::ErrorDialogFactory\l::getDialogFromUIError",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Creates a dialog invoker from a UIError."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="nsbaci::ui::ErrorDialogFactory\l::getDialogsFromUIErrors",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1ui_1_1_error_dialog_factory.html#a1365c1eb5aacbc116ea1d33b1ab386c3",tooltip="Creates dialog invokers for multiple UIErrors."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="nsbaci::ui::ErrorDialogFactory\l::showError",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1ui_1_1_error_dialog_factory.html#a976244adb544a39dcbb7d8f155f3cc0c",tooltip="Shows a single error dialog immediately."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="nsbaci::ui::ErrorDialogFactory\l::showErrors",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1ui_1_1_error_dialog_factory.html#adf4cbfbfffb1e0504fd3ef7271646111",tooltip="Shows all error dialogs sequentially."];
+}

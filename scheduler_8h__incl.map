@@ -1,0 +1,16 @@
+<map id="scheduler.h" name="scheduler.h">
+<area shape="rect" id="Node000001" title="Scheduler class declaration for nsbaci runtime service." alt="" coords="65,5,153,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,72,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,35,63,71,59,67,98,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="75,155,132,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="111,31,107,140,102,139,106,34"/>
+<area shape="rect" id="Node000004" href="$thread_8h.html" title="Thread class declaration for nsbaci runtime service." alt="" coords="152,80,221,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="123,30,165,69,160,70,122,35"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="175,106,131,147,128,142,170,108"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="156,155,217,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="188,105,189,140,184,138,185,109"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="241,155,297,181"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="202,105,246,144,241,144,200,110"/>
+<area shape="rect" id="Node000007" href="$runtime_types_8h.html" title="Type definitions for runtime&#45;related operations." alt="" coords="322,155,432,181"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="220,105,332,148,327,149,219,110"/>
+</map>

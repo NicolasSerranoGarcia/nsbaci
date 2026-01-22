@@ -1,0 +1,82 @@
+<map id="controller.h" name="controller.h">
+<area shape="rect" id="Node000001" title="Controller class declaration for nsbaci." alt="" coords="733,5,819,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,75,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="731,23,465,39,281,56,91,82,89,77,281,51,465,34,735,20"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="98,80,163,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="730,24,497,43,340,60,182,83,180,83,176,78,181,77,340,55,497,38,735,21"/>
+<area shape="rect" id="Node000004" href="$compiler_service_8h.html" title="CompilerService class declaration for nsbaci." alt="" coords="713,80,839,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="777,30,778,66,774,63,775,35"/>
+<area shape="rect" id="Node000017" href="$compiler_types_8h.html" title="Type definitions for compiler&#45;related operations." alt="" coords="331,304,448,331"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="730,23,643,31,532,42,426,59,384,70,353,82,290,118,262,137,238,158,221,179,213,202,214,227,228,254,245,273,267,288,318,308,313,308,264,293,242,277,223,258,209,228,207,201,217,177,234,154,259,133,287,114,351,78,382,65,425,54,531,37,643,26,736,21"/>
+<area shape="rect" id="Node000015" href="$file_types_8h.html" title="Type definitions for file&#45;related operations." alt="" coords="896,155,981,181"/>
+<area shape="poly" id="edge24_Node000001_Node000015" title=" " alt="" coords="793,30,852,78,919,144,914,144,849,82,792,35"/>
+<area shape="rect" id="Node000021" href="$drawing_service_8h.html" title="DrawingService class declaration for nsbaci." alt="" coords="547,80,669,107"/>
+<area shape="poly" id="edge18_Node000001_Node000021" title=" " alt="" coords="744,34,652,76,650,71,749,31"/>
+<area shape="rect" id="Node000022" href="$file_service_8h.html" title="FileService class declaration for nsbaci." alt="" coords="963,80,1056,107"/>
+<area shape="poly" id="edge20_Node000001_Node000022" title=" " alt="" coords="817,30,957,75,951,75,817,35"/>
+<area shape="rect" id="Node000023" href="$runtime_service_8h.html" title="RuntimeService class declaration for nsbaci." alt="" coords="364,80,484,107"/>
+<area shape="poly" id="edge25_Node000001_Node000023" title=" " alt="" coords="731,30,499,79,498,74,735,28"/>
+<area shape="rect" id="Node000030" href="$runtime_types_8h.html" title="Type definitions for runtime&#45;related operations." alt="" coords="1157,155,1267,181"/>
+<area shape="poly" id="edge36_Node000001_Node000030" title=" " alt="" coords="819,21,990,40,1078,57,1114,67,1140,78,1175,107,1200,142,1195,140,1171,110,1137,82,1112,72,1077,62,989,45,819,26"/>
+<area shape="rect" id="Node000032" href="$runtime_view_8h.html" title="RuntimeView widget declaration for nsbaci." alt="" coords="1619,80,1722,107"/>
+<area shape="poly" id="edge37_Node000001_Node000032" title=" " alt="" coords="819,21,1606,85,1602,88,819,26"/>
+<area shape="rect" id="Node000046" href="$ui_error_8h.html" title="UI Error type definitions for nsbaci." alt="" coords="946,304,1016,331"/>
+<area shape="poly" id="edge48_Node000001_Node000046" title=" " alt="" coords="818,21,884,28,958,39,1025,55,1051,66,1070,78,1090,102,1099,126,1099,152,1091,182,1075,216,1054,247,1009,296,1006,291,1049,244,1070,213,1085,180,1093,151,1094,127,1085,104,1066,82,1049,71,1023,60,957,44,883,33,819,26"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="504,155,573,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="732,108,589,154,587,149,737,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="551,379,609,405"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="777,105,773,142,764,182,736,263,717,296,686,333,656,357,623,376,622,370,653,353,682,329,712,293,731,261,759,181,768,141,773,109"/>
+<area shape="rect" id="Node000007" href="$compiler_8h.html" title="Abstract Compiler class declaration for nsbaci." alt="" coords="453,229,534,256"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="775,105,762,145,750,166,734,183,690,210,642,227,593,238,550,243,549,237,592,233,640,222,688,205,730,179,746,163,757,143,771,109"/>
+<area shape="rect" id="Node000012" href="$error_8h.html" title="Error class declaration for nsbaci." alt="" coords="880,379,938,405"/>
+<area shape="poly" id="edge13_Node000004_Node000012" title=" " alt="" coords="789,104,810,127,829,153,856,209,878,267,906,365,901,362,873,269,852,212,824,156,806,130,788,110"/>
+<area shape="poly" id="edge14_Node000004_Node000015" title=" " alt="" coords="805,105,899,148,894,148,804,110"/>
+<area shape="rect" id="Node000020" href="$nsbaci_compiler_8h.html" title="NsbaciCompiler class declaration for nsbaci." alt="" coords="598,155,720,181"/>
+<area shape="poly" id="edge15_Node000004_Node000020" title=" " alt="" coords="758,106,693,149,691,144,753,108"/>
+<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="502,254,568,366,562,365,499,259"/>
+<area shape="rect" id="Node000011" href="$base_result_8h.html" title="Base result class declaration for nsbaci services." alt="" coords="574,304,672,331"/>
+<area shape="poly" id="edge8_Node000007_Node000011" title=" " alt="" coords="516,254,589,296,584,296,515,259"/>
+<area shape="poly" id="edge11_Node000007_Node000017" title=" " alt="" coords="478,255,421,297,419,293,473,258"/>
+<area shape="poly" id="edge9_Node000011_Node000006" title=" " alt="" coords="618,330,597,368,594,363,613,333"/>
+<area shape="poly" id="edge10_Node000011_Node000012" title=" " alt="" coords="672,328,867,379,862,379,672,334"/>
+<area shape="poly" id="edge12_Node000017_Node000006" title=" " alt="" coords="423,329,540,374,534,374,422,334"/>
+<area shape="poly" id="edge16_Node000020_Node000007" title=" " alt="" coords="632,181,537,225,535,220,627,183"/>
+<area shape="poly" id="edge19_Node000021_Node000005" title=" " alt="" coords="598,106,563,145,560,141,594,109"/>
+<area shape="poly" id="edge21_Node000022_Node000006" title=" " alt="" coords="1016,105,1028,142,1028,163,1021,183,982,232,934,273,881,307,824,334,767,354,713,370,624,388,623,383,711,365,765,349,822,329,878,302,931,269,978,228,1016,180,1023,162,1022,143,1014,109"/>
+<area shape="poly" id="edge22_Node000022_Node000011" title=" " alt="" coords="1012,105,1012,144,1006,165,995,183,978,200,960,210,925,219,886,222,841,232,667,300,665,295,839,227,885,217,924,214,958,206,974,196,991,180,1002,162,1007,143,1009,109"/>
+<area shape="poly" id="edge23_Node000022_Node000015" title=" " alt="" coords="999,106,963,146,960,141,995,109"/>
+<area shape="poly" id="edge26_Node000023_Node000005" title=" " alt="" coords="444,105,508,146,503,146,444,110"/>
+<area shape="poly" id="edge27_Node000023_Node000011" title=" " alt="" coords="432,105,458,141,494,179,517,194,537,202,558,210,581,227,602,257,616,291,612,288,597,260,577,231,556,215,535,207,514,199,490,183,454,144,431,110"/>
+<area shape="rect" id="Node000024" href="$interpreter_8h.html" title="Interpreter class declaration for nsbaci runtime service." alt="" coords="339,155,429,181"/>
+<area shape="poly" id="edge28_Node000023_Node000024" title=" " alt="" coords="419,105,400,143,396,139,415,109"/>
+<area shape="rect" id="Node000027" href="$program_8h.html" title="Program class declaration for nsbaci runtime service." alt="" coords="350,229,429,256"/>
+<area shape="poly" id="edge33_Node000023_Node000027" title=" " alt="" coords="384,109,355,128,340,141,329,156,325,172,331,188,343,204,359,220,354,220,339,207,326,191,320,172,324,154,336,137,352,124,389,106"/>
+<area shape="rect" id="Node000031" href="$scheduler_8h.html" title="Scheduler class declaration for nsbaci runtime service." alt="" coords="237,229,326,256"/>
+<area shape="poly" id="edge34_Node000023_Node000031" title=" " alt="" coords="387,109,353,129,319,156,301,185,290,216,285,213,296,183,315,153,351,124,392,106"/>
+<area shape="poly" id="edge29_Node000024_Node000011" title=" " alt="" coords="430,177,488,197,547,227,582,258,609,292,604,291,578,261,544,232,486,202,430,183"/>
+<area shape="poly" id="edge30_Node000024_Node000027" title=" " alt="" coords="386,180,390,215,385,213,384,184"/>
+<area shape="poly" id="edge31_Node000027_Node000006" title=" " alt="" coords="407,254,555,369,549,369,405,259"/>
+<area shape="poly" id="edge32_Node000027_Node000017" title=" " alt="" coords="391,254,392,290,387,287,388,259"/>
+<area shape="poly" id="edge35_Node000031_Node000006" title=" " alt="" coords="284,254,296,292,306,312,320,329,358,347,415,362,538,385,533,385,414,368,356,352,317,333,302,315,291,294,282,258"/>
+<area shape="poly" id="edge47_Node000032_Node000030" title=" " alt="" coords="1616,103,1283,157,1282,151,1621,102"/>
+<area shape="rect" id="Node000033" title=" " alt="" coords="1291,155,1394,181"/>
+<area shape="poly" id="edge38_Node000032_Node000033" title=" " alt="" coords="1621,106,1410,155,1409,149,1616,107"/>
+<area shape="rect" id="Node000034" title=" " alt="" coords="1418,155,1520,181"/>
+<area shape="poly" id="edge39_Node000032_Node000034" title=" " alt="" coords="1638,107,1520,152,1518,146,1633,108"/>
+<area shape="rect" id="Node000035" title=" " alt="" coords="1545,155,1607,181"/>
+<area shape="poly" id="edge40_Node000032_Node000035" title=" " alt="" coords="1657,106,1605,148,1603,143,1652,108"/>
+<area shape="rect" id="Node000036" title=" " alt="" coords="1632,155,1710,181"/>
+<area shape="poly" id="edge41_Node000032_Node000036" title=" " alt="" coords="1672,105,1673,141,1669,137,1669,109"/>
+<area shape="rect" id="Node000037" title=" " alt="" coords="1733,155,1827,181"/>
+<area shape="poly" id="edge42_Node000032_Node000037" title=" " alt="" coords="1690,105,1751,146,1746,145,1689,110"/>
+<area shape="rect" id="Node000038" title=" " alt="" coords="1851,155,1960,181"/>
+<area shape="poly" id="edge43_Node000032_Node000038" title=" " alt="" coords="1712,105,1852,150,1847,150,1711,110"/>
+<area shape="rect" id="Node000039" title=" " alt="" coords="1984,155,2083,181"/>
+<area shape="poly" id="edge44_Node000032_Node000039" title=" " alt="" coords="1723,102,1971,154,1966,154,1722,108"/>
+<area shape="rect" id="Node000040" title=" " alt="" coords="2106,155,2179,181"/>
+<area shape="poly" id="edge45_Node000032_Node000040" title=" " alt="" coords="1723,98,1884,118,2094,154,2089,154,1883,123,1723,103"/>
+<area shape="rect" id="Node000041" title=" " alt="" coords="2203,155,2306,181"/>
+<area shape="poly" id="edge46_Node000032_Node000041" title=" " alt="" coords="1723,97,1923,118,2190,154,2185,154,1922,123,1723,102"/>
+<area shape="poly" id="edge49_Node000046_Node000006" title=" " alt="" coords="948,325,624,385,623,380,943,325"/>
+<area shape="poly" id="edge50_Node000046_Node000012" title=" " alt="" coords="971,330,934,370,931,365,966,332"/>
+</map>

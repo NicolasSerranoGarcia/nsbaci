@@ -1,0 +1,5 @@
+<map id="nsbaci::services::RuntimeService::step" name="nsbaci::services::RuntimeService::step">
+<area shape="rect" id="Node000001" title="Executes a single instruction for any ready thread." alt="" coords="5,5,179,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a0e437afb0c45ee05ffbd58102ffd8791" title="Gets the current state of the thread." alt="" coords="227,5,394,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,24,214,26,209,27,179,29"/>
+</map>

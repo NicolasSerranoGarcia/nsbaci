@@ -1,0 +1,5 @@
+<map id="nsbaci::services::runtime::NsbaciScheduler::pickNext" name="nsbaci::services::runtime::NsbaciScheduler::pickNext">
+<area shape="rect" id="Node000001" title="Pick the next thread to run." alt="" coords="5,5,194,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a7bbfc15a74b2da209a9572edcef4eda0" title="Get the currently running thread." alt="" coords="242,5,418,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,24,229,26,224,27,194,29"/>
+</map>

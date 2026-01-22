@@ -1,0 +1,24 @@
+<map id="fileTypes.h" name="fileTypes.h">
+<area shape="rect" id="Node000001" title="Type definitions for file&#45;related operations." alt="" coords="371,5,456,32"/>
+<area shape="rect" id="Node000002" href="$compiler_service_8h.html" title="CompilerService class declaration for nsbaci." alt="" coords="191,229,316,256"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="370,41,343,60,315,82,285,115,267,156,258,195,256,230,251,228,253,195,262,154,281,112,312,78,340,55,374,38"/>
+<area shape="rect" id="Node000008" href="$controller_8h.html" title="Controller class declaration for nsbaci." alt="" coords="395,304,480,331"/>
+<area shape="poly" id="edge5_Node000001_Node000008" title=" " alt="" coords="439,40,482,90,502,120,517,154,521,177,519,199,503,242,477,279,452,306,450,301,473,276,498,240,514,198,516,177,512,155,498,123,478,93,438,45"/>
+<area shape="rect" id="Node000010" href="$error_types_8h.html" title="Type definitions for error&#45;related structures." alt="" coords="326,80,419,107"/>
+<area shape="poly" id="edge6_Node000001_Node000010" title=" " alt="" coords="401,44,381,81,377,78,397,47"/>
+<area shape="rect" id="Node000017" href="$file_service_8h.html" title="FileService class declaration for nsbaci." alt="" coords="410,155,503,181"/>
+<area shape="poly" id="edge12_Node000001_Node000017" title=" " alt="" coords="423,45,455,155,450,154,420,49"/>
+<area shape="rect" id="Node000003" href="$compiler_service_8cpp.html" title="Implementation of the CompilerService class for nsbaci." alt="" coords="197,304,336,331"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="260,269,267,305,262,302,257,273"/>
+<area shape="rect" id="Node000004" href="$compiler_service_factory_8h.html" title="CompilerServiceFactory class declaration for nsbaci." alt="" coords="5,304,174,331"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="214,263,119,306,117,301,208,262"/>
+<area shape="poly" id="edge4_Node000002_Node000008" title=" " alt="" coords="300,260,408,303,403,304,299,265"/>
+<area shape="rect" id="Node000011" href="$error_8h.html" title="Error class declaration for nsbaci." alt="" coords="276,155,335,181"/>
+<area shape="poly" id="edge7_Node000010_Node000011" title=" " alt="" coords="352,117,319,156,315,152,348,120"/>
+<area shape="rect" id="Node000029" href="$ui_error_8h.html" title="UI Error type definitions for nsbaci." alt="" coords="340,229,410,256"/>
+<area shape="poly" id="edge11_Node000010_Node000029" title=" " alt="" coords="375,120,377,230,372,228,371,124"/>
+<area shape="poly" id="edge8_Node000011_Node000002" title=" " alt="" coords="290,193,264,231,261,227,285,196"/>
+<area shape="poly" id="edge9_Node000011_Node000029" title=" " alt="" coords="329,190,366,229,360,229,327,195"/>
+<area shape="poly" id="edge10_Node000029_Node000008" title=" " alt="" coords="397,266,429,304,424,303,395,270"/>
+<area shape="poly" id="edge13_Node000017_Node000008" title=" " alt="" coords="455,195,441,305,437,302,450,198"/>
+</map>

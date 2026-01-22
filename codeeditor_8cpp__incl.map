@@ -1,0 +1,13 @@
+<map id="codeeditor.cpp" name="codeeditor.cpp">
+<area shape="rect" id="Node000001" title="Implementation of the CodeEditor class with line numbers." alt="" coords="170,5,277,32"/>
+<area shape="rect" id="Node000002" href="$codeeditor_8h.html" title="CodeEditor class with line numbers for nsbaci." alt="" coords="71,80,163,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,34,150,73,147,69,207,31"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="187,80,260,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="225,30,226,65,221,63,222,35"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="284,80,374,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="242,30,301,71,295,71,241,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,155,114,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="109,106,81,144,77,141,104,108"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="138,155,210,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="128,105,158,143,152,142,126,110"/>
+</map>

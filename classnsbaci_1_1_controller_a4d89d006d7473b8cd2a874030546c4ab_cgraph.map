@@ -1,0 +1,5 @@
+<map id="nsbaci::Controller::onPauseRequested" name="nsbaci::Controller::onPauseRequested">
+<area shape="rect" id="Node000001" title="Pauses continuous execution." alt="" coords="5,5,149,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#a81153ea61842a545ba81799e396d0eb5" title="Emitted when the runtime execution state changes." alt="" coords="197,5,352,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,24,184,26,179,27,149,29"/>
+</map>

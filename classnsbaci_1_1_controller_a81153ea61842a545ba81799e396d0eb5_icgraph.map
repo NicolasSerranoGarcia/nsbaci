@@ -1,0 +1,16 @@
+<map id="nsbaci::Controller::runtimeStateChanged" name="nsbaci::Controller::runtimeStateChanged">
+<area shape="rect" id="Node000001" title="Emitted when the runtime execution state changes." alt="" coords="407,139,562,181"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#a4d89d006d7473b8cd2a874030546c4ab" title="Pauses continuous execution." alt="" coords="196,5,340,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="447,128,406,95,358,62,336,51,335,46,360,58,410,91,452,128"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1_controller.html#aee75083e9f66c960fcccce4871cdf874" title="Resets the runtime to initial state." alt="" coords="197,72,338,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="396,134,339,118,339,112,402,133"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1_controller.html#acd21d306cad8ed24d61cc5f33a1d0dd3" title="Starts or resumes continuous execution mode." alt="" coords="177,139,359,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="389,161,360,163,359,157,394,159"/>
+<area shape="rect" id="Node000006" href="$classnsbaci_1_1_controller.html#ae49a575b703388f9134291d7449cde6c" title="Executes a single instruction across any ready thread." alt="" coords="201,205,334,248"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="396,187,336,209,334,204,401,185"/>
+<area shape="rect" id="Node000007" href="$classnsbaci_1_1_controller.html#af0ac80b53693b349ad461a65fcbd746a" title="Executes a single instruction on a specific thread." alt="" coords="181,272,354,315"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="452,191,410,229,360,262,336,274,335,269,358,258,406,225,447,193"/>
+<area shape="rect" id="Node000005" href="$classnsbaci_1_1_controller.html#a3e9a64f392ee28382ad1d28c638bfd87" title="Provides user input to the runtime." alt="" coords="5,172,129,215"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="159,179,130,186,128,181,163,176"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="183,214,129,206,128,201,188,212"/>
+</map>

@@ -1,0 +1,37 @@
+digraph "controller.cpp"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [id="Node000001",label="controller.cpp",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Implementation of the Controller class for nsbaci."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="controller.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$controller_8h.html",tooltip="Controller class declaration for nsbaci."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="QObject",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node4 [id="edge3_Node000002_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="QTimer",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node5 [id="edge4_Node000002_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="compilerService.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$compiler_service_8h.html",tooltip="CompilerService class declaration for nsbaci."];
+  Node5 -> Node16 [id="edge5_Node000005_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="fileTypes.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$file_types_8h.html",tooltip="Type definitions for file-related operations."];
+  Node2 -> Node18 [id="edge6_Node000002_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="compilerTypes.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$compiler_types_8h.html",tooltip="Type definitions for compiler-related operations."];
+  Node2 -> Node22 [id="edge7_Node000002_Node000022",color="steelblue1",style="solid",tooltip=" "];
+  Node22 [id="Node000022",label="drawingService.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$drawing_service_8h.html",tooltip="DrawingService class declaration for nsbaci."];
+  Node2 -> Node23 [id="edge8_Node000002_Node000023",color="steelblue1",style="solid",tooltip=" "];
+  Node23 [id="Node000023",label="fileService.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$file_service_8h.html",tooltip="FileService class declaration for nsbaci."];
+  Node23 -> Node16 [id="edge9_Node000023_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node16 [id="edge10_Node000002_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node24 [id="edge11_Node000002_Node000024",color="steelblue1",style="solid",tooltip=" "];
+  Node24 [id="Node000024",label="runtimeService.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$runtime_service_8h.html",tooltip="RuntimeService class declaration for nsbaci."];
+  Node2 -> Node31 [id="edge12_Node000002_Node000031",color="steelblue1",style="solid",tooltip=" "];
+  Node31 [id="Node000031",label="runtimeTypes.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$runtime_types_8h.html",tooltip="Type definitions for runtime-related operations."];
+  Node2 -> Node33 [id="edge13_Node000002_Node000033",color="steelblue1",style="solid",tooltip=" "];
+  Node33 [id="Node000033",label="runtimeView.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$runtime_view_8h.html",tooltip="RuntimeView widget declaration for nsbaci."];
+  Node33 -> Node31 [id="edge14_Node000033_Node000031",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node47 [id="edge15_Node000002_Node000047",color="steelblue1",style="solid",tooltip=" "];
+  Node47 [id="Node000047",label="uiError.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$ui_error_8h.html",tooltip="UI Error type definitions for nsbaci."];
+  Node1 -> Node20 [id="edge16_Node000001_Node000020",color="steelblue1",style="solid",tooltip=" "];
+  Node20 [id="Node000020",label="instruction.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$instruction_8h.html",tooltip="Instruction definitions for nsbaci compiler."];
+}

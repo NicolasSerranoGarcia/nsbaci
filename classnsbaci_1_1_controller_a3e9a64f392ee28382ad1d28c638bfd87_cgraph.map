@@ -1,0 +1,14 @@
+<map id="nsbaci::Controller::onInputProvided" name="nsbaci::Controller::onInputProvided">
+<area shape="rect" id="Node000001" title="Provides user input to the runtime." alt="" coords="5,39,129,81"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#acd21d306cad8ed24d61cc5f33a1d0dd3" title="Starts or resumes continuous execution mode." alt="" coords="177,5,359,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,47,163,43,159,46,130,52"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1_controller.html#ae49a575b703388f9134291d7449cde6c" title="Executes a single instruction across any ready thread." alt="" coords="201,72,334,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="129,68,188,79,183,81,129,73"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1_controller.html#a81153ea61842a545ba81799e396d0eb5" title="Emitted when the runtime execution state changes." alt="" coords="426,5,582,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="359,24,413,26,408,27,360,29"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="334,72,414,52,409,53,336,77"/>
+<area shape="rect" id="Node000005" href="$structnsbaci_1_1_u_i_error.html#a742b39c9ac92b9f2d1a3e4b3877fc3c0" title="Converts backend errors to UI&#45;ready errors." alt="" coords="407,72,601,115"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="335,91,394,93,389,94,335,96"/>
+<area shape="rect" id="Node000006" href="$classnsbaci_1_1_controller.html#ae6b719999fa7ce9046f92da5e711aa4a" title="Emitted when the runtime needs user input (cin, read, etc.)." alt="" coords="442,139,566,181"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="335,109,430,138,425,139,335,115"/>
+</map>

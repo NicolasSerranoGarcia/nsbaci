@@ -1,0 +1,9 @@
+<map id="nsbaci::Controller::inputRequested" name="nsbaci::Controller::inputRequested">
+<area shape="rect" id="Node000001" title="Emitted when the runtime needs user input (cin, read, etc.)." alt="" coords="398,39,521,81"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#ae49a575b703388f9134291d7449cde6c" title="Executes a single instruction across any ready thread." alt="" coords="197,5,330,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="380,47,331,41,331,35,385,47"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1_controller.html#af0ac80b53693b349ad461a65fcbd746a" title="Executes a single instruction on a specific thread." alt="" coords="177,72,350,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="385,73,351,81,350,76,380,73"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1_controller.html#a3e9a64f392ee28382ad1d28c638bfd87" title="Provides user input to the runtime." alt="" coords="5,5,129,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="179,28,130,29,129,24,184,26"/>
+</map>
