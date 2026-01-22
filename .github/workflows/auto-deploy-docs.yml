@@ -38,6 +38,8 @@ jobs:
             mingw-w64-x86_64-texlive-fonts-recommended
             mingw-w64-x86_64-texlive-extra-utils
             mingw-w64-x86_64-ghostscript
+            bison
+            flex
 
       - name: Configure and build DeskUp
         run: |

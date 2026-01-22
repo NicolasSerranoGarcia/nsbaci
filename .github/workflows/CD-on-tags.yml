@@ -152,8 +152,10 @@ jobs:
           export PATH="$(brew --prefix bison)/bin:$(brew --prefix flex)/bin:$PATH"
           mkdir -p build
           cd build
+          # Use Homebrew flex include path to avoid mismatch with system FlexLexer.h
           cmake -DCMAKE_BUILD_TYPE=Release \
                 -DCMAKE_PREFIX_PATH="$(brew --prefix qt@6)" \
+                -DCMAKE_CXX_FLAGS="-I$(brew --prefix flex)/include" \
                 ..
           cmake --build . --config Release
 
