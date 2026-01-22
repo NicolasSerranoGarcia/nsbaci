@@ -41,6 +41,10 @@ jobs:
             bison
             flex
 
+      - name: Copy FlexLexer.h to MinGW64 include path
+        run: cp /usr/include/FlexLexer.h /mingw64/include/
+        shell: msys2 {0}
+
       - name: Configure and build DeskUp
         run: |
           mkdir -p build
