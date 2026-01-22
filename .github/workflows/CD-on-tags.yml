@@ -30,6 +30,10 @@ jobs:
             bison
             flex
 
+      - name: Copy FlexLexer.h to MinGW64 include path
+        run: cp /usr/include/FlexLexer.h /mingw64/include/
+        shell: msys2 {0}
+
       - name: Configure and build nsbaci
         run: |
           mkdir -p build
@@ -144,6 +148,8 @@ jobs:
 
       - name: Configure and build nsbaci
         run: |
+          # Add Homebrew bison and flex to PATH (system bison is too old)
+          export PATH="$(brew --prefix bison)/bin:$(brew --prefix flex)/bin:$PATH"
           mkdir -p build
           cd build
           cmake -DCMAKE_BUILD_TYPE=Release \
