@@ -27,8 +27,8 @@ jobs:
             mingw-w64-x86_64-qt6
             mingw-w64-x86_64-qt6-base
             mingw-w64-x86_64-qt6-tools
-            mingw-w64-x86_64-bison
-            mingw-w64-x86_64-flex
+            bison
+            flex
 
       - name: Configure and build nsbaci
         run: |
@@ -111,7 +111,8 @@ jobs:
             libfuse2 \
             wget \
             bison \
-            flex
+            flex \
+            libfl-dev
 
       - name: Configure and build nsbaci
         run: |
@@ -138,8 +139,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Qt6
-        run: brew install qt@6
+      - name: Install dependencies
+        run: brew install qt@6 bison flex
 
       - name: Configure and build nsbaci
         run: |
