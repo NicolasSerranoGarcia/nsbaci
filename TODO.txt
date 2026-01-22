@@ -1,10 +1,7 @@
 - Implement FileService tests
 
-- Implement the memory model of my compiler (the instructions, syntax...)
+- Add instructions for threads
 
-- Although you can implement a scheduler assuming the output of the compiler (a vector of instructions), it is better to first implement the 
-compiler
+- Drawing service
 
--Inyect the services in the controller with a configuration factory, depending on the config of the program. Return a service package
-
-- Need to aquire the results of the compilation, then convert them into nsbaci errors to return them in the nsbaciCompiler::compile function
+-User guide
