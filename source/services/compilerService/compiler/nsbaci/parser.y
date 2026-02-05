@@ -27,19 +27,42 @@
       uint32_t address;
       bool isConst;
       int scopeLevel;
+      bool isParam = false;  // True if this is a function parameter
+    };
+
+    struct FunctionInfo {
+      std::string name;
+      VarType returnType;
+      std::vector<std::pair<std::string, VarType>> params;
+      uint32_t address;  // Instruction address where function starts
     };
 
     struct SymbolTable {
       std::unordered_map<std::string, Symbol> symbols;
+      std::unordered_map<std::string, FunctionInfo> functions;
       uint32_t nextAddress = 0;
       int currentScope = 0;
 
-      bool declare(const std::string& name, VarType type, bool isConst = false) {
+      bool declare(const std::string& name, VarType type, bool isConst = false, bool isParam = false) {
         if (symbols.count(name) && symbols[name].scopeLevel == currentScope) {
           return false; // Already declared in this scope
         }
-        symbols[name] = {name, type, nextAddress++, isConst, currentScope};
+        symbols[name] = {name, type, nextAddress++, isConst, currentScope, isParam};
         return true;
+      }
+
+      bool declareFunction(const std::string& name, VarType returnType, 
+                          const std::vector<std::pair<std::string, VarType>>& params, uint32_t addr) {
+        if (functions.count(name)) {
+          return false; // Already declared
+        }
+        functions[name] = {name, returnType, params, addr};
+        return true;
+      }
+
+      FunctionInfo* lookupFunction(const std::string& name) {
+        auto it = functions.find(name);
+        return it != functions.end() ? &it->second : nullptr;
       }
 
       Symbol* lookup(const std::string& name) {
@@ -94,6 +117,12 @@
   // Break/continue stack for loops
   static std::stack<std::vector<size_t>> breakStack;
   static std::stack<size_t> continueStack;
+
+  // Function parsing helpers
+  static std::string currentFunctionName;
+  static nsbaci::compiler::VarType currentFunctionReturnType;
+  static std::vector<std::pair<std::string, nsbaci::compiler::VarType>> currentFunctionParams;
+  static int currentArgCount;
 }
 
 %parse-param { nsbaci::compiler::Lexer& lexer }
@@ -116,6 +145,9 @@
 // I/O
 %token COUT CIN ENDL
 %token SHL SHR
+
+// Concurrency
+%token SEMAPHORE COBEGIN COEND P_OP V_OP
 
 // Literals
 %token TRUE_LIT FALSE_LIT
@@ -158,7 +190,12 @@ program:
       // Initialize symbol table
       symtab = nsbaci::compiler::SymbolTable{};
     }
-  | program statement
+  | program top_level_item
+  ;
+
+top_level_item:
+    statement
+  | function_def
   ;
 
 statement:
@@ -175,6 +212,9 @@ statement:
   | cout_stmt ';'
   | cin_stmt ';'
   | expr_stmt
+  | cobegin_stmt
+  | p_stmt ';'
+  | v_stmt ';'
   | ';'  /* empty statement */
   ;
 
@@ -203,6 +243,32 @@ declaration:
       }
       // expr already on stack, store it
       emit(instructions, Opcode::Store, symtab.lookup($2)->address);
+    }
+  | SEMAPHORE IDENT '=' expr ';'
+    {
+      // Semaphore declaration with initial value
+      if (!symtab.declare($2, VarType::Int)) {
+        nsbaci::Error err;
+        err.basic.severity = nsbaci::types::ErrSeverity::Error;
+        err.basic.message = "Semaphore '" + $2 + "' already declared";
+        err.basic.type = nsbaci::types::ErrType::compilationError;
+        errors.push_back(std::move(err));
+      }
+      // Initialize semaphore with value from expr (already on stack)
+      emit(instructions, Opcode::StoreSemaphore, symtab.lookup($2)->address);
+    }
+  | SEMAPHORE IDENT ';'
+    {
+      // Semaphore declaration with default value 0
+      if (!symtab.declare($2, VarType::Int)) {
+        nsbaci::Error err;
+        err.basic.severity = nsbaci::types::ErrSeverity::Error;
+        err.basic.message = "Semaphore '" + $2 + "' already declared";
+        err.basic.type = nsbaci::types::ErrType::compilationError;
+        errors.push_back(std::move(err));
+      }
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::StoreSemaphore, symtab.lookup($2)->address);
     }
   | CONST type_spec IDENT '=' expr ';'
     {
@@ -278,7 +344,15 @@ assignment_stmt:
         emit(instructions, Opcode::StoreKeep);  // Store value at computed address
       }
     }
-  | IDENT PLUS_ASSIGN expr
+  | IDENT PLUS_ASSIGN
+    {
+      // Load variable before expr is evaluated
+      Symbol* sym = symtab.lookup($1);
+      if (sym) {
+        emit(instructions, Opcode::LoadValue, sym->address);
+      }
+    }
+    expr
     {
       Symbol* sym = symtab.lookup($1);
       if (!sym) {
@@ -288,43 +362,71 @@ assignment_stmt:
         err.basic.type = nsbaci::types::ErrType::compilationError;
         errors.push_back(std::move(err));
       } else {
-        emit(instructions, Opcode::LoadValue, sym->address);
+        // Stack: [var, expr] -> var + expr
         emit(instructions, Opcode::Add);
         emit(instructions, Opcode::Store, sym->address);
       }
     }
-  | IDENT MINUS_ASSIGN expr
+  | IDENT MINUS_ASSIGN
     {
       Symbol* sym = symtab.lookup($1);
       if (sym) {
         emit(instructions, Opcode::LoadValue, sym->address);
+      }
+    }
+    expr
+    {
+      Symbol* sym = symtab.lookup($1);
+      if (sym) {
+        // Stack: [var, expr] -> var - expr
         emit(instructions, Opcode::Sub);
         emit(instructions, Opcode::Store, sym->address);
       }
     }
-  | IDENT MULT_ASSIGN expr
+  | IDENT MULT_ASSIGN
     {
       Symbol* sym = symtab.lookup($1);
       if (sym) {
         emit(instructions, Opcode::LoadValue, sym->address);
+      }
+    }
+    expr
+    {
+      Symbol* sym = symtab.lookup($1);
+      if (sym) {
+        // Stack: [var, expr] -> var * expr
         emit(instructions, Opcode::Mult);
         emit(instructions, Opcode::Store, sym->address);
       }
     }
-  | IDENT DIV_ASSIGN expr
+  | IDENT DIV_ASSIGN
     {
       Symbol* sym = symtab.lookup($1);
       if (sym) {
         emit(instructions, Opcode::LoadValue, sym->address);
+      }
+    }
+    expr
+    {
+      Symbol* sym = symtab.lookup($1);
+      if (sym) {
+        // Stack: [var, expr] -> var / expr
         emit(instructions, Opcode::Div);
         emit(instructions, Opcode::Store, sym->address);
       }
     }
-  | IDENT MOD_ASSIGN expr
+  | IDENT MOD_ASSIGN
     {
       Symbol* sym = symtab.lookup($1);
       if (sym) {
         emit(instructions, Opcode::LoadValue, sym->address);
+      }
+    }
+    expr
+    {
+      Symbol* sym = symtab.lookup($1);
+      if (sym) {
+        // Stack: [var, expr] -> var % expr
         emit(instructions, Opcode::Mod);
         emit(instructions, Opcode::Store, sym->address);
       }
@@ -513,12 +615,25 @@ continue_stmt:
 return_stmt:
     RETURN ';'
     {
-      emit(instructions, Opcode::Halt);
+      // Check if we're in a function or main program
+      if (currentFunctionName.empty()) {
+        // In main program - halt
+        emit(instructions, Opcode::Halt);
+      } else {
+        // In a function - return to caller
+        emit(instructions, Opcode::ShortReturn);
+      }
     }
   | RETURN expr ';'
     {
-      // Return value is on stack - for now just halt
-      emit(instructions, Opcode::Halt);
+      // Return value is on stack
+      if (currentFunctionName.empty()) {
+        // In main program - halt (value discarded)
+        emit(instructions, Opcode::Halt);
+      } else {
+        // In a function - return with value on stack
+        emit(instructions, Opcode::ExitFunction);
+      }
     }
   ;
 
@@ -605,6 +720,130 @@ expr_stmt:
     }
   ;
 
+cobegin_stmt:
+    COBEGIN
+    {
+      // Emit Cobegin - marks start of concurrent block
+      emit(instructions, Opcode::Cobegin);
+    }
+    cobegin_body COEND
+    {
+      // Emit Coend - waits for all spawned threads to finish
+      emit(instructions, Opcode::Coend);
+    }
+  ;
+
+cobegin_body:
+    cobegin_block
+  | cobegin_body cobegin_block
+  ;
+
+cobegin_block:
+    block
+    {
+      // Each block in cobegin represents a concurrent process
+      // The Create opcode spawns a new thread for the block
+      emit(instructions, Opcode::Create);
+    }
+  ;
+
+p_stmt:
+    P_OP '(' IDENT ')'
+    {
+      Symbol* sym = symtab.lookup($3);
+      if (!sym) {
+        nsbaci::Error err;
+        err.basic.severity = nsbaci::types::ErrSeverity::Error;
+        err.basic.message = "Undeclared semaphore '" + $3 + "'";
+        err.basic.type = nsbaci::types::ErrType::compilationError;
+        errors.push_back(std::move(err));
+      } else {
+        // P operation (wait): push semaphore address and execute Wait
+        emit(instructions, Opcode::LoadAddress, sym->address);
+        emit(instructions, Opcode::Wait);
+      }
+    }
+  ;
+
+v_stmt:
+    V_OP '(' IDENT ')'
+    {
+      Symbol* sym = symtab.lookup($3);
+      if (!sym) {
+        nsbaci::Error err;
+        err.basic.severity = nsbaci::types::ErrSeverity::Error;
+        err.basic.message = "Undeclared semaphore '" + $3 + "'";
+        err.basic.type = nsbaci::types::ErrType::compilationError;
+        errors.push_back(std::move(err));
+      } else {
+        // V operation (signal): push semaphore address and execute Signal
+        emit(instructions, Opcode::LoadAddress, sym->address);
+        emit(instructions, Opcode::Signal);
+      }
+    }
+  ;
+
+function_def:
+    type_spec IDENT '('
+    {
+      // Save function info for later
+      currentFunctionName = $2;
+      currentFunctionReturnType = $1;
+      currentFunctionParams.clear();
+      symtab.enterScope();
+    }
+    param_list ')'
+    {
+      // Jump over function body (for top-level code)
+      size_t jumpOver = emitJump(instructions, Opcode::Jump);
+      
+      // Record function start address
+      uint32_t funcAddr = static_cast<uint32_t>(instructions.size());
+      symtab.declareFunction(currentFunctionName, currentFunctionReturnType, 
+                             currentFunctionParams, funcAddr);
+      
+      // Declare parameters as local variables
+      for (const auto& param : currentFunctionParams) {
+        symtab.declare(param.first, param.second, false, true);
+      }
+      
+      // Store the jump address for patching after body
+      breakStack.push({jumpOver});  // Reuse breakStack temporarily
+    }
+    function_body
+    {
+      // Emit implicit return for void functions
+      if (currentFunctionReturnType == VarType::Void) {
+        emit(instructions, Opcode::ShortReturn);
+      }
+      
+      // Patch the jump-over instruction
+      if (!breakStack.empty() && !breakStack.top().empty()) {
+        patchJump(instructions, breakStack.top()[0]);
+        breakStack.pop();
+      }
+      
+      symtab.exitScope();
+    }
+  ;
+
+param_list:
+    %empty
+  | param_decl
+  | param_list ',' param_decl
+  ;
+
+param_decl:
+    type_spec IDENT
+    {
+      currentFunctionParams.push_back({$2, $1});
+    }
+  ;
+
+function_body:
+    '{' stmt_list '}'
+  ;
+
 expr:
     NUMBER
     {
@@ -650,6 +889,35 @@ expr:
         emit(instructions, Opcode::PushLiteral, int32_t(sym->address));
         emit(instructions, Opcode::Add);
         emit(instructions, Opcode::LoadIndirect);
+      }
+    }
+  | IDENT '(' 
+    {
+      // Function call - check if function exists
+      currentArgCount = 0;
+    }
+    arg_list ')'
+    {
+      FunctionInfo* func = symtab.lookupFunction($1);
+      if (!func) {
+        nsbaci::Error err;
+        err.basic.severity = nsbaci::types::ErrSeverity::Error;
+        err.basic.message = "Undeclared function '" + $1 + "'";
+        err.basic.type = nsbaci::types::ErrType::compilationError;
+        errors.push_back(std::move(err));
+        emit(instructions, Opcode::PushLiteral, int32_t(0)); // Push dummy return value
+      } else {
+        if (currentArgCount != static_cast<int>(func->params.size())) {
+          nsbaci::Error err;
+          err.basic.severity = nsbaci::types::ErrSeverity::Error;
+          err.basic.message = "Function '" + $1 + "' expects " + 
+                              std::to_string(func->params.size()) + " arguments, got " + 
+                              std::to_string(currentArgCount);
+          err.basic.type = nsbaci::types::ErrType::compilationError;
+          errors.push_back(std::move(err));
+        }
+        // Call the function
+        emit(instructions, Opcode::Call, int32_t(func->address));
       }
     }
   | '(' expr ')'
@@ -761,6 +1029,19 @@ expr:
         emit(instructions, Opcode::Sub);
         emit(instructions, Opcode::StoreKeep, sym->address);
       }
+    }
+  ;
+
+arg_list:
+    %empty
+  | arg
+  | arg_list ',' arg
+  ;
+
+arg:
+    expr
+    {
+      currentArgCount++;
     }
   ;
 

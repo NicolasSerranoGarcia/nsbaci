@@ -72,6 +72,38 @@ void NsbaciScheduler::blockCurrent() {
   runningIndex = std::nullopt;
 }
 
+void NsbaciScheduler::blockOnSemaphore(uint32_t semaphoreAddr) {
+  if (!runningIndex.has_value()) {
+    return;
+  }
+
+  Thread& current = threads[runningIndex.value()];
+  current.setState(nsbaci::types::ThreadState::Blocked);
+  semaphoreQueues[semaphoreAddr].push_back(runningIndex.value());
+  runningIndex = std::nullopt;
+}
+
+size_t NsbaciScheduler::unblockSemaphore(uint32_t semaphoreAddr) {
+  auto it = semaphoreQueues.find(semaphoreAddr);
+  if (it == semaphoreQueues.end() || it->second.empty()) {
+    return 0;
+  }
+
+  // Unblock one thread waiting on this semaphore (FIFO order)
+  size_t threadIndex = it->second.front();
+  it->second.erase(it->second.begin());
+
+  threads[threadIndex].setState(nsbaci::types::ThreadState::Ready);
+  readyQueue.push_back(threadIndex);
+
+  // Clean up empty queue
+  if (it->second.empty()) {
+    semaphoreQueues.erase(it);
+  }
+
+  return 1;
+}
+
 void NsbaciScheduler::unblock(nsbaci::types::ThreadID threadId) {
   // Search in blocked queue and move to ready
   for (auto it = blockedQueue.begin(); it != blockedQueue.end(); ++it) {
@@ -122,6 +154,7 @@ void NsbaciScheduler::clear() {
   readyQueue.clear();
   blockedQueue.clear();
   ioQueue.clear();
+  semaphoreQueues.clear();
   runningIndex = std::nullopt;
 }
 

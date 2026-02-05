@@ -72,6 +72,24 @@ RuntimeResult RuntimeService::step() {
     return result;
   }
 
+  // Handle concurrency signals
+  if (interpResult.shouldBlock) {
+    // Thread is blocked on a semaphore
+    scheduler->blockOnSemaphore(interpResult.blockingSemaphore);
+  }
+
+  if (interpResult.signalSemaphore) {
+    // A semaphore was signaled - unblock waiting thread if any
+    scheduler->unblockSemaphore(interpResult.signaledSemaphore);
+  }
+
+  if (interpResult.createThread) {
+    // Create a new thread at the specified PC
+    runtime::Thread newThread;
+    newThread.setPC(interpResult.newThreadPC);
+    scheduler->addThread(std::move(newThread));
+  }
+
   // Propagate I/O info
   result.needsInput = interpResult.needsInput;
   result.inputPrompt = std::move(interpResult.inputPrompt);

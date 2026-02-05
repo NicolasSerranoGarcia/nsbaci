@@ -17,7 +17,6 @@ CompilerService::CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c)
 nsbaci::compiler::CompilerResult CompilerService::compile(
     nsbaci::types::Text raw) {
   auto result = compiler->compile(raw);
-
   if (result.ok) {
     lastCompiledInstructions = std::move(result.instructions);
     lastCompiledSymbols = std::move(result.symbols);

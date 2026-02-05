@@ -14,6 +14,7 @@
 #define NSBACI_SERVICES_RUNTIME_SCHEDULER_H
 
 #include <optional>
+#include <unordered_map>
 #include <vector>
 
 #include "thread.h"
@@ -53,6 +54,19 @@ class Scheduler {
    * @brief Block the currently running thread.
    */
   virtual void blockCurrent() = 0;
+
+  /**
+   * @brief Block current thread on a semaphore.
+   * @param semaphoreAddr The address of the semaphore.
+   */
+  virtual void blockOnSemaphore(uint32_t semaphoreAddr) = 0;
+
+  /**
+   * @brief Unblock threads waiting on a semaphore.
+   * @param semaphoreAddr The address of the semaphore.
+   * @return Number of threads unblocked.
+   */
+  virtual size_t unblockSemaphore(uint32_t semaphoreAddr) = 0;
 
   /**
    * @brief Move a thread from blocked to ready state.
@@ -105,6 +119,9 @@ class Scheduler {
   std::vector<size_t> blockedQueue;    ///< Indices of blocked threads
   std::vector<size_t> ioQueue;         ///< Indices of I/O waiting threads
   std::optional<size_t> runningIndex;  ///< Index of currently running thread
+
+  /// @brief Map from semaphore address to list of waiting thread indices
+  std::unordered_map<uint32_t, std::vector<size_t>> semaphoreQueues;
 };
 
 }  // namespace nsbaci::services::runtime

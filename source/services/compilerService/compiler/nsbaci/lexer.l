@@ -25,24 +25,29 @@
 "//"[^\n]* { /* single-line comment */ yylloc->step(); }
 "/*"([^*]|\*+[^*/])*\*+"/" { /* multi-line comment */ yylloc->step(); }
 
-"int"      { return nsbaci::compiler::Parser::token::INT; }
-"bool"     { return nsbaci::compiler::Parser::token::BOOL; }
-"char"     { return nsbaci::compiler::Parser::token::CHAR; }
-"void"     { return nsbaci::compiler::Parser::token::VOID; }
-"const"    { return nsbaci::compiler::Parser::token::CONST; }
-"if"       { return nsbaci::compiler::Parser::token::IF; }
-"else"     { return nsbaci::compiler::Parser::token::ELSE; }
-"while"    { return nsbaci::compiler::Parser::token::WHILE; }
-"do"       { return nsbaci::compiler::Parser::token::DO; }
-"for"      { return nsbaci::compiler::Parser::token::FOR; }
-"break"    { return nsbaci::compiler::Parser::token::BREAK; }
-"continue" { return nsbaci::compiler::Parser::token::CONTINUE; }
-"return"   { return nsbaci::compiler::Parser::token::RETURN; }
-"true"     { return nsbaci::compiler::Parser::token::TRUE_LIT; }
-"false"    { return nsbaci::compiler::Parser::token::FALSE_LIT; }
-"cout"     { return nsbaci::compiler::Parser::token::COUT; }
-"cin"      { return nsbaci::compiler::Parser::token::CIN; }
-"endl"     { return nsbaci::compiler::Parser::token::ENDL; }
+"int"       { return nsbaci::compiler::Parser::token::INT; }
+"bool"      { return nsbaci::compiler::Parser::token::BOOL; }
+"char"      { return nsbaci::compiler::Parser::token::CHAR; }
+"void"      { return nsbaci::compiler::Parser::token::VOID; }
+"const"     { return nsbaci::compiler::Parser::token::CONST; }
+"if"        { return nsbaci::compiler::Parser::token::IF; }
+"else"      { return nsbaci::compiler::Parser::token::ELSE; }
+"while"     { return nsbaci::compiler::Parser::token::WHILE; }
+"do"        { return nsbaci::compiler::Parser::token::DO; }
+"for"       { return nsbaci::compiler::Parser::token::FOR; }
+"break"     { return nsbaci::compiler::Parser::token::BREAK; }
+"continue"  { return nsbaci::compiler::Parser::token::CONTINUE; }
+"return"    { return nsbaci::compiler::Parser::token::RETURN; }
+"true"      { return nsbaci::compiler::Parser::token::TRUE_LIT; }
+"false"     { return nsbaci::compiler::Parser::token::FALSE_LIT; }
+"cout"      { return nsbaci::compiler::Parser::token::COUT; }
+"cin"       { return nsbaci::compiler::Parser::token::CIN; }
+"endl"      { return nsbaci::compiler::Parser::token::ENDL; }
+"semaphore" { return nsbaci::compiler::Parser::token::SEMAPHORE; }
+"cobegin"   { return nsbaci::compiler::Parser::token::COBEGIN; }
+"coend"     { return nsbaci::compiler::Parser::token::COEND; }
+"p"         { return nsbaci::compiler::Parser::token::P_OP; }
+"v"         { return nsbaci::compiler::Parser::token::V_OP; }
 
 [0-9]+ {
     yylval->emplace<int>(std::stoi(yytext));

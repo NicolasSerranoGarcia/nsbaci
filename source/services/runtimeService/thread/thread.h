@@ -111,6 +111,29 @@ class Thread {
   uint32_t getSP() const { return sp; }
   void setSP(uint32_t addr) { sp = addr; }
 
+  // ============== Call Stack ==============
+
+  /**
+   * @brief Push return address onto call stack.
+   */
+  void pushReturnAddress(uint32_t addr) { callStack.push_back(addr); }
+
+  /**
+   * @brief Pop return address from call stack.
+   * @return The return address, or 0 if stack is empty.
+   */
+  uint32_t popReturnAddress() {
+    if (callStack.empty()) return 0;
+    uint32_t addr = callStack.back();
+    callStack.pop_back();
+    return addr;
+  }
+
+  /**
+   * @brief Check if call stack is empty.
+   */
+  bool callStackEmpty() const { return callStack.empty(); }
+
  private:
   nsbaci::types::ThreadID id;
   nsbaci::types::ThreadState state;
@@ -125,6 +148,9 @@ class Thread {
 
   // Thread-local stack
   std::vector<int32_t> stack;
+
+  // Call stack for return addresses
+  std::vector<uint32_t> callStack;
 
   static nsbaci::types::ThreadID nextThreadId;
 

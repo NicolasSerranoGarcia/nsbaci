@@ -6,6 +6,21 @@
 find_package(FLEX REQUIRED)
 find_package(BISON REQUIRED)
 
+# Find FlexLexer.h include directory
+# On MSYS2/MinGW, FlexLexer.h is in /usr/include (MSYS layer)
+if(WIN32)
+    # Check common MSYS2 paths
+    if(EXISTS "C:/msys64/usr/include/FlexLexer.h")
+        set(FLEX_INCLUDE_DIR "C:/msys64/usr/include")
+    elseif(EXISTS "/usr/include/FlexLexer.h")
+        set(FLEX_INCLUDE_DIR "/usr/include")
+    endif()
+else()
+    find_path(FLEX_INCLUDE_DIR FlexLexer.h)
+endif()
+
+message(STATUS "FLEX_INCLUDE_DIR: ${FLEX_INCLUDE_DIR}")
+
 # Generate parser and lexer
 
     set(PARSER_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR})
@@ -39,6 +54,7 @@ find_package(BISON REQUIRED)
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/..
         ${PARSER_OUTPUT_DIR}
+        ${FLEX_INCLUDE_DIR}
     )
 
 # Dependencies

@@ -231,27 +231,139 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       break;
     }
 
+    case Opcode::Call: {
+      // Call function: save return address and jump to function
+      int32_t target = std::get<int32_t>(instr.operand1);
+      t.pushReturnAddress(t.getPC() + 1);  // Return to instruction after Call
+      t.setPC(static_cast<uint32_t>(target));
+      advancePC = false;
+      break;
+    }
+
+    case Opcode::ShortCall: {
+      // Short call without display update
+      int32_t target = std::get<int32_t>(instr.operand1);
+      t.pushReturnAddress(t.getPC() + 1);
+      t.setPC(static_cast<uint32_t>(target));
+      advancePC = false;
+      break;
+    }
+
+    case Opcode::ShortReturn: {
+      // Return from function (no return value)
+      if (t.callStackEmpty()) {
+        // No return address - terminate thread
+        t.setState(nsbaci::types::ThreadState::Terminated);
+        advancePC = false;
+      } else {
+        uint32_t returnAddr = t.popReturnAddress();
+        t.setPC(returnAddr);
+        advancePC = false;
+      }
+      break;
+    }
+
+    case Opcode::ExitFunction: {
+      // Return from function with return value on stack
+      // The return value is already on the stack, just return
+      if (t.callStackEmpty()) {
+        t.setState(nsbaci::types::ThreadState::Terminated);
+        advancePC = false;
+      } else {
+        uint32_t returnAddr = t.popReturnAddress();
+        t.setPC(returnAddr);
+        advancePC = false;
+      }
+      break;
+    }
+
+    case Opcode::ExitProc: {
+      // Exit procedure (same as ShortReturn for now)
+      if (t.callStackEmpty()) {
+        t.setState(nsbaci::types::ThreadState::Terminated);
+        advancePC = false;
+      } else {
+        uint32_t returnAddr = t.popReturnAddress();
+        t.setPC(returnAddr);
+        advancePC = false;
+      }
+      break;
+    }
+
     // ============== Concurrency - Semaphores ==============
+    case Opcode::StoreSemaphore: {
+      // Initialize semaphore: address in operand1, value on stack
+      uint32_t addr = std::get<uint32_t>(instr.operand1);
+      int32_t value = t.pop();
+      if (addr >= program.memory().size()) {
+        program.memory().resize(addr + 1, 0);
+      }
+      program.memory()[addr] = value;
+      break;
+    }
+
     case Opcode::Wait: {
-      // TODO: Implement semaphore wait
-      // Get semaphore address, decrement, block if < 0
+      // Semaphore wait (P operation)
+      // Address is on the stack
+      uint32_t addr = static_cast<uint32_t>(t.pop());
+      if (addr >= program.memory().size()) {
+        program.memory().resize(addr + 1, 0);
+      }
+
+      int32_t semValue = program.memory()[addr];
+      if (semValue > 0) {
+        // Semaphore available, decrement and continue
+        program.memory()[addr] = semValue - 1;
+      } else {
+        // Semaphore not available, block the thread
+        result.shouldBlock = true;
+        result.blockingSemaphore = addr;
+        // Don't advance PC - will retry when unblocked
+        advancePC = false;
+        // Push address back for retry
+        t.push(static_cast<int32_t>(addr));
+      }
       break;
     }
 
     case Opcode::Signal: {
-      // TODO: Implement semaphore signal
-      // Get semaphore address, increment, wake waiting thread if any
+      // Semaphore signal (V operation)
+      // Address is on the stack
+      uint32_t addr = static_cast<uint32_t>(t.pop());
+      if (addr >= program.memory().size()) {
+        program.memory().resize(addr + 1, 0);
+      }
+
+      // Increment semaphore
+      program.memory()[addr]++;
+
+      // Signal to runtime that a thread may be unblocked
+      result.signalSemaphore = true;
+      result.signaledSemaphore = addr;
       break;
     }
 
     // ============== Concurrency - Process ==============
     case Opcode::Cobegin: {
-      // TODO: Mark start of concurrent block
+      // Mark start of concurrent block
+      // The cobegin instruction itself just marks the beginning
+      // Actual thread creation happens with Create instructions
+      result.cobeginStart = true;
       break;
     }
 
     case Opcode::Coend: {
-      // TODO: Wait for all concurrent threads to finish
+      // Wait for all concurrent threads to finish
+      // Runtime service handles the synchronization
+      result.coendWait = true;
+      break;
+    }
+
+    case Opcode::Create: {
+      // Create a new thread starting at the next instruction
+      // The new thread will execute the block following Create
+      result.createThread = true;
+      result.newThreadPC = t.getPC() + 1;
       break;
     }
 

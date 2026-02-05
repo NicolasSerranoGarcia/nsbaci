@@ -1,6 +1,16 @@
 - Implement FileService tests
 
-- Add instructions for threads
+- [DONE] Add instructions for multithread support
+  Implemented concurrency primitives:
+  - `semaphore name = value;` - Declare and initialize a semaphore
+  - `p(sem);` - P operation (decrement, block if 0)
+  - `v(sem);` - V operation (increment, wake waiting thread)
+  - `cobegin { block1 } { block2 } ... coend` - Execute blocks concurrently
+
+- [DONE] Add function support
+  - Function definitions: `type name(params) { body }`
+  - Function calls: `name(args)`
+  - Return statements: `return;` or `return expr;`
 
 - Drawing service
 

@@ -38,6 +38,8 @@ class NsbaciScheduler final : public Scheduler {
   Thread* pickNext() override;
   void addThread(Thread thread) override;
   void blockCurrent() override;
+  void blockOnSemaphore(uint32_t semaphoreAddr) override;
+  size_t unblockSemaphore(uint32_t semaphoreAddr) override;
   void unblock(nsbaci::types::ThreadID threadId) override;
   void yield() override;
   void terminateCurrent() override;
