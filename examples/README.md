@@ -69,14 +69,6 @@ p(mutex);               // Wait/acquire (P operation)
 v(mutex);               // Signal/release (V operation)
 ```
 
-## Running Examples
-
-1. Open NSBACI application
-2. Load an example file (File → Open)
-3. Compile the program
-4. Run or step through execution
-5. Observe output and thread states
-
 ## Concurrency Notes
 
 - The scheduler uses **random thread selection** to simulate non-deterministic execution
