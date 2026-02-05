@@ -1,0 +1,70 @@
+// ==============================================
+// NSBACI Example 10: Input/Output
+// ==============================================
+// Demonstrates: cin, cout, user interaction
+
+cout << "=== Input/Output Demo ===" << endl;
+cout << endl;
+
+// Get user's name (as a number for simplicity)
+cout << "Enter a number: ";
+int num;
+cin >> num;
+
+cout << "You entered: " << num << endl;
+cout << endl;
+
+// Perform calculations
+cout << "Calculations with your number:" << endl;
+cout << num << " + 10 = " << num + 10 << endl;
+cout << num << " * 2 = " << num * 2 << endl;
+cout << num << " / 2 = " << num / 2 << endl;
+cout << num << " % 7 = " << num % 7 << endl;
+
+// Check properties
+cout << endl << "Number properties:" << endl;
+if (num % 2 == 0) {
+    cout << num << " is even" << endl;
+} else {
+    cout << num << " is odd" << endl;
+}
+
+if (num > 0) {
+    cout << num << " is positive" << endl;
+} else if (num < 0) {
+    cout << num << " is negative" << endl;
+} else {
+    cout << num << " is zero" << endl;
+}
+
+// Get two more numbers
+cout << endl << "Enter two more numbers:" << endl;
+cout << "First: ";
+int a;
+cin >> a;
+cout << "Second: ";
+int b;
+cin >> b;
+
+cout << endl << "Results:" << endl;
+cout << a << " + " << b << " = " << a + b << endl;
+cout << a << " - " << b << " = " << a - b << endl;
+cout << a << " * " << b << " = " << a * b << endl;
+
+if (b != 0) {
+    cout << a << " / " << b << " = " << a / b << endl;
+    cout << a << " % " << b << " = " << a % b << endl;
+} else {
+    cout << "Cannot divide by zero!" << endl;
+}
+
+// Max and min
+if (a > b) {
+    cout << "Max: " << a << ", Min: " << b << endl;
+} else {
+    cout << "Max: " << b << ", Min: " << a << endl;
+}
+
+cout << endl << "Thank you for using the I/O demo!" << endl;
+
+return;

@@ -1,0 +1,96 @@
+// ==============================================
+// NSBACI Example 03: Arrays
+// ==============================================
+// Demonstrates: array declaration, access, manipulation
+
+// Array declaration
+int numbers[10];
+
+// Initialize array with values
+cout << "Initializing array..." << endl;
+for (int i = 0; i < 10; i++) {
+    numbers[i] = i * 10;
+}
+
+// Print array
+cout << "Array contents:" << endl;
+for (int i = 0; i < 10; i++) {
+    cout << "numbers[" << i << "] = " << numbers[i] << endl;
+}
+
+// Find sum
+int sum = 0;
+for (int i = 0; i < 10; i++) {
+    sum += numbers[i];
+}
+cout << endl << "Sum of array: " << sum << endl;
+
+// Find max
+int max = numbers[0];
+for (int i = 1; i < 10; i++) {
+    if (numbers[i] > max) {
+        max = numbers[i];
+    }
+}
+cout << "Maximum value: " << max << endl;
+
+// Find min
+int min = numbers[0];
+for (int i = 1; i < 10; i++) {
+    if (numbers[i] < min) {
+        min = numbers[i];
+    }
+}
+cout << "Minimum value: " << min << endl;
+
+// Reverse array in place
+cout << endl << "Reversing array..." << endl;
+int left = 0;
+int right = 9;
+while (left < right) {
+    int temp = numbers[left];
+    numbers[left] = numbers[right];
+    numbers[right] = temp;
+    left++;
+    right--;
+}
+
+// Print reversed array
+cout << "Reversed array:" << endl;
+for (int i = 0; i < 10; i++) {
+    cout << numbers[i] << " ";
+}
+cout << endl;
+
+// Simple bubble sort
+int data[5];
+data[0] = 64;
+data[1] = 34;
+data[2] = 25;
+data[3] = 12;
+data[4] = 22;
+
+cout << endl << "Before sorting: ";
+for (int i = 0; i < 5; i++) {
+    cout << data[i] << " ";
+}
+cout << endl;
+
+// Bubble sort
+for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4 - i; j++) {
+        if (data[j] > data[j + 1]) {
+            int temp = data[j];
+            data[j] = data[j + 1];
+            data[j + 1] = temp;
+        }
+    }
+}
+
+cout << "After sorting: ";
+for (int i = 0; i < 5; i++) {
+    cout << data[i] << " ";
+}
+cout << endl;
+
+return;

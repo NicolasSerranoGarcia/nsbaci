@@ -1,0 +1,154 @@
+// ==============================================
+// NSBACI Example 04: Functions
+// ==============================================
+// Demonstrates: function definitions, parameters, return values, recursion
+
+// Simple function with no parameters
+void sayHello() {
+    cout << "Hello from a function!" << endl;
+    return;
+}
+
+// Function with parameters
+int add(int a, int b) {
+    return a + b;
+}
+
+// Function with multiple operations
+int multiply(int x, int y) {
+    int result = x * y;
+    return result;
+}
+
+// Function that returns boolean
+bool isEven(int n) {
+    if (n % 2 == 0) {
+        return true;
+    }
+    return false;
+}
+
+// Function with conditional logic
+int max(int a, int b) {
+    if (a > b) {
+        return a;
+    }
+    return b;
+}
+
+int min(int a, int b) {
+    if (a < b) {
+        return a;
+    }
+    return b;
+}
+
+// Recursive function: factorial
+int factorial(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+// Recursive function: fibonacci
+int fibonacci(int n) {
+    if (n <= 0) {
+        return 0;
+    }
+    if (n == 1) {
+        return 1;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Recursive function: power
+int power(int base, int exp) {
+    if (exp == 0) {
+        return 1;
+    }
+    return base * power(base, exp - 1);
+}
+
+// Function to check if prime
+bool isPrime(int n) {
+    if (n < 2) {
+        return false;
+    }
+    int i = 2;
+    while (i * i <= n) {
+        if (n % i == 0) {
+            return false;
+        }
+        i++;
+    }
+    return true;
+}
+
+// Greatest Common Divisor (Euclidean algorithm)
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+
+// ==================== Main Program ====================
+
+cout << "=== Function Demonstrations ===" << endl << endl;
+
+// Call void function
+sayHello();
+
+// Basic function calls
+cout << endl << "Basic Functions:" << endl;
+cout << "add(5, 3) = " << add(5, 3) << endl;
+cout << "multiply(4, 7) = " << multiply(4, 7) << endl;
+cout << "max(15, 8) = " << max(15, 8) << endl;
+cout << "min(15, 8) = " << min(15, 8) << endl;
+
+// Boolean function
+cout << endl << "Even/Odd Check:" << endl;
+cout << "isEven(4) = " << isEven(4) << endl;
+cout << "isEven(7) = " << isEven(7) << endl;
+
+// Factorial
+cout << endl << "Factorials:" << endl;
+for (int i = 0; i <= 7; i++) {
+    cout << i << "! = " << factorial(i) << endl;
+}
+
+// Fibonacci
+cout << endl << "Fibonacci sequence (first 10):" << endl;
+for (int i = 0; i < 10; i++) {
+    cout << fibonacci(i) << " ";
+}
+cout << endl;
+
+// Power function
+cout << endl << "Powers of 2:" << endl;
+for (int i = 0; i <= 8; i++) {
+    cout << "2^" << i << " = " << power(2, i) << endl;
+}
+
+// Prime check
+cout << endl << "Prime numbers up to 30:" << endl;
+for (int i = 2; i <= 30; i++) {
+    if (isPrime(i)) {
+        cout << i << " ";
+    }
+}
+cout << endl;
+
+// GCD
+cout << endl << "GCD examples:" << endl;
+cout << "gcd(48, 18) = " << gcd(48, 18) << endl;
+cout << "gcd(56, 98) = " << gcd(56, 98) << endl;
+cout << "gcd(101, 103) = " << gcd(101, 103) << endl;
+
+// Nested function calls
+cout << endl << "Nested calls:" << endl;
+cout << "add(multiply(2, 3), multiply(4, 5)) = " << add(multiply(2, 3), multiply(4, 5)) << endl;
+cout << "max(add(1, 2), add(3, 4)) = " << max(add(1, 2), add(3, 4)) << endl;
+
+return;

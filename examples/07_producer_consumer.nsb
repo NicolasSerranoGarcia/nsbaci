@@ -1,0 +1,79 @@
+// ==============================================
+// NSBACI Example 07: Producer-Consumer Problem
+// ==============================================
+// Classic concurrency problem solved with semaphores
+
+// Shared buffer (single slot for simplicity)
+int buffer = 0;
+int itemCount = 0;
+
+// Semaphores
+semaphore mutex = 1;      // Mutual exclusion for buffer access
+semaphore empty = 5;      // Count of empty slots (buffer size = 5)
+semaphore full = 0;       // Count of full slots
+
+const int NUM_ITEMS = 8;  // Number of items to produce/consume
+
+cout << "=== Producer-Consumer Problem ===" << endl;
+cout << "Buffer size: 5" << endl;
+cout << "Items to transfer: " << NUM_ITEMS << endl;
+cout << endl;
+
+cobegin
+{
+    // Producer
+    int produced = 0;
+    while (produced < NUM_ITEMS) {
+        // Wait for empty slot
+        p(empty);
+        
+        // Enter critical section
+        p(mutex);
+        
+        // Produce item
+        int item = produced + 1;
+        buffer = item;
+        itemCount++;
+        cout << "Producer: Produced item " << item << " (buffer count: " << itemCount << ")" << endl;
+        
+        // Exit critical section
+        v(mutex);
+        
+        // Signal that buffer has item
+        v(full);
+        
+        produced++;
+    }
+    cout << "Producer: Finished producing all items" << endl;
+}
+{
+    // Consumer
+    int consumed = 0;
+    while (consumed < NUM_ITEMS) {
+        // Wait for item
+        p(full);
+        
+        // Enter critical section
+        p(mutex);
+        
+        // Consume item
+        int item = buffer;
+        itemCount--;
+        cout << "Consumer: Consumed item " << item << " (buffer count: " << itemCount << ")" << endl;
+        
+        // Exit critical section
+        v(mutex);
+        
+        // Signal that buffer has empty slot
+        v(empty);
+        
+        consumed++;
+    }
+    cout << "Consumer: Finished consuming all items" << endl;
+}
+coend
+
+cout << endl;
+cout << "Producer-Consumer completed successfully!" << endl;
+
+return;

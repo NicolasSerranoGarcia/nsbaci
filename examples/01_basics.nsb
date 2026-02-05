@@ -1,0 +1,72 @@
+// ==============================================
+// NSBACI Example 01: Basic Syntax
+// ==============================================
+// Demonstrates: variables, types, operators, I/O
+
+// Variable declarations
+int x = 10;
+int y = 20;
+bool flag = true;
+char letter = 'A';
+const int MAX = 100;
+
+// Arithmetic operators
+int sum = x + y;
+int diff = y - x;
+int product = x * y;
+int quotient = y / x;
+int remainder = y % x;
+
+// Output
+cout << "Basic Arithmetic:" << endl;
+cout << "x = " << x << ", y = " << y << endl;
+cout << "Sum: " << sum << endl;
+cout << "Difference: " << diff << endl;
+cout << "Product: " << product << endl;
+cout << "Quotient: " << quotient << endl;
+cout << "Remainder: " << remainder << endl;
+
+// Comparison operators
+cout << endl << "Comparisons:" << endl;
+cout << "x < y: " << (x < y) << endl;
+cout << "x > y: " << (x > y) << endl;
+cout << "x == y: " << (x == y) << endl;
+cout << "x != y: " << (x != y) << endl;
+cout << "x <= y: " << (x <= y) << endl;
+cout << "x >= y: " << (x >= y) << endl;
+
+// Logical operators
+bool a = true;
+bool b = false;
+cout << endl << "Logical Operators:" << endl;
+cout << "a && b: " << (a && b) << endl;
+cout << "a || b: " << (a || b) << endl;
+cout << "!a: " << (!a) << endl;
+
+// Increment/Decrement
+int counter = 5;
+cout << endl << "Increment/Decrement:" << endl;
+cout << "counter = " << counter << endl;
+counter++;
+cout << "After counter++: " << counter << endl;
+counter--;
+cout << "After counter--: " << counter << endl;
+cout << "++counter: " << ++counter << endl;
+cout << "--counter: " << --counter << endl;
+
+// Compound assignment
+int val = 10;
+cout << endl << "Compound Assignment:" << endl;
+cout << "val = " << val << endl;
+val += 5;
+cout << "After val += 5: " << val << endl;
+val -= 3;
+cout << "After val -= 3: " << val << endl;
+val *= 2;
+cout << "After val *= 2: " << val << endl;
+val /= 4;
+cout << "After val /= 4: " << val << endl;
+val %= 3;
+cout << "After val %= 3: " << val << endl;
+
+return;

@@ -1,0 +1,101 @@
+// ==============================================
+// NSBACI Example 08: Dining Philosophers (Simplified)
+// ==============================================
+// Classic concurrency problem with 3 philosophers
+
+// Forks (semaphores) - each philosopher needs 2 adjacent forks to eat
+semaphore fork0 = 1;
+semaphore fork1 = 1;
+semaphore fork2 = 1;
+
+// Number of times each philosopher eats
+int ate0 = 0;
+int ate1 = 0;
+int ate2 = 0;
+
+const int MEALS = 2;  // Each philosopher eats 2 times
+
+cout << "=== Dining Philosophers (3 philosophers) ===" << endl;
+cout << "Each philosopher will eat " << MEALS << " times" << endl;
+cout << endl;
+
+cobegin
+{
+    // Philosopher 0: uses fork0 and fork1
+    int meals = 0;
+    while (meals < MEALS) {
+        cout << "Philosopher 0: Thinking..." << endl;
+        
+        // Pick up forks (lower numbered first to prevent deadlock)
+        p(fork0);
+        cout << "Philosopher 0: Picked up fork 0" << endl;
+        p(fork1);
+        cout << "Philosopher 0: Picked up fork 1" << endl;
+        
+        // Eat
+        cout << "Philosopher 0: Eating (meal " << meals + 1 << ")" << endl;
+        ate0++;
+        
+        // Put down forks
+        v(fork1);
+        v(fork0);
+        cout << "Philosopher 0: Put down forks" << endl;
+        
+        meals++;
+    }
+    cout << "Philosopher 0: Done dining!" << endl;
+}
+{
+    // Philosopher 1: uses fork1 and fork2
+    int meals = 0;
+    while (meals < MEALS) {
+        cout << "Philosopher 1: Thinking..." << endl;
+        
+        p(fork1);
+        cout << "Philosopher 1: Picked up fork 1" << endl;
+        p(fork2);
+        cout << "Philosopher 1: Picked up fork 2" << endl;
+        
+        cout << "Philosopher 1: Eating (meal " << meals + 1 << ")" << endl;
+        ate1++;
+        
+        v(fork2);
+        v(fork1);
+        cout << "Philosopher 1: Put down forks" << endl;
+        
+        meals++;
+    }
+    cout << "Philosopher 1: Done dining!" << endl;
+}
+{
+    // Philosopher 2: uses fork2 and fork0 (picks up fork0 first to prevent deadlock)
+    int meals = 0;
+    while (meals < MEALS) {
+        cout << "Philosopher 2: Thinking..." << endl;
+        
+        // Note: Pick up fork0 before fork2 to maintain ordering and prevent deadlock
+        p(fork0);
+        cout << "Philosopher 2: Picked up fork 0" << endl;
+        p(fork2);
+        cout << "Philosopher 2: Picked up fork 2" << endl;
+        
+        cout << "Philosopher 2: Eating (meal " << meals + 1 << ")" << endl;
+        ate2++;
+        
+        v(fork2);
+        v(fork0);
+        cout << "Philosopher 2: Put down forks" << endl;
+        
+        meals++;
+    }
+    cout << "Philosopher 2: Done dining!" << endl;
+}
+coend
+
+cout << endl;
+cout << "All philosophers finished dining!" << endl;
+cout << "Philosopher 0 ate: " << ate0 << " times" << endl;
+cout << "Philosopher 1 ate: " << ate1 << " times" << endl;
+cout << "Philosopher 2 ate: " << ate2 << " times" << endl;
+
+return;

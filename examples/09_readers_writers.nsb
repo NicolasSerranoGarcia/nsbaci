@@ -1,0 +1,104 @@
+// ==============================================
+// NSBACI Example 09: Readers-Writers Problem
+// ==============================================
+// Multiple readers can read simultaneously, but writers need exclusive access
+
+// Shared data
+int sharedData = 0;
+int readerCount = 0;
+
+// Semaphores
+semaphore mutex = 1;       // Protects readerCount
+semaphore writeLock = 1;   // Exclusive access for writing
+
+cout << "=== Readers-Writers Problem ===" << endl;
+cout << "Initial shared data: " << sharedData << endl;
+cout << endl;
+
+cobegin
+{
+    // Writer 1
+    int writes = 0;
+    while (writes < 2) {
+        p(writeLock);  // Get exclusive access
+        
+        sharedData = sharedData + 10;
+        cout << "Writer 1: Wrote value " << sharedData << endl;
+        
+        v(writeLock);  // Release exclusive access
+        writes++;
+    }
+    cout << "Writer 1: Done" << endl;
+}
+{
+    // Writer 2
+    int writes = 0;
+    while (writes < 2) {
+        p(writeLock);
+        
+        sharedData = sharedData + 5;
+        cout << "Writer 2: Wrote value " << sharedData << endl;
+        
+        v(writeLock);
+        writes++;
+    }
+    cout << "Writer 2: Done" << endl;
+}
+{
+    // Reader 1
+    int reads = 0;
+    while (reads < 3) {
+        // Entry section
+        p(mutex);
+        readerCount++;
+        if (readerCount == 1) {
+            p(writeLock);  // First reader locks out writers
+        }
+        v(mutex);
+        
+        // Reading
+        cout << "Reader 1: Read value " << sharedData << endl;
+        
+        // Exit section
+        p(mutex);
+        readerCount--;
+        if (readerCount == 0) {
+            v(writeLock);  // Last reader unlocks for writers
+        }
+        v(mutex);
+        
+        reads++;
+    }
+    cout << "Reader 1: Done" << endl;
+}
+{
+    // Reader 2
+    int reads = 0;
+    while (reads < 3) {
+        p(mutex);
+        readerCount++;
+        if (readerCount == 1) {
+            p(writeLock);
+        }
+        v(mutex);
+        
+        cout << "Reader 2: Read value " << sharedData << endl;
+        
+        p(mutex);
+        readerCount--;
+        if (readerCount == 0) {
+            v(writeLock);
+        }
+        v(mutex);
+        
+        reads++;
+    }
+    cout << "Reader 2: Done" << endl;
+}
+coend
+
+cout << endl;
+cout << "Final shared data: " << sharedData << endl;
+cout << "Readers-Writers completed!" << endl;
+
+return;

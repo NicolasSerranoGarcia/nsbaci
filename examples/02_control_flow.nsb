@@ -1,0 +1,78 @@
+// ==============================================
+// NSBACI Example 02: Control Flow
+// ==============================================
+// Demonstrates: if/else, while, do-while, for, break, continue
+
+int x = 15;
+
+// If-else statements
+cout << "If-Else Statements:" << endl;
+if (x > 10) {
+    cout << "x is greater than 10" << endl;
+} else {
+    cout << "x is not greater than 10" << endl;
+}
+
+if (x < 5) {
+    cout << "x is less than 5" << endl;
+} else if (x < 15) {
+    cout << "x is between 5 and 14" << endl;
+} else if (x == 15) {
+    cout << "x is exactly 15" << endl;
+} else {
+    cout << "x is greater than 15" << endl;
+}
+
+// While loop
+cout << endl << "While Loop (count 1 to 5):" << endl;
+int i = 1;
+while (i <= 5) {
+    cout << i << " ";
+    i++;
+}
+cout << endl;
+
+// Do-while loop
+cout << endl << "Do-While Loop (count down from 5):" << endl;
+int j = 5;
+do {
+    cout << j << " ";
+    j--;
+} while (j > 0);
+cout << endl;
+
+// For loop
+cout << endl << "For Loop (squares 1-5):" << endl;
+for (int k = 1; k <= 5; k++) {
+    cout << k << "^2 = " << k * k << endl;
+}
+
+// Nested loops
+cout << endl << "Nested Loops (multiplication table 1-3):" << endl;
+for (int row = 1; row <= 3; row++) {
+    for (int col = 1; col <= 3; col++) {
+        cout << row * col << " ";
+    }
+    cout << endl;
+}
+
+// Break statement
+cout << endl << "Break (find first multiple of 7):" << endl;
+for (int n = 1; n <= 100; n++) {
+    if (n % 7 == 0) {
+        cout << "First multiple of 7: " << n << endl;
+        break;
+    }
+}
+
+// Continue statement
+cout << endl << "Continue (print odd numbers 1-10):" << endl;
+for (int m = 1; m <= 10; m++) {
+    if (m % 2 == 0) {
+        continue;
+    }
+    cout << m << " ";
+}
+cout << endl;
+
+return;

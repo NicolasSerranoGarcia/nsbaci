@@ -1,0 +1,46 @@
+// ==============================================
+// NSBACI Example 05: Concurrency Basics
+// ==============================================
+// Demonstrates: cobegin/coend, basic parallel execution
+
+// Simple concurrent execution
+cout << "=== Basic Parallel Execution ===" << endl;
+cout << "Starting concurrent blocks..." << endl;
+
+cobegin
+{
+    // Thread 1
+    cout << "Thread 1: Starting" << endl;
+    int i = 0;
+    while (i < 3) {
+        cout << "Thread 1: Count " << i << endl;
+        i++;
+    }
+    cout << "Thread 1: Done" << endl;
+}
+{
+    // Thread 2
+    cout << "Thread 2: Starting" << endl;
+    int j = 0;
+    while (j < 3) {
+        cout << "Thread 2: Count " << j << endl;
+        j++;
+    }
+    cout << "Thread 2: Done" << endl;
+}
+{
+    // Thread 3
+    cout << "Thread 3: Starting" << endl;
+    int k = 0;
+    while (k < 3) {
+        cout << "Thread 3: Count " << k << endl;
+        k++;
+    }
+    cout << "Thread 3: Done" << endl;
+}
+coend
+
+cout << endl << "All threads completed!" << endl;
+cout << "Notice: Output order may vary due to non-deterministic scheduling" << endl;
+
+return;

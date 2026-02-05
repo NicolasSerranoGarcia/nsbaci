@@ -1,0 +1,63 @@
+// ==============================================
+// NSBACI Example 06: Semaphores
+// ==============================================
+// Demonstrates: semaphore declaration, p() and v() operations, mutual exclusion
+
+// Shared variable (will be protected by semaphore)
+int counter = 0;
+
+// Binary semaphore for mutual exclusion (mutex)
+semaphore mutex = 1;
+
+cout << "=== Semaphore Example: Protected Counter ===" << endl;
+cout << "Initial counter value: " << counter << endl;
+cout << "Running 3 concurrent threads, each incrementing counter 5 times..." << endl;
+cout << endl;
+
+cobegin
+{
+    // Thread 1: Increment counter 5 times with protection
+    int i = 0;
+    while (i < 5) {
+        p(mutex);           // Acquire lock (P operation / wait)
+        int temp = counter;
+        temp = temp + 1;
+        counter = temp;
+        cout << "Thread 1: counter = " << counter << endl;
+        v(mutex);           // Release lock (V operation / signal)
+        i++;
+    }
+}
+{
+    // Thread 2: Increment counter 5 times with protection
+    int i = 0;
+    while (i < 5) {
+        p(mutex);
+        int temp = counter;
+        temp = temp + 1;
+        counter = temp;
+        cout << "Thread 2: counter = " << counter << endl;
+        v(mutex);
+        i++;
+    }
+}
+{
+    // Thread 3: Increment counter 5 times with protection
+    int i = 0;
+    while (i < 5) {
+        p(mutex);
+        int temp = counter;
+        temp = temp + 1;
+        counter = temp;
+        cout << "Thread 3: counter = " << counter << endl;
+        v(mutex);
+        i++;
+    }
+}
+coend
+
+cout << endl;
+cout << "Final counter value: " << counter << endl;
+cout << "(Should be 15 because semaphore prevents race conditions)" << endl;
+
+return;
