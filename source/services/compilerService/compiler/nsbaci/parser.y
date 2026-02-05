@@ -72,8 +72,14 @@
 
       void enterScope() { currentScope++; }
       void exitScope() {
-        // Keep all symbols for runtime display - just decrement scope level
-        // Note: This means scoped variables remain visible in debugger
+        // Remove symbols declared in this scope to allow shadowing in sibling scopes
+        for (auto it = symbols.begin(); it != symbols.end(); ) {
+          if (it->second.scopeLevel == currentScope) {
+            it = symbols.erase(it);
+          } else {
+            ++it;
+          }
+        }
         currentScope--;
       }
     };
@@ -107,6 +113,16 @@
     inline void patchJump(InstructionStream& is, size_t addr, size_t target) {
       is[addr].operand1 = int32_t(target);
     }
+
+    // Helper to create compilation errors with proper payload
+    inline void emitError(std::vector<nsbaci::Error>& errors, const std::string& msg, int line, int column) {
+      nsbaci::Error err;
+      err.basic.severity = nsbaci::types::ErrSeverity::Error;
+      err.basic.message = msg;
+      err.basic.type = nsbaci::types::ErrType::compilationError;
+      err.payload = nsbaci::types::CompileError{line, column};
+      errors.push_back(std::move(err));
+    }
   }
 }
 
@@ -138,6 +154,10 @@
   // For frame-based local variable management
   static uint32_t currentFunctionFrameStart;
   static int32_t currentFunctionFrameSize;
+  
+  // Cobegin/coend: track block start addresses and jump-over addresses
+  static std::vector<size_t> cobeginBlockStarts;  // Start address of each block
+  static size_t cobeginJumpOverAddr;              // Address of jump that skips all blocks
 }
 
 %parse-param { nsbaci::compiler::Lexer& lexer }
@@ -237,11 +257,7 @@ declaration:
     type_spec IDENT ';'
     {
       if (!symtab.declare($2, $1)) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Variable '" + $2 + "' already declared";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Variable '" + $2 + "' already declared", @2.begin.line, @2.begin.column);
       }
       // Initialize to 0
       emit(instructions, Opcode::PushLiteral, int32_t(0));
@@ -250,11 +266,7 @@ declaration:
   | type_spec IDENT '=' expr ';'
     {
       if (!symtab.declare($2, $1)) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Variable '" + $2 + "' already declared";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Variable '" + $2 + "' already declared", @2.begin.line, @2.begin.column);
       }
       // expr already on stack, store it
       emit(instructions, Opcode::Store, symtab.lookup($2)->address);
@@ -263,11 +275,7 @@ declaration:
     {
       // Semaphore declaration with initial value
       if (!symtab.declare($2, VarType::Int)) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Semaphore '" + $2 + "' already declared";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Semaphore '" + $2 + "' already declared", @2.begin.line, @2.begin.column);
       }
       // Initialize semaphore with value from expr (already on stack)
       emit(instructions, Opcode::StoreSemaphore, symtab.lookup($2)->address);
@@ -276,11 +284,7 @@ declaration:
     {
       // Semaphore declaration with default value 0
       if (!symtab.declare($2, VarType::Int)) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Semaphore '" + $2 + "' already declared";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Semaphore '" + $2 + "' already declared", @2.begin.line, @2.begin.column);
       }
       emit(instructions, Opcode::PushLiteral, int32_t(0));
       emit(instructions, Opcode::StoreSemaphore, symtab.lookup($2)->address);
@@ -288,11 +292,7 @@ declaration:
   | CONST type_spec IDENT '=' expr ';'
     {
       if (!symtab.declare($3, $2, true)) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Constant '" + $3 + "' already declared";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Constant '" + $3 + "' already declared", @3.begin.line, @3.begin.column);
       }
       emit(instructions, Opcode::Store, symtab.lookup($3)->address);
     }
@@ -326,17 +326,9 @@ assignment_stmt:
     {
       Symbol* sym = symtab.lookup($1);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared variable '" + $1 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared variable '" + $1 + "'", @1.begin.line, @1.begin.column);
       } else if (sym->isConst) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Cannot assign to constant '" + $1 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Cannot assign to constant '" + $1 + "'", @1.begin.line, @1.begin.column);
       } else {
         emit(instructions, Opcode::Store, sym->address);
       }
@@ -347,11 +339,7 @@ assignment_stmt:
       // Stack after parsing: [index, value]
       Symbol* sym = symtab.lookup($1);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared array '" + $1 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared array '" + $1 + "'", @1.begin.line, @1.begin.column);
       } else {
         // Stack: [index, value]
         // Swap to get: [value, index]
@@ -376,11 +364,7 @@ assignment_stmt:
     {
       Symbol* sym = symtab.lookup($1);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared variable '" + $1 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared variable '" + $1 + "'", @1.begin.line, @1.begin.column);
       } else {
         // Stack: [var, expr] -> var + expr
         emit(instructions, Opcode::Add);
@@ -637,11 +621,7 @@ break_stmt:
     BREAK ';'
     {
       if (breakStack.empty()) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "'break' outside of loop";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "'break' outside of loop", @1.begin.line, @1.begin.column);
       } else {
         breakStack.top().push_back(emitJump(instructions, Opcode::Jump));
       }
@@ -652,11 +632,7 @@ continue_stmt:
     CONTINUE ';'
     {
       if (continueStack.empty()) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "'continue' outside of loop";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "'continue' outside of loop", @1.begin.line, @1.begin.column);
       } else if (!isForLoopStack.empty() && isForLoopStack.top()) {
         // In a for-loop: emit forward jump, patch later to update section
         forContinueStack.top().push_back(emitJump(instructions, Opcode::Jump));
@@ -734,17 +710,9 @@ cin_chain:
     {
       Symbol* sym = symtab.lookup($2);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared variable '" + $2 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared variable '" + $2 + "'", @2.begin.line, @2.begin.column);
       } else if (sym->isConst) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Cannot read into constant '" + $2 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Cannot read into constant '" + $2 + "'", @2.begin.line, @2.begin.column);
       } else {
         // Read value and store
         emit(instructions, Opcode::Read);
@@ -755,17 +723,9 @@ cin_chain:
     {
       Symbol* sym = symtab.lookup($3);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared variable '" + $3 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared variable '" + $3 + "'", @3.begin.line, @3.begin.column);
       } else if (sym->isConst) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Cannot read into constant '" + $3 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Cannot read into constant '" + $3 + "'", @3.begin.line, @3.begin.column);
       } else {
         emit(instructions, Opcode::Read);
         emit(instructions, Opcode::Store, sym->address);
@@ -784,13 +744,26 @@ expr_stmt:
 cobegin_stmt:
     COBEGIN
     {
-      // Emit Cobegin - marks start of concurrent block
-      emit(instructions, Opcode::Cobegin);
+      // Clear block tracking and emit jump to skip over all blocks
+      cobeginBlockStarts.clear();
+      cobeginJumpOverAddr = instructions.size();
+      emit(instructions, Opcode::Jump, 0);  // Will be patched to jump after all blocks
     }
     cobegin_body COEND
     {
+      // Patch the initial jump to skip all blocks - now points here
+      size_t afterBlocks = instructions.size();
+      instructions[cobeginJumpOverAddr].operand1 = static_cast<int32_t>(afterBlocks);
+      
+      // Emit Create instructions for each block
+      for (size_t blockStart : cobeginBlockStarts) {
+        emit(instructions, Opcode::Create, static_cast<int32_t>(blockStart));
+      }
+      
       // Emit Coend - waits for all spawned threads to finish
-      emit(instructions, Opcode::Coend);
+      emit(instructions, Opcode::Coend, static_cast<int32_t>(cobeginBlockStarts.size()));
+      
+      cobeginBlockStarts.clear();
     }
   ;
 
@@ -800,11 +773,14 @@ cobegin_body:
   ;
 
 cobegin_block:
+    {
+      // Record start address of this block
+      cobeginBlockStarts.push_back(instructions.size());
+    }
     block
     {
-      // Each block in cobegin represents a concurrent process
-      // The Create opcode spawns a new thread for the block
-      emit(instructions, Opcode::Create);
+      // Each block ends with ThreadEnd to terminate the spawned thread
+      emit(instructions, Opcode::ThreadEnd);
     }
   ;
 
@@ -813,11 +789,7 @@ p_stmt:
     {
       Symbol* sym = symtab.lookup($3);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared semaphore '" + $3 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared semaphore '" + $3 + "'", @3.begin.line, @3.begin.column);
       } else {
         // P operation (wait): push semaphore address and execute Wait
         emit(instructions, Opcode::LoadAddress, sym->address);
@@ -831,11 +803,7 @@ v_stmt:
     {
       Symbol* sym = symtab.lookup($3);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared semaphore '" + $3 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared semaphore '" + $3 + "'", @3.begin.line, @3.begin.column);
       } else {
         // V operation (signal): push semaphore address and execute Signal
         emit(instructions, Opcode::LoadAddress, sym->address);
@@ -954,11 +922,7 @@ expr:
     {
       Symbol* sym = symtab.lookup($1);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared variable '" + $1 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared variable '" + $1 + "'", @1.begin.line, @1.begin.column);
         emit(instructions, Opcode::PushLiteral, int32_t(0)); // Push dummy
       } else {
         emit(instructions, Opcode::LoadValue, sym->address);
@@ -969,11 +933,7 @@ expr:
       // Array access: compute base + index, load indirect
       Symbol* sym = symtab.lookup($1);
       if (!sym) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared array '" + $1 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared array '" + $1 + "'", @1.begin.line, @1.begin.column);
       } else {
         emit(instructions, Opcode::PushLiteral, int32_t(sym->address));
         emit(instructions, Opcode::Add);
@@ -991,21 +951,13 @@ expr:
       argCountStack.pop();
       FunctionInfo* func = symtab.lookupFunction($1);
       if (!func) {
-        nsbaci::Error err;
-        err.basic.severity = nsbaci::types::ErrSeverity::Error;
-        err.basic.message = "Undeclared function '" + $1 + "'";
-        err.basic.type = nsbaci::types::ErrType::compilationError;
-        errors.push_back(std::move(err));
+        emitError(errors, "Undeclared function '" + $1 + "'", @1.begin.line, @1.begin.column);
         emit(instructions, Opcode::PushLiteral, int32_t(0)); // Push dummy return value
       } else {
         if (argCount != static_cast<int>(func->params.size())) {
-          nsbaci::Error err;
-          err.basic.severity = nsbaci::types::ErrSeverity::Error;
-          err.basic.message = "Function '" + $1 + "' expects " + 
+          emitError(errors, "Function '" + $1 + "' expects " + 
                               std::to_string(func->params.size()) + " arguments, got " + 
-                              std::to_string(argCount);
-          err.basic.type = nsbaci::types::ErrType::compilationError;
-          errors.push_back(std::move(err));
+                              std::to_string(argCount), @1.begin.line, @1.begin.column);
         }
         // Call the function
         emit(instructions, Opcode::Call, int32_t(func->address));

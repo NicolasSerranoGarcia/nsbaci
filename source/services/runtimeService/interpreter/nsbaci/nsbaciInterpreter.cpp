@@ -410,25 +410,30 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
 
     // ============== Concurrency - Process ==============
     case Opcode::Cobegin: {
-      // Mark start of concurrent block
-      // The cobegin instruction itself just marks the beginning
-      // Actual thread creation happens with Create instructions
-      result.cobeginStart = true;
+      // No longer used - cobegin is now just a marker that gets optimized out
+      // The new code generation uses Jump + Create instructions
       break;
     }
 
     case Opcode::Coend: {
       // Wait for all concurrent threads to finish
+      // operand1 contains the expected number of threads to wait for
       // Runtime service handles the synchronization
       result.coendWait = true;
+      result.expectedThreadCount = std::get<int32_t>(instr.operand1);
       break;
     }
 
     case Opcode::Create: {
-      // Create a new thread starting at the next instruction
-      // The new thread will execute the block following Create
+      // Create a new thread starting at the address in operand1
       result.createThread = true;
-      result.newThreadPC = t.getPC() + 1;
+      result.newThreadPC = static_cast<uint32_t>(std::get<int32_t>(instr.operand1));
+      break;
+    }
+
+    case Opcode::ThreadEnd: {
+      // Terminate the current thread
+      t.setState(nsbaci::types::ThreadState::Terminated);
       break;
     }
 
@@ -514,6 +519,12 @@ bool NsbaciInterpreter::isWaitingForInput() const { return waitingForInput; }
 
 void NsbaciInterpreter::setOutputCallback(OutputCallback callback) {
   outputCallback = std::move(callback);
+}
+
+void NsbaciInterpreter::reset() {
+  waitingForInput = false;
+  pendingInput.clear();
+  hasInput = false;
 }
 
 }  // namespace nsbaci::services::runtime

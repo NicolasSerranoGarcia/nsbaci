@@ -48,6 +48,8 @@ class NsbaciScheduler final : public Scheduler {
   void clear() override;
   void unblockIO() override;
   const std::vector<Thread>& getThreads() const override;
+  void blockOnCoend(int32_t expectedThreads) override;
+  void checkCoendUnblock() override;
 
  private:
   /**

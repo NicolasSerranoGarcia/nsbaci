@@ -32,6 +32,10 @@ void RuntimeService::reset() {
     mainThread.setPC(0);  // Start at instruction 0
     scheduler->addThread(std::move(mainThread));
   }
+  if (interpreter) {
+    // Clear any pending input state
+    interpreter->reset();
+  }
   state = RuntimeState::Paused;
 }
 
@@ -90,6 +94,11 @@ RuntimeResult RuntimeService::step() {
     scheduler->addThread(std::move(newThread));
   }
 
+  if (interpResult.coendWait) {
+    // Block thread at coend until spawned threads finish
+    scheduler->blockOnCoend(interpResult.expectedThreadCount);
+  }
+
   // Propagate I/O info
   result.needsInput = interpResult.needsInput;
   result.inputPrompt = std::move(interpResult.inputPrompt);
@@ -97,7 +106,8 @@ RuntimeResult RuntimeService::step() {
 
   // Check if thread terminated
   if (thread->getState() == nsbaci::types::ThreadState::Terminated) {
-    // Thread finished execution
+    // Thread finished execution - check if coend-blocked threads should wake
+    scheduler->checkCoendUnblock();
     if (!scheduler->hasThreads()) {
       state = RuntimeState::Halted;
       result.halted = true;

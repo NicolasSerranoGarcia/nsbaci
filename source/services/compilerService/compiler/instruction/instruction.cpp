@@ -118,6 +118,8 @@ const char* opcodeName(Opcode op) {
       return "Coend";
     case Opcode::Create:
       return "Create";
+    case Opcode::ThreadEnd:
+      return "ThreadEnd";
     case Opcode::Suspend:
       return "Suspend";
     case Opcode::Revive:

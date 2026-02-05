@@ -113,6 +113,18 @@ class Scheduler {
    */
   virtual const std::vector<Thread>& getThreads() const = 0;
 
+  /**
+   * @brief Block current thread on coend (waiting for spawned threads).
+   * @param expectedThreads Number of threads that should terminate.
+   */
+  virtual void blockOnCoend(int32_t expectedThreads) = 0;
+
+  /**
+   * @brief Check if coend-blocked threads should be unblocked.
+   * Called after a thread terminates.
+   */
+  virtual void checkCoendUnblock() = 0;
+
  protected:
   std::vector<Thread> threads;         ///< All threads owned by scheduler
   std::vector<size_t> readyQueue;      ///< Indices of ready threads
@@ -122,6 +134,9 @@ class Scheduler {
 
   /// @brief Map from semaphore address to list of waiting thread indices
   std::unordered_map<uint32_t, std::vector<size_t>> semaphoreQueues;
+
+  /// @brief Threads waiting at coend, with their expected thread counts
+  std::vector<std::pair<size_t, int32_t>> coendQueue;
 };
 
 }  // namespace nsbaci::services::runtime

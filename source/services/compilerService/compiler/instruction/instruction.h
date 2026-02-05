@@ -86,8 +86,9 @@ enum class Opcode : uint8_t {
 
   // ============== Concurrency - Process ==============
   Cobegin,    // Begin concurrent block
-  Coend,      // End concurrent block
-  Create,     // Create new process
+  Coend,      // End concurrent block (operand1 = expected thread count)
+  Create,     // Create new process (operand1 = start PC)
+  ThreadEnd,  // Terminate current thread
   Suspend,    // Suspend current process
   Revive,     // Revive suspended process
   WhichProc,  // Get current process ID

@@ -45,6 +45,7 @@ class NsbaciInterpreter final : public Interpreter {
   void provideInput(const std::string& input) override;
   bool isWaitingForInput() const override;
   void setOutputCallback(OutputCallback callback) override;
+  void reset() override;
 
  private:
   OutputCallback outputCallback;

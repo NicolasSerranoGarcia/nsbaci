@@ -136,10 +136,14 @@ void NsbaciScheduler::terminateCurrent() {
   threads[runningIndex.value()].setState(
       nsbaci::types::ThreadState::Terminated);
   runningIndex = std::nullopt;
+
+  // Check if any coend-blocked threads should be unblocked
+  checkCoendUnblock();
 }
 
 bool NsbaciScheduler::hasThreads() const {
-  return runningIndex.has_value() || !readyQueue.empty();
+  return runningIndex.has_value() || !readyQueue.empty() || 
+         !blockedQueue.empty() || !ioQueue.empty() || !coendQueue.empty();
 }
 
 Thread* NsbaciScheduler::current() {
@@ -155,6 +159,7 @@ void NsbaciScheduler::clear() {
   blockedQueue.clear();
   ioQueue.clear();
   semaphoreQueues.clear();
+  coendQueue.clear();
   runningIndex = std::nullopt;
 }
 
@@ -179,6 +184,51 @@ std::optional<size_t> NsbaciScheduler::findThreadIndex(
     }
   }
   return std::nullopt;
+}
+
+void NsbaciScheduler::blockOnCoend(int32_t expectedThreads) {
+  if (!runningIndex.has_value()) {
+    return;
+  }
+
+  Thread& current = threads[runningIndex.value()];
+  current.setState(nsbaci::types::ThreadState::Blocked);
+  coendQueue.push_back({runningIndex.value(), expectedThreads});
+  runningIndex = std::nullopt;
+}
+
+void NsbaciScheduler::checkCoendUnblock() {
+  if (coendQueue.empty()) {
+    return;
+  }
+
+  // Count non-terminated threads (excluding coend-blocked threads)
+  size_t activeThreads = 0;
+  for (size_t i = 0; i < threads.size(); ++i) {
+    auto state = threads[i].getState();
+    if (state != nsbaci::types::ThreadState::Terminated) {
+      // Check if this thread is coend-blocked
+      bool isCoendBlocked = false;
+      for (const auto& [idx, _] : coendQueue) {
+        if (idx == i) {
+          isCoendBlocked = true;
+          break;
+        }
+      }
+      if (!isCoendBlocked) {
+        activeThreads++;
+      }
+    }
+  }
+
+  // If no active threads (other than coend-blocked), unblock all coend threads
+  if (activeThreads == 0) {
+    for (const auto& [idx, _] : coendQueue) {
+      threads[idx].setState(nsbaci::types::ThreadState::Ready);
+      readyQueue.push_back(idx);
+    }
+    coendQueue.clear();
+  }
 }
 
 }  // namespace nsbaci::services::runtime

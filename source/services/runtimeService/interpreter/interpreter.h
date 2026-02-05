@@ -44,6 +44,7 @@ struct InterpreterResult : nsbaci::BaseResult {
   bool shouldYield = false;           ///< Thread should yield after instruction
   bool cobeginStart = false;          ///< Starting a cobegin block
   bool coendWait = false;             ///< Waiting for cobegin threads to finish
+  int32_t expectedThreadCount = 0;    ///< Number of threads to wait for at coend
   bool createThread = false;          ///< Should create a new thread
   uint32_t newThreadPC = 0;           ///< PC for new thread (if createThread is true)
   bool signalSemaphore = false;       ///< Signal was called on a semaphore
@@ -99,6 +100,12 @@ class Interpreter {
    * @param callback Function to call when output is produced.
    */
   virtual void setOutputCallback(OutputCallback callback) = 0;
+
+  /**
+   * @brief Reset interpreter state for a new run.
+   * Clears any pending input and waiting state.
+   */
+  virtual void reset() = 0;
 };
 
 }  // namespace nsbaci::services::runtime
