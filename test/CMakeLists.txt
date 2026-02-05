@@ -28,6 +28,8 @@ target_link_libraries(nsbaci_runtime_tests PRIVATE
     google_test_library
     nsbaci_nsbaciCompiler_library
     nsbaci_nsbaciInterpreter_library
+    nsbaci_nsbaciScheduler_library
+    nsbaci_scheduler_library
     nsbaci_thread_library
     nsbaci_program_library
     nsbaci_compilerInstruction_library
@@ -37,6 +39,8 @@ target_include_directories(nsbaci_runtime_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/source/services/compilerService/compiler/nsbaci
     ${CMAKE_SOURCE_DIR}/source/services/compilerService/compiler/instruction
     ${CMAKE_SOURCE_DIR}/source/services/runtimeService/interpreter/nsbaci
+    ${CMAKE_SOURCE_DIR}/source/services/runtimeService/scheduler/nsbaci
+    ${CMAKE_SOURCE_DIR}/source/services/runtimeService/scheduler
     ${CMAKE_SOURCE_DIR}/source/services/runtimeService/thread
     ${CMAKE_SOURCE_DIR}/source/services/runtimeService/program
     ${CMAKE_SOURCE_DIR}/source/errors/error

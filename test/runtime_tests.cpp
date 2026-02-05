@@ -507,6 +507,105 @@ TEST_F(RuntimeTest, MinInt32) {
     EXPECT_EQ(getMemoryAt(result, 0), -2147483647 - 1);
 }
 
+// ============== Scheduler Coend Blocking Tests ==============
+
+#include "nsbaciScheduler.h"
+
+class SchedulerTest : public ::testing::Test {
+protected:
+    NsbaciScheduler scheduler;
+    
+    void SetUp() override {
+        scheduler.clear();
+    }
+};
+
+TEST_F(SchedulerTest, BlockOnCoend_BlocksCurrentThread) {
+    Thread t1;
+    scheduler.addThread(std::move(t1));
+    
+    // Pick and run the thread
+    Thread* current = scheduler.pickNext();
+    ASSERT_NE(current, nullptr);
+    
+    // Block on coend
+    scheduler.blockOnCoend(2);
+    
+    // Thread should no longer be running
+    EXPECT_EQ(scheduler.current(), nullptr);
+    
+    // Thread should be blocked
+    EXPECT_EQ(current->getState(), nsbaci::types::ThreadState::Blocked);
+}
+
+TEST_F(SchedulerTest, CheckCoendUnblock_UnblocksWhenNoActiveThreads) {
+    Thread t1, t2, t3;
+    scheduler.addThread(std::move(t1));
+    scheduler.addThread(std::move(t2));
+    scheduler.addThread(std::move(t3));
+    
+    // First thread blocks on coend
+    Thread* main = scheduler.pickNext();
+    ASSERT_NE(main, nullptr);
+    scheduler.blockOnCoend(2);
+    
+    // Second thread runs and terminates
+    Thread* spawned1 = scheduler.pickNext();
+    ASSERT_NE(spawned1, nullptr);
+    spawned1->setState(nsbaci::types::ThreadState::Terminated);
+    scheduler.checkCoendUnblock();
+    
+    // Main should still be blocked (one thread still active)
+    EXPECT_EQ(main->getState(), nsbaci::types::ThreadState::Blocked);
+    
+    // Third thread runs and terminates
+    Thread* spawned2 = scheduler.pickNext();
+    ASSERT_NE(spawned2, nullptr);
+    spawned2->setState(nsbaci::types::ThreadState::Terminated);
+    scheduler.checkCoendUnblock();
+    
+    // Now main should be unblocked
+    EXPECT_EQ(main->getState(), nsbaci::types::ThreadState::Ready);
+}
+
+TEST_F(SchedulerTest, CheckCoendUnblock_NoEffectWithoutCoendBlocked) {
+    Thread t1;
+    scheduler.addThread(std::move(t1));
+    
+    Thread* current = scheduler.pickNext();
+    ASSERT_NE(current, nullptr);
+    
+    // Terminate without coend
+    current->setState(nsbaci::types::ThreadState::Terminated);
+    
+    // Should not crash or have side effects
+    scheduler.checkCoendUnblock();
+    
+    EXPECT_EQ(current->getState(), nsbaci::types::ThreadState::Terminated);
+}
+
+TEST_F(SchedulerTest, HasThreads_CorrectAfterCoendBlock) {
+    Thread t1, t2;
+    scheduler.addThread(std::move(t1));
+    scheduler.addThread(std::move(t2));
+    
+    // Block first thread on coend
+    Thread* main = scheduler.pickNext();
+    scheduler.blockOnCoend(1);
+    
+    // Should still have threads (one in ready queue)
+    EXPECT_TRUE(scheduler.hasThreads());
+    
+    // Run and terminate second thread
+    Thread* spawned = scheduler.pickNext();
+    ASSERT_NE(spawned, nullptr);
+    spawned->setState(nsbaci::types::ThreadState::Terminated);
+    scheduler.checkCoendUnblock();
+    
+    // Main unblocked, should have threads
+    EXPECT_TRUE(scheduler.hasThreads());
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

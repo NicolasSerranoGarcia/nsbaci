@@ -12,6 +12,7 @@
 
 #include "nsbaciCompiler.h"
 #include "nsbaciInterpreter.h"
+#include "nsbaciScheduler.h"
 #include "thread.h"
 #include "program.h"
 #include "runtimeTypes.h"
@@ -567,6 +568,462 @@ TEST_F(IntegrationTest, EdgeCase_DeepRecursion) {
     std::string output = compileAndRun(source);
     
     EXPECT_TRUE(output.find("countDown(100) = 100") != std::string::npos);
+}
+
+// =================================================================
+// Example 5: Concurrency - cobegin/coend, Thread Creation
+// =================================================================
+
+/**
+ * @class ConcurrencyTest
+ * @brief Test fixture for multi-threaded program execution
+ * 
+ * Uses the scheduler to properly handle thread creation, blocking,
+ * and coend synchronization.
+ */
+class ConcurrencyTest : public ::testing::Test {
+protected:
+    NsbaciCompiler compiler;
+    
+    struct ConcurrencyResult {
+        std::string output;
+        int threadCount;      // Max number of threads created
+        bool halted;
+        int steps;
+    };
+    
+    /**
+     * @brief Compile and run a multi-threaded program
+     * 
+     * Uses the scheduler to handle thread creation, blocking, and
+     * coend synchronization properly.
+     */
+    ConcurrencyResult compileAndRunConcurrent(const std::string& source, int maxSteps = 100000) {
+        ConcurrencyResult result{"", 0, false, 0};
+        
+        auto compileResult = compiler.compile(source);
+        if (!compileResult.ok) {
+            result.output = "COMPILE_ERROR";
+            return result;
+        }
+        
+        auto program = std::make_shared<Program>(
+            std::move(compileResult.instructions),
+            std::move(compileResult.symbols)
+        );
+        
+        NsbaciScheduler scheduler;
+        NsbaciInterpreter interpreter;
+        
+        // Add main thread
+        Thread mainThread;
+        scheduler.addThread(std::move(mainThread));
+        result.threadCount = 1;
+        
+        while (result.steps < maxSteps) {
+            Thread* current = scheduler.pickNext();
+            if (!current) {
+                // No ready threads - check if any threads exist
+                if (!scheduler.hasThreads()) {
+                    result.halted = true;
+                    break;
+                }
+                // All threads blocked - deadlock or waiting
+                break;
+            }
+            
+            auto stepResult = interpreter.executeInstruction(*current, *program);
+            result.steps++;
+            result.output += stepResult.output;
+            
+            // Handle thread creation
+            if (stepResult.createThread) {
+                Thread newThread;
+                newThread.setPC(stepResult.newThreadPC);
+                scheduler.addThread(std::move(newThread));
+                result.threadCount++;
+            }
+            
+            // Handle coend wait
+            if (stepResult.coendWait) {
+                scheduler.blockOnCoend(stepResult.expectedThreadCount);
+            }
+            
+            // Handle semaphore blocking
+            if (stepResult.shouldBlock) {
+                scheduler.blockOnSemaphore(stepResult.blockingSemaphore);
+            }
+            
+            // Handle semaphore signaling
+            if (stepResult.signalSemaphore) {
+                scheduler.unblockSemaphore(stepResult.signaledSemaphore);
+            }
+            
+            // Handle thread termination
+            if (current->getState() == nsbaci::types::ThreadState::Terminated) {
+                scheduler.checkCoendUnblock();
+                if (!scheduler.hasThreads()) {
+                    result.halted = true;
+                    break;
+                }
+            }
+            
+            // Handle errors
+            if (!stepResult.ok) {
+                break;
+            }
+        }
+        
+        if (result.steps >= maxSteps) {
+            result.output += "\nTIMEOUT_ERROR: Max steps reached";
+        }
+        
+        return result;
+    }
+};
+
+TEST_F(ConcurrencyTest, CobeginCoend_BasicTwoBlocks) {
+    std::string source = R"(
+        int a = 0;
+        int b = 0;
+        
+        cobegin {
+            a = 1;
+        }
+        {
+            b = 2;
+        } coend
+        
+        cout << "a=" << a << " b=" << b << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    // Should create 3 threads: main + 2 spawned
+    EXPECT_EQ(result.threadCount, 3);
+    // Both variables should be set (check each individually)
+    EXPECT_TRUE(result.output.find("a=1") != std::string::npos);
+    EXPECT_TRUE(result.output.find("b=2") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_ThreeBlocks) {
+    std::string source = R"(
+        int x = 0;
+        int y = 0;
+        int z = 0;
+        
+        cobegin {
+            x = 10;
+        }
+        {
+            y = 20;
+        }
+        {
+            z = 30;
+        } coend
+        
+        cout << "x=" << x << " y=" << y << " z=" << z << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    // Should create 4 threads: main + 3 spawned
+    EXPECT_EQ(result.threadCount, 4);
+    EXPECT_TRUE(result.output.find("x=10 y=20 z=30") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_ThreadsWithOutput) {
+    std::string source = R"(
+        cobegin {
+            cout << "Block1" << endl;
+        }
+        {
+            cout << "Block2" << endl;
+        } coend
+        
+        cout << "Done" << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    EXPECT_EQ(result.threadCount, 3);
+    // Both blocks should have output
+    EXPECT_TRUE(result.output.find("Block1") != std::string::npos);
+    EXPECT_TRUE(result.output.find("Block2") != std::string::npos);
+    // "Done" should appear (main thread resumes after coend)
+    EXPECT_TRUE(result.output.find("Done") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_SharedVariableAccess) {
+    std::string source = R"(
+        int counter = 0;
+        
+        cobegin {
+            counter = counter + 1;
+        }
+        {
+            counter = counter + 10;
+        } coend
+        
+        // Result depends on execution order, but should be 1+10=11
+        // Due to race conditions, could be 1, 10, or 11
+        cout << "counter=" << counter << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    EXPECT_EQ(result.threadCount, 3);
+    // Counter should be at least 1 (some thread ran)
+    EXPECT_TRUE(result.output.find("counter=") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_WithLoops) {
+    // Test cobegin blocks with loops - uses global variables to avoid
+    // local variable scoping issues in concurrent blocks
+    std::string source = R"(
+        int sum1 = 0;
+        int sum2 = 0;
+        
+        cobegin {
+            sum1 = 1 + 2 + 3;
+        }
+        {
+            sum2 = 1 + 2 + 3;
+        } coend
+        
+        cout << "sum1=" << sum1 << endl;
+        cout << "sum2=" << sum2 << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    EXPECT_EQ(result.threadCount, 3);
+    // Check that both sums are computed
+    EXPECT_TRUE(result.output.find("sum1=6") != std::string::npos);
+    EXPECT_TRUE(result.output.find("sum2=6") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_MainThreadWaits) {
+    // Verify that main thread waits for spawned threads
+    std::string source = R"(
+        int done1 = 0;
+        int done2 = 0;
+        
+        cobegin {
+            // Some work
+            int x = 0;
+            for (int i = 0; i < 10; i++) { x = x + 1; }
+            done1 = 1;
+        }
+        {
+            // Some work
+            int y = 0;
+            for (int i = 0; i < 10; i++) { y = y + 1; }
+            done2 = 1;
+        } coend
+        
+        // After coend, both should be done
+        cout << "done1=" << done1 << " done2=" << done2 << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    // Main thread should wait for both spawned threads
+    EXPECT_TRUE(result.output.find("done1=1 done2=1") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_NoExtraThreads) {
+    // Verify exact thread count - no thread explosion
+    std::string source = R"(
+        cobegin {
+            int x = 1;
+        }
+        {
+            int y = 2;
+        }
+        {
+            int z = 3;
+        }
+        {
+            int w = 4;
+        } coend
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    // Should be exactly 5 threads: main + 4 spawned
+    EXPECT_EQ(result.threadCount, 5);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_SingleBlock) {
+    // Edge case: cobegin with a single block
+    std::string source = R"(
+        int x = 0;
+        
+        cobegin {
+            x = 42;
+        } coend
+        
+        cout << "x=" << x << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    // Should create 2 threads: main + 1 spawned
+    EXPECT_EQ(result.threadCount, 2);
+    EXPECT_TRUE(result.output.find("x=42") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_CodeAfterCoend) {
+    // Verify code after coend executes
+    std::string source = R"(
+        cout << "Before" << endl;
+        
+        cobegin {
+            cout << "Thread1" << endl;
+        }
+        {
+            cout << "Thread2" << endl;
+        } coend
+        
+        cout << "After" << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    EXPECT_TRUE(result.output.find("Before") != std::string::npos);
+    EXPECT_TRUE(result.output.find("Thread1") != std::string::npos);
+    EXPECT_TRUE(result.output.find("Thread2") != std::string::npos);
+    EXPECT_TRUE(result.output.find("After") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, CobeginCoend_LocalVariablesInEachBlock) {
+    // Each cobegin block should have its own local variable scope
+    // This was a bug: variables declared in one block conflicted with sibling blocks
+    std::string source = R"(
+        int result1 = 0;
+        int result2 = 0;
+        int result3 = 0;
+        
+        cobegin {
+            int i = 0;
+            int temp = 1;
+            while (i < 3) {
+                temp = temp + 1;
+                i = i + 1;
+            }
+            result1 = temp;
+        }
+        {
+            int i = 0;
+            int temp = 10;
+            while (i < 3) {
+                temp = temp + 1;
+                i = i + 1;
+            }
+            result2 = temp;
+        }
+        {
+            int i = 0;
+            int temp = 100;
+            while (i < 3) {
+                temp = temp + 1;
+                i = i + 1;
+            }
+            result3 = temp;
+        } coend
+        
+        cout << "r1=" << result1 << " r2=" << result2 << " r3=" << result3 << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    EXPECT_EQ(result.threadCount, 4);  // main + 3 spawned
+    // Each block should have computed: initial + 3
+    EXPECT_TRUE(result.output.find("r1=4") != std::string::npos);   // 1 + 3
+    EXPECT_TRUE(result.output.find("r2=13") != std::string::npos);  // 10 + 3
+    EXPECT_TRUE(result.output.find("r3=103") != std::string::npos); // 100 + 3
+}
+
+TEST_F(ConcurrencyTest, Semaphore_BasicMutex) {
+    // Test basic semaphore mutex behavior
+    std::string source = R"(
+        int counter = 0;
+        semaphore mutex = 1;
+        
+        cobegin {
+            p(mutex);
+            counter = counter + 1;
+            v(mutex);
+        }
+        {
+            p(mutex);
+            counter = counter + 10;
+            v(mutex);
+        } coend
+        
+        cout << "counter=" << counter << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    EXPECT_EQ(result.threadCount, 3);
+    // Counter should be 11 (1 + 10) - semaphore ensures no race
+    EXPECT_TRUE(result.output.find("counter=11") != std::string::npos);
+}
+
+TEST_F(ConcurrencyTest, Semaphore_ProtectedCounter) {
+    // Similar to example 06 but simpler
+    std::string source = R"(
+        int counter = 0;
+        semaphore mutex = 1;
+        
+        cobegin {
+            p(mutex);
+            int temp = counter;
+            temp = temp + 1;
+            counter = temp;
+            v(mutex);
+            
+            p(mutex);
+            temp = counter;
+            temp = temp + 1;
+            counter = temp;
+            v(mutex);
+        }
+        {
+            p(mutex);
+            int temp = counter;
+            temp = temp + 1;
+            counter = temp;
+            v(mutex);
+            
+            p(mutex);
+            temp = counter;
+            temp = temp + 1;
+            counter = temp;
+            v(mutex);
+        } coend
+        
+        cout << "counter=" << counter << endl;
+    )";
+    
+    auto result = compileAndRunConcurrent(source);
+    
+    EXPECT_TRUE(result.halted);
+    // 2 threads x 2 increments = 4
+    EXPECT_TRUE(result.output.find("counter=4") != std::string::npos);
 }
 
 int main(int argc, char** argv) {

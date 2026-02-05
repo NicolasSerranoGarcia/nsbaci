@@ -472,6 +472,114 @@ TEST_F(CompilerTest, ExplicitHalt) {
     }
 }
 
+// ============== Scope Tests ==============
+
+TEST_F(CompilerTest, SiblingBlocksSameVariableName) {
+    // Variables with the same name in sibling scopes should be allowed
+    std::string source = R"(
+        { int i = 1; }
+        { int i = 2; }
+        { int i = 3; }
+    )";
+    EXPECT_TRUE(compile(source));
+}
+
+TEST_F(CompilerTest, CobeginBlocksSameVariableName) {
+    // Each cobegin block should have its own scope
+    std::string source = R"(
+        cobegin {
+            int i = 0;
+            int temp = 1;
+        }
+        {
+            int i = 0;
+            int temp = 2;
+        }
+        {
+            int i = 0;
+            int temp = 3;
+        } coend
+    )";
+    EXPECT_TRUE(compile(source));
+}
+
+TEST_F(CompilerTest, NestedScopesShadowing) {
+    // Inner scope can shadow outer scope variables
+    std::string source = R"(
+        int x = 1;
+        {
+            int x = 2;
+            {
+                int x = 3;
+            }
+        }
+    )";
+    EXPECT_TRUE(compile(source));
+}
+
+TEST_F(CompilerTest, SameScopeRedeclarationError) {
+    // Same variable name in same scope should error
+    EXPECT_FALSE(compile("int x = 1; int x = 2;"));
+    auto errors = compileAndGetErrors("int x = 1; int x = 2;");
+    EXPECT_FALSE(errors.empty());
+    EXPECT_TRUE(errors[0].basic.message.find("already declared") != std::string::npos);
+}
+
+TEST_F(CompilerTest, LoopVariableScopeIsolation) {
+    // Loop variables in separate loops should be independent
+    std::string source = R"(
+        for (int i = 0; i < 5; i++) { }
+        for (int i = 0; i < 5; i++) { }
+    )";
+    EXPECT_TRUE(compile(source));
+}
+
+// ============== Error Payload Tests ==============
+
+TEST_F(CompilerTest, ErrorHasCompileErrorPayload) {
+    // Compilation errors should have CompileError payload type
+    auto errors = compileAndGetErrors("undeclared_var = 5;");
+    ASSERT_FALSE(errors.empty());
+    
+    // Check that payload is CompileError type (index 2 in variant)
+    EXPECT_TRUE(std::holds_alternative<nsbaci::types::CompileError>(errors[0].payload));
+}
+
+TEST_F(CompilerTest, ErrorHasLineInfo) {
+    // Errors should have line information
+    std::string source = "int x = 1;\nundeclared = 5;";
+    auto errors = compileAndGetErrors(source);
+    ASSERT_FALSE(errors.empty());
+    
+    auto* compileErr = std::get_if<nsbaci::types::CompileError>(&errors[0].payload);
+    ASSERT_NE(compileErr, nullptr);
+    EXPECT_GT(compileErr->line, 0);  // Line should be positive
+}
+
+TEST_F(CompilerTest, ErrorHasColumnInfo) {
+    // Errors should have column information
+    auto errors = compileAndGetErrors("     undeclared = 5;");  // 5 spaces before error
+    ASSERT_FALSE(errors.empty());
+    
+    auto* compileErr = std::get_if<nsbaci::types::CompileError>(&errors[0].payload);
+    ASSERT_NE(compileErr, nullptr);
+    EXPECT_GT(compileErr->column, 0);  // Column should be positive
+}
+
+TEST_F(CompilerTest, MultipleErrorsHavePayloads) {
+    // Multiple errors should all have proper payloads
+    std::string source = R"(
+        a = 1;
+        b = 2;
+        c = 3;
+    )";
+    auto errors = compileAndGetErrors(source);
+    
+    for (const auto& err : errors) {
+        EXPECT_TRUE(std::holds_alternative<nsbaci::types::CompileError>(err.payload));
+    }
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
