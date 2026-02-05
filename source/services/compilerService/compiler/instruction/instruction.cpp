@@ -20,6 +20,8 @@ const char* opcodeName(Opcode op) {
       return "LoadAddress";
     case Opcode::LoadIndirect:
       return "LoadIndirect";
+    case Opcode::StoreIndirect:
+      return "StoreIndirect";
     case Opcode::LoadBlock:
       return "LoadBlock";
     case Opcode::Store:
@@ -28,6 +30,10 @@ const char* opcodeName(Opcode op) {
       return "StoreKeep";
     case Opcode::PushLiteral:
       return "PushLiteral";
+    case Opcode::Swap:
+      return "Swap";
+    case Opcode::RotateDown3:
+      return "RotateDown3";
     case Opcode::Index:
       return "Index";
     case Opcode::CopyBlock:
@@ -92,6 +98,10 @@ const char* opcodeName(Opcode op) {
       return "ExitProc";
     case Opcode::ExitFunction:
       return "ExitFunction";
+    case Opcode::EnterFrame:
+      return "EnterFrame";
+    case Opcode::LeaveFrame:
+      return "LeaveFrame";
     case Opcode::Halt:
       return "Halt";
 

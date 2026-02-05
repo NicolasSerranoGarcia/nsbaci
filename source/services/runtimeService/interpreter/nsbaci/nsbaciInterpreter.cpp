@@ -91,6 +91,37 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       break;
     }
 
+    case Opcode::StoreIndirect: {
+      // Stack: [value, address] -> pop address, pop value, store value at address
+      uint32_t addr = static_cast<uint32_t>(t.pop());
+      int32_t value = t.pop();
+      if (addr >= program.memory().size()) {
+        program.memory().resize(addr + 1, 0);
+      }
+      program.memory()[addr] = value;
+      break;
+    }
+
+    case Opcode::Swap: {
+      // Swap top two stack elements
+      int32_t a = t.pop();
+      int32_t b = t.pop();
+      t.push(a);
+      t.push(b);
+      break;
+    }
+
+    case Opcode::RotateDown3: {
+      // Rotate top 3: [a,b,c] (c on top) -> [b,c,a]
+      int32_t c = t.pop();
+      int32_t b = t.pop();
+      int32_t a = t.pop();
+      t.push(b);
+      t.push(c);
+      t.push(a);
+      break;
+    }
+
     // ============== Arithmetic Operations ==============
     case Opcode::Add: {
       int32_t b = t.pop();
@@ -286,6 +317,40 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
         uint32_t returnAddr = t.popReturnAddress();
         t.setPC(returnAddr);
         advancePC = false;
+      }
+      break;
+    }
+
+    case Opcode::EnterFrame: {
+      // Save local variable values for this frame
+      // operand1 = start address, operand2 = count
+      uint32_t startAddr = std::get<uint32_t>(instr.operand1);
+      int32_t count = std::get<int32_t>(instr.operand2);
+      std::vector<int32_t> savedLocals;
+      for (int32_t i = 0; i < count; i++) {
+        uint32_t addr = startAddr + i;
+        if (addr < program.memory().size()) {
+          savedLocals.push_back(program.memory()[addr]);
+        } else {
+          savedLocals.push_back(0);
+        }
+      }
+      t.pushFrame(savedLocals);
+      break;
+    }
+
+    case Opcode::LeaveFrame: {
+      // Restore local variable values from saved frame
+      // operand1 = start address, operand2 = count
+      uint32_t startAddr = std::get<uint32_t>(instr.operand1);
+      int32_t count = std::get<int32_t>(instr.operand2);
+      auto savedLocals = t.popFrame();
+      for (size_t i = 0; i < savedLocals.size() && static_cast<int32_t>(i) < count; i++) {
+        uint32_t addr = startAddr + i;
+        if (addr >= program.memory().size()) {
+          program.memory().resize(addr + 1, 0);
+        }
+        program.memory()[addr] = savedLocals[i];
       }
       break;
     }

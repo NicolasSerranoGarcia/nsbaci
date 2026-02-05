@@ -134,6 +134,28 @@ class Thread {
    */
   bool callStackEmpty() const { return callStack.empty(); }
 
+  /**
+   * @brief Push a frame with saved local variable values
+   */
+  void pushFrame(const std::vector<int32_t>& savedLocals) {
+    frameStack.push_back(savedLocals);
+  }
+
+  /**
+   * @brief Pop a frame and get saved local variable values
+   */
+  std::vector<int32_t> popFrame() {
+    if (frameStack.empty()) return {};
+    auto frame = frameStack.back();
+    frameStack.pop_back();
+    return frame;
+  }
+
+  /**
+   * @brief Check if frame stack is empty
+   */
+  bool frameStackEmpty() const { return frameStack.empty(); }
+
  private:
   nsbaci::types::ThreadID id;
   nsbaci::types::ThreadState state;
@@ -151,6 +173,9 @@ class Thread {
 
   // Call stack for return addresses
   std::vector<uint32_t> callStack;
+
+  // Frame stack for saving local variable values during recursion
+  std::vector<std::vector<int32_t>> frameStack;
 
   static nsbaci::types::ThreadID nextThreadId;
 

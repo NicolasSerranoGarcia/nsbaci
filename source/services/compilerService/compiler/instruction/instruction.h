@@ -30,13 +30,16 @@ namespace nsbaci::compiler {
  */
 enum class Opcode : uint8_t {
   // ============== Stack/Memory Operations ==============
-  LoadValue,      // Load value from address onto stack
-  LoadAddress,    // Load address onto stack
-  LoadIndirect,   // Load value from address pointed to by top of stack
-  LoadBlock,      // Load block of memory onto stack
-  Store,          // Store top of stack to address
-  StoreKeep,      // Store and keep value on stack
-  PushLiteral,    // Push literal value onto stack
+  LoadValue,       // Load value from address onto stack
+  LoadAddress,     // Load address onto stack
+  LoadIndirect,    // Load value from address pointed to by top of stack
+  StoreIndirect,   // Store value to address on stack (pops addr, pops value)
+  LoadBlock,       // Load block of memory onto stack
+  Store,           // Store top of stack to address
+  StoreKeep,       // Store and keep value on stack
+  PushLiteral,     // Push literal value onto stack
+  Swap,            // Swap top two stack elements
+  RotateDown3,     // Rotate top 3: [a,b,c] -> [b,c,a]
   Index,          // Array indexing
   CopyBlock,      // Copy block of memory
   ValueAt,        // Get value at address on stack
@@ -73,6 +76,8 @@ enum class Opcode : uint8_t {
   ShortReturn,   // Short return
   ExitProc,      // Exit procedure
   ExitFunction,  // Exit function (with return value)
+  EnterFrame,    // Enter function frame (save locals) - operand1 = start addr, operand2 = count
+  LeaveFrame,    // Leave function frame (restore locals) - operand1 = start addr, operand2 = count
   Halt,          // Halt execution
 
   // ============== Loop Control ==============
@@ -168,6 +173,9 @@ struct Instruction {
       : opcode(op), operand1(std::move(op1)), operand2() {}
 
   Instruction(Opcode op, int32_t op1, int32_t op2)
+      : opcode(op), operand1(op1), operand2(op2) {}
+
+  Instruction(Opcode op, uint32_t op1, int32_t op2)
       : opcode(op), operand1(op1), operand2(op2) {}
 };
 

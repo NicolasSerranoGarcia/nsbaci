@@ -34,7 +34,7 @@ Controller::Controller(FileService&& f, CompilerService&& c, RuntimeService&& r,
       drawingService(std::move(d)) {
   // Set up the run timer for continuous execution
   runTimer = new QTimer(this);
-  runTimer->setInterval(1000);  // 10ms between batches for responsive UI
+  runTimer->setInterval(100);
   connect(runTimer, &QTimer::timeout, this, &Controller::runBatch);
 }
 

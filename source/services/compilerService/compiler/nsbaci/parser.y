@@ -88,6 +88,9 @@
     inline void emit(InstructionStream& is, Opcode op, uint32_t arg) {
       is.emplace_back(op, arg);
     }
+    inline void emit(InstructionStream& is, Opcode op, uint32_t arg1, int32_t arg2) {
+      is.emplace_back(op, arg1, arg2);
+    }
     inline void emit(InstructionStream& is, Opcode op, const std::string& arg) {
       is.emplace_back(op, arg);
     }
@@ -118,11 +121,23 @@
   static std::stack<std::vector<size_t>> breakStack;
   static std::stack<size_t> continueStack;
 
+  // For-loop specific: track pending continue jumps that need to go to update section
+  static std::stack<std::vector<size_t>> forContinueStack;
+  static std::stack<bool> isForLoopStack;  // Track if current loop is a for-loop
+
+  // For-loop update instruction buffer and marker
+  static std::stack<nsbaci::compiler::InstructionStream> forUpdateBuffer;
+  static std::stack<size_t> forUpdateMarker;
+
   // Function parsing helpers
   static std::string currentFunctionName;
   static nsbaci::compiler::VarType currentFunctionReturnType;
   static std::vector<std::pair<std::string, nsbaci::compiler::VarType>> currentFunctionParams;
-  static int currentArgCount;
+  static std::stack<int> argCountStack;  // Stack for nested function calls
+  
+  // For frame-based local variable management
+  static uint32_t currentFunctionFrameStart;
+  static int32_t currentFunctionFrameSize;
 }
 
 %parse-param { nsbaci::compiler::Lexer& lexer }
@@ -329,6 +344,7 @@ assignment_stmt:
   | IDENT '[' expr ']' '=' expr
     {
       // Array element assignment
+      // Stack after parsing: [index, value]
       Symbol* sym = symtab.lookup($1);
       if (!sym) {
         nsbaci::Error err;
@@ -337,11 +353,15 @@ assignment_stmt:
         err.basic.type = nsbaci::types::ErrType::compilationError;
         errors.push_back(std::move(err));
       } else {
-        // Stack: [index, value] -> compute address and store
-        // Push base address, add index, then store indirect
+        // Stack: [index, value]
+        // Swap to get: [value, index]
+        emit(instructions, Opcode::Swap);
+        // Push base address: [value, index, base]
         emit(instructions, Opcode::PushLiteral, int32_t(sym->address));
-        emit(instructions, Opcode::Add);  // base + index
-        emit(instructions, Opcode::StoreKeep);  // Store value at computed address
+        // Add base+index: [value, address]
+        emit(instructions, Opcode::Add);
+        // StoreIndirect pops address then value
+        emit(instructions, Opcode::StoreIndirect);
       }
     }
   | IDENT PLUS_ASSIGN
@@ -470,6 +490,7 @@ while_stmt:
     WHILE
     {
       breakStack.push({});
+      isForLoopStack.push(false);  // This is a while-loop
     }
     '('
     {
@@ -490,6 +511,7 @@ while_stmt:
       }
       breakStack.pop();
       continueStack.pop();
+      isForLoopStack.pop();
     }
   ;
 
@@ -498,6 +520,7 @@ do_while_stmt:
     {
       breakStack.push({});
       continueStack.push(instructions.size());
+      isForLoopStack.push(false);  // This is a do-while-loop
     }
     statement WHILE '(' expr ')' ';'
     {
@@ -510,6 +533,7 @@ do_while_stmt:
       }
       breakStack.pop();
       continueStack.pop();
+      isForLoopStack.pop();
     }
   ;
 
@@ -517,15 +541,39 @@ for_stmt:
     FOR '(' for_init ';'
     {
       breakStack.push({});
-      continueStack.push(instructions.size());  // Condition start
+      forUpdateBuffer.push({});  // Buffer for update code
+      forContinueStack.push({});  // Track continues that need to jump to update
+      isForLoopStack.push(true);  // This is a for-loop
+      continueStack.push(instructions.size());  // Condition start (for reference)
     }
     expr ';'
     {
       size_t exitJump = emitJump(instructions, Opcode::JumpZero);
       breakStack.top().push_back(exitJump);
+      forUpdateMarker.push(instructions.size());  // Mark start of update code
     }
-    for_update ')' statement
+    for_update ')'
     {
+      // Move update instructions from main stream to buffer (preserving order)
+      size_t marker = forUpdateMarker.top();
+      for (size_t i = marker; i < instructions.size(); i++) {
+        forUpdateBuffer.top().push_back(instructions[i]);
+      }
+      instructions.resize(marker);  // Remove the update instructions
+      forUpdateMarker.pop();
+    }
+    statement
+    {
+      // Patch all continue jumps to point here (start of update code)
+      for (size_t addr : forContinueStack.top()) {
+        patchJump(instructions, addr);
+      }
+      forContinueStack.pop();
+      // Emit the buffered update code AFTER the body
+      for (const auto& instr : forUpdateBuffer.top()) {
+        instructions.push_back(instr);
+      }
+      forUpdateBuffer.pop();
       // Jump back to condition check
       emit(instructions, Opcode::Jump, int32_t(continueStack.top()));
       // Patch all breaks to here
@@ -534,6 +582,7 @@ for_stmt:
       }
       breakStack.pop();
       continueStack.pop();
+      isForLoopStack.pop();
     }
   ;
 
@@ -558,7 +607,9 @@ for_update:
   | IDENT '=' expr
     {
       Symbol* sym = symtab.lookup($1);
-      if (sym) emit(instructions, Opcode::Store, sym->address);
+      if (sym) {
+        emit(instructions, Opcode::Store, sym->address);
+      }
     }
   | IDENT INC
     {
@@ -606,7 +657,11 @@ continue_stmt:
         err.basic.message = "'continue' outside of loop";
         err.basic.type = nsbaci::types::ErrType::compilationError;
         errors.push_back(std::move(err));
+      } else if (!isForLoopStack.empty() && isForLoopStack.top()) {
+        // In a for-loop: emit forward jump, patch later to update section
+        forContinueStack.top().push_back(emitJump(instructions, Opcode::Jump));
       } else {
+        // In while/do-while: jump directly to condition
         emit(instructions, Opcode::Jump, int32_t(continueStack.top()));
       }
     }
@@ -620,7 +675,10 @@ return_stmt:
         // In main program - halt
         emit(instructions, Opcode::Halt);
       } else {
-        // In a function - return to caller
+        // In a function - restore frame and return to caller
+        if (currentFunctionFrameSize > 0) {
+          emit(instructions, Opcode::LeaveFrame, currentFunctionFrameStart, currentFunctionFrameSize);
+        }
         emit(instructions, Opcode::ShortReturn);
       }
     }
@@ -631,7 +689,10 @@ return_stmt:
         // In main program - halt (value discarded)
         emit(instructions, Opcode::Halt);
       } else {
-        // In a function - return with value on stack
+        // In a function - restore frame and return with value on stack
+        if (currentFunctionFrameSize > 0) {
+          emit(instructions, Opcode::LeaveFrame, currentFunctionFrameStart, currentFunctionFrameSize);
+        }
         emit(instructions, Opcode::ExitFunction);
       }
     }
@@ -802,9 +863,29 @@ function_def:
       symtab.declareFunction(currentFunctionName, currentFunctionReturnType, 
                              currentFunctionParams, funcAddr);
       
-      // Declare parameters as local variables
+      // Declare parameters as local variables and emit code to store them
+      // Arguments are on stack in order [arg0, arg1, ...argN] with argN on top
+      // So we need to pop in reverse order
+      std::vector<uint32_t> paramAddresses;
       for (const auto& param : currentFunctionParams) {
         symtab.declare(param.first, param.second, false, true);
+        paramAddresses.push_back(symtab.lookup(param.first)->address);
+      }
+      
+      // Track frame info for LeaveFrame on return
+      if (!paramAddresses.empty()) {
+        currentFunctionFrameStart = paramAddresses[0];
+        currentFunctionFrameSize = static_cast<int32_t>(paramAddresses.size());
+        // Emit EnterFrame to save current values before overwriting
+        emit(instructions, Opcode::EnterFrame, currentFunctionFrameStart, currentFunctionFrameSize);
+      } else {
+        currentFunctionFrameStart = 0;
+        currentFunctionFrameSize = 0;
+      }
+      
+      // Pop arguments from stack into parameter addresses (reverse order)
+      for (auto it = paramAddresses.rbegin(); it != paramAddresses.rend(); ++it) {
+        emit(instructions, Opcode::Store, *it);
       }
       
       // Store the jump address for patching after body
@@ -814,6 +895,9 @@ function_def:
     {
       // Emit implicit return for void functions
       if (currentFunctionReturnType == VarType::Void) {
+        if (currentFunctionFrameSize > 0) {
+          emit(instructions, Opcode::LeaveFrame, currentFunctionFrameStart, currentFunctionFrameSize);
+        }
         emit(instructions, Opcode::ShortReturn);
       }
       
@@ -822,6 +906,11 @@ function_def:
         patchJump(instructions, breakStack.top()[0]);
         breakStack.pop();
       }
+      
+      // Reset function context
+      currentFunctionName.clear();
+      currentFunctionFrameStart = 0;
+      currentFunctionFrameSize = 0;
       
       symtab.exitScope();
     }
@@ -893,11 +982,13 @@ expr:
     }
   | IDENT '(' 
     {
-      // Function call - check if function exists
-      currentArgCount = 0;
+      // Function call - push new arg count for nested calls
+      argCountStack.push(0);
     }
     arg_list ')'
     {
+      int argCount = argCountStack.top();
+      argCountStack.pop();
       FunctionInfo* func = symtab.lookupFunction($1);
       if (!func) {
         nsbaci::Error err;
@@ -907,12 +998,12 @@ expr:
         errors.push_back(std::move(err));
         emit(instructions, Opcode::PushLiteral, int32_t(0)); // Push dummy return value
       } else {
-        if (currentArgCount != static_cast<int>(func->params.size())) {
+        if (argCount != static_cast<int>(func->params.size())) {
           nsbaci::Error err;
           err.basic.severity = nsbaci::types::ErrSeverity::Error;
           err.basic.message = "Function '" + $1 + "' expects " + 
                               std::to_string(func->params.size()) + " arguments, got " + 
-                              std::to_string(currentArgCount);
+                              std::to_string(argCount);
           err.basic.type = nsbaci::types::ErrType::compilationError;
           errors.push_back(std::move(err));
         }
@@ -1041,7 +1132,9 @@ arg_list:
 arg:
     expr
     {
-      currentArgCount++;
+      if (!argCountStack.empty()) {
+        argCountStack.top()++;
+      }
     }
   ;
 
