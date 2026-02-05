@@ -1,8 +1,3 @@
-// ==============================================
-// NSBACI Example 08: Dining Philosophers (Simplified)
-// ==============================================
-// Classic concurrency problem with 3 philosophers
-
 // Forks (semaphores) - each philosopher needs 2 adjacent forks to eat
 semaphore fork0 = 1;
 semaphore fork1 = 1;

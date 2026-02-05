@@ -1,8 +1,3 @@
-// ==============================================
-// NSBACI Example 05: Concurrency Basics
-// ==============================================
-// Demonstrates: cobegin/coend, basic parallel execution
-
 // Simple concurrent execution
 cout << "=== Basic Parallel Execution ===" << endl;
 cout << "Starting concurrent blocks..." << endl;

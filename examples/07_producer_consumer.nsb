@@ -1,8 +1,3 @@
-// ==============================================
-// NSBACI Example 07: Producer-Consumer Problem
-// ==============================================
-// Classic concurrency problem solved with semaphores
-
 // Shared buffer (single slot for simplicity)
 int buffer = 0;
 int itemCount = 0;

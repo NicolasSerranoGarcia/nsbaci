@@ -1,8 +1,3 @@
-// ==============================================
-// NSBACI Example 01: Basic Syntax
-// ==============================================
-// Demonstrates: variables, types, operators, I/O
-
 // Variable declarations
 int x = 10;
 int y = 20;

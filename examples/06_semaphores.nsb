@@ -1,8 +1,3 @@
-// ==============================================
-// NSBACI Example 06: Semaphores
-// ==============================================
-// Demonstrates: semaphore declaration, p() and v() operations, mutual exclusion
-
 // Shared variable (will be protected by semaphore)
 int counter = 0;
 

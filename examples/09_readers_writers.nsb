@@ -1,8 +1,3 @@
-// ==============================================
-// NSBACI Example 09: Readers-Writers Problem
-// ==============================================
-// Multiple readers can read simultaneously, but writers need exclusive access
-
 // Shared data
 int sharedData = 0;
 int readerCount = 0;

@@ -1,8 +1,3 @@
-// ==============================================
-// NSBACI Example 10: Input/Output
-// ==============================================
-// Demonstrates: cin, cout, user interaction
-
 cout << "=== Input/Output Demo ===" << endl;
 cout << endl;
 

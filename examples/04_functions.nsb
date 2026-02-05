@@ -1,8 +1,3 @@
-// ==============================================
-// NSBACI Example 04: Functions
-// ==============================================
-// Demonstrates: function definitions, parameters, return values, recursion
-
 // Simple function with no parameters
 void sayHello() {
     cout << "Hello from a function!" << endl;
