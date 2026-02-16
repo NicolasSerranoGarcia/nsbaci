@@ -38,6 +38,7 @@ jobs:
             mingw-w64-x86_64-texlive-fonts-recommended
             mingw-w64-x86_64-texlive-extra-utils
             mingw-w64-x86_64-ghostscript
+            mingw-w64-x86_64-pandoc
             bison
             flex
 
@@ -45,27 +46,47 @@ jobs:
         run: cp /usr/include/FlexLexer.h /mingw64/include/
         shell: msys2 {0}
 
-      - name: Configure and build DeskUp
+      - name: Configure project
         run: |
           mkdir -p build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Release -DGENERATE_DOCS=ON ..
+          cmake -DCMAKE_BUILD_TYPE=Release -DGENERATE_DOCS=ON -DGENERATE_USER_GUIDE=ON ..
+        shell: msys2 {0}
+
+      - name: Build project
+        run: |
+          cd build
           cmake --build . --config Release
         shell: msys2 {0}
 
-      #   Right now i'm doing nothing with the pdf
-      - name: Build documentation (Doxygen)
+      - name: Generate User Guide PDF
+        run: |
+          cd build
+          make user_guide || cmake --build . --target user_guide
+        shell: msys2 {0}
+
+      - name: Build Doxygen documentation
         run: |
           cd build
           doxygen -u Doxyfile
           doxygen Doxyfile
-          if [ -d "../docs/latex" ]; then
-            cd ../docs/latex
+        shell: msys2 {0}
+
+      - name: Generate Codebase Reference PDF
+        run: |
+          if [ -d "docs/latex" ]; then
+            cd docs/latex
+            pdflatex --shell-escape refman.tex
             pdflatex --shell-escape refman.tex
             mkdir -p ../html/pdf
-            cp refman.pdf ../html/pdf/
+            cp refman.pdf ../html/pdf/nsbaci_codebase_reference.pdf
           fi
+        shell: msys2 {0}
 
+      - name: Copy User Guide PDF to docs
+        run: |
+          mkdir -p docs/html/pdf
+          cp build/docs/nsbaci_user_guide.pdf docs/html/pdf/
         shell: msys2 {0}
 
       - name: Deploy documentation to GitHub Pages

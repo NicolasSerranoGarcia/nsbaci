@@ -1,0 +1,25 @@
+/*!
+\mainpage notitle
+
+\htmlonly
+<div class="du-hero">
+  <h1>NSBACI Documentation</h1>
+  <p class="du-sub">A development environment for learning concurrency</p>
+</div>
+
+<div class="du-grid">
+  <a class="du-card" href="pdf/nsbaci_user_guide.pdf" download="nsbaci_user_guide.pdf">
+    <h3>User Guide</h3>
+    <p>Language syntax, GUI walkthrough, concurrency patterns, semaphores, and graphics.</p>
+    <code>For users & students</code>
+  </a>
+
+  <a class="du-card" href="pdf/nsbaci_codebase_reference.pdf" download="nsbaci_codebase_reference.pdf">
+    <h3>Codebase Reference</h3>
+    <p>Developer documentation generated from source code. Classes, modules, architecture.</p>
+    <code>For developers & contributors</code>
+  </a>
+</div>
+\endhtmlonly
+
+*/
