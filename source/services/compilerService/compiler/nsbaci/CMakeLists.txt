@@ -8,12 +8,23 @@ find_package(BISON REQUIRED)
 
 # Find FlexLexer.h include directory
 # On MSYS2/MinGW, FlexLexer.h is in /usr/include (MSYS layer)
+# On macOS with Homebrew, it's in $(brew --prefix flex)/include
 if(WIN32)
     # Check common MSYS2 paths
     if(EXISTS "C:/msys64/usr/include/FlexLexer.h")
         set(FLEX_INCLUDE_DIR "C:/msys64/usr/include")
     elseif(EXISTS "/usr/include/FlexLexer.h")
         set(FLEX_INCLUDE_DIR "/usr/include")
+    endif()
+elseif(APPLE)
+    # Homebrew flex on Apple Silicon
+    if(EXISTS "/opt/homebrew/opt/flex/include/FlexLexer.h")
+        set(FLEX_INCLUDE_DIR "/opt/homebrew/opt/flex/include")
+    # Homebrew flex on Intel Mac
+    elseif(EXISTS "/usr/local/opt/flex/include/FlexLexer.h")
+        set(FLEX_INCLUDE_DIR "/usr/local/opt/flex/include")
+    else()
+        find_path(FLEX_INCLUDE_DIR FlexLexer.h)
     endif()
 else()
     find_path(FLEX_INCLUDE_DIR FlexLexer.h)

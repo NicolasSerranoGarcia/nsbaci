@@ -212,6 +212,14 @@ jobs:
       - name: List downloaded artifacts (debug)
         run: ls -R dist
 
+      - name: Flatten Windows artifact
+        run: |
+          # Move exe from subdirectory to dist/windows root
+          find dist/windows -name "*.exe" -exec mv {} dist/windows/ \;
+          # Remove empty subdirectories
+          find dist/windows -type d -empty -delete
+          ls -la dist/windows/
+
       - name: Generate release notes
         id: notes
         uses: actions/github-script@v7
@@ -324,7 +332,7 @@ jobs:
             **Release notes**
             ${{ steps.notes.outputs.notes }}
           files: |
-            dist/windows/**/*.exe
+            dist/windows/*.exe
             dist/linux/*.AppImage
             dist/macos/*.dmg
           draft: false
