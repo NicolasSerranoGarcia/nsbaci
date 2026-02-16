@@ -1,0 +1,54 @@
+// Clear the canvas with white background
+clearCanvas(WHITE);
+
+// ============== Basic Shapes (Outlines) ==============
+
+// Draw circle outline
+setColor(RED);
+drawCircle(100, 100, 40);
+
+// Draw rectangle outline
+setColor(BLUE);
+drawRect(180, 60, 80, 80);
+
+// Draw triangle outline
+setColor(GREEN);
+drawTriangle(320, 140, 280, 60, 360, 60);
+
+// Draw line
+setColor(BLACK);
+setLineWidth(2);
+drawLine(400, 60, 500, 140);
+
+// Draw ellipse outline
+setColor(PURPLE);
+drawEllipse(580, 100, 50, 30);
+
+// ============== Filled Shapes ==============
+
+// Filled circle
+setColor(RED);
+fillCircle(100, 250, 40);
+
+// Filled rectangle
+setColor(BLUE);
+fillRect(180, 210, 80, 80);
+
+// Filled triangle
+setColor(GREEN);
+fillTriangle(320, 290, 280, 210, 360, 210);
+
+// Filled ellipse
+setColor(PURPLE);
+fillEllipse(580, 250, 50, 30);
+
+// ============== Text ==============
+
+setColor(BLACK);
+drawText(50, 350, "Outlines (top row) vs Filled (bottom row)", 14);
+
+// Draw a pixel
+setColor(ORANGE);
+drawPixel(400, 250);
+
+refreshCanvas();

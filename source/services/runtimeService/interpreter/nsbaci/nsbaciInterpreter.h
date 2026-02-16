@@ -45,13 +45,19 @@ class NsbaciInterpreter final : public Interpreter {
   void provideInput(const std::string& input) override;
   bool isWaitingForInput() const override;
   void setOutputCallback(OutputCallback callback) override;
+  void setDrawingCallback(DrawingCallback callback) override;
   void reset() override;
 
  private:
   OutputCallback outputCallback;
+  DrawingCallback drawingCallback;
   bool waitingForInput = false;
   std::string pendingInput;
   bool hasInput = false;
+
+  // Drawing state
+  uint8_t currentR = 0, currentG = 0, currentB = 0, currentA = 255;
+  int32_t currentLineWidth = 1;
 };
 
 }  // namespace nsbaci::services::runtime

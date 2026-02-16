@@ -26,7 +26,7 @@ using namespace nsbaci::services;
 namespace nsbaci {
 
 Controller::Controller(FileService&& f, CompilerService&& c, RuntimeService&& r,
-                       DrawingService&& d, QObject* parent)
+                       std::unique_ptr<DrawingService> d, QObject* parent)
     : QObject(parent),
       fileService(std::move(f)),
       compilerService(std::move(c)),
@@ -87,6 +87,31 @@ void Controller::onRunRequested() {
   runtimeService.setOutputCallback([this](const std::string& output) {
     emit outputReceived(QString::fromStdString(output));
   });
+
+  // Set up drawing callback to forward to drawing service
+  if (drawingService) {
+    runtimeService.setDrawingCallback(
+        [this](const nsbaci::types::DrawCommand& command) {
+          // Create drawing widget if it doesn't exist
+          if (!drawingWidget) {
+            drawingWidget = new nsbaci::ui::DrawingWidget();
+            drawingWidget->setWindowTitle("NSBACI Canvas");
+            drawingWidget->setAttribute(Qt::WA_DeleteOnClose);
+            connect(drawingWidget, &QObject::destroyed, this,
+                    [this]() { drawingWidget = nullptr; });
+            // Connect drawing service signals to widget
+            connect(drawingService.get(),
+                    &DrawingService::drawCommandReceived, drawingWidget,
+                    &nsbaci::ui::DrawingWidget::onDrawCommand);
+          }
+          // Show the widget if not visible
+          if (!drawingWidget->isVisible()) {
+            drawingWidget->show();
+          }
+          // Forward the command to the drawing service
+          drawingService->processCommand(command);
+        });
+  }
 
   currentProgramName = "Program";  // TODO: Get actual name from file
   programLoaded = true;

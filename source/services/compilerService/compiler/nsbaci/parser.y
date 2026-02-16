@@ -184,6 +184,22 @@
 // Concurrency
 %token SEMAPHORE COBEGIN COEND P_OP V_OP
 
+// Drawing
+%token CANVAS DRAW_SET_COLOR DRAW_SET_LINE_WIDTH
+%token DRAW_CIRCLE DRAW_RECT DRAW_TRIANGLE DRAW_LINE DRAW_ELLIPSE
+%token DRAW_PIXEL DRAW_TEXT DRAW_CLEAR DRAW_REFRESH
+%token FILL_CIRCLE FILL_RECT FILL_TRIANGLE FILL_ELLIPSE
+
+// Color macros
+%token COLOR_RED COLOR_GREEN COLOR_BLUE COLOR_WHITE COLOR_BLACK
+%token COLOR_YELLOW COLOR_CYAN COLOR_MAGENTA COLOR_ORANGE
+%token COLOR_PINK COLOR_PURPLE COLOR_GRAY
+
+// Position macros
+%token POS_CENTER POS_TOP_LEFT POS_TOP_CENTER POS_TOP_RIGHT
+%token POS_CENTER_LEFT POS_CENTER_RIGHT POS_BOTTOM_LEFT
+%token POS_BOTTOM_CENTER POS_BOTTOM_RIGHT
+
 // Literals
 %token TRUE_LIT FALSE_LIT
 
@@ -250,6 +266,7 @@ statement:
   | cobegin_stmt
   | p_stmt ';'
   | v_stmt ';'
+  | draw_stmt ';'
   | ';'  /* empty statement */
   ;
 
@@ -809,6 +826,380 @@ v_stmt:
         emit(instructions, Opcode::LoadAddress, sym->address);
         emit(instructions, Opcode::Signal);
       }
+    }
+  ;
+
+// ============== Drawing Statements ==============
+
+draw_stmt:
+    draw_set_color_stmt
+  | draw_set_line_width_stmt
+  | draw_circle_stmt
+  | draw_rect_stmt
+  | draw_triangle_stmt
+  | draw_line_stmt
+  | draw_ellipse_stmt
+  | draw_pixel_stmt
+  | draw_text_stmt
+  | draw_clear_stmt
+  | draw_refresh_stmt
+  | fill_circle_stmt
+  | fill_rect_stmt
+  | fill_triangle_stmt
+  | fill_ellipse_stmt
+  ;
+
+// Point expression: {x, y} - pushes x then y onto stack
+point_expr:
+    '{' expr ',' expr '}'
+    {
+      // expr already pushed x, then y onto stack - nothing more to do
+    }
+  ;
+
+draw_set_color_stmt:
+    DRAW_SET_COLOR '(' expr ',' expr ',' expr ')'
+    {
+      // Stack has r, g, b - emit set color
+      emit(instructions, Opcode::DrawSetColor);
+    }
+  | DRAW_SET_COLOR '(' expr ',' expr ',' expr ',' expr ')'
+    {
+      // Stack has r, g, b, a - emit set color with alpha
+      emit(instructions, Opcode::DrawSetColorAlpha);
+    }
+  | DRAW_SET_COLOR '(' color_macro ')'
+    {
+      // Color macro pushes r, g, b onto stack
+      emit(instructions, Opcode::DrawSetColor);
+    }
+  ;
+
+color_macro:
+    COLOR_RED
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+    }
+  | COLOR_GREEN
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+    }
+  | COLOR_BLUE
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+    }
+  | COLOR_WHITE
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+    }
+  | COLOR_BLACK
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+    }
+  | COLOR_YELLOW
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+    }
+  | COLOR_CYAN
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+    }
+  | COLOR_MAGENTA
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+    }
+  | COLOR_ORANGE
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(165));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+    }
+  | COLOR_PINK
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(255));
+      emit(instructions, Opcode::PushLiteral, int32_t(192));
+      emit(instructions, Opcode::PushLiteral, int32_t(203));
+    }
+  | COLOR_PURPLE
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(128));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(128));
+    }
+  | COLOR_GRAY
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(128));
+      emit(instructions, Opcode::PushLiteral, int32_t(128));
+      emit(instructions, Opcode::PushLiteral, int32_t(128));
+    }
+  ;
+
+position_macro:
+    POS_CENTER
+    {
+      // Center position - will be resolved at runtime
+      emit(instructions, Opcode::PushLiteral, int32_t(400));  // Default center X
+      emit(instructions, Opcode::PushLiteral, int32_t(300));  // Default center Y
+    }
+  | POS_TOP_LEFT
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+    }
+  | POS_TOP_CENTER
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(400));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+    }
+  | POS_TOP_RIGHT
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(800));
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+    }
+  | POS_CENTER_LEFT
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(300));
+    }
+  | POS_CENTER_RIGHT
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(800));
+      emit(instructions, Opcode::PushLiteral, int32_t(300));
+    }
+  | POS_BOTTOM_LEFT
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(0));
+      emit(instructions, Opcode::PushLiteral, int32_t(600));
+    }
+  | POS_BOTTOM_CENTER
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(400));
+      emit(instructions, Opcode::PushLiteral, int32_t(600));
+    }
+  | POS_BOTTOM_RIGHT
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(800));
+      emit(instructions, Opcode::PushLiteral, int32_t(600));
+    }
+  ;
+
+draw_set_line_width_stmt:
+    DRAW_SET_LINE_WIDTH '(' expr ')'
+    {
+      emit(instructions, Opcode::DrawSetLineWidth);
+    }
+  ;
+
+// ============== Draw (Outline) Statements ==============
+
+draw_circle_stmt:
+    DRAW_CIRCLE '(' expr ',' expr ',' expr ')'
+    {
+      // x, y, radius - outline only
+      emit(instructions, Opcode::DrawCircle);
+    }
+  | DRAW_CIRCLE '(' point_expr ',' expr ')'
+    {
+      // {x, y}, radius - outline only
+      emit(instructions, Opcode::DrawCircle);
+    }
+  | DRAW_CIRCLE '(' position_macro ',' expr ')'
+    {
+      // Position macro pushed x, y; then radius - outline only
+      emit(instructions, Opcode::DrawCircle);
+    }
+  ;
+
+draw_rect_stmt:
+    DRAW_RECT '(' expr ',' expr ',' expr ',' expr ')'
+    {
+      // x, y, width, height - outline only
+      emit(instructions, Opcode::DrawRectangle);
+    }
+  | DRAW_RECT '(' point_expr ',' expr ',' expr ')'
+    {
+      // {x, y}, width, height - outline only
+      emit(instructions, Opcode::DrawRectangle);
+    }
+  ;
+
+draw_triangle_stmt:
+    DRAW_TRIANGLE '(' expr ',' expr ',' expr ',' expr ',' expr ',' expr ')'
+    {
+      // x1, y1, x2, y2, x3, y3 - outline only
+      emit(instructions, Opcode::DrawTriangle);
+    }
+  | DRAW_TRIANGLE '(' point_expr ',' point_expr ',' point_expr ')'
+    {
+      // {x1, y1}, {x2, y2}, {x3, y3} - outline only
+      emit(instructions, Opcode::DrawTriangle);
+    }
+  ;
+
+draw_line_stmt:
+    DRAW_LINE '(' expr ',' expr ',' expr ',' expr ')'
+    {
+      // x1, y1, x2, y2
+      emit(instructions, Opcode::DrawLine);
+    }
+  | DRAW_LINE '(' point_expr ',' point_expr ')'
+    {
+      // {x1, y1}, {x2, y2}
+      emit(instructions, Opcode::DrawLine);
+    }
+  ;
+
+draw_ellipse_stmt:
+    DRAW_ELLIPSE '(' expr ',' expr ',' expr ',' expr ')'
+    {
+      // x, y, radiusX, radiusY - outline only
+      emit(instructions, Opcode::DrawEllipse);
+    }
+  | DRAW_ELLIPSE '(' point_expr ',' expr ',' expr ')'
+    {
+      // {x, y}, radiusX, radiusY - outline only
+      emit(instructions, Opcode::DrawEllipse);
+    }
+  ;
+
+draw_pixel_stmt:
+    DRAW_PIXEL '(' expr ',' expr ')'
+    {
+      // x, y
+      emit(instructions, Opcode::DrawPixel);
+    }
+  | DRAW_PIXEL '(' point_expr ')'
+    {
+      // {x, y}
+      emit(instructions, Opcode::DrawPixel);
+    }
+  ;
+
+draw_text_stmt:
+    DRAW_TEXT '(' expr ',' expr ',' STRING_LIT ')'
+    {
+      // x, y, text - default font size
+      emit(instructions, Opcode::PushLiteral, int32_t(12));  // Default font size
+      emit(instructions, Opcode::DrawText, $7);
+    }
+  | DRAW_TEXT '(' expr ',' expr ',' STRING_LIT ',' expr ')'
+    {
+      // x, y, text, fontSize
+      emit(instructions, Opcode::DrawText, $7);
+    }
+  | DRAW_TEXT '(' point_expr ',' STRING_LIT ')'
+    {
+      // {x, y}, text - default font size
+      emit(instructions, Opcode::PushLiteral, int32_t(12));  // Default font size
+      emit(instructions, Opcode::DrawText, $5);
+    }
+  | DRAW_TEXT '(' point_expr ',' STRING_LIT ',' expr ')'
+    {
+      // {x, y}, text, fontSize
+      emit(instructions, Opcode::DrawText, $5);
+    }
+  ;
+
+// ============== Fill (Filled Shape) Statements ==============
+
+fill_circle_stmt:
+    FILL_CIRCLE '(' expr ',' expr ',' expr ')'
+    {
+      // x, y, radius - filled
+      emit(instructions, Opcode::FillCircle);
+    }
+  | FILL_CIRCLE '(' point_expr ',' expr ')'
+    {
+      // {x, y}, radius - filled
+      emit(instructions, Opcode::FillCircle);
+    }
+  | FILL_CIRCLE '(' position_macro ',' expr ')'
+    {
+      // Position macro pushed x, y; then radius - filled
+      emit(instructions, Opcode::FillCircle);
+    }
+  ;
+
+fill_rect_stmt:
+    FILL_RECT '(' expr ',' expr ',' expr ',' expr ')'
+    {
+      // x, y, width, height - filled
+      emit(instructions, Opcode::FillRectangle);
+    }
+  | FILL_RECT '(' point_expr ',' expr ',' expr ')'
+    {
+      // {x, y}, width, height - filled
+      emit(instructions, Opcode::FillRectangle);
+    }
+  ;
+
+fill_triangle_stmt:
+    FILL_TRIANGLE '(' expr ',' expr ',' expr ',' expr ',' expr ',' expr ')'
+    {
+      // x1, y1, x2, y2, x3, y3 - filled
+      emit(instructions, Opcode::FillTriangle);
+    }
+  | FILL_TRIANGLE '(' point_expr ',' point_expr ',' point_expr ')'
+    {
+      // {x1, y1}, {x2, y2}, {x3, y3} - filled
+      emit(instructions, Opcode::FillTriangle);
+    }
+  ;
+
+fill_ellipse_stmt:
+    FILL_ELLIPSE '(' expr ',' expr ',' expr ',' expr ')'
+    {
+      // x, y, radiusX, radiusY - filled
+      emit(instructions, Opcode::FillEllipse);
+    }
+  | FILL_ELLIPSE '(' point_expr ',' expr ',' expr ')'
+    {
+      // {x, y}, radiusX, radiusY - filled
+      emit(instructions, Opcode::FillEllipse);
+    }
+  ;
+
+// ============== Canvas Operations ==============
+
+draw_clear_stmt:
+    DRAW_CLEAR '(' ')'
+    {
+      emit(instructions, Opcode::DrawClear);
+    }
+  | DRAW_CLEAR '(' expr ',' expr ',' expr ')'
+    {
+      // Clear with specific color (r, g, b on stack)
+      emit(instructions, Opcode::DrawSetColor);
+      emit(instructions, Opcode::DrawClear);
+    }
+  | DRAW_CLEAR '(' color_macro ')'
+    {
+      // Clear with color macro
+      emit(instructions, Opcode::DrawSetColor);
+      emit(instructions, Opcode::DrawClear);
+    }
+  ;
+
+draw_refresh_stmt:
+    DRAW_REFRESH '(' ')'
+    {
+      emit(instructions, Opcode::DrawRefresh);
     }
   ;
 

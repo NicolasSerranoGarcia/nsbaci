@@ -249,6 +249,16 @@ class RuntimeService {
    */
   void setOutputCallback(runtime::OutputCallback callback);
 
+  /**
+   * @brief Sets the callback for drawing operations.
+   *
+   * The callback is invoked whenever the program performs drawing operations
+   * (setColor, drawCircle, fillRect, etc.).
+   *
+   * @param callback Function to call with DrawCommand objects.
+   */
+  void setDrawingCallback(runtime::DrawingCallback callback);
+
  private:
   runtime::Program
       program;  ///< The loaded program with instructions and memory.

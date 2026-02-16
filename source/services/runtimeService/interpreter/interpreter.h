@@ -18,6 +18,7 @@
 #include <string>
 
 #include "baseResult.h"
+#include "drawingTypes.h"
 #include "program.h"
 #include "thread.h"
 
@@ -63,6 +64,9 @@ using OutputCallback = std::function<void(const std::string&)>;
 /// @brief Callback type for input requests
 using InputRequestCallback = std::function<void(const std::string&)>;
 
+/// @brief Callback type for drawing operations
+using DrawingCallback = std::function<void(const nsbaci::types::DrawCommand&)>;
+
 /**
  * @class Interpreter
  * @brief Executes instructions for threads within a program context.
@@ -100,6 +104,12 @@ class Interpreter {
    * @param callback Function to call when output is produced.
    */
   virtual void setOutputCallback(OutputCallback callback) = 0;
+
+  /**
+   * @brief Set the drawing callback for drawing operations.
+   * @param callback Function to call when drawing is requested.
+   */
+  virtual void setDrawingCallback(DrawingCallback callback) = 0;
 
   /**
    * @brief Reset interpreter state for a new run.

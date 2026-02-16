@@ -5,6 +5,8 @@
 
 # nsbaci_drawingService_library
 
+    set(CMAKE_AUTOMOC ON)
+
     add_library(nsbaci_drawingService_library STATIC
         drawingService.cpp
         drawingService.h
@@ -22,4 +24,5 @@
         config_compiler_flags_library
         nsbaci_types_library
         nsbaci_error_library
+        Qt${QT_VERSION_MAJOR}::Core
     )

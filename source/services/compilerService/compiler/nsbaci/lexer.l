@@ -49,6 +49,46 @@
 "p"         { return nsbaci::compiler::Parser::token::P_OP; }
 "v"         { return nsbaci::compiler::Parser::token::V_OP; }
 
+"canvas"        { return nsbaci::compiler::Parser::token::CANVAS; }
+"setColor"      { return nsbaci::compiler::Parser::token::DRAW_SET_COLOR; }
+"setLineWidth"  { return nsbaci::compiler::Parser::token::DRAW_SET_LINE_WIDTH; }
+"drawCircle"    { return nsbaci::compiler::Parser::token::DRAW_CIRCLE; }
+"drawRect"      { return nsbaci::compiler::Parser::token::DRAW_RECT; }
+"drawTriangle"  { return nsbaci::compiler::Parser::token::DRAW_TRIANGLE; }
+"drawLine"      { return nsbaci::compiler::Parser::token::DRAW_LINE; }
+"drawEllipse"   { return nsbaci::compiler::Parser::token::DRAW_ELLIPSE; }
+"drawPixel"     { return nsbaci::compiler::Parser::token::DRAW_PIXEL; }
+"drawText"      { return nsbaci::compiler::Parser::token::DRAW_TEXT; }
+"fillCircle"    { return nsbaci::compiler::Parser::token::FILL_CIRCLE; }
+"fillRect"      { return nsbaci::compiler::Parser::token::FILL_RECT; }
+"fillTriangle"  { return nsbaci::compiler::Parser::token::FILL_TRIANGLE; }
+"fillEllipse"   { return nsbaci::compiler::Parser::token::FILL_ELLIPSE; }
+"clearCanvas"   { return nsbaci::compiler::Parser::token::DRAW_CLEAR; }
+"refreshCanvas" { return nsbaci::compiler::Parser::token::DRAW_REFRESH; }
+
+"RED"        { return nsbaci::compiler::Parser::token::COLOR_RED; }
+"GREEN"      { return nsbaci::compiler::Parser::token::COLOR_GREEN; }
+"BLUE"       { return nsbaci::compiler::Parser::token::COLOR_BLUE; }
+"WHITE"      { return nsbaci::compiler::Parser::token::COLOR_WHITE; }
+"BLACK"      { return nsbaci::compiler::Parser::token::COLOR_BLACK; }
+"YELLOW"     { return nsbaci::compiler::Parser::token::COLOR_YELLOW; }
+"CYAN"       { return nsbaci::compiler::Parser::token::COLOR_CYAN; }
+"MAGENTA"    { return nsbaci::compiler::Parser::token::COLOR_MAGENTA; }
+"ORANGE"     { return nsbaci::compiler::Parser::token::COLOR_ORANGE; }
+"PINK"       { return nsbaci::compiler::Parser::token::COLOR_PINK; }
+"PURPLE"     { return nsbaci::compiler::Parser::token::COLOR_PURPLE; }
+"GRAY"       { return nsbaci::compiler::Parser::token::COLOR_GRAY; }
+
+"CENTER"        { return nsbaci::compiler::Parser::token::POS_CENTER; }
+"TOP_LEFT"      { return nsbaci::compiler::Parser::token::POS_TOP_LEFT; }
+"TOP_CENTER"    { return nsbaci::compiler::Parser::token::POS_TOP_CENTER; }
+"TOP_RIGHT"     { return nsbaci::compiler::Parser::token::POS_TOP_RIGHT; }
+"CENTER_LEFT"   { return nsbaci::compiler::Parser::token::POS_CENTER_LEFT; }
+"CENTER_RIGHT"  { return nsbaci::compiler::Parser::token::POS_CENTER_RIGHT; }
+"BOTTOM_LEFT"   { return nsbaci::compiler::Parser::token::POS_BOTTOM_LEFT; }
+"BOTTOM_CENTER" { return nsbaci::compiler::Parser::token::POS_BOTTOM_CENTER; }
+"BOTTOM_RIGHT"  { return nsbaci::compiler::Parser::token::POS_BOTTOM_RIGHT; }
+
 [0-9]+ {
     yylval->emplace<int>(std::stoi(yytext));
     return nsbaci::compiler::Parser::token::NUMBER;

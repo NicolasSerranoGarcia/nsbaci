@@ -27,9 +27,12 @@
 #include <QObject>
 #include <QTimer>
 
+#include <memory>
+
 #include "compilerService.h"
 #include "compilerTypes.h"
 #include "drawingService.h"
+#include "drawingWidget.h"
 #include "fileService.h"
 #include "fileTypes.h"
 #include "runtimeService.h"
@@ -83,13 +86,13 @@ class Controller : public QObject {
    * @param f FileService instance for file operations.
    * @param c CompilerService instance for compilation.
    * @param r RuntimeService instance for program execution.
-   * @param d DrawingService instance for graphical output.
+   * @param d DrawingService instance for graphical output (unique_ptr).
    * @param parent Optional parent QObject for Qt memory management.
    */
   explicit Controller(nsbaci::services::FileService&& f,
                       nsbaci::services::CompilerService&& c,
                       nsbaci::services::RuntimeService&& r,
-                      nsbaci::services::DrawingService&& d,
+                      std::unique_ptr<nsbaci::services::DrawingService> d,
                       QObject* parent = nullptr);
 
   /**
@@ -302,8 +305,10 @@ class Controller : public QObject {
       compilerService;  ///< Service for BACI compilation.
   nsbaci::services::RuntimeService
       runtimeService;  ///< Service for program execution.
-  nsbaci::services::DrawingService
+  std::unique_ptr<nsbaci::services::DrawingService>
       drawingService;  ///< Service for graphical output.
+  nsbaci::ui::DrawingWidget*
+      drawingWidget = nullptr;  ///< Widget for canvas rendering.
 
   QString currentProgramName;  ///< Name of the currently loaded program.
   bool programLoaded = false;  ///< True if a program is loaded and ready.

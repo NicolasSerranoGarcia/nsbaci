@@ -187,7 +187,43 @@ const char* opcodeName(Opcode op) {
     case Opcode::LengthString:
       return "LengthString";
 
-    // Graphics Operations
+    // Graphics/Drawing Operations
+    case Opcode::DrawClear:
+      return "DrawClear";
+    case Opcode::DrawRefresh:
+      return "DrawRefresh";
+    case Opcode::DrawSetColor:
+      return "DrawSetColor";
+    case Opcode::DrawSetColorAlpha:
+      return "DrawSetColorAlpha";
+    case Opcode::DrawSetLineWidth:
+      return "DrawSetLineWidth";
+    case Opcode::DrawSetPosition:
+      return "DrawSetPosition";
+    case Opcode::DrawCircle:
+      return "DrawCircle";
+    case Opcode::DrawRectangle:
+      return "DrawRectangle";
+    case Opcode::DrawTriangle:
+      return "DrawTriangle";
+    case Opcode::DrawLine:
+      return "DrawLine";
+    case Opcode::DrawEllipse:
+      return "DrawEllipse";
+    case Opcode::DrawPixel:
+      return "DrawPixel";
+    case Opcode::DrawText:
+      return "DrawText";
+    case Opcode::FillCircle:
+      return "FillCircle";
+    case Opcode::FillRectangle:
+      return "FillRectangle";
+    case Opcode::FillTriangle:
+      return "FillTriangle";
+    case Opcode::FillEllipse:
+      return "FillEllipse";
+
+    // Legacy Graphics Operations
     case Opcode::MoveTo:
       return "MoveTo";
     case Opcode::MoveBy:

@@ -25,6 +25,7 @@
         nsbaci_uierror_library
         runtimeView
         nsbaci_compilerInstruction_library
+        nsbaci_drawingWidget_library
         
         nsbaci_services_library
     )

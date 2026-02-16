@@ -9,7 +9,7 @@
     set(CMAKE_AUTOUIC OFF)
     set(CMAKE_AUTORCC ON)
 
-    find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+    find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
 
     # --- Create an interface library representing qt. Any sub-library that uses qt should link against this one ---
 

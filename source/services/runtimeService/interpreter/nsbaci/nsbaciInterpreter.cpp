@@ -491,6 +491,240 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       break;
     }
 
+    // ============== Drawing Operations ==============
+    case Opcode::DrawClear: {
+      if (drawingCallback) {
+        drawingCallback(nsbaci::types::DrawCommand::clear());
+      }
+      break;
+    }
+
+    case Opcode::DrawRefresh: {
+      if (drawingCallback) {
+        drawingCallback(nsbaci::types::DrawCommand::refresh());
+      }
+      break;
+    }
+
+    case Opcode::DrawSetColor: {
+      // Stack: r, g, b (popped in reverse order)
+      int32_t b = t.pop();
+      int32_t g = t.pop();
+      int32_t r = t.pop();
+      currentR = static_cast<uint8_t>(r & 0xFF);
+      currentG = static_cast<uint8_t>(g & 0xFF);
+      currentB = static_cast<uint8_t>(b & 0xFF);
+      currentA = 255;
+      if (drawingCallback) {
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::setColor(color));
+      }
+      break;
+    }
+
+    case Opcode::DrawSetColorAlpha: {
+      // Stack: r, g, b, a (popped in reverse order)
+      int32_t a = t.pop();
+      int32_t b = t.pop();
+      int32_t g = t.pop();
+      int32_t r = t.pop();
+      currentR = static_cast<uint8_t>(r & 0xFF);
+      currentG = static_cast<uint8_t>(g & 0xFF);
+      currentB = static_cast<uint8_t>(b & 0xFF);
+      currentA = static_cast<uint8_t>(a & 0xFF);
+      if (drawingCallback) {
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::setColor(color));
+      }
+      break;
+    }
+
+    case Opcode::DrawSetLineWidth: {
+      currentLineWidth = t.pop();
+      if (drawingCallback) {
+        drawingCallback(nsbaci::types::DrawCommand::setLineWidth(currentLineWidth));
+      }
+      break;
+    }
+
+    case Opcode::DrawSetPosition: {
+      // Stack: x, y
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      if (drawingCallback) {
+        drawingCallback(nsbaci::types::DrawCommand::setPosition(
+            nsbaci::types::Point(x, y)));
+      }
+      break;
+    }
+
+    case Opcode::DrawCircle: {
+      // Stack: x, y, radius (outline only)
+      int32_t radius = t.pop();
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Circle circle(
+            nsbaci::types::Point(x, y), radius, false);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(circle, color));
+      }
+      break;
+    }
+
+    case Opcode::FillCircle: {
+      // Stack: x, y, radius (filled)
+      int32_t radius = t.pop();
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Circle circle(
+            nsbaci::types::Point(x, y), radius, true);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(circle, color));
+      }
+      break;
+    }
+
+    case Opcode::DrawRectangle: {
+      // Stack: x, y, width, height (outline only)
+      int32_t height = t.pop();
+      int32_t width = t.pop();
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Rectangle rect(x, y, width, height, false);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(rect, color));
+      }
+      break;
+    }
+
+    case Opcode::FillRectangle: {
+      // Stack: x, y, width, height (filled)
+      int32_t height = t.pop();
+      int32_t width = t.pop();
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Rectangle rect(x, y, width, height, true);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(rect, color));
+      }
+      break;
+    }
+
+    case Opcode::DrawTriangle: {
+      // Stack: x1, y1, x2, y2, x3, y3 (outline only)
+      int32_t y3 = t.pop();
+      int32_t x3 = t.pop();
+      int32_t y2 = t.pop();
+      int32_t x2 = t.pop();
+      int32_t y1 = t.pop();
+      int32_t x1 = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Triangle tri(
+            nsbaci::types::Point(x1, y1),
+            nsbaci::types::Point(x2, y2),
+            nsbaci::types::Point(x3, y3), false);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(tri, color));
+      }
+      break;
+    }
+
+    case Opcode::FillTriangle: {
+      // Stack: x1, y1, x2, y2, x3, y3 (filled)
+      int32_t y3 = t.pop();
+      int32_t x3 = t.pop();
+      int32_t y2 = t.pop();
+      int32_t x2 = t.pop();
+      int32_t y1 = t.pop();
+      int32_t x1 = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Triangle tri(
+            nsbaci::types::Point(x1, y1),
+            nsbaci::types::Point(x2, y2),
+            nsbaci::types::Point(x3, y3), true);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(tri, color));
+      }
+      break;
+    }
+
+    case Opcode::DrawLine: {
+      // Stack: x1, y1, x2, y2
+      int32_t y2 = t.pop();
+      int32_t x2 = t.pop();
+      int32_t y1 = t.pop();
+      int32_t x1 = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Line line(
+            nsbaci::types::Point(x1, y1),
+            nsbaci::types::Point(x2, y2), currentLineWidth);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(line, color));
+      }
+      break;
+    }
+
+    case Opcode::DrawEllipse: {
+      // Stack: x, y, radiusX, radiusY (outline only)
+      int32_t radiusY = t.pop();
+      int32_t radiusX = t.pop();
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Ellipse ellipse(
+            nsbaci::types::Point(x, y), radiusX, radiusY, false);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(ellipse, color));
+      }
+      break;
+    }
+
+    case Opcode::FillEllipse: {
+      // Stack: x, y, radiusX, radiusY (filled)
+      int32_t radiusY = t.pop();
+      int32_t radiusX = t.pop();
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Ellipse ellipse(
+            nsbaci::types::Point(x, y), radiusX, radiusY, true);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(ellipse, color));
+      }
+      break;
+    }
+
+    case Opcode::DrawPixel: {
+      // Stack: x, y
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      if (drawingCallback) {
+        nsbaci::types::Pixel pixel(x, y);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(pixel, color));
+      }
+      break;
+    }
+
+    case Opcode::DrawText: {
+      // Stack: x, y, fontSize; operand1 = text string
+      int32_t fontSize = t.pop();
+      int32_t y = t.pop();
+      int32_t x = t.pop();
+      std::string text = std::get<std::string>(instr.operand1);
+      if (drawingCallback) {
+        nsbaci::types::DrawText drawText(
+            nsbaci::types::Point(x, y), text, fontSize);
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::drawShape(drawText, color));
+      }
+      break;
+    }
+
     // ============== Default ==============
     default: {
       nsbaci::Error err;
@@ -521,10 +755,19 @@ void NsbaciInterpreter::setOutputCallback(OutputCallback callback) {
   outputCallback = std::move(callback);
 }
 
+void NsbaciInterpreter::setDrawingCallback(DrawingCallback callback) {
+  drawingCallback = std::move(callback);
+}
+
 void NsbaciInterpreter::reset() {
   waitingForInput = false;
   pendingInput.clear();
   hasInput = false;
+  currentR = 0;
+  currentG = 0;
+  currentB = 0;
+  currentA = 255;
+  currentLineWidth = 1;
 }
 
 }  // namespace nsbaci::services::runtime

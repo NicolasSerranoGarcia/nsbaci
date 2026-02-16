@@ -8,6 +8,7 @@
     add_subdirectory(errorDialogFactory)
     add_subdirectory(mainwindow)
     add_subdirectory(runtimeView)
+    add_subdirectory(drawingWidget)
 
 # nsbaci_ui_library
 # Note: This library includes nsbaci_errordialogfactory_library internally
@@ -19,5 +20,6 @@
     target_link_libraries(nsbaci_ui_library INTERFACE
         nsbaci_mainwindow_library
         runtimeView
+        nsbaci_drawingWidget_library
         # nsbaci_errordialogfactory_library is already linked via mainwindow
     )

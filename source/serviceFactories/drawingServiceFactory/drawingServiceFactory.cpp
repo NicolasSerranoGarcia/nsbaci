@@ -9,12 +9,14 @@
 
 #include "drawingServiceFactory.h"
 
+#include <memory>
+
 namespace nsbaci::factories {
 
-nsbaci::services::DrawingService DrawingServiceFactory::createService(
+std::unique_ptr<nsbaci::services::DrawingService> DrawingServiceFactory::createService(
     DefaultDrawingBackend) {
   // default constructor generates a default drawing service
-  return nsbaci::services::DrawingService{};
+  return std::make_unique<nsbaci::services::DrawingService>();
 }
 
 }  // namespace nsbaci::factories

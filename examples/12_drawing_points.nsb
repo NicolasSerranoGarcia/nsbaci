@@ -1,0 +1,55 @@
+clearCanvas(WHITE);
+
+// ============== Point Syntax Demo ==============
+
+// Draw shapes using Point syntax {x, y}
+setColor(BLUE);
+drawCircle({100, 100}, 50);           // Circle at point
+
+setColor(RED);
+fillCircle({250, 100}, 50);           // Filled circle at point
+
+// Rectangle with point for position
+setColor(GREEN);
+drawRect({400, 50}, 100, 100);
+
+setColor(CYAN);
+fillRect({550, 50}, 100, 100);
+
+// Triangle with three points
+setColor(MAGENTA);
+drawTriangle({100, 200}, {50, 300}, {150, 300});
+
+setColor(ORANGE);
+fillTriangle({250, 200}, {200, 300}, {300, 300});
+
+// Line with two points
+setColor(BLACK);
+setLineWidth(3);
+drawLine({400, 200}, {550, 300});
+
+// Ellipse with point
+setColor(PURPLE);
+drawEllipse({650, 250}, 60, 40);
+
+// Pixel with point
+setColor(RED);
+drawPixel({700, 200});
+
+// Text with point
+setColor(BLACK);
+drawText({50, 350}, "Using {x, y} Point syntax for coordinates", 16);
+drawText({50, 380}, "This makes code more readable!", 14);
+
+// Mixed example: Using variables with points
+int centerX = 400;
+int centerY = 450;
+int radius = 30;
+
+setColor(YELLOW);
+fillCircle(centerX, centerY, radius);
+
+setColor(BLACK);
+drawCircle(centerX, centerY, radius);
+
+refreshCanvas();

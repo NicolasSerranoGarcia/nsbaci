@@ -13,6 +13,8 @@
 #ifndef NSBACI_DRAWINGSERVICEFACTORY_H
 #define NSBACI_DRAWINGSERVICEFACTORY_H
 
+#include <memory>
+
 #include "drawingService.h"
 
 /**
@@ -37,9 +39,9 @@ class DrawingServiceFactory {
   DrawingServiceFactory() = default;
 
  public:
-  static nsbaci::services::DrawingService createService(
+  static std::unique_ptr<nsbaci::services::DrawingService> createService(
       DefaultDrawingBackend);
-  // static nsbaci::services::DrawingService createService(OtherBackendOrTest
+  // static std::unique_ptr<nsbaci::services::DrawingService> createService(OtherBackendOrTest
   // t);
   ~DrawingServiceFactory() = default;
 };

@@ -1,0 +1,116 @@
+clearCanvas(135, 206, 235);  // Sky blue background
+
+// ============== Sky Elements ==============
+
+// Sun
+setColor(YELLOW);
+fillCircle({650, 80}, 50);
+
+// Sun rays
+setColor(YELLOW);
+setLineWidth(3);
+drawLine({650, 20}, {650, 0});
+drawLine({700, 80}, {730, 80});
+drawLine({600, 80}, {570, 80});
+drawLine({690, 40}, {710, 20});
+drawLine({610, 40}, {590, 20});
+drawLine({690, 120}, {710, 140});
+drawLine({610, 120}, {590, 140});
+
+// Clouds
+setColor(WHITE);
+fillCircle({150, 60}, 30);
+fillCircle({180, 50}, 35);
+fillCircle({210, 60}, 30);
+fillCircle({120, 70}, 25);
+fillCircle({240, 70}, 25);
+
+fillCircle({450, 80}, 25);
+fillCircle({480, 70}, 30);
+fillCircle({510, 80}, 25);
+
+// ============== Ground ==============
+
+// Grass
+setColor(34, 139, 34);  // Forest green
+fillRect({0, 400}, 800, 200);
+
+// ============== House ==============
+
+// House body (main structure)
+setColor(139, 69, 19);  // Saddle brown
+fillRect({200, 250}, 250, 150);
+
+// Roof
+setColor(139, 0, 0);  // Dark red
+fillTriangle({180, 250}, {325, 120}, {470, 250});
+
+// Chimney
+setColor(105, 105, 105);  // Dim gray
+fillRect({380, 150}, 40, 80);
+
+// Door
+setColor(101, 67, 33);  // Dark brown
+fillRect({290, 310}, 70, 90);
+
+// Door handle
+setColor(YELLOW);
+fillCircle({340, 360}, 5);
+
+// Windows
+setColor(173, 216, 230);  // Light blue
+fillRect({220, 280}, 50, 50);
+fillRect({380, 280}, 50, 50);
+
+// Window frames
+setColor(WHITE);
+setLineWidth(2);
+drawRect({220, 280}, 50, 50);
+drawLine({245, 280}, {245, 330});
+drawLine({220, 305}, {270, 305});
+
+drawRect({380, 280}, 50, 50);
+drawLine({405, 280}, {405, 330});
+drawLine({380, 305}, {430, 305});
+
+// ============== Decorations ==============
+
+// Tree trunk
+setColor(139, 69, 19);
+fillRect({550, 320}, 30, 80);
+
+// Tree foliage
+setColor(34, 139, 34);
+fillCircle({565, 280}, 50);
+fillCircle({530, 310}, 35);
+fillCircle({600, 310}, 35);
+
+// Flowers in front
+setColor(255, 20, 147);  // Deep pink
+fillCircle({150, 420}, 8);
+fillCircle({170, 430}, 8);
+fillCircle({140, 440}, 8);
+
+setColor(255, 165, 0);  // Orange
+fillCircle({680, 425}, 8);
+fillCircle({700, 435}, 8);
+fillCircle({660, 440}, 8);
+
+// Fence
+setColor(WHITE);
+int fenceX = 50;
+while (fenceX < 180) {
+    fillRect(fenceX, 430, 10, 40);
+    fenceX = fenceX + 20;
+}
+
+// Horizontal fence bar
+fillRect({50, 445}, 130, 5);
+
+// Path to door
+setColor(169, 169, 169);  // Dark gray
+fillRect({305, 400}, 40, 50);
+
+// ============== Title ==============
+
+refreshCanvas();

@@ -192,4 +192,10 @@ void RuntimeService::setOutputCallback(runtime::OutputCallback callback) {
   }
 }
 
+void RuntimeService::setDrawingCallback(runtime::DrawingCallback callback) {
+  if (interpreter) {
+    interpreter->setDrawingCallback(std::move(callback));
+  }
+}
+
 }  // namespace nsbaci::services

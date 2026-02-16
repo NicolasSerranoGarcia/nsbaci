@@ -127,7 +127,33 @@ enum class Opcode : uint8_t {
   CompareRawString,  // Compare raw strings
   LengthString,      // Get string length
 
-  // ============== Graphics Operations ==============
+  // ============== Graphics/Drawing Operations ==============
+  // Canvas operations
+  DrawClear,      // Clear the canvas (optional: r, g, b on stack)
+  DrawRefresh,    // Force canvas refresh
+
+  // Color/state operations
+  DrawSetColor,       // Set drawing color (r, g, b on stack)
+  DrawSetColorAlpha,  // Set drawing color with alpha (r, g, b, a on stack)
+  DrawSetLineWidth,   // Set line width (width on stack)
+  DrawSetPosition,    // Set current position (x, y on stack)
+
+  // Shape drawing operations (outline only)
+  DrawCircle,      // Draw circle outline (x, y, radius on stack)
+  DrawRectangle,   // Draw rectangle outline (x, y, width, height on stack)
+  DrawTriangle,    // Draw triangle outline (x1, y1, x2, y2, x3, y3 on stack)
+  DrawLine,        // Draw line (x1, y1, x2, y2 on stack)
+  DrawEllipse,     // Draw ellipse outline (x, y, radiusX, radiusY on stack)
+  DrawPixel,       // Draw pixel (x, y on stack)
+  DrawText,        // Draw text (x, y, fontSize on stack, string in operand)
+
+  // Shape fill operations (filled shapes)
+  FillCircle,      // Fill circle (x, y, radius on stack)
+  FillRectangle,   // Fill rectangle (x, y, width, height on stack)
+  FillTriangle,    // Fill triangle (x1, y1, x2, y2, x3, y3 on stack)
+  FillEllipse,     // Fill ellipse (x, y, radiusX, radiusY on stack)
+
+  // Legacy graphics (keeping for compatibility)
   MoveTo,       // Move to absolute position
   MoveBy,       // Move by relative offset
   ChangeColor,  // Change drawing color
