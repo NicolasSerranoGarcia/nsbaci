@@ -1,5 +1,3 @@
 -Drawing service
 
 -User guide
-
--known issue: the app compiles with an empty file.

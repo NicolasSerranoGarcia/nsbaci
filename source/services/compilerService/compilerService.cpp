@@ -9,6 +9,9 @@
 
 #include "compilerService.h"
 
+#include <algorithm>
+#include <cctype>
+
 namespace nsbaci::services {
 
 CompilerService::CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c)
@@ -16,6 +19,20 @@ CompilerService::CompilerService(std::unique_ptr<nsbaci::compiler::Compiler> c)
 
 nsbaci::compiler::CompilerResult CompilerService::compile(
     nsbaci::types::Text raw) {
+  // Check if input is empty or contains only whitespace
+  bool isEmpty = raw.empty() ||
+                 std::all_of(raw.begin(), raw.end(),
+                             [](unsigned char c) { return std::isspace(c); });
+  if (isEmpty) {
+    nsbaci::Error err;
+    err.basic.severity = nsbaci::types::ErrSeverity::Error;
+    err.basic.message = "Cannot compile empty file";
+    err.basic.type = nsbaci::types::ErrType::compilationError;
+    err.payload = nsbaci::types::CompileError{1, 1};
+    programReady = false;
+    return nsbaci::compiler::CompilerResult(std::move(err));
+  }
+
   auto result = compiler->compile(raw);
   if (result.ok) {
     lastCompiledInstructions = std::move(result.instructions);
