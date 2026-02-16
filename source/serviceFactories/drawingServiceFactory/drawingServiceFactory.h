@@ -38,7 +38,7 @@ class DrawingServiceFactory {
 
  public:
   static nsbaci::services::DrawingService createService(
-      DefaultDrawingBackend t);
+      DefaultDrawingBackend);
   // static nsbaci::services::DrawingService createService(OtherBackendOrTest
   // t);
   ~DrawingServiceFactory() = default;

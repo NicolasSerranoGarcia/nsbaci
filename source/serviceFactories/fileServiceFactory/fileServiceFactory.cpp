@@ -12,7 +12,7 @@
 namespace nsbaci::factories {
 
 nsbaci::services::FileService FileServiceFactory::createService(
-    DefaultFileSystem t) {
+    DefaultFileSystem) {
   // Default constructor generates a default file service
   return nsbaci::services::FileService{};
 }

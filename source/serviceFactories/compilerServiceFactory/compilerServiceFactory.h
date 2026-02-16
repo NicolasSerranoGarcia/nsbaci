@@ -37,7 +37,7 @@ class CompilerServiceFactory {
   CompilerServiceFactory() = default;
 
  public:
-  static nsbaci::services::CompilerService createService(NsbaciCompiler t);
+  static nsbaci::services::CompilerService createService(NsbaciCompiler);
   // static nsbaci::services::CompilerService createService(OtherCompilerOrTest
   // t);
   ~CompilerServiceFactory() = default;

@@ -56,4 +56,30 @@ void Program::writeMemory(nsbaci::types::MemoryAddr addr, int32_t value) {
   globalMemory[addr] = value;
 }
 
+void Program::createSemaphore(nsbaci::types::MemoryAddr addr,
+                              int32_t initialCount) {
+  semaphores.emplace(addr, Semaphore(initialCount));
+}
+
+bool Program::semaphoreWait(nsbaci::types::MemoryAddr addr,
+                            nsbaci::types::ThreadID threadId) {
+  auto it = semaphores.find(addr);
+  if (it == semaphores.end()) {
+    throw std::runtime_error("Semaphore not found at address");
+  }
+  return it->second.wait(threadId);
+}
+
+nsbaci::types::ThreadID Program::semaphoreSignal(nsbaci::types::MemoryAddr addr) {
+  auto it = semaphores.find(addr);
+  if (it == semaphores.end()) {
+    throw std::runtime_error("Semaphore not found at address");
+  }
+  return it->second.signal();
+}
+
+bool Program::hasSemaphore(nsbaci::types::MemoryAddr addr) const {
+  return semaphores.find(addr) != semaphores.end();
+}
+
 }  // namespace nsbaci::services::runtime

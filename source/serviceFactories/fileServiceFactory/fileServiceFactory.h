@@ -37,7 +37,7 @@ class FileServiceFactory {
   FileServiceFactory() = default;
 
  public:
-  static nsbaci::services::FileService createService(DefaultFileSystem t);
+  static nsbaci::services::FileService createService(DefaultFileSystem);
   // static nsbaci::services::FileService createService(OtherFileSystemOrTest
   // t);
   ~FileServiceFactory() = default;

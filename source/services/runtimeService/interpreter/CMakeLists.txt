@@ -9,7 +9,6 @@
 # nsbaci_interpreter_library
 
     add_library(nsbaci_interpreter_library STATIC
-        interpreter.cpp
         interpreter.h
     )
 

@@ -12,7 +12,7 @@
 namespace nsbaci::factories {
 
 nsbaci::services::CompilerService CompilerServiceFactory::createService(
-    NsbaciCompiler t) {
+    NsbaciCompiler) {
   // Default constructor generates a nsbaci compiler
   return nsbaci::services::CompilerService{};
 }

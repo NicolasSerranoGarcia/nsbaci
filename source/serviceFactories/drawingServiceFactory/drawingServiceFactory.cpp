@@ -12,7 +12,7 @@
 namespace nsbaci::factories {
 
 nsbaci::services::DrawingService DrawingServiceFactory::createService(
-    DefaultDrawingBackend t) {
+    DefaultDrawingBackend) {
   // default constructor generates a default drawing service
   return nsbaci::services::DrawingService{};
 }

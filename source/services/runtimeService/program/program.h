@@ -19,6 +19,7 @@
 
 #include "compilerTypes.h"
 #include "instruction.h"
+#include "semaphore.h"
 
 /**
  * @namespace nsbaci::types
@@ -109,6 +110,38 @@ class Program {
    */
   void writeMemory(nsbaci::types::MemoryAddr addr, int32_t value);
 
+  /**
+   * @brief Create a semaphore at the given address.
+   * @param addr Memory address to associate with the semaphore.
+   * @param initialCount Initial semaphore count.
+   */
+  void createSemaphore(nsbaci::types::MemoryAddr addr, int32_t initialCount);
+
+  /**
+   * @brief Wait (P operation) on a semaphore.
+   * @param addr Address of the semaphore.
+   * @param threadId The thread attempting to wait.
+   * @return true if thread can proceed, false if it must block.
+   */
+  bool semaphoreWait(nsbaci::types::MemoryAddr addr,
+                     nsbaci::types::ThreadID threadId);
+
+  /**
+   * @brief Signal (V operation) on a semaphore.
+   * @param addr Address of the semaphore.
+   * @return ThreadID to wake, or 0 if none waiting.
+   */
+  nsbaci::types::ThreadID semaphoreSignal(nsbaci::types::MemoryAddr addr);
+
+  /**
+   * @brief Check if a semaphore exists at the given address.
+   * @param addr Address to check.
+   * @return true if semaphore exists, false otherwise.
+   */
+  bool hasSemaphore(nsbaci::types::MemoryAddr addr) const;
+
+  
+
  private:
   // Instruction stream - read-only after construction
   nsbaci::compiler::InstructionStream instructions;
@@ -116,6 +149,8 @@ class Program {
   nsbaci::types::SymbolTable symbolTable;
   // Global memory
   nsbaci::types::Memory globalMemory;
+  // Semaphores
+  nsbaci::types::SemaphoreTable semaphores;
 };
 
 }  // namespace nsbaci::services::runtime
