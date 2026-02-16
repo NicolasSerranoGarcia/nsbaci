@@ -38,9 +38,12 @@ jobs:
             mingw-w64-x86_64-texlive-fonts-recommended
             mingw-w64-x86_64-texlive-extra-utils
             mingw-w64-x86_64-ghostscript
-            mingw-w64-x86_64-pandoc
             bison
             flex
+
+      - name: Install Pandoc
+        run: choco install pandoc -y
+        shell: pwsh
 
       - name: Copy FlexLexer.h to MinGW64 include path
         run: cp /usr/include/FlexLexer.h /mingw64/include/
@@ -61,9 +64,21 @@ jobs:
 
       - name: Generate User Guide PDF
         run: |
-          cd build
-          make user_guide || cmake --build . --target user_guide
-        shell: msys2 {0}
+          $env:Path = "C:\msys64\mingw64\bin;" + $env:Path
+          pandoc docs/user_guide.md `
+            --metadata-file=build/docs/user_guide_meta.yaml `
+            --pdf-engine=xelatex `
+            --toc --toc-depth=2 `
+            --number-sections `
+            --highlight-style=tango `
+            -V geometry:margin=1in `
+            -V fontsize=11pt `
+            -V documentclass=report `
+            -V colorlinks=true `
+            -V linkcolor=blue `
+            -V urlcolor=blue `
+            -o build/docs/nsbaci_user_guide.pdf
+        shell: pwsh
 
       - name: Build Doxygen documentation
         run: |
