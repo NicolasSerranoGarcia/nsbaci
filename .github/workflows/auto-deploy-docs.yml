@@ -69,7 +69,6 @@ jobs:
             --pdf-engine=xelatex \
             --toc --toc-depth=2 \
             --number-sections \
-            --syntax-highlighting \
             -V geometry:margin=1in \
             -V fontsize=11pt \
             -V documentclass=report \
