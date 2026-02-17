@@ -1,3 +1,5 @@
 -Drawing service
 
 -User guide
+
+- Clear canvas does not work
