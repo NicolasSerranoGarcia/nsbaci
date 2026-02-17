@@ -64,21 +64,21 @@ jobs:
 
       - name: Generate User Guide PDF
         run: |
-          $env:Path = "C:\msys64\mingw64\bin;" + $env:Path
-          pandoc docs/user_guide.md `
-            --metadata-file=build/docs/user_guide_meta.yaml `
-            --pdf-engine=xelatex `
-            --toc --toc-depth=2 `
-            --number-sections `
-            --highlight-style=tango `
-            -V geometry:margin=1in `
-            -V fontsize=11pt `
-            -V documentclass=report `
-            -V colorlinks=true `
-            -V linkcolor=blue `
-            -V urlcolor=blue `
+          export PATH="/c/Users/runneradmin/AppData/Local/Pandoc:$PATH"
+          pandoc docs/user_guide.md \
+            --metadata-file=build/docs/user_guide_meta.yaml \
+            --pdf-engine=xelatex \
+            --toc --toc-depth=2 \
+            --number-sections \
+            --syntax-highlighting \
+            -V geometry:margin=1in \
+            -V fontsize=11pt \
+            -V documentclass=report \
+            -V colorlinks=true \
+            -V linkcolor=blue \
+            -V urlcolor=blue \
             -o build/docs/nsbaci_user_guide.pdf
-        shell: pwsh
+        shell: msys2 {0}
 
       - name: Build Doxygen documentation
         run: |
