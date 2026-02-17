@@ -49,17 +49,26 @@ jobs:
         run: cp /usr/include/FlexLexer.h /mingw64/include/
         shell: msys2 {0}
 
-      - name: Configure project
+      - name: Configure and build project
         run: |
           mkdir -p build
           cd build
           cmake -DCMAKE_BUILD_TYPE=Release -DGENERATE_DOCS=ON -DGENERATE_USER_GUIDE=ON ..
+          cmake --build . --config Release
         shell: msys2 {0}
 
-      - name: Build project
+      - name: Build documentation (Doxygen)
         run: |
-          cd build
-          cmake --build . --config Release
+            cd build
+            doxygen -u Doxyfile
+            doxygen Doxyfile
+            if [ -d "../docs/latex" ]; then
+              cd ../docs/latex
+
+            pdflatex --shell-escape refman.tex
+            mkdir -p ../html/pdf
+            cp refman.pdf ../html/pdf/
+            fi
         shell: msys2 {0}
 
       - name: Generate User Guide PDF
@@ -80,26 +89,6 @@ jobs:
             -o build/docs/nsbaci_user_guide.pdf
         shell: msys2 {0}
 
-      - name: Build Doxygen documentation
-        run: |
-          cd build
-          doxygen -u Doxyfile
-          doxygen Doxyfile
-        shell: msys2 {0}
-
-      - name: Generate Codebase Reference PDF
-        run: |
-          if [ -d "build/docs/latex" ]; then
-            cd build/docs/latex
-            pdflatex --shell-escape refman.tex
-            pdflatex --shell-escape refman.tex
-            mkdir -p ../html/pdf
-            cp refman.pdf ../html/pdf/nsbaci_codebase_reference.pdf
-          else
-            echo "Warning: build/docs/latex directory not found"
-          fi
-        shell: msys2 {0}
-
       - name: Copy User Guide PDF to docs
         run: |
           mkdir -p build/docs/html/pdf
@@ -111,7 +100,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/docs/html
+          publish_dir: ./docs/html
           publish_branch: gh-pages
           cname: nsbaci.nicolasserranogarcia.com
           force_orphan: true
