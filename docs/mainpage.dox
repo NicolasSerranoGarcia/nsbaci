@@ -14,7 +14,7 @@
     <code>For users & students</code>
   </a>
 
-  <a class="du-card" href="pdf/nsbaci_codebase_reference.pdf" download="nsbaci_codebase_reference.pdf">
+  <a class="du-card" href="pdf/refman.pdf" download="nsbaci_codebase_reference.pdf">
     <h3>Codebase Reference</h3>
     <p>Developer documentation generated from source code. Classes, modules, architecture.</p>
     <code>For developers & contributors</code>
