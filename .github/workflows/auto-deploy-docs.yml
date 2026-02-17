@@ -64,8 +64,7 @@ jobs:
 
       - name: Generate User Guide PDF
         run: |
-          export PATH="/c/Users/runneradmin/AppData/Local/Pandoc:$PATH"
-          pandoc docs/user_guide.md \
+          /c/ProgramData/chocolatey/bin/pandoc.exe docs/user_guide.md \
             --metadata-file=build/docs/user_guide_meta.yaml \
             --pdf-engine=xelatex \
             --toc --toc-depth=2 \
