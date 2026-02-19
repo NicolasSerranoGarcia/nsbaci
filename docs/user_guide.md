@@ -35,7 +35,7 @@ cout << "Hello, x is: " << x << endl;
 return;
 ```
 
-Type this in the editor, hit **Compile** (or press `Ctrl+B`), then **Run** (or `Ctrl+R`). You'll see the output in the console panel. Programs in NSBACI must end with `return;`. As you can see, the syntax is greatly inspired in c++
+Type this in the editor, press **Compile** (or press `Ctrl+B`), then **Run** (or `Ctrl+R`). You'll see the output in the console panel. As I mentioned, the syntax is greatly inspired in C++.
 
 ---.
 
@@ -188,7 +188,7 @@ Each block inside `cobegin`/`coend` runs as a separate thread. The program conti
 
 ### The Runtime View
 
-When you run a concurrent program, NSBACI switches to the Runtime View. Here's what you will see:
+When you run a concurrent program, NSBACI switches to the Runtime View. You will see the following:
 
 - **Threads Panel** — Lists all threads with their current state (running, blocked, terminated). Click on a thread to see what instruction it's about to execute.
 
