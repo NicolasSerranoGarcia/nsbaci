@@ -494,7 +494,9 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
     // ============== Drawing Operations ==============
     case Opcode::DrawClear: {
       if (drawingCallback) {
-        drawingCallback(nsbaci::types::DrawCommand::clear());
+        // Use current color for clearing the canvas
+        nsbaci::types::Color color(currentR, currentG, currentB, currentA);
+        drawingCallback(nsbaci::types::DrawCommand::clearWithColor(color));
       }
       break;
     }

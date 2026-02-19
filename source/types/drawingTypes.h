@@ -248,6 +248,14 @@ struct DrawCommand {
   static DrawCommand clear() {
     DrawCommand cmd;
     cmd.type = DrawCommandType::Clear;
+    cmd.color = Color(255, 255, 255);  // Default white
+    return cmd;
+  }
+
+  static DrawCommand clearWithColor(Color c) {
+    DrawCommand cmd;
+    cmd.type = DrawCommandType::Clear;
+    cmd.color = c;
     return cmd;
   }
 

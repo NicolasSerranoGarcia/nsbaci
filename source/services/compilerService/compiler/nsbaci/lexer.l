@@ -78,6 +78,7 @@
 "PINK"       { return nsbaci::compiler::Parser::token::COLOR_PINK; }
 "PURPLE"     { return nsbaci::compiler::Parser::token::COLOR_PURPLE; }
 "GRAY"       { return nsbaci::compiler::Parser::token::COLOR_GRAY; }
+"BROWN"      { return nsbaci::compiler::Parser::token::COLOR_BROWN; }
 
 "CENTER"        { return nsbaci::compiler::Parser::token::POS_CENTER; }
 "TOP_LEFT"      { return nsbaci::compiler::Parser::token::POS_TOP_LEFT; }

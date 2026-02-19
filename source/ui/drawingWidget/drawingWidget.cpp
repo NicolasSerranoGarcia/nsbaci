@@ -13,6 +13,7 @@
 #include <QPaintEvent>
 #include <QResizeEvent>
 #include <QPolygon>
+#include <cmath>
 
 namespace nsbaci::ui {
 
@@ -22,7 +23,7 @@ DrawingWidget::DrawingWidget(QWidget* parent) : QWidget(parent) {
   setMinimumSize(400, 300);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   setAutoFillBackground(true);
-
+  setWindowIcon(QIcon(":/assets/nsbaci.ico"));
   // Initialize the canvas
   ensureCanvas();
   clear();
@@ -45,6 +46,8 @@ QSize DrawingWidget::sizeHint() const {
 void DrawingWidget::onDrawCommand(const DrawCommand& command) {
   switch (command.type) {
     case DrawCommandType::Clear:
+      // Use the color from the command to clear the canvas
+      backgroundColor_ = toQColor(command.color);
       clear();
       break;
     case DrawCommandType::SetColor:
@@ -241,25 +244,51 @@ void DrawingWidget::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);
   QPainter painter(this);
 
-  // Scale the canvas to fit the widget while maintaining aspect ratio
-  QRect targetRect = rect();
-  QSize canvasSize = canvas_.size();
-
-  // Calculate scaled size maintaining aspect ratio
-  QSize scaledSize = canvasSize.scaled(targetRect.size(), Qt::KeepAspectRatio);
-
-  // Center the canvas in the widget
-  int x = (targetRect.width() - scaledSize.width()) / 2;
-  int y = (targetRect.height() - scaledSize.height()) / 2;
-
-  // Draw a border around the canvas area
-  painter.fillRect(rect(), Qt::darkGray);
-  painter.drawPixmap(x, y, scaledSize.width(), scaledSize.height(), canvas_);
+  // The widget maintains canvas aspect ratio, so we can fill the entire widget
+  painter.drawPixmap(rect(), canvas_);
 }
 
 void DrawingWidget::resizeEvent(QResizeEvent* event) {
-  Q_UNUSED(event);
-  // The canvas size stays fixed, we just rescale during paint
+  // Enforce canvas aspect ratio to ensure the canvas always fills the widget
+  // When user resizes in any direction, scale both axes proportionally
+  QSize oldSize = event->oldSize();
+  QSize newSize = event->size();
+  double aspectRatio =
+      static_cast<double>(canvasSize_.width) / canvasSize_.height;
+
+  // Determine which axis changed more (or if both changed)
+  int deltaWidth = newSize.width() - oldSize.width();
+  int deltaHeight = newSize.height() - oldSize.height();
+
+  int targetWidth, targetHeight;
+
+  // Use the axis with the larger change to drive the resize
+  if (std::abs(deltaWidth) >= std::abs(deltaHeight)) {
+    // Width changed more - calculate height from width
+    targetWidth = newSize.width();
+    targetHeight = static_cast<int>(targetWidth / aspectRatio);
+  } else {
+    // Height changed more - calculate width from height
+    targetHeight = newSize.height();
+    targetWidth = static_cast<int>(targetHeight * aspectRatio);
+  }
+
+  // Ensure minimum size
+  if (targetWidth < 400) {
+    targetWidth = 400;
+    targetHeight = static_cast<int>(targetWidth / aspectRatio);
+  }
+  if (targetHeight < 300) {
+    targetHeight = 300;
+    targetWidth = static_cast<int>(targetHeight * aspectRatio);
+  }
+
+  // Only resize if needed to avoid infinite recursion
+  if (targetWidth != newSize.width() || targetHeight != newSize.height()) {
+    resize(targetWidth, targetHeight);
+  }
+
+  QWidget::resizeEvent(event);
 }
 
 // ============== Private Methods ==============

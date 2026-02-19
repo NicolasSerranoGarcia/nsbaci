@@ -193,7 +193,7 @@
 // Color macros
 %token COLOR_RED COLOR_GREEN COLOR_BLUE COLOR_WHITE COLOR_BLACK
 %token COLOR_YELLOW COLOR_CYAN COLOR_MAGENTA COLOR_ORANGE
-%token COLOR_PINK COLOR_PURPLE COLOR_GRAY
+%token COLOR_PINK COLOR_PURPLE COLOR_GRAY COLOR_BROWN
 
 // Position macros
 %token POS_CENTER POS_TOP_LEFT POS_TOP_CENTER POS_TOP_RIGHT
@@ -948,6 +948,12 @@ color_macro:
       emit(instructions, Opcode::PushLiteral, int32_t(128));
       emit(instructions, Opcode::PushLiteral, int32_t(128));
     }
+  | COLOR_BROWN
+    {
+      emit(instructions, Opcode::PushLiteral, int32_t(139));
+      emit(instructions, Opcode::PushLiteral, int32_t(69));
+      emit(instructions, Opcode::PushLiteral, int32_t(19));
+    }
   ;
 
 position_macro:
@@ -1180,6 +1186,11 @@ fill_ellipse_stmt:
 draw_clear_stmt:
     DRAW_CLEAR '(' ')'
     {
+      // Clear with white (default)
+      emit(instructions, Opcode::PushLiteral, int32_t(255));  // R
+      emit(instructions, Opcode::PushLiteral, int32_t(255));  // G
+      emit(instructions, Opcode::PushLiteral, int32_t(255));  // B
+      emit(instructions, Opcode::DrawSetColor);
       emit(instructions, Opcode::DrawClear);
     }
   | DRAW_CLEAR '(' expr ',' expr ',' expr ')'
