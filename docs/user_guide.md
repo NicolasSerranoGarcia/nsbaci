@@ -6,17 +6,17 @@
 
 ## What is NSBACI?
 
-NSBACI (Nicolás Serrano BAsic Concurrency Interpreter) is a development environment designed to help you understand concurrency concepts. If you've ever wondered how multiple threads work together, how race conditions happen, or why synchronization matters — this tool is for you.
+NSBACI (Nicolás Serrano BAsic Concurrency Interpreter) is a small development environment designed to work with simple concurrency. The program consists of a simple text editor, which
+supports edition of one file, which one can then compile and run. NSBACI has it's own language, which follow C's syntax for almost every aspect. It also has I/O, whose syntax comes directly from C++. 
+The program also carries a runtime environment, where you can analyze your programs step by step, just like a debugger. 
 
-The idea is simple: write concurrent programs in a C++ -like syntax, and watch them execute step by step. You get to see exactly what each thread is doing at any moment, which makes understanding (and debugging) concurrent behavior much more intuitive than reading theory alone.
-
-NSBACI is inspired by Ben Ari's jBACI, but built from scratch with a modern interface and some extra features like graphics drawing.
+NSBACI is inspired by Ben Ari's jBACI, but built from scratch in C++ with a renewed interface and some extra features like graphics drawing.
 
 ---
 
 ## Getting Started
 
-### The Interface at a Glance
+### The Interface
 
 When you open NSBACI, you'll see a clean code editor. The sidebar on the left has two main buttons:
 
