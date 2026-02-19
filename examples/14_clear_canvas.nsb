@@ -1,0 +1,120 @@
+// ============== Test 1: Clear with RGB values ==============
+// Clear to sky blue using RGB values
+clearCanvas(135, 206, 235);
+
+setColor(WHITE);
+drawText(50, 50, "Test 1: clearCanvas(135, 206, 235) - Sky Blue", 16);
+drawText(50, 80, "Canvas cleared with RGB values", 12);
+
+// Draw a shape to show the background
+setColor(YELLOW);
+fillCircle(400, 150, 60);
+setColor(BLACK);
+drawText(360, 145, "Sun", 14);
+
+refreshCanvas();
+
+int i;
+for (i = 0; i < 1000; i = i + 1) {
+    // busy wait
+}
+
+// ============== Test 2: Clear with color macro ==============
+// Clear to green using a color macro
+clearCanvas(GREEN);
+
+setColor(WHITE);
+drawText(50, 50, "Test 2: clearCanvas(GREEN) - Color Macro", 16);
+drawText(50, 80, "Canvas cleared with GREEN macro", 12);
+
+// Draw something on the green background
+setColor(BROWN);  // Brown for tree trunk
+fillRect(350, 200, 30, 150);
+setColor(34, 139, 34);  // Forest green for tree leaves
+fillCircle(365, 170, 60);
+setColor(WHITE);
+drawText(330, 380, "Tree", 14);
+
+refreshCanvas();
+
+// Wait
+for (i = 0; i < 1000; i = i + 1) {
+    // busy wait
+}
+
+// ============== Test 3: Clear with no arguments (white) ==============
+// Clear to white (default)
+clearCanvas();
+
+setColor(BLACK);
+drawText(50, 50, "Test 3: clearCanvas() - Default White", 16);
+drawText(50, 80, "Canvas cleared with no arguments (white)", 12);
+
+// Draw colorful shapes on white background
+setColor(RED);
+fillCircle(150, 200, 40);
+
+setColor(BLUE);
+fillRect(220, 160, 80, 80);
+
+setColor(GREEN);
+fillTriangle(380, 240, 340, 160, 420, 160);
+
+setColor(PURPLE);
+fillEllipse(500, 200, 50, 40);
+
+setColor(ORANGE);
+fillCircle(600, 200, 40);
+
+setColor(BLACK);
+drawText(50, 300, "All shapes visible on white background", 14);
+
+refreshCanvas();
+
+// Wait
+for (i = 0; i < 1000; i = i + 1) {
+    // busy wait
+}
+
+// ============== Test 4: Clear with custom dark color ==============
+// Clear to dark purple
+clearCanvas(48, 25, 52);
+
+setColor(WHITE);
+drawText(50, 50, "Test 4: clearCanvas(48, 25, 52) - Dark Purple", 16);
+drawText(50, 80, "Canvas cleared with dark custom color", 12);
+
+// Draw bright shapes that stand out
+setColor(CYAN);
+fillCircle(200, 200, 50);
+
+setColor(MAGENTA);
+fillRect(300, 150, 100, 100);
+
+setColor(YELLOW);
+fillTriangle(500, 250, 450, 150, 550, 150);
+
+setColor(WHITE);
+drawText(50, 350, "Bright shapes on dark background", 14);
+
+refreshCanvas();
+
+// Wait
+for (i = 0; i < 1000; i = i + 1) {
+    // busy wait
+}
+
+// ============== Final: Show completion message ==============
+clearCanvas(WHITE);
+
+setColor(BLACK);
+drawText(200, 250, "clearCanvas Tests Complete!", 24);
+drawText(180, 300, "All clear modes working correctly", 16);
+
+// Draw a checkmark
+setColor(GREEN);
+setLineWidth(4);
+drawLine(350, 380, 380, 420);
+drawLine(380, 420, 450, 340);
+
+refreshCanvas();
