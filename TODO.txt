@@ -1,1 +1,1 @@
--User guide
+- Introduce code examples inside the Help toolbar, as kind of an intregrated user guide
