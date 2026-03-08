@@ -1,0 +1,145 @@
+/*!
+\page download Download
+
+\htmlonly
+<div class="du-hero">
+  <h1>Download nsbaci</h1>
+  <p class="du-sub">Get the latest release for your platform</p>
+</div>
+
+<div id="dl-loading" style="text-align:center; padding:2rem 0; opacity:.7;">
+  Loading latest release&hellip;
+</div>
+
+<div id="dl-error" style="display:none; text-align:center; padding:2rem 0;">
+  <p>Could not fetch the latest release.</p>
+  <p>You can download it directly from
+    <a href="https://github.com/NicolasSerranoGarcia/nsbaci/releases/latest">GitHub Releases</a>.</p>
+</div>
+
+<div id="dl-content" style="display:none;">
+
+  <p id="dl-version" style="text-align:center; opacity:.75; margin-bottom:1.5rem;"></p>
+
+  <div class="du-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+
+    <!-- Windows -->
+    <div class="du-card" id="dl-card-windows">
+      <h3>Windows</h3>
+      <p>Installer (.exe) for Windows 10 and later.</p>
+      <code>64-bit x86</code>
+      <div style="margin-top:.75rem;">
+        <a id="dl-link-windows" class="du-btn" style="display:none;" href="#">Download</a>
+        <span id="dl-na-windows" style="display:none; opacity:.6;">Not available</span>
+      </div>
+    </div>
+
+    <!-- Linux -->
+    <div class="du-card" id="dl-card-linux">
+      <h3>Linux</h3>
+      <p>Portable AppImage, works on most distributions.</p>
+      <code>64-bit x86</code>
+      <div style="margin-top:.75rem;">
+        <a id="dl-link-linux" class="du-btn" style="display:none;" href="#">Download</a>
+        <span id="dl-na-linux" style="display:none; opacity:.6;">Not available</span>
+      </div>
+    </div>
+
+    <!-- macOS -->
+    <div class="du-card" id="dl-card-macos">
+      <h3>macOS</h3>
+      <p>Disk image (.dmg) for Apple Silicon and Intel.</p>
+      <code>Universal</code>
+      <div style="margin-top:.75rem;">
+        <a id="dl-link-macos" class="du-btn" style="display:none;" href="#">Download</a>
+        <span id="dl-na-macos" style="display:none; opacity:.6;">Not available</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="du-sections" style="max-width:52rem; margin:2rem auto 0;">
+
+    <h2>Installation notes</h2>
+
+    <h3>Windows</h3>
+    <p>Windows may show a <em>"Windows protected your PC"</em> warning because the
+    installer is not digitally signed.  Click <strong>More info</strong> then
+    <strong>Run anyway</strong> to proceed.</p>
+
+    <h3>Linux</h3>
+    <ol>
+      <li>Make the file executable: <code>chmod +x nsbaci-*.AppImage</code></li>
+      <li>Run it: <code>./nsbaci-*.AppImage</code></li>
+    </ol>
+    <p>If you see a <em>"FUSE not found"</em> error, install it first:<br>
+    <code>sudo apt install libfuse2</code> (Debian/Ubuntu) or
+    <code>sudo dnf install fuse-libs</code> (Fedora).</p>
+
+    <h3>macOS</h3>
+    <ol>
+      <li>Open the <code>.dmg</code> and drag <strong>nsbaci</strong> to <strong>Applications</strong>.</li>
+      <li>On first launch, right-click the app and select <strong>Open</strong> to bypass Gatekeeper.</li>
+    </ol>
+
+  </div>
+
+  <p style="text-align:center; margin-top:2rem; opacity:.6;">
+    All releases are available on
+    <a href="https://github.com/NicolasSerranoGarcia/nsbaci/releases">GitHub</a>.
+  </p>
+
+</div>
+
+<script>
+(function () {
+  var API = "https://api.github.com/repos/NicolasSerranoGarcia/nsbaci/releases/latest";
+
+  fetch(API)
+    .then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    })
+    .then(function (release) {
+      document.getElementById("dl-loading").style.display = "none";
+      document.getElementById("dl-content").style.display = "block";
+      document.getElementById("dl-version").textContent = release.tag_name + "  \u2014  " + new Date(release.published_at).toLocaleDateString();
+
+      var assets = release.assets || [];
+      var mapped = { windows: null, linux: null, macos: null };
+
+      assets.forEach(function (a) {
+        var name = a.name.toLowerCase();
+        if (name.endsWith(".exe"))       mapped.windows = a;
+        else if (name.endsWith(".appimage")) mapped.linux = a;
+        else if (name.endsWith(".dmg"))  mapped.macos = a;
+      });
+
+      ["windows", "linux", "macos"].forEach(function (key) {
+        var link = document.getElementById("dl-link-" + key);
+        var na   = document.getElementById("dl-na-" + key);
+        if (mapped[key]) {
+          link.href = mapped[key].browser_download_url;
+          link.textContent = "Download (" + formatBytes(mapped[key].size) + ")";
+          link.style.display = "inline-block";
+        } else {
+          na.style.display = "inline";
+        }
+      });
+    })
+    .catch(function () {
+      document.getElementById("dl-loading").style.display = "none";
+      document.getElementById("dl-error").style.display = "block";
+    });
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + " B";
+    var kb = bytes / 1024;
+    if (kb < 1024) return kb.toFixed(1) + " KB";
+    return (kb / 1024).toFixed(1) + " MB";
+  }
+})();
+</script>
+\endhtmlonly
+
+*/

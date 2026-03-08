@@ -19,6 +19,12 @@
     <p>Developer documentation generated from source code. Classes, modules, architecture.</p>
     <code>For developers & contributors</code>
   </a>
+
+  <a class="du-card" href="download.html">
+    <h3>Download</h3>
+    <p>Get the latest release for Windows, Linux, or macOS.</p>
+    <code>Installers & binaries</code>
+  </a>
 </div>
 \endhtmlonly
 
