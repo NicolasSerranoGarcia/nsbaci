@@ -22,6 +22,7 @@
 #include "errorDialogFactory.h"
 #include "runtimeView.h"
 #include "uiError.h"
+#include "userGuideDialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -96,6 +97,7 @@ class MainWindow : public QMainWindow {
   void onToggleFullscreen();
 
   // Help menu
+  void onUserGuide();
   void onAbout();
 
   // Editor
@@ -152,6 +154,7 @@ class MainWindow : public QMainWindow {
   QAction* actionRun = nullptr;
 
   // Help actions
+  QAction* actionUserGuide = nullptr;
   QAction* actionAbout = nullptr;
 
   // State
