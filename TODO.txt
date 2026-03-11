@@ -1,1 +1,3 @@
-- Introduce code examples inside the Help toolbar, as kind of an intregrated user guide
+- Introduce code examples inside the Help toolbar, as kind of an intregrated user guide. Maybe downloadable files? Or just an integrated user guide with the code examples.
+If done, link it with the docs page nsbaci.nicolasserranogarcia.com which has the pdf of the user guide and additional resources. It should look like a subwindow maybe? With 
+a side menu
