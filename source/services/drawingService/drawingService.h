@@ -15,7 +15,6 @@
 #define NSBACI_SERVICES_DRAWINGSERVICE_H
 
 #include <QObject>
-
 #include <memory>
 
 #include "drawingTypes.h"
@@ -277,10 +276,10 @@ class DrawingService : public QObject {
   void canvasSizeChanged(const nsbaci::types::Size& size);
 
  private:
-  nsbaci::types::Color currentColor_{0, 0, 0};      // Default black
-  nsbaci::types::Point currentPosition_{0, 0};      // Default origin
-  int32_t lineWidth_ = 1;                           // Default line width
-  nsbaci::types::Size canvasSize_{800, 600};        // Default canvas size
+  nsbaci::types::Color currentColor_{0, 0, 0};           // Default black
+  nsbaci::types::Point currentPosition_{0, 0};           // Default origin
+  int32_t lineWidth_ = 1;                                // Default line width
+  nsbaci::types::Size canvasSize_{800, 600};             // Default canvas size
   nsbaci::types::Color backgroundColor_{255, 255, 255};  // Default white
 };
 

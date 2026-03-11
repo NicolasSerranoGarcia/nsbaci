@@ -70,7 +70,8 @@ bool Program::semaphoreWait(nsbaci::types::MemoryAddr addr,
   return it->second.wait(threadId);
 }
 
-nsbaci::types::ThreadID Program::semaphoreSignal(nsbaci::types::MemoryAddr addr) {
+nsbaci::types::ThreadID Program::semaphoreSignal(
+    nsbaci::types::MemoryAddr addr) {
   auto it = semaphores.find(addr);
   if (it == semaphores.end()) {
     throw std::runtime_error("Semaphore not found at address");

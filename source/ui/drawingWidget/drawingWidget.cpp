@@ -9,10 +9,10 @@
 
 #include "drawingWidget.h"
 
-#include <QPainter>
 #include <QPaintEvent>
-#include <QResizeEvent>
+#include <QPainter>
 #include <QPolygon>
+#include <QResizeEvent>
 #include <cmath>
 
 namespace nsbaci::ui {
@@ -29,13 +29,9 @@ DrawingWidget::DrawingWidget(QWidget* parent) : QWidget(parent) {
   clear();
 }
 
-nsbaci::types::Size DrawingWidget::getCanvasSize() const {
-  return canvasSize_;
-}
+nsbaci::types::Size DrawingWidget::getCanvasSize() const { return canvasSize_; }
 
-QSize DrawingWidget::minimumSizeHint() const {
-  return QSize(400, 300);
-}
+QSize DrawingWidget::minimumSizeHint() const { return QSize(400, 300); }
 
 QSize DrawingWidget::sizeHint() const {
   return QSize(canvasSize_.width, canvasSize_.height);
@@ -85,9 +81,7 @@ void DrawingWidget::onClearRequested(const Color& color) {
   clear();
 }
 
-void DrawingWidget::onRefreshRequested() {
-  update();
-}
+void DrawingWidget::onRefreshRequested() { update(); }
 
 void DrawingWidget::onCanvasSizeChanged(const Size& size) {
   canvasSize_ = size;
@@ -109,7 +103,7 @@ void DrawingWidget::clear() {
 }
 
 void DrawingWidget::drawCircle(int32_t centerX, int32_t centerY, int32_t radius,
-                                bool filled) {
+                               bool filled) {
   ensureCanvas();
   QPainter painter(&canvas_);
   painter.setRenderHint(QPainter::Antialiasing);
@@ -129,7 +123,7 @@ void DrawingWidget::drawCircle(int32_t centerX, int32_t centerY, int32_t radius,
 }
 
 void DrawingWidget::drawRectangle(int32_t x, int32_t y, int32_t width,
-                                   int32_t height, bool filled) {
+                                  int32_t height, bool filled) {
   ensureCanvas();
   QPainter painter(&canvas_);
   painter.setRenderHint(QPainter::Antialiasing);
@@ -149,7 +143,7 @@ void DrawingWidget::drawRectangle(int32_t x, int32_t y, int32_t width,
 }
 
 void DrawingWidget::drawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-                                  int32_t x3, int32_t y3, bool filled) {
+                                 int32_t x3, int32_t y3, bool filled) {
   ensureCanvas();
   QPainter painter(&canvas_);
   painter.setRenderHint(QPainter::Antialiasing);
@@ -184,8 +178,7 @@ void DrawingWidget::drawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
 }
 
 void DrawingWidget::drawEllipse(int32_t centerX, int32_t centerY,
-                                 int32_t radiusX, int32_t radiusY,
-                                 bool filled) {
+                                int32_t radiusX, int32_t radiusY, bool filled) {
   ensureCanvas();
   QPainter painter(&canvas_);
   painter.setRenderHint(QPainter::Antialiasing);
@@ -213,7 +206,7 @@ void DrawingWidget::drawPixel(int32_t x, int32_t y) {
 }
 
 void DrawingWidget::drawText(int32_t x, int32_t y, const QString& text,
-                              int32_t fontSize) {
+                             int32_t fontSize) {
   ensureCanvas();
   QPainter painter(&canvas_);
   painter.setRenderHint(QPainter::TextAntialiasing);
@@ -227,9 +220,7 @@ void DrawingWidget::drawText(int32_t x, int32_t y, const QString& text,
   update();
 }
 
-void DrawingWidget::setLineWidth(int32_t width) {
-  lineWidth_ = width;
-}
+void DrawingWidget::setLineWidth(int32_t width) { lineWidth_ = width; }
 
 void DrawingWidget::reset() {
   currentColor_ = Qt::black;

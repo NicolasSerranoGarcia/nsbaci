@@ -74,7 +74,7 @@ void DrawingService::setLineWidth(int32_t width) {
 // ============== Shape Drawing ==============
 
 void DrawingService::drawCircle(int32_t centerX, int32_t centerY,
-                                 int32_t radius, bool filled) {
+                                int32_t radius, bool filled) {
   Circle circle(Point(centerX, centerY), radius, filled);
   Drawable drawable(circle, currentColor_);
   emit drawRequested(drawable);
@@ -82,7 +82,7 @@ void DrawingService::drawCircle(int32_t centerX, int32_t centerY,
 }
 
 void DrawingService::drawRectangle(int32_t x, int32_t y, int32_t width,
-                                    int32_t height, bool filled) {
+                                   int32_t height, bool filled) {
   Rectangle rect(x, y, width, height, filled);
   Drawable drawable(rect, currentColor_);
   emit drawRequested(drawable);
@@ -90,8 +90,8 @@ void DrawingService::drawRectangle(int32_t x, int32_t y, int32_t width,
 }
 
 void DrawingService::drawTriangle(int32_t x1, int32_t y1, int32_t x2,
-                                   int32_t y2, int32_t x3, int32_t y3,
-                                   bool filled) {
+                                  int32_t y2, int32_t x3, int32_t y3,
+                                  bool filled) {
   Triangle tri(Point(x1, y1), Point(x2, y2), Point(x3, y3), filled);
   Drawable drawable(tri, currentColor_);
   emit drawRequested(drawable);
@@ -106,8 +106,8 @@ void DrawingService::drawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
 }
 
 void DrawingService::drawEllipse(int32_t centerX, int32_t centerY,
-                                  int32_t radiusX, int32_t radiusY,
-                                  bool filled) {
+                                 int32_t radiusX, int32_t radiusY,
+                                 bool filled) {
   Ellipse ellipse(Point(centerX, centerY), radiusX, radiusY, filled);
   Drawable drawable(ellipse, currentColor_);
   emit drawRequested(drawable);
@@ -122,7 +122,7 @@ void DrawingService::drawPixel(int32_t x, int32_t y) {
 }
 
 void DrawingService::drawText(int32_t x, int32_t y, const std::string& text,
-                               int32_t fontSize) {
+                              int32_t fontSize) {
   DrawText drawText(Point(x, y), text, fontSize);
   Drawable drawable(drawText, currentColor_);
   emit drawRequested(drawable);

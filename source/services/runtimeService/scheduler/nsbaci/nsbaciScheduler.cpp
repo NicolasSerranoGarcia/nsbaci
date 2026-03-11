@@ -142,7 +142,7 @@ void NsbaciScheduler::terminateCurrent() {
 }
 
 bool NsbaciScheduler::hasThreads() const {
-  return runningIndex.has_value() || !readyQueue.empty() || 
+  return runningIndex.has_value() || !readyQueue.empty() ||
          !blockedQueue.empty() || !ioQueue.empty() || !coendQueue.empty();
 }
 

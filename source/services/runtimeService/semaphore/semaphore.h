@@ -41,7 +41,7 @@ class Semaphore {
 
  private:
   std::queue<nsbaci::types::ThreadID> blocked;  ///< Queue of blocked threads
-  int32_t count;                       ///< Current semaphore count
+  int32_t count;                                ///< Current semaphore count
 };
 
 }  // namespace nsbaci::services::runtime

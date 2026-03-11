@@ -41,8 +41,8 @@ class DrawingServiceFactory {
  public:
   static std::unique_ptr<nsbaci::services::DrawingService> createService(
       DefaultDrawingBackend);
-  // static std::unique_ptr<nsbaci::services::DrawingService> createService(OtherBackendOrTest
-  // t);
+  // static std::unique_ptr<nsbaci::services::DrawingService>
+  // createService(OtherBackendOrTest t);
   ~DrawingServiceFactory() = default;
 };
 

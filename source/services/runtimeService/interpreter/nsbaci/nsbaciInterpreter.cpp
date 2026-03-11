@@ -92,7 +92,8 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
     }
 
     case Opcode::StoreIndirect: {
-      // Stack: [value, address] -> pop address, pop value, store value at address
+      // Stack: [value, address] -> pop address, pop value, store value at
+      // address
       uint32_t addr = static_cast<uint32_t>(t.pop());
       int32_t value = t.pop();
       if (addr >= program.memory().size()) {
@@ -345,7 +346,8 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       uint32_t startAddr = std::get<uint32_t>(instr.operand1);
       int32_t count = std::get<int32_t>(instr.operand2);
       auto savedLocals = t.popFrame();
-      for (size_t i = 0; i < savedLocals.size() && static_cast<int32_t>(i) < count; i++) {
+      for (size_t i = 0;
+           i < savedLocals.size() && static_cast<int32_t>(i) < count; i++) {
         uint32_t addr = startAddr + i;
         if (addr >= program.memory().size()) {
           program.memory().resize(addr + 1, 0);
@@ -427,7 +429,8 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
     case Opcode::Create: {
       // Create a new thread starting at the address in operand1
       result.createThread = true;
-      result.newThreadPC = static_cast<uint32_t>(std::get<int32_t>(instr.operand1));
+      result.newThreadPC =
+          static_cast<uint32_t>(std::get<int32_t>(instr.operand1));
       break;
     }
 
@@ -544,7 +547,8 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
     case Opcode::DrawSetLineWidth: {
       currentLineWidth = t.pop();
       if (drawingCallback) {
-        drawingCallback(nsbaci::types::DrawCommand::setLineWidth(currentLineWidth));
+        drawingCallback(
+            nsbaci::types::DrawCommand::setLineWidth(currentLineWidth));
       }
       break;
     }
@@ -566,8 +570,7 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       int32_t y = t.pop();
       int32_t x = t.pop();
       if (drawingCallback) {
-        nsbaci::types::Circle circle(
-            nsbaci::types::Point(x, y), radius, false);
+        nsbaci::types::Circle circle(nsbaci::types::Point(x, y), radius, false);
         nsbaci::types::Color color(currentR, currentG, currentB, currentA);
         drawingCallback(nsbaci::types::DrawCommand::drawShape(circle, color));
       }
@@ -580,8 +583,7 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       int32_t y = t.pop();
       int32_t x = t.pop();
       if (drawingCallback) {
-        nsbaci::types::Circle circle(
-            nsbaci::types::Point(x, y), radius, true);
+        nsbaci::types::Circle circle(nsbaci::types::Point(x, y), radius, true);
         nsbaci::types::Color color(currentR, currentG, currentB, currentA);
         drawingCallback(nsbaci::types::DrawCommand::drawShape(circle, color));
       }
@@ -625,10 +627,9 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       int32_t y1 = t.pop();
       int32_t x1 = t.pop();
       if (drawingCallback) {
-        nsbaci::types::Triangle tri(
-            nsbaci::types::Point(x1, y1),
-            nsbaci::types::Point(x2, y2),
-            nsbaci::types::Point(x3, y3), false);
+        nsbaci::types::Triangle tri(nsbaci::types::Point(x1, y1),
+                                    nsbaci::types::Point(x2, y2),
+                                    nsbaci::types::Point(x3, y3), false);
         nsbaci::types::Color color(currentR, currentG, currentB, currentA);
         drawingCallback(nsbaci::types::DrawCommand::drawShape(tri, color));
       }
@@ -644,10 +645,9 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       int32_t y1 = t.pop();
       int32_t x1 = t.pop();
       if (drawingCallback) {
-        nsbaci::types::Triangle tri(
-            nsbaci::types::Point(x1, y1),
-            nsbaci::types::Point(x2, y2),
-            nsbaci::types::Point(x3, y3), true);
+        nsbaci::types::Triangle tri(nsbaci::types::Point(x1, y1),
+                                    nsbaci::types::Point(x2, y2),
+                                    nsbaci::types::Point(x3, y3), true);
         nsbaci::types::Color color(currentR, currentG, currentB, currentA);
         drawingCallback(nsbaci::types::DrawCommand::drawShape(tri, color));
       }
@@ -661,9 +661,9 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       int32_t y1 = t.pop();
       int32_t x1 = t.pop();
       if (drawingCallback) {
-        nsbaci::types::Line line(
-            nsbaci::types::Point(x1, y1),
-            nsbaci::types::Point(x2, y2), currentLineWidth);
+        nsbaci::types::Line line(nsbaci::types::Point(x1, y1),
+                                 nsbaci::types::Point(x2, y2),
+                                 currentLineWidth);
         nsbaci::types::Color color(currentR, currentG, currentB, currentA);
         drawingCallback(nsbaci::types::DrawCommand::drawShape(line, color));
       }
@@ -677,8 +677,8 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       int32_t y = t.pop();
       int32_t x = t.pop();
       if (drawingCallback) {
-        nsbaci::types::Ellipse ellipse(
-            nsbaci::types::Point(x, y), radiusX, radiusY, false);
+        nsbaci::types::Ellipse ellipse(nsbaci::types::Point(x, y), radiusX,
+                                       radiusY, false);
         nsbaci::types::Color color(currentR, currentG, currentB, currentA);
         drawingCallback(nsbaci::types::DrawCommand::drawShape(ellipse, color));
       }
@@ -692,8 +692,8 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       int32_t y = t.pop();
       int32_t x = t.pop();
       if (drawingCallback) {
-        nsbaci::types::Ellipse ellipse(
-            nsbaci::types::Point(x, y), radiusX, radiusY, true);
+        nsbaci::types::Ellipse ellipse(nsbaci::types::Point(x, y), radiusX,
+                                       radiusY, true);
         nsbaci::types::Color color(currentR, currentG, currentB, currentA);
         drawingCallback(nsbaci::types::DrawCommand::drawShape(ellipse, color));
       }
@@ -719,8 +719,8 @@ InterpreterResult NsbaciInterpreter::executeInstruction(Thread& t,
       int32_t x = t.pop();
       std::string text = std::get<std::string>(instr.operand1);
       if (drawingCallback) {
-        nsbaci::types::DrawText drawText(
-            nsbaci::types::Point(x, y), text, fontSize);
+        nsbaci::types::DrawText drawText(nsbaci::types::Point(x, y), text,
+                                         fontSize);
         nsbaci::types::Color color(currentR, currentG, currentB, currentA);
         drawingCallback(nsbaci::types::DrawCommand::drawShape(drawText, color));
       }

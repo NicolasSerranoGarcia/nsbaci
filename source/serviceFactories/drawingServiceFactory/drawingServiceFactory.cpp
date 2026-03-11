@@ -13,8 +13,8 @@
 
 namespace nsbaci::factories {
 
-std::unique_ptr<nsbaci::services::DrawingService> DrawingServiceFactory::createService(
-    DefaultDrawingBackend) {
+std::unique_ptr<nsbaci::services::DrawingService>
+DrawingServiceFactory::createService(DefaultDrawingBackend) {
   // default constructor generates a default drawing service
   return std::make_unique<nsbaci::services::DrawingService>();
 }

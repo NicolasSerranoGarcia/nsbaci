@@ -26,7 +26,6 @@
 
 #include <QObject>
 #include <QTimer>
-
 #include <memory>
 
 #include "compilerService.h"
@@ -307,8 +306,8 @@ class Controller : public QObject {
       runtimeService;  ///< Service for program execution.
   std::unique_ptr<nsbaci::services::DrawingService>
       drawingService;  ///< Service for graphical output.
-  nsbaci::ui::DrawingWidget*
-      drawingWidget = nullptr;  ///< Widget for canvas rendering.
+  nsbaci::ui::DrawingWidget* drawingWidget =
+      nullptr;  ///< Widget for canvas rendering.
 
   QString currentProgramName;  ///< Name of the currently loaded program.
   bool programLoaded = false;  ///< True if a program is loaded and ready.

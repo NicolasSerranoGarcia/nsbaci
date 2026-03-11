@@ -140,8 +140,6 @@ class Program {
    */
   bool hasSemaphore(nsbaci::types::MemoryAddr addr) const;
 
-  
-
  private:
   // Instruction stream - read-only after construction
   nsbaci::compiler::InstructionStream instructions;

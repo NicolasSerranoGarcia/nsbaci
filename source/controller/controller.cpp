@@ -100,9 +100,8 @@ void Controller::onRunRequested() {
             connect(drawingWidget, &QObject::destroyed, this,
                     [this]() { drawingWidget = nullptr; });
             // Connect drawing service signals to widget
-            connect(drawingService.get(),
-                    &DrawingService::drawCommandReceived, drawingWidget,
-                    &nsbaci::ui::DrawingWidget::onDrawCommand);
+            connect(drawingService.get(), &DrawingService::drawCommandReceived,
+                    drawingWidget, &nsbaci::ui::DrawingWidget::onDrawCommand);
           }
           // Show the widget if not visible
           if (!drawingWidget->isVisible()) {

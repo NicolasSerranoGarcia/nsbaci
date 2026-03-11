@@ -200,7 +200,8 @@ struct DrawText {
 /**
  * @brief Variant type for all drawable shapes.
  */
-using Shape = std::variant<Circle, Rectangle, Triangle, Line, Ellipse, Pixel, DrawText>;
+using Shape =
+    std::variant<Circle, Rectangle, Triangle, Line, Ellipse, Pixel, DrawText>;
 
 /**
  * @struct Drawable
@@ -224,13 +225,13 @@ struct Drawable {
  * @brief Types of drawing commands that can be executed.
  */
 enum class DrawCommandType {
-  Clear,          // Clear the canvas
-  SetColor,       // Set current drawing color
-  SetPosition,    // Set current drawing position
-  DrawShape,      // Draw a shape
-  Fill,           // Fill the canvas with current color
-  SetLineWidth,   // Set line thickness
-  Refresh         // Force refresh/redraw
+  Clear,         // Clear the canvas
+  SetColor,      // Set current drawing color
+  SetPosition,   // Set current drawing position
+  DrawShape,     // Draw a shape
+  Fill,          // Fill the canvas with current color
+  SetLineWidth,  // Set line thickness
+  Refresh        // Force refresh/redraw
 };
 
 /**
@@ -239,10 +240,10 @@ enum class DrawCommandType {
  */
 struct DrawCommand {
   DrawCommandType type;
-  Color color;           // For SetColor
-  Point position;        // For SetPosition
-  Shape shape;           // For DrawShape
-  int32_t lineWidth = 1; // For SetLineWidth
+  Color color;            // For SetColor
+  Point position;         // For SetPosition
+  Shape shape;            // For DrawShape
+  int32_t lineWidth = 1;  // For SetLineWidth
 
   // Factory methods for convenience
   static DrawCommand clear() {
@@ -309,7 +310,7 @@ struct DrawCommand {
  * @brief Configuration for the drawing canvas.
  */
 struct CanvasConfig {
-  Size size{800, 600};           // Default canvas size
+  Size size{800, 600};                   // Default canvas size
   Color backgroundColor{255, 255, 255};  // Default white background
   std::string title = "NSBACI Canvas";
 };

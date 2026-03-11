@@ -40,16 +40,16 @@ struct InterpreterResult : nsbaci::BaseResult {
   std::string output;       ///< Output produced by this instruction
 
   // Concurrency control signals
-  bool shouldBlock = false;           ///< Thread should be blocked (semaphore wait)
-  uint32_t blockingSemaphore = 0;     ///< Address of semaphore causing block
-  bool shouldYield = false;           ///< Thread should yield after instruction
-  bool cobeginStart = false;          ///< Starting a cobegin block
-  bool coendWait = false;             ///< Waiting for cobegin threads to finish
-  int32_t expectedThreadCount = 0;    ///< Number of threads to wait for at coend
-  bool createThread = false;          ///< Should create a new thread
-  uint32_t newThreadPC = 0;           ///< PC for new thread (if createThread is true)
-  bool signalSemaphore = false;       ///< Signal was called on a semaphore
-  uint32_t signaledSemaphore = 0;     ///< Address of semaphore that was signaled
+  bool shouldBlock = false;  ///< Thread should be blocked (semaphore wait)
+  uint32_t blockingSemaphore = 0;   ///< Address of semaphore causing block
+  bool shouldYield = false;         ///< Thread should yield after instruction
+  bool cobeginStart = false;        ///< Starting a cobegin block
+  bool coendWait = false;           ///< Waiting for cobegin threads to finish
+  int32_t expectedThreadCount = 0;  ///< Number of threads to wait for at coend
+  bool createThread = false;        ///< Should create a new thread
+  uint32_t newThreadPC = 0;  ///< PC for new thread (if createThread is true)
+  bool signalSemaphore = false;    ///< Signal was called on a semaphore
+  uint32_t signaledSemaphore = 0;  ///< Address of semaphore that was signaled
 };
 
 /**

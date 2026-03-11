@@ -96,11 +96,14 @@ int main(int argc, char* argv[]) {
   a.setStyle(QStyleFactory::create("Fusion"));
 
   MainWindow w;
-  nsbaci::Controller c(
-      nsbaci::factories::FileServiceFactory::createService(nsbaci::factories::defaultFileSystem),
-      nsbaci::factories::CompilerServiceFactory::createService(nsbaci::factories::nsbaciCompiler),
-      nsbaci::factories::RuntimeServiceFactory::createService(nsbaci::factories::nsbaciRuntime),
-      nsbaci::factories::DrawingServiceFactory::createService(nsbaci::factories::defaultDrawingBackend));
+  nsbaci::Controller c(nsbaci::factories::FileServiceFactory::createService(
+                           nsbaci::factories::defaultFileSystem),
+                       nsbaci::factories::CompilerServiceFactory::createService(
+                           nsbaci::factories::nsbaciCompiler),
+                       nsbaci::factories::RuntimeServiceFactory::createService(
+                           nsbaci::factories::nsbaciRuntime),
+                       nsbaci::factories::DrawingServiceFactory::createService(
+                           nsbaci::factories::defaultDrawingBackend));
   setupViewController(&c, &w);
 
   w.show();

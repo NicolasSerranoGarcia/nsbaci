@@ -13,11 +13,11 @@
 #ifndef NSBACI_UI_DRAWINGWIDGET_H
 #define NSBACI_UI_DRAWINGWIDGET_H
 
-#include <QWidget>
+#include <QColor>
 #include <QPainter>
 #include <QPixmap>
-#include <QColor>
 #include <QPoint>
+#include <QWidget>
 #include <vector>
 
 #include "drawingTypes.h"
@@ -128,8 +128,8 @@ class DrawingWidget : public QWidget {
   /**
    * @brief Draw a triangle.
    */
-  void drawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-                    int32_t x3, int32_t y3, bool filled = false);
+  void drawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3,
+                    int32_t y3, bool filled = false);
 
   /**
    * @brief Draw a line.
@@ -195,10 +195,10 @@ class DrawingWidget : public QWidget {
    */
   void ensureCanvas();
 
-  QPixmap canvas_;                        // The drawing buffer
-  QColor currentColor_{Qt::black};        // Current drawing color
-  QColor backgroundColor_{Qt::white};     // Background color
-  int lineWidth_ = 1;                     // Current line width
+  QPixmap canvas_;                            // The drawing buffer
+  QColor currentColor_{Qt::black};            // Current drawing color
+  QColor backgroundColor_{Qt::white};         // Background color
+  int lineWidth_ = 1;                         // Current line width
   nsbaci::types::Size canvasSize_{800, 600};  // Canvas dimensions
 };
 
