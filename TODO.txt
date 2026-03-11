@@ -1,4 +1,1 @@
-- Add preferences in the toolbox: for example, an option to swtich between dark, light... Style preferences, colours maybe... Some configuration for the user -> new patch along with
-integrated user guide
-
 - Maybe syntax highlighting? not autocomplete, just highlight -> new Minor
