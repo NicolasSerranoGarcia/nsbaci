@@ -2,6 +2,7 @@
 <RCC>
   <qresource prefix="/">
     <file>assets/nsbaci.ico</file>
+    <file>examples/00_introduction.nsb</file>
     <file>examples/01_basics.nsb</file>
     <file>examples/02_control_flow.nsb</file>
     <file>examples/03_arrays.nsb</file>

@@ -43,6 +43,23 @@ UserGuideDialog::UserGuideDialog(QWidget* parent) : QDialog(parent) {
 
 void UserGuideDialog::populateExamples() {
   examples = {
+      // --- Introduction ---
+      {"Welcome to NSBACI", "Introduction",
+       ":/examples/00_introduction.nsb",
+       "NSBACI (Nicolás Serrano BAsic Concurrency Interpreter) is a small "
+       "development environment designed to work with simple concurrency. "
+       "It consists of a text editor where you write code, compile it, "
+       "and run it in a built-in runtime with step-by-step debugging.\n\n"
+       "The language follows C/C++ syntax for most constructs, adding "
+       "cobegin/coend for concurrency and semaphores for synchronization. "
+       "It also includes a canvas graphics API for drawing.\n\n"
+       "This User Guide provides ready-to-run code examples organized by "
+       "topic. Browse the sidebar on the left to pick a category and example. "
+       "The code is displayed in the viewer below — click \"Load in Editor\" "
+       "to copy it into the main editor, where you can compile and run it. "
+       "For the full reference, click \"Open Online Docs\" at the bottom of "
+       "the sidebar."},
+
       // --- Basics ---
       {"Variables & Operators", "Basics", ":/examples/01_basics.nsb",
        "Demonstrates variable declarations, arithmetic operators, comparison "
