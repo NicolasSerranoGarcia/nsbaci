@@ -9,6 +9,7 @@
 
 #include "codeeditor.h"
 
+#include <QEvent>
 #include <QPainter>
 #include <QTextBlock>
 
@@ -81,6 +82,18 @@ void CodeEditor::resizeEvent(QResizeEvent* e) {
       QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
 
+void CodeEditor::changeEvent(QEvent* e) {
+  QPlainTextEdit::changeEvent(e);
+  if (e->type() == QEvent::FontChange) {
+    lineNumberArea->setFont(font());
+    updateLineNumberAreaWidth(0);
+    // Resize the gutter to match new width
+    QRect cr = contentsRect();
+    lineNumberArea->setGeometry(
+        QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+  }
+}
+
 void CodeEditor::highlightCurrentLine() {
   QList<QTextEdit::ExtraSelection> extraSelections;
 
@@ -101,6 +114,7 @@ void CodeEditor::highlightCurrentLine() {
 
 void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent* event) {
   QPainter painter(lineNumberArea);
+  painter.setFont(font());
   painter.fillRect(event->rect(),
                    lightTheme ? QColor("#f0f0f0") : QColor("#1a1a1a"));
 

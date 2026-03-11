@@ -34,6 +34,7 @@ class CodeEditor : public QPlainTextEdit {
 
  protected:
   void resizeEvent(QResizeEvent* event) override;
+  void changeEvent(QEvent* event) override;
 
  private slots:
   void updateLineNumberAreaWidth(int newBlockCount);

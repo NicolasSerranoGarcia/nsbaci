@@ -191,7 +191,6 @@ QString MainWindow::darkStyleSheet() const {
             border: none;
             selection-background-color: #3a3a3a;
             selection-color: #ffffff;
-            font-size: 14px;
         }
 
         /* Status bar */
@@ -405,7 +404,6 @@ QString MainWindow::lightStyleSheet() const {
             border: none;
             selection-background-color: #b4d8f8;
             selection-color: #000000;
-            font-size: 14px;
         }
 
         /* Status bar */
