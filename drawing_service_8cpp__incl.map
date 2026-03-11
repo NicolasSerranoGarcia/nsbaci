@@ -1,0 +1,12 @@
+<map id="drawingService.cpp" name="drawingService.cpp">
+<area shape="rect" id="Node000001" title="DrawingService class implementation for nsbaci." alt="" coords="44,5,180,32"/>
+<area shape="rect" id="Node000002" href="$drawing_service_8h.html" title="DrawingService class declaration for nsbaci." alt="" coords="51,80,173,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,30,115,65,109,64,111,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,155,75,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="98,110,65,145,61,142,101,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="124,229,193,256"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="117,105,140,181,151,216,146,214,135,182,114,109"/>
+<area shape="rect" id="Node000005" href="$drawing_types_8h.html" title="Type definitions for drawing&#45;related operations." alt="" coords="149,155,262,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="129,105,180,144,175,146,128,110"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="200,181,177,218,173,214,195,183"/>
+</map>

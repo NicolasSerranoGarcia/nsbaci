@@ -1,0 +1,9 @@
+<map id="baseResult.h" name="baseResult.h">
+<area shape="rect" id="Node000001" title="Base result class declaration for nsbaci services." alt="" coords="25,5,123,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,63,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,35,51,67,46,65,68,30"/>
+<area shape="rect" id="Node000003" href="$error_8h.html" title="Error class declaration for nsbaci." alt="" coords="86,80,144,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="82,30,103,66,98,67,81,35"/>
+<area shape="rect" id="Node000004" href="$error_types_8h.html" title="Type definitions for error&#45;related structures." alt="" coords="69,155,162,181"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="117,105,118,140,113,138,114,109"/>
+</map>

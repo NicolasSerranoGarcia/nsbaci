@@ -1,0 +1,12 @@
+<map id="nsbaci::services::DrawingService::clear" name="nsbaci::services::DrawingService::clear">
+<area shape="rect" id="Node000001" title="Clear the canvas with a specific color." alt="" coords="5,65,178,108"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_drawing_service.html#a3c5cef2572fc340266d2914de74f8cf9" title="Clear the canvas with optional background color." alt="" coords="226,65,398,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,84,213,86,208,87,179,89"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1services_1_1_drawing_service.html#a0a4be131b231498e82c63081f1eca0c2" title="Emitted when the canvas should be cleared." alt="" coords="468,5,640,48"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="131,62,175,42,225,27,283,18,342,13,455,17,450,18,343,19,284,23,226,32,177,47,133,67"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1services_1_1_drawing_service.html#a1c5fb1aa7fa938efaecffb59794819cf" title="Emitted when a drawing command should be executed." alt="" coords="446,95,662,137"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="167,106,226,117,330,124,433,125,428,125,330,129,225,123,166,111"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="270,63,268,55,275,46,290,41,312,39,335,41,351,50,346,50,334,46,312,44,291,46,278,51,273,57,275,66"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="398,63,450,52,456,51,399,68"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="398,94,433,101,428,101,398,100"/>
+</map>

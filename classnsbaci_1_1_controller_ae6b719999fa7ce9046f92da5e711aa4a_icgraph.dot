@@ -1,0 +1,15 @@
+digraph "nsbaci::Controller::inputRequested"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="nsbaci::Controller\l::inputRequested",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Emitted when the runtime needs user input (cin, read, etc.)."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="nsbaci::Controller\l::onStepRequested",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1_controller.html#ae49a575b703388f9134291d7449cde6c",tooltip="Executes a single instruction across any ready thread."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="nsbaci::Controller\l::onInputProvided",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1_controller.html#a3e9a64f392ee28382ad1d28c638bfd87",tooltip="Provides user input to the runtime."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="nsbaci::Controller\l::onStepThreadRequested",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1_controller.html#af0ac80b53693b349ad461a65fcbd746a",tooltip="Executes a single instruction on a specific thread."];
+}

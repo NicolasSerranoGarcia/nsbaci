@@ -1,0 +1,38 @@
+<map id="nsbaci::services::runtime::NsbaciInterpreter::executeInstruction" name="nsbaci::services::runtime::NsbaciInterpreter::executeInstruction">
+<area shape="rect" id="Node000001" title="Executes the current instruction for the given thread with the program context." alt="" coords="5,561,250,604"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a78d826906ede0a73f3849cfc511cd668" title="Increment the program counter." alt="" coords="315,5,482,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,560,134,470,143,406,157,335,178,262,208,188,246,119,296,58,303,54,301,58,300,62,251,122,213,190,184,263,162,337,148,407,139,470,132,561"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a460ecc922b6bd23ee82476641e0abec0" title="Check if call stack is empty." alt="" coords="314,72,483,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,561,138,480,149,425,165,363,187,300,215,236,251,177,296,125,303,121,300,126,300,129,255,180,220,239,192,302,170,365,154,426,144,481,133,561"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1services_1_1runtime_1_1_program.html#a05c582e48c6431d7be9812f32f8b0806" title="Gets instruction at the given address." alt="" coords="315,163,482,205"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="130,560,146,494,176,401,198,351,225,302,258,256,296,215,303,212,300,216,299,219,262,259,230,305,203,354,181,403,151,495,135,562"/>
+<area shape="rect" id="Node000005" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a2c78a54f0df36c6c01b8747d643fb5c9" title="Get the program counter." alt="" coords="315,229,482,272"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="133,560,152,504,185,430,233,351,262,314,296,282,304,278,301,283,299,286,266,318,237,354,190,432,157,506,138,561"/>
+<area shape="rect" id="Node000006" href="$classnsbaci_1_1services_1_1runtime_1_1_program.html#a1522a0bede6813b3412f32cd236ac0b8" title="Gets the total number of instructions." alt="" coords="308,320,489,363"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="138,560,163,520,198,470,243,418,296,373,307,368,303,372,299,377,247,421,203,473,167,523,143,562"/>
+<area shape="rect" id="Node000007" href="$classnsbaci_1_1services_1_1runtime_1_1_program.html#a466336d2d53a80da54a159e4864a68da" title="Access to global memory." alt="" coords="315,411,482,453"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="153,559,216,512,296,463,312,458,308,462,299,468,219,516,157,563"/>
+<area shape="rect" id="Node000008" href="$namespacensbaci_1_1compiler.html#a91679e48c7893cc5c2942ffe864ed950" title="Get the string name of an opcode (for debugging/display)." alt="" coords="298,477,499,504"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="178,559,297,513,325,507,321,510,299,519,181,563"/>
+<area shape="rect" id="Node000009" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a6f68a48272680c23a4da4299e7032b46" title="Pop a value from the thread&#39;s stack." alt="" coords="315,528,482,571"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="249,565,301,560,297,563,251,570"/>
+<area shape="rect" id="Node000010" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#afb94db973766857a6c4c887594d03772" title="Pop a frame and get saved local variable values." alt="" coords="315,595,482,637"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="249,595,301,602,297,605,251,600"/>
+<area shape="rect" id="Node000011" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a9df63c642b591cb295b0e3604077e1d1" title="Pop return address from call stack." alt="" coords="306,661,491,704"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="182,602,299,647,318,655,313,657,297,652,183,607"/>
+<area shape="rect" id="Node000012" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a90c3c38b117d73f343c0324285801942" title="Push a value onto the thread&#39;s stack." alt="" coords="315,728,482,771"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="151,602,216,657,256,687,299,714,311,721,306,722,296,718,253,692,213,661,151,607"/>
+<area shape="rect" id="Node000013" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#ac116ae6af2df41f2d27310e51530546b" title="Push a frame with saved local variable values." alt="" coords="315,795,482,837"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="141,601,168,641,204,688,248,738,299,781,308,787,302,788,296,785,244,742,199,692,164,644,142,607"/>
+<area shape="rect" id="Node000014" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a5debd0e206065f1dd35be699679bfbe2" title="Push return address onto call stack." alt="" coords="302,861,494,904"/>
+<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="137,602,160,653,194,719,241,788,268,819,299,847,306,853,300,853,296,851,265,823,236,791,190,722,155,656,137,607"/>
+<area shape="rect" id="Node000015" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a301eab593a0126582af4caedbd2e9acc" title="Set the program counter." alt="" coords="315,928,482,971"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="134,602,154,665,185,748,207,793,233,837,264,878,299,914,304,919,299,919,296,918,260,882,229,840,203,796,180,750,149,667,134,607"/>
+<area shape="rect" id="Node000016" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#a4954594edbf3f78ce9657906b17a1b57" title="Sets the state of the thread." alt="" coords="315,995,482,1037"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="132,602,148,676,177,777,199,832,226,886,259,936,300,981,304,986,299,986,296,985,255,940,221,888,194,834,172,779,143,677,131,607"/>
+<area shape="rect" id="Node000017" href="$classnsbaci_1_1services_1_1runtime_1_1_thread.html#aa3fea9b3f7771c287c29ba5280d6ed87" title="Peek at the top of the stack without removing." alt="" coords="315,1061,482,1104"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="131,602,143,686,153,743,169,805,190,870,219,934,255,994,300,1047,305,1054,299,1053,296,1051,250,998,214,937,185,872,164,806,148,744,138,687,130,607"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="347,162,345,153,354,144,372,138,398,136,428,139,447,146,442,149,427,144,398,141,373,143,357,148,350,154,353,162"/>
+<area shape="poly" id="edge7_Node000006_Node000006" title=" " alt="" coords="347,319,345,310,354,301,372,295,398,293,428,296,447,304,442,306,427,301,398,299,373,301,357,305,350,311,353,320"/>
+<area shape="poly" id="edge9_Node000007_Node000007" title=" " alt="" coords="347,410,345,401,354,392,372,386,398,384,428,387,447,395,442,396,427,392,398,389,373,391,357,396,350,402,353,410"/>
+</map>

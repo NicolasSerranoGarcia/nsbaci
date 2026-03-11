@@ -1,0 +1,11 @@
+digraph "nsbaci::Controller::outputReceived"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="nsbaci::Controller\l::outputReceived",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Emitted when the runtime produces output (cout, writeln, etc.)."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="nsbaci::Controller\l::onRunRequested",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1_controller.html#a4207649a6d1b14fff28cfc5e5667fb55",tooltip="Handles a request to load and prepare a compiled program for execution."];
+}

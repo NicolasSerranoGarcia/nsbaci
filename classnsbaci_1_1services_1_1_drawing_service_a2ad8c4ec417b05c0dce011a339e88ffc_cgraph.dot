@@ -1,0 +1,15 @@
+digraph "nsbaci::services::DrawingService::setColor"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="nsbaci::services::Drawing\lService::setColor",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Set the current drawing color using RGBA values."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="nsbaci::services::Drawing\lService::drawCommandReceived",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1services_1_1_drawing_service.html#a1c5fb1aa7fa938efaecffb59794819cf",tooltip="Emitted when a drawing command should be executed."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="nsbaci::services::Drawing\lService::setColor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classnsbaci_1_1services_1_1_drawing_service.html#a27cfbd7f8d2526786a67ad898d9d789d",tooltip="Set the current drawing color using RGB values."];
+  Node3 -> Node2 [id="edge3_Node000003_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node3 -> Node3 [id="edge4_Node000003_Node000003",color="steelblue1",style="solid",tooltip=" "];
+}

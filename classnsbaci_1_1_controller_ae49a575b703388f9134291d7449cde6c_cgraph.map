@@ -1,0 +1,9 @@
+<map id="nsbaci::Controller::onStepRequested" name="nsbaci::Controller::onStepRequested">
+<area shape="rect" id="Node000001" title="Executes a single instruction across any ready thread." alt="" coords="5,72,139,115"/>
+<area shape="rect" id="Node000002" href="$structnsbaci_1_1_u_i_error.html#a742b39c9ac92b9f2d1a3e4b3877fc3c0" title="Converts backend errors to UI&#45;ready errors." alt="" coords="187,5,381,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,70,201,52,197,55,140,75"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1_controller.html#ae6b719999fa7ce9046f92da5e711aa4a" title="Emitted when the runtime needs user input (cin, read, etc.)." alt="" coords="222,72,346,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,91,209,92,204,95,139,96"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1_controller.html#a81153ea61842a545ba81799e396d0eb5" title="Emitted when the runtime execution state changes." alt="" coords="206,139,362,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="139,112,202,133,197,134,139,117"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="nsbaci::services::runtime::Scheduler" name="nsbaci::services::runtime::Scheduler">
+<area shape="rect" id="Node000001" title="Manages thread scheduling and state transitions." alt="" coords="5,5,173,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html" title="BACI&#45;specific implementation of the Scheduler." alt="" coords="5,96,173,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,62,92,97,86,95,87,66"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="nsbaci::Controller::onSaveRequested" name="nsbaci::Controller::onSaveRequested">
+<area shape="rect" id="Node000001" title="Handles a request to save source code to a file." alt="" coords="5,72,142,115"/>
+<area shape="rect" id="Node000002" href="$structnsbaci_1_1_u_i_error.html#a742b39c9ac92b9f2d1a3e4b3877fc3c0" title="Converts backend errors to UI&#45;ready errors." alt="" coords="190,5,384,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,70,204,52,200,55,143,74"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1_controller.html#a7b2437a59e96e40d03aecae17ee046a5" title="Emitted when a file save operation fails." alt="" coords="225,72,348,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,91,212,92,207,94,142,96"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1_controller.html#a37785be93930fcae1a44db64a6dd7412" title="Emitted when a file save operation succeeds." alt="" coords="225,139,348,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="142,112,213,135,208,137,142,117"/>
+</map>

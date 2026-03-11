@@ -1,0 +1,23 @@
+<map id="drawingTypes.h" name="drawingTypes.h">
+<area shape="rect" id="Node000001" title="Type definitions for drawing&#45;related operations." alt="" coords="382,5,495,32"/>
+<area shape="rect" id="Node000002" href="$drawing_service_8h.html" title="DrawingService class declaration for nsbaci." alt="" coords="159,80,280,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="384,39,259,82,257,77,388,36"/>
+<area shape="rect" id="Node000010" href="$drawing_widget_8h.html" title="DrawingWidget class declaration for nsbaci." alt="" coords="379,80,498,107"/>
+<area shape="poly" id="edge5_Node000001_Node000010" title=" " alt="" coords="440,46,441,81,436,78,437,50"/>
+<area shape="rect" id="Node000012" href="$interpreter_8h.html" title="Interpreter class declaration for nsbaci runtime service." alt="" coords="603,80,693,107"/>
+<area shape="poly" id="edge8_Node000001_Node000012" title=" " alt="" coords="489,35,614,79,608,80,489,40"/>
+<area shape="rect" id="Node000003" href="$controller_8h.html" title="Controller class declaration for nsbaci." alt="" coords="346,229,432,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="142,103,88,114,38,129,21,140,11,151,9,164,18,180,40,196,73,209,163,226,263,235,348,241,343,241,262,241,163,232,72,214,37,200,14,183,4,165,6,149,17,135,36,125,87,109,146,100"/>
+<area shape="rect" id="Node000006" href="$drawing_service_8cpp.html" title="DrawingService class implementation for nsbaci." alt="" coords="28,155,163,181"/>
+<area shape="poly" id="edge3_Node000002_Node000006" title=" " alt="" coords="184,116,119,156,116,152,187,113"/>
+<area shape="rect" id="Node000007" href="$drawing_service_factory_8h.html" title="DrawingServiceFactory class declaration for nsbaci." alt="" coords="187,155,351,181"/>
+<area shape="poly" id="edge4_Node000002_Node000007" title=" " alt="" coords="238,117,263,155,258,154,236,122"/>
+<area shape="poly" id="edge6_Node000010_Node000003" title=" " alt="" coords="429,119,417,156,394,231,390,227,412,154,425,123"/>
+<area shape="rect" id="Node000011" href="$drawing_widget_8cpp.html" title="DrawingWidget class implementation for nsbaci." alt="" coords="427,155,559,181"/>
+<area shape="poly" id="edge7_Node000010_Node000011" title=" " alt="" coords="458,117,486,155,481,154,456,122"/>
+<area shape="rect" id="Node000013" href="$nsbaci_interpreter_8h.html" title="NsbaciInterpreter class declaration for nsbaci runtime service." alt="" coords="583,155,712,181"/>
+<area shape="poly" id="edge9_Node000012_Node000013" title=" " alt="" coords="650,121,650,156,646,153,646,124"/>
+<area shape="rect" id="Node000016" href="$runtime_service_8h.html" title="RuntimeService class declaration for nsbaci." alt="" coords="736,155,855,181"/>
+<area shape="poly" id="edge10_Node000012_Node000016" title=" " alt="" coords="688,111,772,154,767,154,687,116"/>
+<area shape="poly" id="edge11_Node000016_Node000003" title=" " alt="" coords="724,183,432,236,432,231,718,183"/>
+</map>

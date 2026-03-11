@@ -1,0 +1,6 @@
+<map id="nsbaci::services::runtime::Program::memory" name="nsbaci::services::runtime::Program::memory">
+<area shape="rect" id="Node000001" title="Access to global memory." alt="" coords="298,29,465,72"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="421,13,407,10,381,8,357,10,342,15,337,21,338,30,334,27,332,19,340,10,356,5,381,3,408,5,426,14"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_interpreter.html#a42e636e66f698e15b70b188e4205eb6e" title="Executes the current instruction for the given thread with the program context." alt="" coords="5,29,250,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="279,51,250,53,250,48,285,51"/>
+</map>

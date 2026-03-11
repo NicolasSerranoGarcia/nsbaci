@@ -1,0 +1,5 @@
+<map id="nsbaci::ui::ErrorDialogFactory::showError" name="nsbaci::ui::ErrorDialogFactory::showError">
+<area shape="rect" id="Node000001" title="Shows a single error dialog immediately." alt="" coords="5,5,200,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1ui_1_1_error_dialog_factory.html#a0406719bd4f61c4331000235028c8c6c" title="Creates a dialog invoker from a UIError." alt="" coords="248,5,442,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,24,235,26,230,27,200,29"/>
+</map>

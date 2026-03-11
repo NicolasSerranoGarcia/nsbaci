@@ -1,0 +1,6 @@
+<map id="nsbaci::services::DrawingService::setPosition" name="nsbaci::services::DrawingService::setPosition">
+<area shape="rect" id="Node000001" title="Set the current drawing position." alt="" coords="226,29,398,72"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="346,13,334,10,312,8,291,10,278,15,273,21,275,30,270,27,268,19,275,10,290,5,312,3,335,5,351,14"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_drawing_service.html#a21ae4e87c951e79831f0df698ba516e4" title="Set the current drawing position using a Point." alt="" coords="5,29,178,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,51,178,53,178,48,213,50"/>
+</map>

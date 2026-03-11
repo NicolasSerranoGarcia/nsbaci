@@ -1,0 +1,5 @@
+<map id="nsbaci::Controller::onStepRequested" name="nsbaci::Controller::onStepRequested">
+<area shape="rect" id="Node000001" title="Executes a single instruction across any ready thread." alt="" coords="177,5,310,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#a3e9a64f392ee28382ad1d28c638bfd87" title="Provides user input to the runtime." alt="" coords="5,5,129,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,27,129,29,129,24,164,26"/>
+</map>

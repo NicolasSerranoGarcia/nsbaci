@@ -1,0 +1,9 @@
+<map id="nsbaci::Controller::onOpenRequested" name="nsbaci::Controller::onOpenRequested">
+<area shape="rect" id="Node000001" title="Handles a request to open and load a source file." alt="" coords="5,72,143,115"/>
+<area shape="rect" id="Node000002" href="$structnsbaci_1_1_u_i_error.html#a742b39c9ac92b9f2d1a3e4b3877fc3c0" title="Converts backend errors to UI&#45;ready errors." alt="" coords="191,5,385,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,69,205,52,200,55,144,74"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1_controller.html#a91fdaafbfe9b254aa0d029808044b697" title="Emitted when a file load operation fails." alt="" coords="226,72,350,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="143,91,213,92,208,94,144,96"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1_controller.html#a21b8939908870ffd8bb26c7e1e46491c" title="Emitted when a file load operation succeeds." alt="" coords="226,139,350,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="144,112,214,136,209,137,143,117"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="nsbaci::types::Circle" name="nsbaci::types::Circle">
+<area shape="rect" id="Node000001" title="Circle shape with center and radius." alt="" coords="5,104,147,131"/>
+<area shape="rect" id="Node000002" href="$structnsbaci_1_1types_1_1_point.html" title="2D point/position representation." alt="" coords="7,5,145,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,46,79,104,73,103,74,49"/>
+</map>

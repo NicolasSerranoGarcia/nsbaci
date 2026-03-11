@@ -1,0 +1,11 @@
+<map id="drawingTypes.h" name="drawingTypes.h">
+<area shape="rect" id="Node000001" title="Type definitions for drawing&#45;related operations." alt="" coords="110,5,222,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,66,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,35,73,74,71,70,142,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="89,80,158,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,31,140,69,137,65,156,34"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="182,80,236,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="175,30,196,67,191,66,172,35"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="260,80,320,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="188,30,258,72,253,72,187,35"/>
+</map>

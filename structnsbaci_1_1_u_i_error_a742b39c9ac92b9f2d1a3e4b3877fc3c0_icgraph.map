@@ -1,0 +1,15 @@
+<map id="nsbaci::UIError::fromBackendErrors" name="nsbaci::UIError::fromBackendErrors">
+<area shape="rect" id="Node000001" title="Converts backend errors to UI&#45;ready errors." alt="" coords="398,139,592,181"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#ad1010501575332e0e6582116e72136e0" title="Handles a request to compile source code." alt="" coords="186,5,340,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="452,129,404,96,349,62,326,51,326,46,351,58,407,92,457,129"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1_controller.html#ab1ec7dd6c3f48eb0bfe6fcbff7355776" title="Handles a request to open and load a source file." alt="" coords="195,72,332,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="402,134,333,116,332,110,407,133"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1_controller.html#a457490dae6842cfed5b174087ee260cc" title="Handles a request to save source code to a file." alt="" coords="195,139,332,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="380,161,332,163,331,157,385,159"/>
+<area shape="rect" id="Node000005" href="$classnsbaci_1_1_controller.html#ae49a575b703388f9134291d7449cde6c" title="Executes a single instruction across any ready thread." alt="" coords="197,205,330,248"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="402,187,331,210,330,205,407,185"/>
+<area shape="rect" id="Node000007" href="$classnsbaci_1_1_controller.html#af0ac80b53693b349ad461a65fcbd746a" title="Executes a single instruction on a specific thread." alt="" coords="177,272,350,315"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="457,190,407,228,351,262,327,274,325,269,349,258,404,224,452,192"/>
+<area shape="rect" id="Node000006" href="$classnsbaci_1_1_controller.html#a3e9a64f392ee28382ad1d28c638bfd87" title="Provides user input to the runtime." alt="" coords="5,205,129,248"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="179,228,130,229,129,224,184,226"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="nsbaci::Controller::runStarted" name="nsbaci::Controller::runStarted">
+<area shape="rect" id="Node000001" title="Emitted when a program is loaded and ready for execution." alt="" coords="184,5,307,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#a4207649a6d1b14fff28cfc5e5667fb55" title="Handles a request to load and prepare a compiled program for execution." alt="" coords="5,5,136,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,27,136,29,136,24,171,26"/>
+</map>

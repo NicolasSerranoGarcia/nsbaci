@@ -1,0 +1,30 @@
+<map id="compiler.h" name="compiler.h">
+<area shape="rect" id="Node000001" title="Abstract Compiler class declaration for nsbaci." alt="" coords="218,5,299,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,74,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="219,35,90,78,88,73,221,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="194,155,248,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="237,31,210,54,190,81,187,96,189,111,203,143,198,141,184,113,181,96,185,79,207,50,232,34"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="59,155,169,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="240,31,210,56,180,82,154,113,132,144,128,140,149,109,176,78,207,51,236,34"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="442,155,499,181"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="299,20,335,25,374,35,413,53,447,78,464,108,471,141,466,138,459,110,443,82,410,57,373,41,334,30,300,25"/>
+<area shape="rect" id="Node000006" href="$base_result_8h.html" title="Base result class declaration for nsbaci services." alt="" coords="508,80,606,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="299,27,495,75,490,78,299,33"/>
+<area shape="rect" id="Node000012" href="$compiler_types_8h.html" title="Type definitions for compiler&#45;related operations." alt="" coords="200,80,316,107"/>
+<area shape="poly" id="edge8_Node000001_Node000012" title=" " alt="" coords="260,30,261,66,256,63,257,35"/>
+<area shape="rect" id="Node000014" href="$instruction_8h.html" title="Instruction definitions for nsbaci compiler." alt="" coords="340,80,432,107"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="281,30,353,72,348,72,280,35"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="544,106,498,147,495,142,539,108"/>
+<area shape="rect" id="Node000007" href="$error_8h.html" title="Error class declaration for nsbaci." alt="" coords="528,155,586,181"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="559,105,559,141,555,137,555,109"/>
+<area shape="poly" id="edge10_Node000012_Node000003" title=" " alt="" coords="254,106,236,143,232,139,249,109"/>
+<area shape="poly" id="edge11_Node000012_Node000004" title=" " alt="" coords="236,107,154,150,152,145,230,108"/>
+<area shape="poly" id="edge12_Node000012_Node000005" title=" " alt="" coords="296,105,429,151,424,152,295,110"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="272,155,332,181"/>
+<area shape="poly" id="edge9_Node000012_Node000013" title=" " alt="" coords="267,105,289,142,284,141,265,110"/>
+<area shape="poly" id="edge15_Node000014_Node000003" title=" " alt="" coords="360,107,262,152,260,146,355,108"/>
+<area shape="poly" id="edge17_Node000014_Node000005" title=" " alt="" coords="402,105,447,145,442,144,400,110"/>
+<area shape="poly" id="edge14_Node000014_Node000013" title=" " alt="" coords="374,106,329,147,327,142,369,108"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="356,155,416,181"/>
+<area shape="poly" id="edge16_Node000014_Node000009" title=" " alt="" coords="388,105,388,141,384,137,384,109"/>
+</map>

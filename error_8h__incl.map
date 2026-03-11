@@ -1,0 +1,12 @@
+<map id="error.h" name="error.h">
+<area shape="rect" id="Node000001" title="Error class declaration for nsbaci." alt="" coords="23,5,81,32"/>
+<area shape="rect" id="Node000002" href="$error_types_8h.html" title="Type definitions for error&#45;related structures." alt="" coords="5,80,99,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="52,30,55,65,49,64,52,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="39,229,92,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="38,110,16,142,10,161,12,181,23,200,39,218,34,220,19,203,7,182,4,160,11,139,39,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="22,155,82,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="53,105,55,139,49,139,51,110"/>
+<area shape="rect" id="Node000005" href="$file_types_8h.html" title="Type definitions for file&#45;related operations." alt="" coords="106,155,190,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="69,105,122,144,117,146,68,110"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="136,181,93,221,89,217,131,183"/>
+</map>

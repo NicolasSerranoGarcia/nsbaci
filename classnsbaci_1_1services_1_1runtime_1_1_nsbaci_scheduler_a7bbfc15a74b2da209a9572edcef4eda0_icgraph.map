@@ -1,0 +1,13 @@
+<map id="nsbaci::services::runtime::NsbaciScheduler::current" name="nsbaci::services::runtime::NsbaciScheduler::current">
+<area shape="rect" id="Node000001" title="Get the currently running thread." alt="" coords="304,139,480,181"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a4e7720ba0652edf0b923e2e8164db182" title="Block the currently running thread." alt="" coords="25,5,236,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="353,128,308,95,254,62,228,51,227,46,257,58,311,90,358,128"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a2de88ec823090356afb51d117ea95adf" title="Block current thread on coend (waiting for spawned threads)." alt="" coords="19,72,242,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="288,135,217,118,217,113,293,133"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a792d07b9ebe3d182cfdb3fe48841c7e7" title="Block current thread on a semaphore." alt="" coords="5,139,256,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="285,161,256,163,255,157,291,159"/>
+<area shape="rect" id="Node000005" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a6f48ee6408a3b8c453aa4a74a9aaf80b" title="Pick the next thread to run." alt="" coords="36,205,225,248"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="288,187,218,207,216,202,293,185"/>
+<area shape="rect" id="Node000006" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a51922666c5b2766f283ae693d8fe14c9" title="Yield the current thread (move to back of ready queue)." alt="" coords="47,272,214,315"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="358,191,311,230,257,262,215,278,214,273,254,258,308,225,353,193"/>
+</map>

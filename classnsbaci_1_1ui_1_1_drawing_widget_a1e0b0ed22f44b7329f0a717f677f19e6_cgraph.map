@@ -1,0 +1,5 @@
+<map id="nsbaci::ui::DrawingWidget::onClearRequested" name="nsbaci::ui::DrawingWidget::onClearRequested">
+<area shape="rect" id="Node000001" title="Clear the canvas with a specific color." alt="" coords="5,5,180,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1ui_1_1_drawing_widget.html#aeeaec1ad7f0d197d1acef37a76d2d994" title="Clear the canvas with the current background color." alt="" coords="228,5,402,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,24,215,26,209,27,180,29"/>
+</map>

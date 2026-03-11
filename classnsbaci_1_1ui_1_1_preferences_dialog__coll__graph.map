@@ -1,0 +1,5 @@
+<map id="nsbaci::ui::PreferencesDialog" name="nsbaci::ui::PreferencesDialog">
+<area shape="rect" id="Node000001" title="A dialog that allows the user to configure application preferences." alt="" coords="5,80,198,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="67,5,136,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,46,104,81,99,79,100,50"/>
+</map>

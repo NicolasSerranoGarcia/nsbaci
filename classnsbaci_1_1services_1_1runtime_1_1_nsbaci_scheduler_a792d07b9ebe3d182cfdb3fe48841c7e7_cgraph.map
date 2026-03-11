@@ -1,0 +1,5 @@
+<map id="nsbaci::services::runtime::NsbaciScheduler::blockOnSemaphore" name="nsbaci::services::runtime::NsbaciScheduler::blockOnSemaphore">
+<area shape="rect" id="Node000001" title="Block current thread on a semaphore." alt="" coords="5,5,256,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a7bbfc15a74b2da209a9572edcef4eda0" title="Get the currently running thread." alt="" coords="304,5,480,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,24,291,27,286,27,256,29"/>
+</map>

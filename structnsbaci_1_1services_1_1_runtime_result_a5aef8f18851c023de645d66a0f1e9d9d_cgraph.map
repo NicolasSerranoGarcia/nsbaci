@@ -1,0 +1,5 @@
+<map id="nsbaci::services::RuntimeResult::RuntimeResult" name="nsbaci::services::RuntimeResult::RuntimeResult">
+<area shape="rect" id="Node000001" title="Constructs a failed result from a single error." alt="" coords="5,5,179,48"/>
+<area shape="rect" id="Node000002" href="$structnsbaci_1_1_base_result.html#a8597b3cc00d27223b24e3b0f83280537" title="Default constructor creates a successful result." alt="" coords="227,5,362,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,24,214,26,209,27,179,29"/>
+</map>

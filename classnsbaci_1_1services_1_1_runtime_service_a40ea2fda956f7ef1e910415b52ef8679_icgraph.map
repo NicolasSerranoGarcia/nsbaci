@@ -1,0 +1,6 @@
+<map id="nsbaci::services::RuntimeService::RuntimeService" name="nsbaci::services::RuntimeService::RuntimeService">
+<area shape="rect" id="Node000001" title="Default constructor creates an uninitialized service." alt="" coords="228,29,401,72"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="349,13,337,10,314,8,293,10,281,15,276,21,277,30,272,27,270,19,278,10,292,5,314,3,338,5,354,14"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_runtime_service.html#aee7c0c9674154480e8307ef4970b4c0b" title="Default destructor." alt="" coords="5,29,180,72"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="209,51,180,53,180,48,214,50"/>
+</map>

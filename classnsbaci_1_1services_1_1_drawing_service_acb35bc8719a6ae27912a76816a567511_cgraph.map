@@ -1,0 +1,6 @@
+<map id="nsbaci::services::DrawingService::setLineWidth" name="nsbaci::services::DrawingService::setLineWidth">
+<area shape="rect" id="Node000001" title="Set the line thickness for subsequent drawings." alt="" coords="5,29,178,72"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="46,28,44,19,52,10,67,5,92,3,117,5,135,13,129,14,116,10,91,8,69,10,54,15,49,21,51,29"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_drawing_service.html#a1c5fb1aa7fa938efaecffb59794819cf" title="Emitted when a drawing command should be executed." alt="" coords="226,29,442,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,48,213,50,207,51,178,53"/>
+</map>

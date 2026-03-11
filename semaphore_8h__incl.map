@@ -1,0 +1,23 @@
+<map id="semaphore.h" name="semaphore.h">
+<area shape="rect" id="Node000001" title="Semaphore implementation for process synchronization." alt="" coords="199,5,295,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="298,155,359,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,30,317,141,312,141,253,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,155,116,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,34,172,55,130,82,101,112,78,143,74,139,97,108,127,78,170,50,215,31"/>
+<area shape="rect" id="Node000004" href="$compiler_types_8h.html" title="Type definitions for compiler&#45;related operations." alt="" coords="141,80,257,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="241,31,218,69,214,65,237,34"/>
+<area shape="rect" id="Node000007" href="$thread_8h.html" title="Thread class declaration for nsbaci runtime service." alt="" coords="333,80,401,107"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="269,30,336,71,331,72,268,35"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="222,105,295,146,290,147,221,110"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="178,107,100,149,97,145,172,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="139,155,192,181"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="196,106,180,142,176,139,191,109"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="217,155,274,181"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="209,105,232,142,227,141,206,110"/>
+<area shape="poly" id="edge9_Node000007_Node000002" title=" " alt="" coords="363,106,344,143,341,139,358,109"/>
+<area shape="poly" id="edge11_Node000007_Node000006" title=" " alt="" coords="349,107,281,149,279,144,343,108"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="383,155,439,181"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="376,105,398,142,393,140,374,110"/>
+<area shape="rect" id="Node000009" href="$runtime_types_8h.html" title="Type definitions for runtime&#45;related operations." alt="" coords="464,155,574,181"/>
+<area shape="poly" id="edge12_Node000007_Node000009" title=" " alt="" coords="394,105,481,148,476,147,393,110"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="nsbaci::Controller::onCompileRequested" name="nsbaci::Controller::onCompileRequested">
+<area shape="rect" id="Node000001" title="Handles a request to compile source code." alt="" coords="5,72,160,115"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1_controller.html#a45631ada6ab1b0c33a4c833a0874d85f" title="Emitted when compilation fails." alt="" coords="243,5,366,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,69,231,48,226,51,157,74"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1_controller.html#a55b86564d0342729b3b36597ff3ab49e" title="Emitted when compilation succeeds." alt="" coords="235,72,374,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="160,91,222,92,218,94,160,96"/>
+<area shape="rect" id="Node000004" href="$structnsbaci_1_1_u_i_error.html#a742b39c9ac92b9f2d1a3e4b3877fc3c0" title="Converts backend errors to UI&#45;ready errors." alt="" coords="208,139,402,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="156,113,219,133,214,134,156,118"/>
+</map>

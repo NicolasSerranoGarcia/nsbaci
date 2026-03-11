@@ -1,0 +1,6 @@
+<map id="nsbaci::services::DrawingService::processCommand" name="nsbaci::services::DrawingService::processCommand">
+<area shape="rect" id="Node000001" title="Process a drawing command from the runtime." alt="" coords="5,29,185,72"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="48,28,47,19,54,10,71,5,95,3,121,5,139,13,133,14,120,10,95,8,72,10,57,15,52,21,54,29"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_drawing_service.html#a1c5fb1aa7fa938efaecffb59794819cf" title="Emitted when a drawing command should be executed." alt="" coords="233,29,449,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,48,220,50,214,51,185,53"/>
+</map>

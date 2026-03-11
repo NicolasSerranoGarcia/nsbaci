@@ -1,0 +1,52 @@
+<map id="interpreter.h" name="interpreter.h">
+<area shape="rect" id="Node000001" title="Interpreter class declaration for nsbaci runtime service." alt="" coords="216,5,306,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,83,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,35,98,77,95,72,225,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="107,80,173,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="238,35,176,74,173,70,242,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="299,304,352,331"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="266,31,322,289,317,289,262,34"/>
+<area shape="rect" id="Node000005" href="$base_result_8h.html" title="Base result class declaration for nsbaci services." alt="" coords="954,80,1052,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="306,20,574,40,753,56,935,77,941,80,935,81,934,83,752,61,573,45,307,25"/>
+<area shape="rect" id="Node000012" href="$drawing_types_8h.html" title="Type definitions for drawing&#45;related operations." alt="" coords="112,229,224,256"/>
+<area shape="poly" id="edge7_Node000001_Node000012" title=" " alt="" coords="259,32,182,216,177,214,253,33"/>
+<area shape="rect" id="Node000015" href="$program_8h.html" title="Program class declaration for nsbaci runtime service." alt="" coords="484,80,564,107"/>
+<area shape="poly" id="edge12_Node000001_Node000015" title=" " alt="" coords="307,30,472,76,467,78,307,35"/>
+<area shape="rect" id="Node000020" href="$thread_8h.html" title="Thread class declaration for nsbaci runtime service." alt="" coords="708,229,777,256"/>
+<area shape="poly" id="edge33_Node000001_Node000020" title=" " alt="" coords="306,20,363,25,432,36,505,53,577,78,634,109,682,153,709,184,730,217,725,215,704,187,678,157,631,113,575,82,504,58,431,41,362,31,308,25"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="731,304,789,331"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="997,106,971,144,937,183,862,248,793,298,791,293,858,244,933,179,967,140,992,109"/>
+<area shape="rect" id="Node000007" href="$error_8h.html" title="Error class declaration for nsbaci." alt="" coords="1004,155,1062,181"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="1009,105,1024,141,1020,139,1007,110"/>
+<area shape="poly" id="edge10_Node000012_Node000004" title=" " alt="" coords="196,254,287,297,282,298,195,259"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="494,304,554,331"/>
+<area shape="poly" id="edge8_Node000012_Node000013" title=" " alt="" coords="225,253,480,305,477,309,224,258"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="122,304,190,331"/>
+<area shape="poly" id="edge9_Node000012_Node000014" title=" " alt="" coords="168,255,163,290,158,287,164,258"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="214,304,274,331"/>
+<area shape="poly" id="edge11_Node000012_Node000009" title=" " alt="" coords="182,254,223,293,217,293,180,259"/>
+<area shape="poly" id="edge13_Node000015_Node000004" title=" " alt="" coords="496,106,458,128,415,155,373,189,340,231,329,259,326,290,322,287,324,258,335,228,369,185,412,150,455,124,491,108"/>
+<area shape="poly" id="edge15_Node000015_Node000006" title=" " alt="" coords="564,95,606,100,656,111,707,128,755,152,785,174,807,196,818,223,818,239,813,257,802,277,787,295,785,290,798,274,808,255,812,239,813,224,803,199,781,178,752,157,705,132,654,116,605,105,564,100"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="597,304,707,331"/>
+<area shape="poly" id="edge14_Node000015_Node000016" title=" " alt="" coords="564,98,620,111,685,135,716,152,746,173,771,198,792,228,796,242,795,254,780,275,754,291,722,303,721,298,752,286,777,271,790,252,791,242,787,231,767,202,742,177,714,157,682,140,619,116,564,103"/>
+<area shape="rect" id="Node000017" href="$compiler_types_8h.html" title="Type definitions for compiler&#45;related operations." alt="" coords="466,229,582,256"/>
+<area shape="poly" id="edge16_Node000015_Node000017" title=" " alt="" coords="526,105,526,215,522,213,522,109"/>
+<area shape="rect" id="Node000018" href="$instruction_8h.html" title="Instruction definitions for nsbaci compiler." alt="" coords="350,229,442,256"/>
+<area shape="poly" id="edge21_Node000015_Node000018" title=" " alt="" coords="516,106,418,220,415,216,511,108"/>
+<area shape="rect" id="Node000019" href="$semaphore_8h.html" title="Semaphore implementation for process synchronization." alt="" coords="572,155,668,181"/>
+<area shape="poly" id="edge26_Node000015_Node000019" title=" " alt="" coords="541,105,594,145,589,145,540,110"/>
+<area shape="poly" id="edge18_Node000017_Node000004" title=" " alt="" coords="492,256,367,304,366,298,487,257"/>
+<area shape="poly" id="edge20_Node000017_Node000006" title=" " alt="" coords="566,254,719,303,714,303,565,259"/>
+<area shape="poly" id="edge17_Node000017_Node000013" title=" " alt="" coords="526,255,526,290,522,287,522,258"/>
+<area shape="poly" id="edge19_Node000017_Node000016" title=" " alt="" coords="547,254,619,296,614,296,546,259"/>
+<area shape="poly" id="edge23_Node000018_Node000004" title=" " alt="" coords="386,256,349,295,347,291,381,258"/>
+<area shape="poly" id="edge25_Node000018_Node000006" title=" " alt="" coords="442,251,454,253,584,275,719,304,713,304,583,281,453,259,442,256"/>
+<area shape="poly" id="edge22_Node000018_Node000013" title=" " alt="" coords="419,254,491,296,486,296,418,259"/>
+<area shape="poly" id="edge24_Node000018_Node000009" title=" " alt="" coords="372,256,285,299,283,294,367,257"/>
+<area shape="poly" id="edge27_Node000019_Node000013" title=" " alt="" coords="621,180,614,217,597,257,579,279,558,297,555,292,575,275,592,255,609,216,617,183"/>
+<area shape="poly" id="edge28_Node000019_Node000016" title=" " alt="" coords="626,179,641,229,651,290,647,287,636,230,623,184"/>
+<area shape="poly" id="edge29_Node000019_Node000017" title=" " alt="" coords="606,181,554,222,552,217,601,183"/>
+<area shape="poly" id="edge30_Node000019_Node000020" title=" " alt="" coords="642,179,711,221,705,221,641,184"/>
+<area shape="poly" id="edge32_Node000020_Node000006" title=" " alt="" coords="747,254,756,290,751,287,744,259"/>
+<area shape="poly" id="edge31_Node000020_Node000013" title=" " alt="" coords="711,255,569,304,568,299,705,256"/>
+</map>

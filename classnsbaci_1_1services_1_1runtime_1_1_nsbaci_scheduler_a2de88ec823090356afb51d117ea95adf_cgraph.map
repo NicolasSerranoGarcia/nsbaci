@@ -1,0 +1,5 @@
+<map id="nsbaci::services::runtime::NsbaciScheduler::blockOnCoend" name="nsbaci::services::runtime::NsbaciScheduler::blockOnCoend">
+<area shape="rect" id="Node000001" title="Block current thread on coend (waiting for spawned threads)." alt="" coords="5,5,228,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a7bbfc15a74b2da209a9572edcef4eda0" title="Get the currently running thread." alt="" coords="276,5,452,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,24,263,27,257,27,228,29"/>
+</map>

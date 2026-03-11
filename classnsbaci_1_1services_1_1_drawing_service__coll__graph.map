@@ -1,0 +1,5 @@
+<map id="nsbaci::services::DrawingService" name="nsbaci::services::DrawingService">
+<area shape="rect" id="Node000001" title="Adapter service for graphical output backends." alt="" coords="5,80,178,123"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="57,5,126,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,46,94,81,89,79,90,50"/>
+</map>

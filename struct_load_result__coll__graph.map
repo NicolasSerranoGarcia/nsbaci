@@ -1,0 +1,7 @@
+<map id="LoadResult" name="LoadResult">
+<area shape="rect" id="Node000001" title="Result type for file load operations." alt="" coords="29,155,117,181"/>
+<area shape="rect" id="Node000002" href="$struct_file_result.html" title="Base result type for file operations." alt="" coords="33,80,113,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,121,76,155,70,153,71,124"/>
+<area shape="rect" id="Node000003" href="$structnsbaci_1_1_base_result.html" title="Base result structure for all service operations." alt="" coords="5,5,141,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="74,45,76,80,70,79,72,50"/>
+</map>

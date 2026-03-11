@@ -1,0 +1,17 @@
+<map id="nsbaci::Controller::onRunRequested" name="nsbaci::Controller::onRunRequested">
+<area shape="rect" id="Node000001" title="Handles a request to load and prepare a compiled program for execution." alt="" coords="5,105,136,148"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_drawing_service.html#a1c5fb1aa7fa938efaecffb59794819cf" title="Emitted when a drawing command should be executed." alt="" coords="184,5,400,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,103,140,79,183,58,201,52,196,55,185,62,143,84,106,107"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1ui_1_1_drawing_widget.html#a8f263e1ddf52b7f34dfd6b35628ec5f8" title="Handle a drawing command." alt="" coords="205,72,379,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,114,191,107,187,110,137,119"/>
+<area shape="rect" id="Node000007" href="$classnsbaci_1_1_controller.html#a79d00131c8735444503c51c75dfc64ba" title="Emitted when the runtime produces output (cout, writeln, etc.)." alt="" coords="230,139,354,181"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="136,134,217,147,212,150,136,139"/>
+<area shape="rect" id="Node000008" href="$classnsbaci_1_1_controller.html#a23162ae4ab6a2e7623fc4d87021ecba0" title="Emitted when a program is loaded and ready for execution." alt="" coords="230,205,354,248"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="104,146,143,169,185,191,218,206,213,206,183,196,140,174,104,151"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1ui_1_1_drawing_widget.html#aeeaec1ad7f0d197d1acef37a76d2d994" title="Clear the canvas with the current background color." alt="" coords="448,5,622,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="371,69,443,52,438,54,373,74"/>
+<area shape="rect" id="Node000005" href="$classnsbaci_1_1ui_1_1_drawing_widget.html#ae7f74fd32ae7b2914a5675670a7fbc2d" title="Set the current drawing color." alt="" coords="448,72,622,115"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="379,91,435,93,430,94,380,96"/>
+<area shape="rect" id="Node000006" href="$classnsbaci_1_1ui_1_1_drawing_widget.html#aa73f2439810e08c2f0f7bb14c4e32759" title="Set the line width." alt="" coords="448,139,622,181"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="372,113,443,134,437,134,372,118"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="nsbaci::services::runtime::NsbaciScheduler::yield" name="nsbaci::services::runtime::NsbaciScheduler::yield">
+<area shape="rect" id="Node000001" title="Yield the current thread (move to back of ready queue)." alt="" coords="5,5,173,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a7bbfc15a74b2da209a9572edcef4eda0" title="Get the currently running thread." alt="" coords="221,5,397,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,24,208,26,203,27,173,29"/>
+</map>

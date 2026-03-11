@@ -1,0 +1,65 @@
+<map id="nsbaci::services::DrawingService::drawCommandReceived" name="nsbaci::services::DrawingService::drawCommandReceived">
+<area shape="rect" id="Node000001" title="Emitted when a drawing command should be executed." alt="" coords="453,862,669,904"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_drawing_service.html#a3c5cef2572fc340266d2914de74f8cf9" title="Clear the canvas with optional background color." alt="" coords="229,91,402,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="554,846,538,696,509,487,488,380,464,283,435,202,420,171,403,147,393,137,391,132,407,144,424,168,440,200,469,281,493,379,514,486,544,695,559,846"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1services_1_1_drawing_service.html#a0c069751337a5b3255488af6bf81b988" title="Clear the canvas with a specific color." alt="" coords="5,8,178,51"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="556,845,546,676,537,560,522,436,502,314,476,204,461,156,443,115,424,82,403,57,379,39,353,26,295,11,235,9,180,13,176,9,235,3,295,6,355,21,382,35,407,53,429,78,448,113,466,154,481,203,507,313,527,435,542,559,552,675,561,846"/>
+<area shape="rect" id="Node000005" href="$classnsbaci_1_1services_1_1_drawing_service.html#a90d2165627ac4f98a01ed7ec332c59bb" title="Draw a circle at the specified position." alt="" coords="229,182,402,224"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="553,845,535,712,503,530,482,438,459,354,432,285,403,238,392,227,391,222,407,235,437,283,464,353,487,437,508,529,540,711,558,846"/>
+<area shape="rect" id="Node000006" href="$classnsbaci_1_1services_1_1_drawing_service.html#a6dcf5fde62bd8646ba2f0964fd12b227" title="Draw an ellipse at the specified position." alt="" coords="229,272,402,315"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="558,845,553,745,545,679,532,607,513,533,486,460,449,390,403,329,392,318,391,313,407,325,454,388,491,458,518,532,537,606,550,678,558,745,563,846"/>
+<area shape="rect" id="Node000007" href="$classnsbaci_1_1services_1_1_drawing_service.html#a4497d865a931d9c46bc1a2ba29057824" title="Draw a line between two points." alt="" coords="229,363,402,406"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="555,846,546,760,521,647,502,586,476,526,443,470,403,419,392,409,390,404,407,416,448,467,481,523,507,584,526,645,551,760,561,847"/>
+<area shape="rect" id="Node000008" href="$classnsbaci_1_1services_1_1_drawing_service.html#ad05216e9a0be40be770ab27ac65bde79" title="Draw a single pixel at the specified position." alt="" coords="229,454,402,496"/>
+<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="552,846,537,776,510,686,490,639,466,592,437,549,403,510,391,499,389,494,407,506,441,546,471,590,495,637,515,685,542,775,557,847"/>
+<area shape="rect" id="Node000009" href="$classnsbaci_1_1services_1_1_drawing_service.html#a501a1dba3dfe91c1366e0b6922307eb0" title="Draw a rectangle at the specified position." alt="" coords="229,544,402,587"/>
+<area shape="poly" id="edge15_Node000001_Node000009" title=" " alt="" coords="547,846,527,793,497,727,456,660,431,629,403,601,389,590,388,585,407,597,435,625,460,657,502,725,532,791,552,847"/>
+<area shape="rect" id="Node000010" href="$classnsbaci_1_1services_1_1_drawing_service.html#a72b8276d22a9c9098e882c0af925fd1a" title="Draw a generic shape." alt="" coords="229,635,402,678"/>
+<area shape="poly" id="edge17_Node000001_Node000010" title=" " alt="" coords="538,849,483,771,446,729,403,692,387,681,385,676,407,687,450,725,488,768,543,848"/>
+<area shape="rect" id="Node000011" href="$classnsbaci_1_1services_1_1_drawing_service.html#a6b656281d26d67868cec292cf364222f" title="Draw text at the specified position." alt="" coords="229,726,402,768"/>
+<area shape="poly" id="edge19_Node000001_Node000011" title=" " alt="" coords="517,853,465,818,404,783,381,771,379,766,406,778,467,814,522,852"/>
+<area shape="rect" id="Node000012" href="$classnsbaci_1_1services_1_1_drawing_service.html#ad286065997f49d21ce5ec921ef95075b" title="Draw a triangle with three vertices." alt="" coords="229,816,402,859"/>
+<area shape="poly" id="edge21_Node000001_Node000012" title=" " alt="" coords="435,861,403,856,401,851,440,859"/>
+<area shape="rect" id="Node000013" href="$classnsbaci_1_1services_1_1_drawing_service.html#aeffb24f8b2db256d43575c984749cae4" title="Fill the entire canvas with the current color." alt="" coords="229,907,402,950"/>
+<area shape="poly" id="edge23_Node000001_Node000013" title=" " alt="" coords="436,907,403,915,400,910,440,904"/>
+<area shape="rect" id="Node000014" href="$classnsbaci_1_1_controller.html#a4207649a6d1b14fff28cfc5e5667fb55" title="Handles a request to load and prepare a compiled program for execution." alt="" coords="250,974,380,1016"/>
+<area shape="poly" id="edge25_Node000001_Node000014" title=" " alt="" coords="504,914,406,964,379,975,376,971,404,959,508,910"/>
+<area shape="rect" id="Node000015" href="$classnsbaci_1_1services_1_1_drawing_service.html#a2ae7061b57e74815d18212fc21ed35d8" title="Process a drawing command from the runtime." alt="" coords="226,1064,405,1107"/>
+<area shape="poly" id="edge26_Node000001_Node000015" title=" " alt="" coords="526,918,474,972,407,1030,355,1066,351,1062,403,1026,470,968,530,914"/>
+<area shape="rect" id="Node000016" href="$classnsbaci_1_1services_1_1_drawing_service.html#aa74a663a1cc0b2eec64812f9c5440585" title="Request a canvas refresh/redraw." alt="" coords="229,1155,402,1198"/>
+<area shape="poly" id="edge28_Node000001_Node000016" title=" " alt="" coords="544,916,490,1015,451,1070,407,1121,360,1156,356,1152,403,1117,447,1067,485,1013,541,920"/>
+<area shape="rect" id="Node000017" href="$classnsbaci_1_1services_1_1_drawing_service.html#a217435e689e4a413a65f17c07ddc2f21" title="Set the current drawing color using a Color struct." alt="" coords="5,1236,178,1279"/>
+<area shape="poly" id="edge30_Node000001_Node000017" title=" " alt="" coords="555,917,541,985,513,1065,494,1106,469,1145,441,1181,406,1212,367,1229,309,1242,179,1256,177,1251,308,1237,365,1224,404,1207,437,1177,465,1142,489,1103,508,1063,536,983,553,922"/>
+<area shape="rect" id="Node000018" href="$classnsbaci_1_1services_1_1_drawing_service.html#a27cfbd7f8d2526786a67ad898d9d789d" title="Set the current drawing color using RGB values." alt="" coords="229,1296,402,1339"/>
+<area shape="poly" id="edge31_Node000001_Node000018" title=" " alt="" coords="553,917,536,987,506,1074,463,1168,437,1213,407,1255,384,1279,358,1298,354,1294,380,1275,403,1252,432,1210,458,1165,501,1072,531,986,550,922"/>
+<area shape="rect" id="Node000019" href="$classnsbaci_1_1services_1_1_drawing_service.html#a2ad8c4ec417b05c0dce011a339e88ffc" title="Set the current drawing color using RGBA values." alt="" coords="5,1326,178,1368"/>
+<area shape="poly" id="edge35_Node000001_Node000019" title=" " alt="" coords="562,918,559,1012,552,1070,539,1132,519,1195,491,1255,454,1308,432,1332,407,1353,378,1370,347,1381,314,1387,281,1389,216,1384,159,1371,158,1366,216,1378,281,1383,313,1381,345,1375,376,1365,403,1349,428,1328,450,1305,487,1252,514,1193,533,1131,546,1069,554,1011,560,922"/>
+<area shape="rect" id="Node000020" href="$classnsbaci_1_1services_1_1_drawing_service.html#acb35bc8719a6ae27912a76816a567511" title="Set the line thickness for subsequent drawings." alt="" coords="229,1438,402,1480"/>
+<area shape="poly" id="edge36_Node000001_Node000020" title=" " alt="" coords="558,917,547,1010,521,1134,501,1201,476,1269,445,1335,407,1397,385,1420,359,1439,356,1435,381,1416,403,1393,440,1333,471,1267,496,1200,516,1132,542,1009,556,922"/>
+<area shape="rect" id="Node000021" href="$classnsbaci_1_1services_1_1_drawing_service.html#a21ae4e87c951e79831f0df698ba516e4" title="Set the current drawing position using a Point." alt="" coords="5,1538,178,1580"/>
+<area shape="poly" id="edge38_Node000001_Node000021" title=" " alt="" coords="557,917,540,1048,509,1221,488,1307,465,1386,437,1450,423,1475,407,1494,376,1508,318,1522,179,1548,177,1543,317,1517,374,1503,403,1490,418,1472,433,1448,460,1384,483,1306,504,1220,535,1047,554,922"/>
+<area shape="rect" id="Node000022" href="$classnsbaci_1_1services_1_1_drawing_service.html#a4bd8f35ccedf24d098f178eb39d7b147" title="Set the current drawing position." alt="" coords="229,1579,402,1622"/>
+<area shape="poly" id="edge39_Node000001_Node000022" title=" " alt="" coords="561,918,556,1032,548,1108,535,1192,516,1281,489,1370,453,1457,407,1538,386,1562,360,1581,358,1576,382,1558,403,1535,448,1455,484,1368,510,1279,530,1191,543,1107,551,1032,559,922"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="350,77,338,72,315,70,294,71,281,76,276,82,278,90,273,90,271,81,278,72,293,66,315,64,339,67,355,74"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="239,86,153,54,150,49,243,83"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1services_1_1_drawing_service.html#a68bfc5e7ea148c0452cae25e2a747cd0" title="Reset the drawing service to initial state." alt="" coords="5,99,178,142"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="212,118,180,119,176,115,216,114"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="127,85,114,80,91,78,70,79,57,84,52,90,54,98,49,99,47,89,54,80,69,74,92,72,115,75,131,82"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="350,167,338,162,315,160,294,162,281,167,276,173,278,181,273,181,271,172,278,163,293,157,315,155,339,157,355,165"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="350,258,338,253,315,251,294,253,281,258,276,264,278,272,273,272,271,262,278,253,293,248,315,246,339,248,355,255"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="350,348,338,344,315,342,294,343,281,348,276,354,278,362,273,362,271,353,278,344,293,338,315,336,339,339,355,346"/>
+<area shape="poly" id="edge14_Node000008_Node000008" title=" " alt="" coords="350,439,338,434,315,432,294,434,281,439,276,445,278,453,273,453,271,444,278,435,293,429,315,427,339,429,355,437"/>
+<area shape="poly" id="edge16_Node000009_Node000009" title=" " alt="" coords="350,530,338,525,315,523,294,525,281,530,276,536,278,544,273,544,271,534,278,525,293,520,315,518,339,520,355,528"/>
+<area shape="poly" id="edge18_Node000010_Node000010" title=" " alt="" coords="350,620,338,616,315,614,294,615,281,620,276,626,278,634,273,634,271,625,278,616,293,610,315,608,339,611,355,618"/>
+<area shape="poly" id="edge20_Node000011_Node000011" title=" " alt="" coords="350,711,338,706,315,704,294,706,281,711,276,717,278,725,273,725,271,716,278,707,293,701,315,699,339,701,355,709"/>
+<area shape="poly" id="edge22_Node000012_Node000012" title=" " alt="" coords="350,802,338,797,315,795,294,797,281,802,276,808,278,816,273,815,271,806,278,797,293,792,315,790,339,792,355,800"/>
+<area shape="poly" id="edge24_Node000013_Node000013" title=" " alt="" coords="350,892,338,888,315,886,294,887,281,892,276,898,278,907,273,906,271,897,278,888,293,882,315,880,339,883,355,890"/>
+<area shape="poly" id="edge27_Node000015_Node000015" title=" " alt="" coords="350,1050,338,1045,315,1043,294,1045,281,1050,276,1056,278,1064,273,1063,271,1054,278,1045,293,1040,315,1038,339,1040,355,1048"/>
+<area shape="poly" id="edge29_Node000016_Node000016" title=" " alt="" coords="350,1140,338,1136,315,1134,294,1135,281,1140,276,1146,278,1155,273,1154,271,1145,278,1136,293,1130,315,1128,339,1131,355,1139"/>
+<area shape="poly" id="edge32_Node000018_Node000017" title=" " alt="" coords="217,1293,174,1282,173,1277,222,1291"/>
+<area shape="poly" id="edge33_Node000018_Node000018" title=" " alt="" coords="350,1281,338,1277,315,1275,294,1277,281,1282,276,1288,278,1296,273,1295,271,1286,278,1277,293,1272,315,1270,339,1272,355,1280"/>
+<area shape="poly" id="edge34_Node000018_Node000019" title=" " alt="" coords="212,1332,180,1338,177,1333,216,1329"/>
+<area shape="poly" id="edge37_Node000020_Node000020" title=" " alt="" coords="350,1422,338,1418,315,1416,294,1418,281,1423,276,1429,278,1438,273,1436,271,1428,278,1419,293,1413,315,1411,339,1413,355,1422"/>
+<area shape="poly" id="edge40_Node000022_Node000021" title=" " alt="" coords="211,1582,178,1578,178,1572,217,1581"/>
+<area shape="poly" id="edge41_Node000022_Node000022" title=" " alt="" coords="350,1563,338,1560,315,1558,294,1559,281,1564,276,1570,278,1580,273,1577,271,1569,278,1560,293,1554,315,1552,339,1555,355,1564"/>
+</map>

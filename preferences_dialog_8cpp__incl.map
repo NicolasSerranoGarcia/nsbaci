@@ -1,0 +1,36 @@
+<map id="preferencesDialog.cpp" name="preferencesDialog.cpp">
+<area shape="rect" id="Node000001" title="Implementation of the PreferencesDialog class." alt="" coords="1022,5,1174,32"/>
+<area shape="rect" id="Node000002" href="$preferences_dialog_8h.html" title="Preferences dialog for nsbaci application settings." alt="" coords="575,80,712,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1025,32,728,81,727,76,1019,32"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1103,155,1205,181"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="1054,32,1019,48,990,64,980,74,975,83,974,94,979,105,995,118,1022,130,1091,153,1085,152,1020,135,992,123,975,108,969,95,969,82,976,70,987,60,1017,43,1049,33"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="989,80,1090,107"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1090,31,1061,70,1058,65,1086,34"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="1114,80,1203,107"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1110,30,1141,69,1136,67,1108,35"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1226,80,1330,107"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1130,30,1235,74,1230,73,1129,35"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1354,80,1461,107"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1153,30,1341,76,1336,76,1152,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,155,98,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="572,101,372,123,114,157,113,152,371,118,577,100"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="122,155,218,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="577,103,422,127,234,157,233,152,422,122,572,104"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="243,155,311,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="577,106,327,157,326,152,572,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="335,155,397,181"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="595,107,413,156,412,151,590,108"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="421,155,514,181"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="615,107,513,151,512,146,610,108"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="538,155,637,181"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="636,106,608,145,605,140,631,108"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="661,155,740,181"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="655,105,684,143,679,142,652,110"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="765,155,845,181"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="672,105,765,148,760,148,671,110"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="869,155,989,181"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="694,105,867,150,861,150,693,110"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1014,155,1079,181"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="713,102,842,122,1001,155,996,154,841,127,713,107"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="713,100,880,121,1090,154,1085,154,879,126,713,105"/>
+</map>

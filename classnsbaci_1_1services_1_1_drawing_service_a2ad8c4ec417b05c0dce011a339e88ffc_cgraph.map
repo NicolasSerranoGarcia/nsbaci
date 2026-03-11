@@ -1,0 +1,9 @@
+<map id="nsbaci::services::DrawingService::setColor" name="nsbaci::services::DrawingService::setColor">
+<area shape="rect" id="Node000001" title="Set the current drawing color using RGBA values." alt="" coords="5,5,178,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_drawing_service.html#a1c5fb1aa7fa938efaecffb59794819cf" title="Emitted when a drawing command should be executed." alt="" coords="446,5,662,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,12,225,8,312,5,398,8,433,13,428,13,398,13,312,10,226,13,179,17"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1services_1_1_drawing_service.html#a27cfbd7f8d2526786a67ad898d9d789d" title="Set the current drawing color using RGB values." alt="" coords="226,47,398,89"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,40,213,49,208,49,178,46"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="398,51,428,48,433,47,399,56"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="270,45,268,37,275,28,290,22,312,20,335,22,351,31,346,31,334,28,312,25,291,27,278,32,273,38,275,48"/>
+</map>

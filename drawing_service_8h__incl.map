@@ -1,0 +1,16 @@
+<map id="drawingService.h" name="drawingService.h">
+<area shape="rect" id="Node000001" title="DrawingService class declaration for nsbaci." alt="" coords="51,5,173,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,75,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,35,65,71,61,67,101,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="78,155,146,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="114,31,115,140,109,139,110,34"/>
+<area shape="rect" id="Node000004" href="$drawing_types_8h.html" title="Type definitions for drawing&#45;related operations." alt="" coords="149,80,262,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="129,30,180,70,175,71,128,35"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="192,106,141,147,139,143,187,108"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="170,155,230,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="206,105,204,140,200,138,202,109"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="255,155,308,181"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="220,105,260,144,255,144,218,110"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="332,155,393,181"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="233,105,324,147,319,148,232,110"/>
+</map>

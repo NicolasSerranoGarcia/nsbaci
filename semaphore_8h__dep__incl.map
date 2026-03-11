@@ -1,0 +1,12 @@
+<map id="semaphore.h" name="semaphore.h">
+<area shape="rect" id="Node000001" title="Semaphore implementation for process synchronization." alt="" coords="85,5,181,32"/>
+<area shape="rect" id="Node000002" href="$program_8h.html" title="Program class declaration for nsbaci runtime service." alt="" coords="94,80,173,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,45,136,80,131,79,132,50"/>
+<area shape="rect" id="Node000003" href="$interpreter_8h.html" title="Interpreter class declaration for nsbaci runtime service." alt="" coords="5,155,96,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,119,67,156,63,152,109,115"/>
+<area shape="rect" id="Node000007" href="$runtime_service_8h.html" title="RuntimeService class declaration for nsbaci." alt="" coords="32,229,152,256"/>
+<area shape="poly" id="edge5_Node000002_Node000007" title=" " alt="" coords="128,121,98,230,93,228,123,122"/>
+<area shape="rect" id="Node000014" href="$program_8cpp.html" title="Program class implementation for nsbaci runtime service." alt="" coords="170,155,264,181"/>
+<area shape="poly" id="edge4_Node000002_Node000014" title=" " alt="" coords="160,115,205,154,200,155,159,120"/>
+<area shape="poly" id="edge3_Node000003_Node000007" title=" " alt="" coords="67,193,87,229,82,229,64,197"/>
+</map>

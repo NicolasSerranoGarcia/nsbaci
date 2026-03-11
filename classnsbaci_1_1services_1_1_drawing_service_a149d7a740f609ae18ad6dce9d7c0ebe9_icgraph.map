@@ -1,0 +1,27 @@
+<map id="nsbaci::services::DrawingService::drawRequested" name="nsbaci::services::DrawingService::drawRequested">
+<area shape="rect" id="Node000001" title="Emitted when a shape should be drawn." alt="" coords="226,347,398,389"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1_drawing_service.html#a90d2165627ac4f98a01ed7ec332c59bb" title="Draw a circle at the specified position." alt="" coords="5,29,178,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="300,331,285,278,260,212,224,145,202,114,176,86,163,75,161,70,179,82,206,110,229,142,265,210,290,276,305,332"/>
+<area shape="rect" id="Node000003" href="$classnsbaci_1_1services_1_1_drawing_service.html#a6dcf5fde62bd8646ba2f0964fd12b227" title="Draw an ellipse at the specified position." alt="" coords="5,120,178,163"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="292,333,246,256,214,214,176,177,161,166,159,161,179,173,218,210,251,253,297,333"/>
+<area shape="rect" id="Node000004" href="$classnsbaci_1_1services_1_1_drawing_service.html#a4497d865a931d9c46bc1a2ba29057824" title="Draw a line between two points." alt="" coords="5,211,178,253"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="273,337,229,302,176,268,155,256,154,251,179,263,232,298,278,336"/>
+<area shape="rect" id="Node000005" href="$classnsbaci_1_1services_1_1_drawing_service.html#ad05216e9a0be40be770ab27ac65bde79" title="Draw a single pixel at the specified position." alt="" coords="5,301,178,344"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="208,348,179,343,177,338,213,346"/>
+<area shape="rect" id="Node000006" href="$classnsbaci_1_1services_1_1_drawing_service.html#a501a1dba3dfe91c1366e0b6922307eb0" title="Draw a rectangle at the specified position." alt="" coords="5,392,178,435"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="208,391,179,398,177,393,213,387"/>
+<area shape="rect" id="Node000007" href="$classnsbaci_1_1services_1_1_drawing_service.html#a72b8276d22a9c9098e882c0af925fd1a" title="Draw a generic shape." alt="" coords="5,483,178,525"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="262,400,129,484,126,480,264,395"/>
+<area shape="rect" id="Node000008" href="$classnsbaci_1_1services_1_1_drawing_service.html#a6b656281d26d67868cec292cf364222f" title="Draw text at the specified position." alt="" coords="5,573,178,616"/>
+<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="290,400,243,469,179,539,132,575,129,571,176,535,239,466,287,404"/>
+<area shape="rect" id="Node000009" href="$classnsbaci_1_1services_1_1_drawing_service.html#ad286065997f49d21ce5ec921ef95075b" title="Draw a triangle with three vertices." alt="" coords="5,664,178,707"/>
+<area shape="poly" id="edge15_Node000001_Node000009" title=" " alt="" coords="300,402,283,453,256,512,222,573,180,630,159,649,135,666,133,661,155,645,176,626,217,570,252,509,278,451,297,406"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="126,15,114,10,91,8,71,10,58,15,53,21,55,29,50,29,48,19,55,10,70,5,92,3,115,5,131,12"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="126,106,114,101,91,99,71,101,58,105,53,111,55,119,50,120,48,110,55,101,70,95,92,93,115,96,131,103"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="126,196,114,192,91,189,71,191,58,196,53,202,55,210,50,210,48,201,55,192,70,186,92,184,115,186,131,194"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="126,287,114,282,91,280,71,282,58,287,53,293,55,301,50,301,48,291,55,282,70,277,92,275,115,277,131,285"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="126,378,114,373,91,371,71,373,58,377,53,383,55,391,49,391,48,382,55,373,70,367,92,365,115,368,131,375"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="126,468,114,464,91,461,71,463,58,468,53,474,55,482,49,482,48,473,55,464,70,458,92,456,115,458,131,466"/>
+<area shape="poly" id="edge14_Node000008_Node000008" title=" " alt="" coords="126,559,114,554,91,552,71,554,58,559,53,565,55,573,50,573,48,563,55,554,70,549,92,547,115,549,131,557"/>
+<area shape="poly" id="edge16_Node000009_Node000009" title=" " alt="" coords="126,649,114,645,91,643,71,645,58,649,53,655,55,664,50,663,48,654,55,645,70,639,92,637,115,640,131,648"/>
+</map>

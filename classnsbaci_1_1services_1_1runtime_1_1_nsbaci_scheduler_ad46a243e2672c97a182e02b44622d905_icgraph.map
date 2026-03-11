@@ -1,0 +1,5 @@
+<map id="nsbaci::services::runtime::NsbaciScheduler::checkCoendUnblock" name="nsbaci::services::runtime::NsbaciScheduler::checkCoendUnblock">
+<area shape="rect" id="Node000001" title="Check if coend&#45;blocked threads should be unblocked." alt="" coords="287,5,544,48"/>
+<area shape="rect" id="Node000002" href="$classnsbaci_1_1services_1_1runtime_1_1_nsbaci_scheduler.html#a12f6ca47e83dfef00bac25ec146cadfb" title="Terminate the currently running thread." alt="" coords="5,5,239,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,27,239,29,239,24,274,27"/>
+</map>
