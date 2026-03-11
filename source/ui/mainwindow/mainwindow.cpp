@@ -20,6 +20,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QSettings>
 #include <QStatusBar>
 #include <QStyle>
 #include <QVBoxLayout>
@@ -30,6 +31,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
   setWindowTitle("nsbaci");
   setWindowIcon(QIcon(":/assets/nsbaci.ico"));
 
+  // Load persisted preferences before applying styles
+  appPrefs = nsbaci::ui::PreferencesDialog::load();
+
   applyStyleSheet();
   createCentralWidget();
   createMenuBar();
@@ -37,10 +41,21 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
   setupShortcuts();
 
   setCurrentFile("Untitled.nsb");
+
+  // Apply editor-related preferences (font, tab width, line numbers, etc.)
+  applyPreferences(appPrefs);
 }
 
 void MainWindow::applyStyleSheet() {
-  QString styleSheet = R"(
+  if (appPrefs.theme == nsbaci::ui::Theme::Light) {
+    setStyleSheet(lightStyleSheet());
+  } else {
+    setStyleSheet(darkStyleSheet());
+  }
+}
+
+QString MainWindow::darkStyleSheet() const {
+  return R"(
         /* Main window */
         QMainWindow {
             background-color: #1a1a1a;
@@ -251,8 +266,220 @@ void MainWindow::applyStyleSheet() {
             background-color: #0078d4;
         }
     )";
+}
 
-  setStyleSheet(styleSheet);
+QString MainWindow::lightStyleSheet() const {
+  return R"(
+        /* Main window */
+        QMainWindow {
+            background-color: #f5f5f5;
+        }
+
+        /* Menu bar */
+        QMenuBar {
+            background-color: #e8e8e8;
+            color: #333333;
+            border: none;
+            padding: 4px 0;
+            font-size: 13px;
+        }
+        QMenuBar::item {
+            padding: 6px 12px;
+            background: transparent;
+            border-radius: 6px;
+            margin: 0 2px;
+        }
+        QMenuBar::item:selected {
+            background-color: #d0d0d0;
+        }
+        QMenuBar::item:pressed {
+            background-color: #c0c0c0;
+        }
+
+        /* Menus */
+        QMenu {
+            background-color: #ffffff;
+            color: #333333;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            padding: 6px;
+            font-size: 13px;
+        }
+        QMenu::item {
+            padding: 8px 32px 8px 12px;
+            border-radius: 6px;
+            margin: 2px 0;
+        }
+        QMenu::item:selected {
+            background-color: #e0e8f0;
+        }
+        QMenu::separator {
+            height: 1px;
+            background: #d0d0d0;
+            margin: 6px 12px;
+        }
+        QMenu::icon {
+            padding-left: 8px;
+        }
+
+        /* File info bar */
+        QFrame#fileInfoBar {
+            background-color: #e8e8e8;
+            border-bottom: 1px solid #d0d0d0;
+            min-height: 36px;
+            max-height: 36px;
+        }
+        QLabel#fileNameLabel {
+            color: #555555;
+            font-size: 13px;
+            font-weight: 500;
+            padding-left: 16px;
+        }
+        QLabel#fileModifiedIndicator {
+            color: #888888;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Sidebar */
+        QFrame#sideBar {
+            background-color: #e8e8e8;
+            border: none;
+        }
+        QToolButton {
+            background-color: #dcdcdc;
+            color: #333333;
+            border: 1px solid #c0c0c0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            min-width: 90px;
+        }
+        QToolButton:hover {
+            background-color: #d0d0d0;
+            border-color: #b0b0b0;
+        }
+        QToolButton:pressed {
+            background-color: #c0c0c0;
+            border-color: #a0a0a0;
+            border-style: inset;
+            padding-top: 12px;
+            padding-bottom: 8px;
+        }
+        QToolButton#compileButton {
+            background-color: #c8e6c8;
+            border-color: #8cc98c;
+        }
+        QToolButton#compileButton:hover {
+            background-color: #b0dab0;
+            border-color: #70b870;
+        }
+        QToolButton#compileButton:pressed {
+            background-color: #a0cca0;
+            border-color: #60a860;
+            border-style: inset;
+            padding-top: 12px;
+            padding-bottom: 8px;
+        }
+        QToolButton#runButton {
+            background-color: #c8d8e8;
+            border-color: #8cb0d0;
+        }
+        QToolButton#runButton:hover {
+            background-color: #b0c8e0;
+            border-color: #70a0c0;
+        }
+        QToolButton#runButton:pressed {
+            background-color: #a0bcd4;
+            border-color: #6090b0;
+            border-style: inset;
+            padding-top: 12px;
+            padding-bottom: 8px;
+        }
+
+        /* Editor */
+        QPlainTextEdit, CodeEditor {
+            background-color: #ffffff;
+            color: #333333;
+            border: none;
+            selection-background-color: #b4d8f8;
+            selection-color: #000000;
+            font-size: 14px;
+        }
+
+        /* Status bar */
+        QStatusBar {
+            background-color: #e8e8e8;
+            color: #666666;
+            font-size: 13px;
+            padding: 8px 12px;
+            min-height: 24px;
+            border-top: 1px solid #d0d0d0;
+        }
+        QStatusBar::item {
+            border: none;
+        }
+
+        /* Scrollbars */
+        QScrollBar:vertical {
+            background-color: transparent;
+            width: 14px;
+            margin: 0;
+        }
+        QScrollBar::handle:vertical {
+            background-color: #c0c0c0;
+            min-height: 40px;
+            border-radius: 7px;
+            margin: 3px;
+        }
+        QScrollBar::handle:vertical:hover {
+            background-color: #a8a8a8;
+        }
+        QScrollBar::handle:vertical:pressed {
+            background-color: #909090;
+        }
+        QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+            height: 0;
+        }
+        QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+            background: transparent;
+        }
+        QScrollBar:horizontal {
+            background-color: transparent;
+            height: 14px;
+            margin: 0;
+        }
+        QScrollBar::handle:horizontal {
+            background-color: #c0c0c0;
+            min-width: 40px;
+            border-radius: 7px;
+            margin: 3px;
+        }
+        QScrollBar::handle:horizontal:hover {
+            background-color: #a8a8a8;
+        }
+        QScrollBar::handle:horizontal:pressed {
+            background-color: #909090;
+        }
+        QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+            width: 0;
+        }
+        QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+            background: transparent;
+        }
+
+        /* Splitter */
+        QSplitter::handle {
+            background-color: #d0d0d0;
+        }
+        QSplitter::handle:horizontal {
+            width: 2px;
+        }
+        QSplitter::handle:hover {
+            background-color: #0078d4;
+        }
+    )";
 }
 
 void MainWindow::createMenuBar() {
@@ -323,6 +550,12 @@ void MainWindow::createMenuBar() {
   actionSelectAll->setShortcut(QKeySequence::SelectAll);
   actionSelectAll->setStatusTip(tr("Select all text"));
 
+  actionPreferences = new QAction(
+      style->standardIcon(QStyle::SP_ComputerIcon), tr("&Preferences..."),
+      this);
+  actionPreferences->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Comma));
+  actionPreferences->setStatusTip(tr("Open application preferences"));
+
   editMenu->addAction(actionUndo);
   editMenu->addAction(actionRedo);
   editMenu->addSeparator();
@@ -331,6 +564,8 @@ void MainWindow::createMenuBar() {
   editMenu->addAction(actionPaste);
   editMenu->addSeparator();
   editMenu->addAction(actionSelectAll);
+  editMenu->addSeparator();
+  editMenu->addAction(actionPreferences);
 
   // View menu
   QMenu* viewMenu = menuBar()->addMenu(tr("&View"));
@@ -404,6 +639,8 @@ void MainWindow::createMenuBar() {
   connect(actionCopy, &QAction::triggered, this, &MainWindow::onCopy);
   connect(actionPaste, &QAction::triggered, this, &MainWindow::onPaste);
   connect(actionSelectAll, &QAction::triggered, this, &MainWindow::onSelectAll);
+  connect(actionPreferences, &QAction::triggered, this,
+          &MainWindow::onPreferences);
 
   // View
   connect(actionToggleSidebar, &QAction::triggered, this,
@@ -581,6 +818,13 @@ void MainWindow::setCurrentFile(const QString& fileName, bool modified) {
 
 void MainWindow::onSaveSucceeded() {
   setCurrentFile(currentFileName, false);
+
+  // Persist last file path for the "restore on startup" feature
+  if (!currentFilePath.isEmpty()) {
+    appPrefs.lastFilePath = currentFilePath;
+    nsbaci::ui::PreferencesDialog::save(appPrefs);
+  }
+
   statusBar()->showMessage(tr("File saved successfully"));
 }
 
@@ -595,6 +839,13 @@ void MainWindow::onLoadSucceeded(const QString& contents) {
   isCompiled = false;
   compileStatusIndicator->setText("Not Compiled");
   compileStatusIndicator->setStyleSheet("color: #909090;");
+
+  // Persist last file path for the "restore on startup" feature
+  if (!currentFilePath.isEmpty()) {
+    appPrefs.lastFilePath = currentFilePath;
+    nsbaci::ui::PreferencesDialog::save(appPrefs);
+  }
+
   statusBar()->showMessage(tr("File loaded successfully"));
 }
 
@@ -761,6 +1012,40 @@ void MainWindow::onRun() {
 }
 
 // Help slots
+
+void MainWindow::onPreferences() {
+  auto* dialog = new nsbaci::ui::PreferencesDialog(appPrefs, this);
+  connect(dialog, &nsbaci::ui::PreferencesDialog::preferencesChanged, this,
+          [this](const nsbaci::ui::Preferences& prefs) {
+            applyPreferences(prefs);
+          });
+  dialog->setAttribute(Qt::WA_DeleteOnClose);
+  dialog->exec();
+}
+
+void MainWindow::applyPreferences(const nsbaci::ui::Preferences& prefs) {
+  appPrefs = prefs;
+
+  // Theme
+  applyStyleSheet();
+  codeEditor->setLightTheme(prefs.theme == nsbaci::ui::Theme::Light);
+
+  // Editor font size
+  QFont editorFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+  editorFont.setPointSize(prefs.editorFontSize);
+  codeEditor->setFont(editorFont);
+
+  // Tab width
+  codeEditor->setTabStopDistance(
+      QFontMetrics(editorFont).horizontalAdvance(' ') * prefs.tabWidth);
+
+  // Word wrap
+  codeEditor->setLineWrapMode(prefs.wordWrap ? QPlainTextEdit::WidgetWidth
+                                             : QPlainTextEdit::NoWrap);
+
+  // Line numbers: hide/show the line number gutter
+  codeEditor->setLineNumbersVisible(prefs.showLineNumbers);
+}
 
 void MainWindow::onUserGuide() {
   auto* dialog = new nsbaci::ui::UserGuideDialog(this);

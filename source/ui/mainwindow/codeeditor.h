@@ -24,6 +24,14 @@ class CodeEditor : public QPlainTextEdit {
   void lineNumberAreaPaintEvent(QPaintEvent* event);
   int lineNumberAreaWidth();
 
+  /** @brief Show or hide the line number gutter. */
+  void setLineNumbersVisible(bool visible);
+  bool lineNumbersVisible() const;
+
+  /** @brief Set whether to use light theme colors for line numbers and
+   * highlights. */
+  void setLightTheme(bool light);
+
  protected:
   void resizeEvent(QResizeEvent* event) override;
 
@@ -34,6 +42,8 @@ class CodeEditor : public QPlainTextEdit {
 
  private:
   LineNumberArea* lineNumberArea;
+  bool showLineNumbers = true;
+  bool lightTheme = false;
 };
 
 class LineNumberArea : public QWidget {

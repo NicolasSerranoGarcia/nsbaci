@@ -10,6 +10,7 @@
     add_subdirectory(runtimeView)
     add_subdirectory(drawingWidget)
     add_subdirectory(userGuideDialog)
+    add_subdirectory(preferencesDialog)
 
 # nsbaci_ui_library
 

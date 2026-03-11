@@ -12,9 +12,11 @@
  */
 
 #include <QApplication>
+#include <QFileInfo>
 #include <QStyleFactory>
 
 #include "controller/controller.h"
+#include "preferencesDialog.h"
 #include "serviceFactories/serviceFactories.h"
 #include "ui/mainwindow/mainwindow.h"
 
@@ -105,6 +107,15 @@ int main(int argc, char* argv[]) {
                        nsbaci::factories::DrawingServiceFactory::createService(
                            nsbaci::factories::defaultDrawingBackend));
   setupViewController(&c, &w);
+
+  // Restore last opened file if the preference is enabled
+  auto prefs = nsbaci::ui::PreferencesDialog::load();
+  if (prefs.restoreLastFile && !prefs.lastFilePath.isEmpty()) {
+    QFileInfo fi(prefs.lastFilePath);
+    if (fi.exists() && fi.isFile()) {
+      emit w.openRequested(prefs.lastFilePath);
+    }
+  }
 
   w.show();
   return a.exec();
