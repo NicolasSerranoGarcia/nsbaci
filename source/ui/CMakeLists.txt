@@ -9,9 +9,9 @@
     add_subdirectory(mainwindow)
     add_subdirectory(runtimeView)
     add_subdirectory(drawingWidget)
+    add_subdirectory(userGuideDialog)
 
 # nsbaci_ui_library
-# Note: This library includes nsbaci_errordialogfactory_library internally
 
     add_library(nsbaci_ui_library INTERFACE)
 

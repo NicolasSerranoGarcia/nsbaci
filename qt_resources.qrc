@@ -2,5 +2,20 @@
 <RCC>
   <qresource prefix="/">
     <file>assets/nsbaci.ico</file>
+    <file>examples/00_introduction.nsb</file>
+    <file>examples/01_basics.nsb</file>
+    <file>examples/02_control_flow.nsb</file>
+    <file>examples/03_arrays.nsb</file>
+    <file>examples/04_functions.nsb</file>
+    <file>examples/05_concurrency_basics.nsb</file>
+    <file>examples/06_semaphores.nsb</file>
+    <file>examples/07_producer_consumer.nsb</file>
+    <file>examples/08_dining_philosophers.nsb</file>
+    <file>examples/09_readers_writers.nsb</file>
+    <file>examples/10_input_output.nsb</file>
+    <file>examples/11_drawing_basics.nsb</file>
+    <file>examples/12_drawing_points.nsb</file>
+    <file>examples/13_drawing_house.nsb</file>
+    <file>examples/14_clear_canvas.nsb</file>
   </qresource>
 </RCC>

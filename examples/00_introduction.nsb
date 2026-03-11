@@ -1,0 +1,5 @@
+// ==================== Your First Program ====================
+// Type this in the editor, press Compile, then Run.
+
+int x = 5;
+cout << "Hello, x is: " << x << endl;

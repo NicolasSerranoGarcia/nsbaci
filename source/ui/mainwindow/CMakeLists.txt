@@ -25,5 +25,6 @@
         config_compiler_flags_library
         nsbaci_qt_library
         nsbaci_errordialogfactory_library
+        nsbaci_userguidedialog_library
         runtimeView
     )

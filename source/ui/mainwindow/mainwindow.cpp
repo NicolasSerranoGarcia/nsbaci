@@ -370,6 +370,12 @@ void MainWindow::createMenuBar() {
   // Help menu
   QMenu* helpMenu = menuBar()->addMenu(tr("&Help"));
 
+  actionUserGuide =
+      new QAction(style->standardIcon(QStyle::SP_DialogHelpButton),
+                  tr("&User Guide"), this);
+  actionUserGuide->setShortcut(QKeySequence::HelpContents);
+  actionUserGuide->setStatusTip(tr("Open the integrated user guide with code examples"));
+
   actionAbout =
       new QAction(style->standardIcon(QStyle::SP_MessageBoxInformation),
                   tr("&About nsbaci"), this);
@@ -378,6 +384,8 @@ void MainWindow::createMenuBar() {
   QAction* actionAboutQt = new QAction(tr("About &Qt"), this);
   actionAboutQt->setStatusTip(tr("About the Qt framework"));
 
+  helpMenu->addAction(actionUserGuide);
+  helpMenu->addSeparator();
   helpMenu->addAction(actionAbout);
   helpMenu->addAction(actionAboutQt);
 
@@ -408,6 +416,8 @@ void MainWindow::createMenuBar() {
   connect(actionRun, &QAction::triggered, this, &MainWindow::onRun);
 
   // Help
+  connect(actionUserGuide, &QAction::triggered, this,
+          &MainWindow::onUserGuide);
   connect(actionAbout, &QAction::triggered, this, &MainWindow::onAbout);
   connect(actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
 }
@@ -751,6 +761,37 @@ void MainWindow::onRun() {
 }
 
 // Help slots
+
+void MainWindow::onUserGuide() {
+  auto* dialog = new nsbaci::ui::UserGuideDialog(this);
+  connect(dialog, &nsbaci::ui::UserGuideDialog::loadExampleRequested, this,
+          [this](const QString& code) {
+            // Warn about unsaved changes
+            if (isModified) {
+              QMessageBox::StandardButton reply = QMessageBox::question(
+                  this, tr("Unsaved Changes"),
+                  tr("The document has been modified.\nDo you want to save "
+                     "your changes before loading the example?"),
+                  QMessageBox::Save | QMessageBox::Discard |
+                      QMessageBox::Cancel,
+                  QMessageBox::Save);
+              if (reply == QMessageBox::Save) {
+                onSave();
+              } else if (reply == QMessageBox::Cancel) {
+                return;
+              }
+            }
+            codeEditor->setPlainText(code);
+            setCurrentFile("Untitled.nsb", true);
+            hasName = false;
+            isCompiled = false;
+            compileStatusIndicator->setText("Not Compiled");
+            compileStatusIndicator->setStyleSheet("color: #909090;");
+            statusBar()->showMessage(tr("Example loaded"));
+          });
+  dialog->setAttribute(Qt::WA_DeleteOnClose);
+  dialog->exec();
+}
 
 void MainWindow::onAbout() {
   QMessageBox::about(this, tr("About nsbaci"),

@@ -15,7 +15,7 @@ drawText(360, 145, "Sun", 14);
 refreshCanvas();
 
 int i;
-for (i = 0; i < 1000; i = i + 1) {
+for (i = 0; i < 100; i = i + 1) {
     // busy wait
 }
 
@@ -38,7 +38,7 @@ drawText(330, 380, "Tree", 14);
 refreshCanvas();
 
 // Wait
-for (i = 0; i < 1000; i = i + 1) {
+for (i = 0; i < 100; i = i + 1) {
     // busy wait
 }
 
@@ -72,7 +72,7 @@ drawText(50, 300, "All shapes visible on white background", 14);
 refreshCanvas();
 
 // Wait
-for (i = 0; i < 1000; i = i + 1) {
+for (i = 0; i < 100; i = i + 1) {
     // busy wait
 }
 
