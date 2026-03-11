@@ -26,5 +26,6 @@
         nsbaci_qt_library
         nsbaci_errordialogfactory_library
         nsbaci_userguidedialog_library
+        nsbaci_preferencesdialog_library
         runtimeView
     )

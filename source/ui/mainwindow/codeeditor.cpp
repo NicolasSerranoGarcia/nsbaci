@@ -9,6 +9,7 @@
 
 #include "codeeditor.h"
 
+#include <QEvent>
 #include <QPainter>
 #include <QTextBlock>
 
@@ -24,6 +25,20 @@ CodeEditor::CodeEditor(QWidget* parent) : QPlainTextEdit(parent) {
 
   updateLineNumberAreaWidth(0);
   highlightCurrentLine();
+}
+
+void CodeEditor::setLineNumbersVisible(bool visible) {
+  showLineNumbers = visible;
+  lineNumberArea->setVisible(visible);
+  updateLineNumberAreaWidth(0);
+}
+
+bool CodeEditor::lineNumbersVisible() const { return showLineNumbers; }
+
+void CodeEditor::setLightTheme(bool light) {
+  lightTheme = light;
+  highlightCurrentLine();
+  lineNumberArea->update();
 }
 
 int CodeEditor::lineNumberAreaWidth() {
@@ -43,7 +58,11 @@ int CodeEditor::lineNumberAreaWidth() {
 }
 
 void CodeEditor::updateLineNumberAreaWidth(int /* newBlockCount */) {
-  setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
+  if (showLineNumbers) {
+    setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
+  } else {
+    setViewportMargins(0, 0, 0, 0);
+  }
 }
 
 void CodeEditor::updateLineNumberArea(const QRect& rect, int dy) {
@@ -63,13 +82,25 @@ void CodeEditor::resizeEvent(QResizeEvent* e) {
       QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
 
+void CodeEditor::changeEvent(QEvent* e) {
+  QPlainTextEdit::changeEvent(e);
+  if (e->type() == QEvent::FontChange) {
+    lineNumberArea->setFont(font());
+    updateLineNumberAreaWidth(0);
+    // Resize the gutter to match new width
+    QRect cr = contentsRect();
+    lineNumberArea->setGeometry(
+        QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+  }
+}
+
 void CodeEditor::highlightCurrentLine() {
   QList<QTextEdit::ExtraSelection> extraSelections;
 
   if (!isReadOnly()) {
     QTextEdit::ExtraSelection selection;
 
-    QColor lineColor = QColor("#222222");
+    QColor lineColor = lightTheme ? QColor("#e8f0f8") : QColor("#222222");
 
     selection.format.setBackground(lineColor);
     selection.format.setProperty(QTextFormat::FullWidthSelection, true);
@@ -83,7 +114,9 @@ void CodeEditor::highlightCurrentLine() {
 
 void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent* event) {
   QPainter painter(lineNumberArea);
-  painter.fillRect(event->rect(), QColor("#1a1a1a"));
+  painter.setFont(font());
+  painter.fillRect(event->rect(),
+                   lightTheme ? QColor("#f0f0f0") : QColor("#1a1a1a"));
 
   QTextBlock block = firstVisibleBlock();
   int blockNumber = block.blockNumber();
@@ -97,9 +130,9 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent* event) {
 
       // Highlight current line number
       if (blockNumber == textCursor().blockNumber()) {
-        painter.setPen(QColor("#a0a0a0"));
+        painter.setPen(lightTheme ? QColor("#333333") : QColor("#a0a0a0"));
       } else {
-        painter.setPen(QColor("#505050"));
+        painter.setPen(lightTheme ? QColor("#a0a0a0") : QColor("#505050"));
       }
 
       painter.drawText(0, top, lineNumberArea->width() - 6,

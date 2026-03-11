@@ -20,6 +20,7 @@
 
 #include "codeeditor.h"
 #include "errorDialogFactory.h"
+#include "preferencesDialog.h"
 #include "runtimeView.h"
 #include "uiError.h"
 #include "userGuideDialog.h"
@@ -96,6 +97,9 @@ class MainWindow : public QMainWindow {
   void onToggleSidebar();
   void onToggleFullscreen();
 
+  // Edit menu (preferences)
+  void onPreferences();
+
   // Help menu
   void onUserGuide();
   void onAbout();
@@ -149,6 +153,9 @@ class MainWindow : public QMainWindow {
   QAction* actionToggleSidebar = nullptr;
   QAction* actionFullscreen = nullptr;
 
+  // Edit actions (preferences)
+  QAction* actionPreferences = nullptr;
+
   // Build actions
   QAction* actionCompile = nullptr;
   QAction* actionRun = nullptr;
@@ -165,6 +172,9 @@ class MainWindow : public QMainWindow {
   bool isCompiled =
       false;  // True when program is compiled and code hasn't changed
 
+  // Current preferences
+  nsbaci::ui::Preferences appPrefs;
+
  private:
   void createCentralWidget();
   void createEditorView();
@@ -173,6 +183,9 @@ class MainWindow : public QMainWindow {
   void createStatusBar();
   void setupShortcuts();
   void applyStyleSheet();
+  void applyPreferences(const nsbaci::ui::Preferences& prefs);
+  QString darkStyleSheet() const;
+  QString lightStyleSheet() const;
 
   void switchToEditor();
   void switchToRuntime();
