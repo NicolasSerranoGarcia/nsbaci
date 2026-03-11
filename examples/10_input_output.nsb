@@ -59,5 +59,3 @@ if (a > b) {
 } else {
     cout << "Max: " << b << ", Min: " << a << endl;
 }
-
-cout << endl << "Thank you for using the I/O demo!" << endl;
