@@ -79,7 +79,8 @@ int numbers[5];           // Array of 5 integers
 numbers[0] = 10;          // First element (indexing starts at 0)
 numbers[4] = 50;          // Last element
 
-int values[3] = {1, 2, 3}; // Initialize directly (if supported)
+//There is no list initialization
+//int values[3] = {1, 2, 3};
 ```
 
 ### Control Flow
@@ -101,7 +102,7 @@ while (x < 10) {
     x++;
 }
 
-// Do-while (runs at least once)
+// Do-while
 do {
     x--;
 } while (x > 0);
@@ -111,7 +112,7 @@ for (int i = 0; i < 5; i++) {
     cout << i << endl;
 }
 
-// Break and continue work as expected
+// Break and continue
 while (true) {
     if (condition) break;     // Exit loop
     if (other) continue;      // Skip to next iteration
@@ -137,7 +138,7 @@ int sum = add(3, 4);  // sum is 7
 sayHello();           // Prints "Hello!"
 ```
 
-Functions can return values (`int`, `bool`, `char`) or nothing (`void`). The `return;` at the end of void functions is optional but helps with clarity.
+Functions can return values (`int`, `bool`, `char`) or nothing (`void`). The `return;` at the end of void functions is optional.
 
 ### Input and Output
 
@@ -230,7 +231,7 @@ coend
 cout << "Final counter: " << counter << endl;
 ```
 
-You might expect `counter` to be 200. Run it a few times. Sometimes it is. Sometimes it's less. That's a **race condition** — both threads read and write `counter` without coordination, and updates get lost.
+You might expect `counter` to be 200. Run it a few times. It can yeld many different results, besides 200. That's a **race condition** — both threads read and write `counter` without coordination, and updates get lost.
 
 Use the Step button to go slowly and watch exactly how the interleaving causes problems.
 

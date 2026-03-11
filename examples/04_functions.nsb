@@ -145,5 +145,3 @@ cout << "gcd(101, 103) = " << gcd(101, 103) << endl;
 cout << endl << "Nested calls:" << endl;
 cout << "add(multiply(2, 3), multiply(4, 5)) = " << add(multiply(2, 3), multiply(4, 5)) << endl;
 cout << "max(add(1, 2), add(3, 4)) = " << max(add(1, 2), add(3, 4)) << endl;
-
-return;

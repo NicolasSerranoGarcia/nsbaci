@@ -53,6 +53,4 @@ coend
 
 cout << endl;
 cout << "Final counter value: " << counter << endl;
-cout << "(Should be 15 because semaphore prevents race conditions)" << endl;
-
-return;
+cout << "(Should be 15 because of the semaphore)" << endl;

@@ -63,5 +63,3 @@ val /= 4;
 cout << "After val /= 4: " << val << endl;
 val %= 3;
 cout << "After val %= 3: " << val << endl;
-
-return;

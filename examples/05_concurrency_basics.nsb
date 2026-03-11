@@ -36,6 +36,4 @@ cobegin
 coend
 
 cout << endl << "All threads completed!" << endl;
-cout << "Notice: Output order may vary due to non-deterministic scheduling" << endl;
-
-return;
+cout << "The order of the output order may (and should) vary because of concurrency" << endl;

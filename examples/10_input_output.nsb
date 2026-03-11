@@ -61,5 +61,3 @@ if (a > b) {
 }
 
 cout << endl << "Thank you for using the I/O demo!" << endl;
-
-return;

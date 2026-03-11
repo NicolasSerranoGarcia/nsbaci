@@ -92,5 +92,3 @@ cout << "All philosophers finished dining!" << endl;
 cout << "Philosopher 0 ate: " << ate0 << " times" << endl;
 cout << "Philosopher 1 ate: " << ate1 << " times" << endl;
 cout << "Philosopher 2 ate: " << ate2 << " times" << endl;
-
-return;

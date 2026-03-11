@@ -70,5 +70,3 @@ coend
 
 cout << endl;
 cout << "Producer-Consumer completed successfully!" << endl;
-
-return;

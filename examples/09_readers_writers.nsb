@@ -95,5 +95,3 @@ coend
 cout << endl;
 cout << "Final shared data: " << sharedData << endl;
 cout << "Readers-Writers completed!" << endl;
-
-return;

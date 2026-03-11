@@ -69,5 +69,3 @@ for (int m = 1; m <= 10; m++) {
     cout << m << " ";
 }
 cout << endl;
-
-return;
