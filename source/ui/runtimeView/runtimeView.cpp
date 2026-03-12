@@ -102,8 +102,6 @@ void RuntimeView::createToolbar() {
   stepButton = new QToolButton();
   stepButton->setObjectName("stepButton");
   stepButton->setText("Step");
-  stepButton->setIcon(style->standardIcon(QStyle::SP_MediaSkipForward));
-  stepButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   stepButton->setToolTip("Execute one instruction (F10)");
   connect(stepButton, &QToolButton::clicked, this, &RuntimeView::onStepClicked);
   layout->addWidget(stepButton);
@@ -136,8 +134,6 @@ void RuntimeView::createToolbar() {
   resetButton = new QToolButton();
   resetButton->setObjectName("resetButton");
   resetButton->setText("Reset");
-  resetButton->setIcon(style->standardIcon(QStyle::SP_BrowserReload));
-  resetButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   resetButton->setToolTip("Reset to beginning");
   connect(resetButton, &QToolButton::clicked, this,
           &RuntimeView::onResetClicked);
@@ -147,8 +143,6 @@ void RuntimeView::createToolbar() {
   stopButton = new QToolButton();
   stopButton->setObjectName("stopButton");
   stopButton->setText("Stop");
-  stopButton->setIcon(style->standardIcon(QStyle::SP_BrowserStop));
-  stopButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   stopButton->setToolTip("Stop and return to editor");
   connect(stopButton, &QToolButton::clicked, this, &RuntimeView::onStopClicked);
   layout->addWidget(stopButton);
@@ -219,8 +213,206 @@ void RuntimeView::createConsolePanel() {
           &RuntimeView::onInputSubmitted);
 }
 
+void RuntimeView::setLightTheme(bool isLight) {
+  lightTheme = isLight;
+  applyStyleSheet();
+}
+
 void RuntimeView::applyStyleSheet() {
-  QString styleSheet = R"(
+  if (lightTheme) {
+    setStyleSheet(R"(
+    RuntimeView {
+      background-color: #f5f5f5;
+    }
+
+    /* Toolbar */
+    QWidget#runtimeToolbar {
+      background-color: #e8e8e8;
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    QToolButton {
+      background-color: #dcdcdc;
+      color: #333333;
+      border: 1px solid #c0c0c0;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    QToolButton:hover {
+      background-color: #d0d0d0;
+      border-color: #b0b0b0;
+    }
+    QToolButton:pressed {
+      background-color: #c0c0c0;
+    }
+    QToolButton:disabled {
+      background-color: #e8e8e8;
+      color: #a0a0a0;
+      border-color: #d0d0d0;
+    }
+    QToolButton#runButton {
+      background-color: #c8e6c8;
+      border-color: #8cc98c;
+    }
+    QToolButton#runButton:hover {
+      background-color: #b0dab0;
+    }
+    QToolButton#stopButton {
+      background-color: #e8c0c0;
+      border-color: #d09090;
+    }
+    QToolButton#stopButton:hover {
+      background-color: #d8a8a8;
+    }
+
+    QLabel#runtimeStatus {
+      color: #666666;
+      font-size: 12px;
+      padding-right: 8px;
+    }
+
+    /* Panel labels */
+    QLabel#panelLabel {
+      color: #555555;
+      font-size: 12px;
+      font-weight: 600;
+      padding-bottom: 4px;
+    }
+
+    /* Splitters */
+    QSplitter::handle {
+      background-color: #d0d0d0;
+    }
+    QSplitter::handle:horizontal {
+      width: 2px;
+    }
+    QSplitter::handle:vertical {
+      height: 2px;
+    }
+
+    /* Thread tree */
+    QTreeWidget#threadTree {
+      background-color: #ffffff;
+      color: #333333;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      font-size: 11px;
+    }
+    QTreeWidget#threadTree::item {
+      padding: 4px;
+    }
+    QTreeWidget#threadTree::item:selected {
+      background-color: #b4d8f8;
+    }
+    QTreeWidget#threadTree::item:alternate {
+      background-color: #f5f5f5;
+    }
+    QHeaderView::section {
+      background-color: #e8e8e8;
+      color: #555555;
+      padding: 6px;
+      border: none;
+      border-bottom: 1px solid #d0d0d0;
+      font-size: 11px;
+    }
+
+    /* Variable table */
+    QTableWidget#variableTable {
+      background-color: #ffffff;
+      color: #333333;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      font-size: 11px;
+      gridline-color: #e0e0e0;
+    }
+    QTableWidget#variableTable::item {
+      padding: 4px;
+    }
+    QTableWidget#variableTable::item:selected {
+      background-color: #b4d8f8;
+    }
+    QTableWidget#variableTable::item:alternate {
+      background-color: #f5f5f5;
+    }
+
+    /* Console */
+    QPlainTextEdit#consoleOutput {
+      background-color: #ffffff;
+      color: #006600;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      font-size: 12px;
+      padding: 8px;
+    }
+
+    QLineEdit#consoleInput {
+      background-color: #ffffff;
+      color: #333333;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      padding: 6px 8px;
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      font-size: 12px;
+    }
+    QLineEdit#consoleInput:focus {
+      border-color: #4a9eff;
+    }
+    QLineEdit#consoleInput:disabled {
+      background-color: #f0f0f0;
+      color: #a0a0a0;
+    }
+
+    QLabel#inputPrompt {
+      color: #006600;
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    QPushButton#inputSubmitButton {
+      background-color: #dcdcdc;
+      color: #333333;
+      border: 1px solid #c0c0c0;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    QPushButton#inputSubmitButton:hover {
+      background-color: #d0d0d0;
+    }
+    QPushButton#inputSubmitButton:disabled {
+      background-color: #e8e8e8;
+      color: #a0a0a0;
+    }
+
+    /* Scrollbars */
+    QScrollBar:vertical {
+      background-color: transparent;
+      width: 12px;
+    }
+    QScrollBar::handle:vertical {
+      background-color: #c0c0c0;
+      min-height: 30px;
+      border-radius: 6px;
+      margin: 2px;
+    }
+    QScrollBar::handle:vertical:hover {
+      background-color: #a8a8a8;
+    }
+    QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+      height: 0;
+    }
+    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+      background: transparent;
+    }
+    )");
+  } else {
+    setStyleSheet(R"(
     RuntimeView {
       background-color: #1a1a1a;
     }
@@ -389,9 +581,8 @@ void RuntimeView::applyStyleSheet() {
       background-color: #202020;
       color: #505050;
     }
-  )";
-
-  setStyleSheet(styleSheet);
+    )");
+  }
 }
 
 // Slots - Update display

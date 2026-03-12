@@ -70,6 +70,8 @@ class RuntimeView : public QWidget {
   explicit RuntimeView(QWidget* parent = nullptr);
   ~RuntimeView() override = default;
 
+  void setLightTheme(bool isLight);
+
  signals:
   // Execution control signals
   void stepRequested();
@@ -140,6 +142,7 @@ class RuntimeView : public QWidget {
   bool isRunning = false;
   bool isHalted = false;
   bool waitingForInput = false;
+  bool lightTheme = false;
   nsbaci::types::ThreadID selectedThread = 0;
 };
 

@@ -22,7 +22,8 @@
 
 namespace nsbaci::ui {
 
-UserGuideDialog::UserGuideDialog(QWidget* parent) : QDialog(parent) {
+UserGuideDialog::UserGuideDialog(bool lightTheme, QWidget* parent)
+    : QDialog(parent), lightTheme(lightTheme) {
   setWindowTitle(tr("User Guide — Code Examples"));
   resize(950, 620);
   setMinimumSize(750, 480);
@@ -289,11 +290,166 @@ QString UserGuideDialog::loadExampleCode(const QString& resourcePath) const {
 }
 
 // ---------------------------------------------------------------------------
-// Styling (matches the dark theme of the main window)
+// Styling (theme-aware)
 // ---------------------------------------------------------------------------
 
 void UserGuideDialog::applyDialogStyle() {
-  QString style = R"(
+  if (lightTheme) {
+    setStyleSheet(R"(
+    /* Dialog background */
+    QDialog {
+        background-color: #f5f5f5;
+    }
+
+    /* Left panel */
+    QWidget#guideLeftPanel {
+        background-color: #e8e8e8;
+        border-right: 1px solid #d0d0d0;
+    }
+
+    /* Header */
+    QLabel#guideHeader {
+        background-color: #e0e0e0;
+        color: #333333;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 12px 16px;
+        border-bottom: 1px solid #d0d0d0;
+    }
+
+    /* Example list */
+    QListWidget#guideExampleList {
+        background-color: #e8e8e8;
+        color: #444444;
+        border: none;
+        font-size: 13px;
+        outline: none;
+    }
+    QListWidget#guideExampleList::item {
+        padding: 7px 12px;
+        border-radius: 0;
+    }
+    QListWidget#guideExampleList::item:selected {
+        background-color: #b4d8f8;
+        color: #000000;
+    }
+    QListWidget#guideExampleList::item:hover:!selected {
+        background-color: #dcdcdc;
+    }
+    /* Category headers (non-selectable) */
+    QListWidget#guideExampleList::item:disabled {
+        color: #777777;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 12px 12px 4px 12px;
+        background-color: transparent;
+    }
+
+    /* Online docs button */
+    QPushButton#guideOnlineDocsButton {
+        background-color: #e0e0e0;
+        color: #1a6fb5;
+        border: none;
+        border-top: 1px solid #d0d0d0;
+        padding: 12px 16px;
+        font-size: 13px;
+        text-align: left;
+    }
+    QPushButton#guideOnlineDocsButton:hover {
+        background-color: #d0d0d0;
+        color: #0d5a9e;
+    }
+
+    /* Right panel */
+    QWidget#guideRightPanel {
+        background-color: #f5f5f5;
+    }
+
+    /* Title label */
+    QLabel#guideTitle {
+        color: #222222;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    /* Description label */
+    QLabel#guideDescription {
+        color: #555555;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    /* Code viewer */
+    QPlainTextEdit#guideCodeViewer {
+        background-color: #ffffff;
+        color: #333333;
+        border: 1px solid #d0d0d0;
+        border-radius: 6px;
+        padding: 12px;
+        selection-background-color: #b4d8f8;
+        selection-color: #000000;
+    }
+
+    /* Load button */
+    QPushButton#guideLoadButton {
+        background-color: #c8e6c8;
+        color: #1a5a1a;
+        border: 1px solid #8cc98c;
+        border-radius: 6px;
+        padding: 8px 20px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    QPushButton#guideLoadButton:hover {
+        background-color: #b0dab0;
+        border-color: #70b870;
+    }
+    QPushButton#guideLoadButton:pressed {
+        background-color: #a0cca0;
+    }
+
+    /* Close button */
+    QPushButton#guideCloseButton {
+        background-color: #dcdcdc;
+        color: #333333;
+        border: 1px solid #c0c0c0;
+        border-radius: 6px;
+        padding: 8px 20px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    QPushButton#guideCloseButton:hover {
+        background-color: #d0d0d0;
+        border-color: #b0b0b0;
+    }
+    QPushButton#guideCloseButton:pressed {
+        background-color: #c0c0c0;
+    }
+
+    /* Scrollbars */
+    QScrollBar:vertical {
+        background-color: transparent;
+        width: 12px;
+    }
+    QScrollBar::handle:vertical {
+        background-color: #c0c0c0;
+        min-height: 30px;
+        border-radius: 6px;
+        margin: 2px;
+    }
+    QScrollBar::handle:vertical:hover {
+        background-color: #a8a8a8;
+    }
+    QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+        height: 0;
+    }
+    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+        background: transparent;
+    }
+    )");
+  } else {
+    setStyleSheet(R"(
     /* Dialog background */
     QDialog {
         background-color: #1a1a1a;
@@ -445,9 +601,8 @@ void UserGuideDialog::applyDialogStyle() {
     QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
         background: transparent;
     }
-  )";
-
-  setStyleSheet(style);
+    )");
+  }
 }
 
 }  // namespace nsbaci::ui

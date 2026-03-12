@@ -44,7 +44,7 @@ class UserGuideDialog : public QDialog {
   Q_OBJECT
 
  public:
-  explicit UserGuideDialog(QWidget* parent = nullptr);
+  explicit UserGuideDialog(bool lightTheme = false, QWidget* parent = nullptr);
   ~UserGuideDialog() override = default;
 
  signals:
@@ -76,6 +76,7 @@ class UserGuideDialog : public QDialog {
 
   // Data
   std::vector<ExampleEntry> examples;
+  bool lightTheme = false;
 };
 
 }  // namespace nsbaci::ui

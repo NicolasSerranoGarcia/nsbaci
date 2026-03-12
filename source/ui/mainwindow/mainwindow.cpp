@@ -548,9 +548,7 @@ void MainWindow::createMenuBar() {
   actionSelectAll->setShortcut(QKeySequence::SelectAll);
   actionSelectAll->setStatusTip(tr("Select all text"));
 
-  actionPreferences = new QAction(
-      style->standardIcon(QStyle::SP_ComputerIcon), tr("&Preferences..."),
-      this);
+  actionPreferences = new QAction(tr("&Preferences..."), this);
   actionPreferences->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Comma));
   actionPreferences->setStatusTip(tr("Open application preferences"));
 
@@ -574,9 +572,7 @@ void MainWindow::createMenuBar() {
   actionToggleSidebar->setCheckable(true);
   actionToggleSidebar->setChecked(true);
 
-  actionFullscreen =
-      new QAction(style->standardIcon(QStyle::SP_TitleBarMaxButton),
-                  tr("&Fullscreen"), this);
+  actionFullscreen = new QAction(tr("&Fullscreen"), this);
   actionFullscreen->setShortcut(QKeySequence::FullScreen);
   actionFullscreen->setStatusTip(tr("Toggle fullscreen mode"));
   actionFullscreen->setCheckable(true);
@@ -587,13 +583,11 @@ void MainWindow::createMenuBar() {
   // Build menu
   QMenu* buildMenu = menuBar()->addMenu(tr("&Build"));
 
-  actionCompile = new QAction(style->standardIcon(QStyle::SP_MediaPlay),
-                              tr("&Compile"), this);
+  actionCompile = new QAction(tr("&Compile"), this);
   actionCompile->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_F9));
   actionCompile->setStatusTip(tr("Compile the current file"));
 
-  actionRun = new QAction(style->standardIcon(QStyle::SP_MediaSeekForward),
-                          tr("&Run"), this);
+  actionRun = new QAction(tr("&Run"), this);
   actionRun->setShortcut(QKeySequence(Qt::Key_F9));
   actionRun->setStatusTip(tr("Run the compiled program"));
 
@@ -603,9 +597,7 @@ void MainWindow::createMenuBar() {
   // Help menu
   QMenu* helpMenu = menuBar()->addMenu(tr("&Help"));
 
-  actionUserGuide =
-      new QAction(style->standardIcon(QStyle::SP_DialogHelpButton),
-                  tr("&User Guide"), this);
+  actionUserGuide = new QAction(tr("&User Guide"), this);
   actionUserGuide->setShortcut(QKeySequence::HelpContents);
   actionUserGuide->setStatusTip(tr("Open the integrated user guide with code examples"));
 
@@ -723,17 +715,15 @@ void MainWindow::createEditorView() {
 
   compileButton = new QToolButton(sideBar);
   compileButton->setObjectName("compileButton");
-  compileButton->setIcon(style->standardIcon(QStyle::SP_MediaPlay));
   compileButton->setText(tr("Compile"));
   compileButton->setToolTip(tr("Compile (Ctrl+F9)"));
-  compileButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  compileButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
 
   runButton = new QToolButton(sideBar);
   runButton->setObjectName("runButton");
-  runButton->setIcon(style->standardIcon(QStyle::SP_MediaSeekForward));
   runButton->setText(tr("Run"));
   runButton->setToolTip(tr("Run (F9)"));
-  runButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  runButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
 
   sideLayout->addWidget(compileButton);
   sideLayout->addWidget(runButton);
@@ -836,7 +826,9 @@ void MainWindow::onLoadSucceeded(const QString& contents) {
   setCurrentFile(currentFileName, false);
   isCompiled = false;
   compileStatusIndicator->setText("Not Compiled");
-  compileStatusIndicator->setStyleSheet("color: #909090;");
+  compileStatusIndicator->setStyleSheet(
+      appPrefs.theme == nsbaci::ui::Theme::Light ? "color: #666666;"
+                                                 : "color: #909090;");
 
   // Persist last file path for the "restore on startup" feature
   if (!currentFilePath.isEmpty()) {
@@ -855,14 +847,20 @@ void MainWindow::onLoadFailed(std::vector<nsbaci::UIError> errors) {
 void MainWindow::onCompileSucceeded() {
   isCompiled = true;
   compileStatusIndicator->setText("Compiled");
-  compileStatusIndicator->setStyleSheet("color: #4ec94e; font-weight: bold;");
+  compileStatusIndicator->setStyleSheet(
+      appPrefs.theme == nsbaci::ui::Theme::Light
+          ? "color: #2d8a2d; font-weight: bold;"
+          : "color: #4ec94e; font-weight: bold;");
   statusBar()->showMessage(tr("File compiled successfully"));
 }
 
 void MainWindow::onCompileFailed(std::vector<nsbaci::UIError> errors) {
   isCompiled = false;
   compileStatusIndicator->setText("Compile Failed");
-  compileStatusIndicator->setStyleSheet("color: #e05050; font-weight: bold;");
+  compileStatusIndicator->setStyleSheet(
+      appPrefs.theme == nsbaci::ui::Theme::Light
+          ? "color: #cc3333; font-weight: bold;"
+          : "color: #e05050; font-weight: bold;");
   nsbaci::ui::ErrorDialogFactory::showErrors(errors, this);
   statusBar()->showMessage(tr("Failed to compile file"));
 }
@@ -890,7 +888,9 @@ void MainWindow::onNew() {
   hasName = false;
   isCompiled = false;
   compileStatusIndicator->setText("Not Compiled");
-  compileStatusIndicator->setStyleSheet("color: #909090;");
+  compileStatusIndicator->setStyleSheet(
+      appPrefs.theme == nsbaci::ui::Theme::Light ? "color: #666666;"
+                                                 : "color: #909090;");
   statusBar()->showMessage(tr("New file created"));
 }
 
@@ -1026,7 +1026,23 @@ void MainWindow::applyPreferences(const nsbaci::ui::Preferences& prefs) {
 
   // Theme
   applyStyleSheet();
-  codeEditor->setLightTheme(prefs.theme == nsbaci::ui::Theme::Light);
+  bool isLight = prefs.theme == nsbaci::ui::Theme::Light;
+  codeEditor->setLightTheme(isLight);
+  runtimeView->setLightTheme(isLight);
+
+  // Update compile status indicator color for the current theme
+  if (!isCompiled) {
+    compileStatusIndicator->setStyleSheet(
+        isLight ? "color: #666666;" : "color: #909090;");
+  } else if (compileStatusIndicator->text() == "Compiled") {
+    compileStatusIndicator->setStyleSheet(
+        isLight ? "color: #2d8a2d; font-weight: bold;"
+                : "color: #4ec94e; font-weight: bold;");
+  } else {
+    compileStatusIndicator->setStyleSheet(
+        isLight ? "color: #cc3333; font-weight: bold;"
+                : "color: #e05050; font-weight: bold;");
+  }
 
   // Editor font size
   QFont editorFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
@@ -1046,7 +1062,8 @@ void MainWindow::applyPreferences(const nsbaci::ui::Preferences& prefs) {
 }
 
 void MainWindow::onUserGuide() {
-  auto* dialog = new nsbaci::ui::UserGuideDialog(this);
+  bool isLight = appPrefs.theme == nsbaci::ui::Theme::Light;
+  auto* dialog = new nsbaci::ui::UserGuideDialog(isLight, this);
   connect(dialog, &nsbaci::ui::UserGuideDialog::loadExampleRequested, this,
           [this](const QString& code) {
             // Warn about unsaved changes
@@ -1069,7 +1086,10 @@ void MainWindow::onUserGuide() {
             hasName = false;
             isCompiled = false;
             compileStatusIndicator->setText("Not Compiled");
-            compileStatusIndicator->setStyleSheet("color: #909090;");
+            compileStatusIndicator->setStyleSheet(
+                appPrefs.theme == nsbaci::ui::Theme::Light
+                    ? "color: #666666;"
+                    : "color: #909090;");
             statusBar()->showMessage(tr("Example loaded"));
           });
   dialog->setAttribute(Qt::WA_DeleteOnClose);
@@ -1077,12 +1097,36 @@ void MainWindow::onUserGuide() {
 }
 
 void MainWindow::onAbout() {
-  QMessageBox::about(this, tr("About nsbaci"),
-                     tr("<h3>nsbaci</h3>"
-                        "<p>Learn concurrency in C++</p>"
-                        "<p>Version: " NSBACI_VERSION "</p>"
-                        "<p>Copyright © 2025 Nicolás Serrano García</p>"
-                        "<p>Licensed under the MIT License.</p>"));
+  QMessageBox aboutBox(this);
+  aboutBox.setWindowTitle(tr("About nsbaci"));
+  aboutBox.setTextFormat(Qt::RichText);
+  aboutBox.setText(
+      tr("<h3>nsbaci</h3>"
+         "<p>Learn concurrency in C++</p>"
+         "<p>Version: " NSBACI_VERSION "</p>"
+         "<p>Copyright © 2025 Nicolás Serrano García</p>"
+         "<p>Licensed under the MIT License.</p>"));
+  aboutBox.setIcon(QMessageBox::Information);
+
+  if (appPrefs.theme == nsbaci::ui::Theme::Light) {
+    aboutBox.setStyleSheet(
+        "QDialog, QMessageBox { background-color: #f5f5f5; }"
+        "QLabel { color: #333333; }"
+        "QPushButton { background-color: #dcdcdc; color: #333333;"
+        "  border: 1px solid #c0c0c0; border-radius: 6px;"
+        "  padding: 6px 20px; font-size: 13px; }"
+        "QPushButton:hover { background-color: #d0d0d0; }");
+  } else {
+    aboutBox.setStyleSheet(
+        "QDialog, QMessageBox { background-color: #1a1a1a; }"
+        "QLabel { color: #e0e0e0; }"
+        "QPushButton { background-color: #2a2a2a; color: #d0d0d0;"
+        "  border: 1px solid #353535; border-radius: 6px;"
+        "  padding: 6px 20px; font-size: 13px; }"
+        "QPushButton:hover { background-color: #353535; }");
+  }
+
+  aboutBox.exec();
 }
 
 void MainWindow::onExit() {
@@ -1114,7 +1158,9 @@ void MainWindow::onTextChanged() {
   if (isCompiled) {
     isCompiled = false;
     compileStatusIndicator->setText("Not Compiled");
-    compileStatusIndicator->setStyleSheet("color: #909090;");
+    compileStatusIndicator->setStyleSheet(
+        appPrefs.theme == nsbaci::ui::Theme::Light ? "color: #666666;"
+                                                   : "color: #909090;");
   }
 }
 
